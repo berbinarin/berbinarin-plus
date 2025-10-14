@@ -9,7 +9,7 @@
                 Coming Soon
             </h1>
             <h1 class="text-6xl font-bold text-primary mb-4">
-                Berbinar Pluss Platform
+                Berbinar E-Learning Platform
             </h1>
         </div>
         <div class="flex gap-[5em]">
