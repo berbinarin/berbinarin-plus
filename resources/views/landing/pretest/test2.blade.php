@@ -23,35 +23,35 @@
         </div>
 
         <!-- Pertanyaan -->
-        <h3 class="text-xl font-semibold mb-6">Pertanyaan 1</h3>
+        <h3 class="text-xl font-semibold mb-6">Pertanyaan 2</h3>
 
         <!-- Wrapper -->
         <div class="w-full">
             <!-- Card pertanyaan -->
             <div class="bg-white rounded-[18px] ring-1 ring-[#2986A3] flex flex-col lg:flex-row-reverse justify-between items-center gap-8 px-4 py-6 lg:px-12 lg:py-8">
-                <div class="flex justify-center items-center">
-                    <img src="{{ asset('assets/images/landing/favicion/question-placeholder.png') }}" alt="Desain Komposisi" class="w-auto lg:w-60 lg:h-60 object-cover rounded-[10px]">
-                </div>
+                <!-- <div class="flex justify-center items-center">
+                    <img src="" alt="Desain Komposisi" class="w-auto lg:w-60 lg:h-60 object-cover rounded-[10px]">
+                </div> -->
 
                 <div class="flex-1">
-                    <p class="text-base lg:text-xl font-medium mb-7">Apa nama komposisi design tersebut?</p>
+                    <p class="text-base lg:text-xl font-medium mb-7">Seorang desainer membuat poster dengan warna merah mencolok, judul besar di atas, dan ruang kosong di sekitar teks agar lebih jelas. Prinsip desain apa yang digunakan?</p>
 
                     <form class="flex flex-col gap-3">
                         <label class="flex items-start gap-3 lg:gap-5 text-base lg:text-xl">
                             <input type="radio" name="answer" value="Negative Space" class="min-w-5 h-7 text-[#2986A3] focus:ring-[#2986A3]">
-                            Negative Space
+                            Kontras, Hierarki, Negative Space
                         </label>
                         <label class="flex items-start gap-3 lg:gap-5 text-base lg:text-xl">
                             <input type="radio" name="answer" value="Hierarchy" class="min-w-5 h-7 text-[#2986A3] focus:ring-[#2986A3]">
-                            Hierarchy
+                            Repetisi, Balance, Pattern
                         </label>
                         <label class="flex items-start gap-3 lg:gap-5 text-base lg:text-xl">
                             <input type="radio" name="answer" value="Pattern" class="min-w-5 h-7 text-[#2986A3] focus:ring-[#2986A3]">
-                            Pattern
+                            Alignment, Gerakan Visual, Proximity
                         </label>
                         <label class="flex items-start gap-3 lg:gap-5 text-base lg:text-xl">
                             <input type="radio" name="answer" value="White Space" class="min-w-5 h-7 text-[#2986A3] focus:ring-[#2986A3]">
-                            White Space
+                            Simetri, Tekstur, Repetition
                         </label>
                     </form>
                 </div>
@@ -60,8 +60,8 @@
 
             <!-- Tombol navigasi -->
             <div class="flex w-full justify-between items-center gap-4 mt-8 text-center font-medium text-base lg:text-xl mx-auto">
-                <a href="#" class="max-sm:w-1/2 py-2 px-[18px] bg-white ring-1 ring-[#3986A3] rounded-lg">Sebelumnya</a>
-                <a href="{{ route('pretest.question.2') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
+                <a href="{{ route('pretest.question') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-white ring-1 ring-[#3986A3] rounded-lg">Sebelumnya</a>
+                <a href="#" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Selesai</a>
             </div>
         </div>
 

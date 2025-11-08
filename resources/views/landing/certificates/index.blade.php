@@ -8,11 +8,18 @@
 
     <div class="mt-20 lg:mt-10">
         <div class="w-full flex flex-col">
-            <h3 class="text-gray-500 text-sm">BERBINAR+    /    Graphic Design    /     Sertifikat   /    <span class="text-black">Download Sertifikat</span></h3>
-            <div class="mt-4 lg:mt-6 flex flex-row">
-                <img src="{{ asset("assets/images/landing/favicion/back-arrow.png") }}" alt="Back" class="w-8 lg:w-10">
-                <h1 class="ml-2 text-xl lg:text-3xl font-semibold">Download Sertifikat</h1>
-            </div>
+            <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
+                <a href="{{ route('homepage.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
+                <span>/</span>
+                <a href="" class="hover:text-gray-900 transition-colors">Graphic Design</a>
+                <span>/</span>
+                <a href="" class="hover:text-gray-900 transition-colors">Sertifikat</a>
+                <span>/</span>
+                <a href="" class="hover:text-gray-900 transition-colors"><span class="text-black">Download Sertifikat</span></a>
+            </nav>
+
+            <h1 class="mt-4 lg:mt-6 text-xl lg:text-3xl font-semibold">Unduh Sertifikat</h1>
+            
             <div class="bg-white w-full mt-5 lg:mt-10 rounded-2xl p-5 lg:p-8">
                 <h2 class="mb-4 font-medium lg:text-xl">Selamat, Tiarasyifa Arsanda!</h2>
 

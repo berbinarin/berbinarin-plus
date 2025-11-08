@@ -12,14 +12,17 @@
     </head>
     <body class="relative w-full overflow-x-hidden bg-gray-100">
 
-        <div class="flex h-screen w-full select-none">
+        {{-- Navbar --}}
+        @include('landing.partials.homepage-navbar')
+
+        <div class="flex w-full select-none">
             {{-- Sidebar --}}
-            <div class="flex-shrink-0">
-                @include("landing.partials.sidebar")
-            </div>
+            {{-- <div class="flex-shrink-0">
+                @include("landing.partials.homepage-sidebar")
+            </div> --}}
 
             {{-- Main Content --}}
-            <main class="w-full my-1 flex-1 overflow-y-auto rounded-l-lg px-5 pb-2 pt-2 transition duration-500 ease-in-out">
+            <main class="w-full flex-1 px-3 lg:px-10 pb-2 pt-4 lg:pt-6 transition duration-500 ease-in-out overflow-y-auto overflow-x-hidden">
                 @yield("content")
             </main>
         </div>

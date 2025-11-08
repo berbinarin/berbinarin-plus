@@ -1,5 +1,5 @@
 @extends('landing.layouts.test-questions', [
-    'title' => 'Pretest Berbinar+',
+    'title' => 'Posttest Berbinar+',
     'active' => 'Berbinar+',
     'page' => 'Berbinar+',
 ])
@@ -12,14 +12,14 @@
             <span>/</span>
             <a href="#" class="hover:text-gray-900 transition-colors">Graphic Design</a>
             <span>/</span>
-            <a href="#" class="hover:text-gray-900 transition-colors">Pre Test</a>
+            <a href="#" class="hover:text-gray-900 transition-colors">Post Test</a>
             <span>/</span>
-            <a href="#" class="text-black">Pre Test - Graphic Design</a>
+            <a href="#" class="text-black">Post Test - Graphic Design</a>
         </nav>
 
         <!-- Judul -->
         <div class="mt-4 mb-6 lg:mt-6 flex flex-row">
-            <h1 class="text-xl lg:text-3xl font-semibold">Pre Test - Graphic Design</h1>
+            <h1 class="text-xl lg:text-3xl font-semibold">Post Test - Graphic Design</h1>
         </div>
 
         <!-- Pertanyaan -->
@@ -61,7 +61,7 @@
             <!-- Tombol navigasi -->
             <div class="flex w-full justify-between items-center gap-4 mt-8 text-center font-medium text-base lg:text-xl mx-auto">
                 <a href="#" class="max-sm:w-1/2 py-2 px-[18px] bg-white ring-1 ring-[#3986A3] rounded-lg">Sebelumnya</a>
-                <a href="{{ route('pretest.question.2') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
+                <a href="{{ route('posttest.question.2') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
             </div>
         </div>
 

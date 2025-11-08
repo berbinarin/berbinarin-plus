@@ -8,6 +8,30 @@
     #sidebarBerbinar.closed ~ #openSidebarBtn {
         display: block;
     }
+    @media (max-width: 600px){
+        #sidebarBerbinar.mobile-closed {
+            transform: translateX(-110%);
+        }
+    }
+
+    /* In your main CSS file or within a @layer directive */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: none;
+  opacity: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 </style>
 
 <!-- Tombol buka sidebar (di luar sidebar, misal di layout utama) -->
@@ -16,7 +40,7 @@
 </button>
 
 <!-- Sidebar -->
-<nav id="sidebarBerbinar" class="flex w-72 flex-col max-sm:shadow-xl bg-white py-8 pl-10 max-sm:fixed top-0 left-0 h-full z-50 transition-transform duration-300">
+<nav id="sidebarBerbinar" class="flex w-72 flex-col max-sm:shadow-xl bg-white py-8 mobile-closed max-sm:fixed top-0 left-0 h-full z-50 transition-transform duration-300">
     <!-- Tombol tutup sidebar -->
     <button id="closeSidebarBtn" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
     {{-- LOGO BERBINAR --}}
@@ -24,62 +48,71 @@
         <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
     </div>
     {{-- LIST MENU --}}
-    <ul class="mt-10 overflow-y-auto overflow-x-hidden text-gray-700 dark:text-gray-400">
+    <ul class="mt-10 overflow-y-auto custom-scrollbar overflow-x-hidden text-gray-700 dark:text-gray-400">
         <!-- Links -->
          <div class="mb-4">
-             <h1 class="text-lg lg:text-2xl font-semibold leading-5 mb-4 lg:mb-2">Pre Test</h1>
-             <a href="" class="flex flex-row items-center duration-700">
+             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Pre Test</h1>
+             <a href="{{ route('pretest.index') }}" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                  <span class="text-lg lg:text-lg leading-5">Pre Test - Graphic Design</span>
              </a>
          </div>
 
+         {{-- Untuk Course Menu dan menu lainnya --}}
          <div class="mb-4">
-            <h1 class="text-lg lg:text-2xl font-semibold leading-5 mb-4 lg:mb-2">Course Menu</h1>
-            <a href="{{ route('materials.index') }}" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
-            <a href="" class="flex flex-row items-center duration-700">
-                <span class="text-lg lg:text-lg leading-5 mb-4 lg:mb-2">1. Perkenalan Dasar</span>
-            </a>
+            <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Course Menu</h1>
+            <div class="flex flex-col">
+                <a href="{{ route('materials.index') }}" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                    <span class="text-lg lg:text-lg leading-5">1. Perkenalan Dasar</span>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                    <span class="text-lg lg:text-lg leading-5">2. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                    <span class="text-lg lg:text-lg leading-5">3. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                    <span class="text-lg lg:text-lg leading-5">4. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                    <span class="text-lg lg:text-lg leading-5">5. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                    <span class="text-lg lg:text-lg leading-5">6. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                    <span class="text-lg lg:text-lg leading-5">7. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                    <span class="text-lg lg:text-lg leading-5">8. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                    <span class="text-lg lg:text-lg leading-5">9. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                    <span class="text-lg lg:text-lg leading-5">10. Perkenalan Dasar</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+            </div>
          </div>
 
          <div class="mb-4">
-             <h1 class="text-lg lg:text-2xl font-semibold leading-5 mb-4 lg:mb-2">Post Test</h1>
-             <a href="" class="flex flex-row items-center duration-700">
+             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Post Test</h1>
+             <a href="{{ route('posttest.index') }}" class="flex flex-row items-center duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                  <span class="text-lg lg:text-lg leading-5">Post Test - Graphic Design</span>
              </a>
          </div>
 
          <div class="mb-4">
-             <h1 class="text-lg lg:text-2xl font-semibold leading-5 mb-4 lg:mb-2">Sertifikat</h1>
-             <a href="{{ route('certificates.index') }}" class="flex flex-row items-center duration-700">
+             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
+             <a href="{{ route('certificates.index') }}" class="flex flex-row items-center duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                  <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
              </a>
          </div>
@@ -111,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
     openBtn.addEventListener('click', function () {
         sidebar.classList.remove('closed');
         sidebar.classList.remove('fixed');
+        sidebar.classList.remove('mobile-closed');
         openBtn.classList.add('lg:hidden');
     });
 });

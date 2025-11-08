@@ -10,6 +10,13 @@
             background-color: white;
         }
     </style>
+
+    <style>
+        .swiper-button-next, .swiper-button-prev {
+            color: #3986A3 !important;
+        }
+    </style>
+
 @endsection
 
 @section('content')
@@ -169,20 +176,20 @@
                                     </div>
                                     <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
                                         aria-hidden="true">&#8203;</span>
-                                    <div class="inline-block align-bottom rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full lg:max-w-2xl lg:rounded-3xl"
+                                    <div class="inline-block align-bottom rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full lg:max-w-[44rem] lg:rounded-3xl"
                                         role="dialog" aria-modal="true" aria-labelledby="modal-headline"
                                         style="background: #FFFFFF; background: linear-gradient(25deg,rgba(255, 255, 255, 1) 0%, rgba(198, 220, 229, 1) 18%, rgba(156, 195, 209, 1) 84%, rgba(96, 158, 181, 1) 100%);">
-                                        <div class="px-4 lg:p-6 lg:pb-0 lg:pt-3">
+                                        <div class="px-2 lg:px-6 lg:p-6 lg:pb-0 lg:pt-3">
                                             <div class="sm:flex sm:items-start lg:justify-center lg:items-center">
-                                                <div class="mt-3 text-center sm:mt-0 sm:ml-2 sm:mr-2 sm:text-left w-full">
-                                                    <div class="w-full flex flex-row justify-center">
+                                                <div class="px-2 lg:px-6 mt-3 text-center sm:mt-0 sm:ml-2 sm:mr-2 sm:text-left w-full">
+                                                    <div class="px-2 lg:px-6 w-full flex flex-row justify-center">
                                                         <h3 class="text-lg text-center leading-6 lg:pb-2 text-[#333333] font-bold lg:text-2xl"
                                                             id="modal-headline">
                                                             Booklet Berbinar Class
                                                         </h3>
                                                         <a onclick="closeModal()"
                                                             class="absolute translate-y-1 lg:translate-y-2 bg-[#E4F3F8] rounded-full right-5 lg:right-10 cursor-pointer">
-                                                            <img src="{{ asset('assets/images/landing/asset-konseling/vector/vector-close.svg') }}"
+                                                            <img src="{{ asset('assets/images/landing/favicion/vector-close.svg') }}"
                                                                 class="scale-50" alt="close">
                                                         </a>
                                                     </div>
@@ -209,11 +216,9 @@
                                         <div class="px-4 py-3 sm:px-6 flex flex-row justify-center">
                                             <div class="flex flex-col items-center justify-center w-full">
                                                 <input type="checkbox"
-                                                    class="h-10 lg:w-1/4 form-checkbox rounded-md bg-gradient-to-r from-[#3986A3] to-[#225062] checked:bg-gradient-to-r checked:from-[#3986A3] checked:to-[#225062] px-16 py-1 lg:px-20 lg:py-1.5 font-medium text-white max-sm:text-[15px] cursor-pointer"
+                                                    class="h-10 lg:w-1/4 appearance-none form-checkbox rounded-md bg-gradient-to-r from-[#3986A3] to-[#225062] checked:bg-gradient-to-r checked:from-[#3986A3] checked:to-[#225062] px-16 py-1 lg:px-20 lg:py-1.5 font-medium text-white max-sm:text-[15px] cursor-pointer"
                                                     id="agreeCheckbox" onchange="agreeModal()">
-                                                <label for="agreeCheckbox"
-                                                    class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya
-                                                    Setuju</label>
+                                                <label for="agreeCheckbox" class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya Setuju</label>
                                             </div>
                                         </div>
                                     </div>
@@ -360,6 +365,9 @@
 
 @push('script')
     {{-- Semua script diletakkan di bawah --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -462,7 +470,7 @@
             // Inisialisasi Swiper untuk booklet
             new Swiper('.swiper-container-booklet', {
                 slidesPerView: 1,
-                spaceBetween: 40,
+                spaceBetween: 70,
                 loop: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
