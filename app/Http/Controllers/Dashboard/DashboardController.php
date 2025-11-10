@@ -8,16 +8,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $totalBerbinarPlusClass = 10;
+        $totalBerbinarPlusUser = 50;
+        return view('dashboard.index', compact('totalBerbinarPlusClass', 'totalBerbinarPlusUser'));
     }
 
-    
-
-    public function berbinarclass()
-    {
-        return view('dashboard.class-pm.class.index');
-    }
-    
     public function admin()
     {
         return view('dashboard.class-pm.user.index');
