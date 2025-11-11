@@ -31,6 +31,8 @@
         </div>
     </div>
 
+{{-- Catatan: Ini ada dua versi untuk modal sertifikat tergantung materinya sudah dikerjakan semua atau belum --}}
+
 <!-- Modal Sertifikat Diproses -->
 <div id="confirmModalCertificateOpen" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">

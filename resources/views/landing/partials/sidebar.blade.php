@@ -133,6 +133,8 @@
     </ul>
 </nav>
 
+{{-- catatan, ini ada beberapa versi untuk menu menu yang kekunci, jadi kurang lebih di antara beberapa versi cuma beda judul saja --}}
+
 <!-- Modal Kunci Materi -->
 <div id="confirmModalMaterials" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
