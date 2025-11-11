@@ -124,7 +124,7 @@
 
         <div class="flex flex-col gap-3 lg:hidden">
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/class-thumbnail/ptpm.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/class-thumbnail/cpm.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -172,7 +172,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/class-thumbnail/uiux.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -196,7 +196,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/class-thumbnail/fullstack.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -220,7 +220,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/class-thumbnail/fe.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -244,7 +244,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -268,7 +268,7 @@
                 </div>
             </div>
 
-            <div class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+            <div id="showModal" class="bg-white z-40 w-auto rounded-lg flex flex-row lg:flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                 <div class="w-1/2 flex flex-col justify-center">
                     <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-full max-h-24 lg:max-h-[126px]">
 
@@ -301,8 +301,8 @@
             <div class="swiper slider-recommendation">
                 <div class="swiper-wrapper py-2 mb-4">
 
-                    <div class="swiper-slide">
-                        <div class="bg-white w-auto rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white w-auto rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/class-thumbnail/ptpm.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -324,8 +324,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white w-auto rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white w-auto rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/class-thumbnail/cpm.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -347,8 +347,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/class-thumbnail/uiux.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -370,8 +370,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/class-thumbnail/fullstack.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -393,8 +393,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/class-thumbnail/fe.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -416,8 +416,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -439,8 +439,8 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
+                    <div class="swiper-slide cursor-pointer">
+                        <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
                             <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
@@ -824,6 +824,26 @@
 
 </div>
 
+
+<!-- Modal Buka Course Lain -->
+<div id="confirmModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+        <!-- Warning Icon -->
+        <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+
+        <!-- Title -->
+        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Kamu belum daftar kelas ini!</h2>
+
+        <!-- Message -->
+        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Kamu akan diarahkan ke halaman pendaftaran berbinar+</p>
+
+        <!-- Actions -->
+        <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+            <button type="button" id="cancelModal" class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
+            <a href="{{ route('auth.berbinar-plus.regis') }}" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</a>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
@@ -891,6 +911,29 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     });
 
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const showModals = document.querySelectorAll('[id="showModal"]');
+    const confirmModal = document.getElementById('confirmModal');
+    const cancelModal = document.getElementById('cancelModal');
+
+    if (showModals.length) {
+        showModals.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirmModal) confirmModal.classList.remove('hidden');
+            });
+        });
+    }
+
+    if (cancelModal) {
+        cancelModal.addEventListener('click', function () {
+            if (confirmModal) confirmModal.classList.add('hidden');
+        });
+    }
 });
 </script>
 @endsection

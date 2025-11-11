@@ -41,6 +41,11 @@ class TestingController
         return view('landing.pretest.test2');
     }
 
+    public function pretestFinished()
+    {
+        return view('landing.pretest.index-finished');
+    }
+
     public function posttest()
     {
         return view('landing.posttest.index');
@@ -54,6 +59,11 @@ class TestingController
     public function posttestQuestion2()
     {
         return view('landing.posttest.test2');
+    }
+
+    public function posttestFinished()
+    {
+        return view('landing.posttest.index-finished');
     }
 
     public function materials()

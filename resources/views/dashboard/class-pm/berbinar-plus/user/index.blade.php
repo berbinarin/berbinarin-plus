@@ -33,6 +33,8 @@
                                 <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Tanggal Daftar</th>
                                 <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Email</th>
                                 <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Pilihan Kelas</th>
+                                <!-- <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Status</th> -->
+                                <!-- <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">WA</th> -->
                                 <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Action</th>
                             </tr>
                         </thead>

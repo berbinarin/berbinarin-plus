@@ -30,7 +30,9 @@
                                 <tr class="mt-4">
                                     <th class="sticky-col sticky-col-1 bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">No</th>
                                     <th class="sticky-col sticky-col-2 bg-white px-6 py-3 text-start text-base font-bold leading-4 tracking-wider text-black">Nama Kelas</th>
-                                    <th class="bg-white px-6 py-3 text-start text-base font-bold leading-4 tracking-wider text-black">Jumlah Pedaftar</th>
+                                    <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">Jumlah Pedaftar</th>
+                                    <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">Detail Materi</th>
+                                    <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">Detail Soal</th>
                                     <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">Aksi</th>
                                 </tr>
                             </thead>
@@ -44,8 +46,18 @@
                                         <td class="whitespace-no-wrap sticky-col sticky-col-2 px-6 py-4">
                                             {{-- {{ $class->title }} --}} Graphic Designer
                                         </td>
-                                        <td class="whitespace-no-wrap px-6 py-4">
+                                        <td class="whitespace-no-wrap text-center px-6 py-4">
                                             {{-- {{ $class->enrollments_count }} --}} 5
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #82C7FF">
+                                                <i class="bx bx-list-ul text-white"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #07444D">
+                                                <i class="bx bx-check text-white"></i>
+                                            </a>
                                         </td>
                                         <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
                                             <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
@@ -67,8 +79,18 @@
                                         <td class="whitespace-no-wrap sticky-col sticky-col-2 px-6 py-4">
                                             {{-- {{ $class->title }} --}} Secretary and Finance
                                         </td>
-                                        <td class="whitespace-no-wrap px-6 py-4">
+                                        <td class="whitespace-no-wrap text-center px-6 py-4">
                                             {{-- {{ $class->enrollments_count }} --}} 5
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #82C7FF">
+                                                <i class="bx bx-list-ul text-white"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #07444D">
+                                                <i class="bx bx-check text-white"></i>
+                                            </a>
                                         </td>
                                         <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
                                             <a href="{{ route('dashboard.berbinar-class.show'{{--,  $class->id --}} ) }}"  class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">

@@ -52,7 +52,7 @@
         <!-- Links -->
          <div class="mb-4">
              <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Pre Test</h1>
-             <a href="{{ route('pretest.index') }}" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+             <a href="{{ route('pretest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                  <span class="text-lg lg:text-lg leading-5">Pre Test - Graphic Design</span>
              </a>
          </div>
@@ -61,61 +61,65 @@
          <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Course Menu</h1>
             <div class="flex flex-col">
-                <a href="{{ route('materials.index') }}" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                <a href="{{ route('materials.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                     <span class="text-lg lg:text-lg leading-5">1. Perkenalan Dasar</span>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
                     <span class="text-lg lg:text-lg leading-5">2. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
                     <span class="text-lg lg:text-lg leading-5">3. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
                     <span class="text-lg lg:text-lg leading-5">4. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
                     <span class="text-lg lg:text-lg leading-5">5. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
                     <span class="text-lg lg:text-lg leading-5">6. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
                     <span class="text-lg lg:text-lg leading-5">7. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
                     <span class="text-lg lg:text-lg leading-5">8. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2 bg-gray-50">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
                     <span class="text-lg lg:text-lg leading-5">9. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
-                <a href="" class="flex flex-row items-center justify-between duration-700 pl-8 pr-2 py-2">
+                <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
                     <span class="text-lg lg:text-lg leading-5">10. Perkenalan Dasar</span>
                     <i class="bx bxs-lock text-2xl text-primary"></i>
                 </a>
             </div>
-         </div>
+        </div>
 
-         <div class="mb-4">
-             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Post Test</h1>
-             <a href="{{ route('posttest.index') }}" class="flex flex-row items-center duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                 <span class="text-lg lg:text-lg leading-5">Post Test - Graphic Design</span>
-             </a>
-         </div>
+        <div class="mb-4">
+            <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Post Test</h1>
+            <!-- <a href="{{ route('posttest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
+            <a id="showModalPostTest" href="#" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                <span class="text-lg lg:text-lg leading-5">Post Test - Graphic Design</span>
+                <i class="bx bxs-lock text-2xl text-primary"></i>
+            </a>
+        </div>
 
-         <div class="mb-4">
-             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
-             <a href="{{ route('certificates.index') }}" class="flex flex-row items-center duration-700 pl-8 pr-2 py-2  {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                 <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
-             </a>
-         </div>
+        <div class="mb-4">
+            <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
+            <!-- <a href="{{ route('certificates.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
+            <a id="showModalCertificates" href="#') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
+                <i class="bx bxs-lock text-2xl text-primary"></i>
+            </a>
+        </div>
 
         <!-- <li class="dark-hover:text-blue-300 mt-20 rounded-lg p-2">
             <form action="/logout" method="POST">
@@ -128,6 +132,63 @@
         </li> -->
     </ul>
 </nav>
+
+<!-- Modal Kunci Materi -->
+<div id="confirmModalMaterials" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+        <!-- Error Icon -->
+        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+
+        <!-- Title -->
+        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Materi ini terkunci!</h2>
+
+        <!-- Message -->
+        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tuntaskan dulu materi sebelumnya, biar progres belajarmu makin mantap.</p>
+
+        <!-- Actions -->
+        <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+            <button type="button" id="cancelModalMaterials" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Kunci Post Test -->
+<div id="confirmModalPostTest" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+        <!-- Error Icon -->
+        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+
+        <!-- Title -->
+        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Post Test ini terkunci!</h2>
+
+        <!-- Message -->
+        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tuntaskan dulu materi sebelumnya, biar progres belajarmu makin mantap.</p>
+
+        <!-- Actions -->
+        <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+            <button type="button" id="cancelModalPostTest" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Kunci Sertifikat -->
+<div id="confirmModalCertificates" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+        <!-- Error Icon -->
+        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+
+        <!-- Title -->
+        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Sertifikat ini terkunci!</h2>
+
+        <!-- Message -->
+        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tuntaskan dulu materi sebelumnya, biar progres belajarmu makin mantap.</p>
+
+        <!-- Actions -->
+        <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+            <button type="button" id="cancelModalCertificates" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</button>
+        </div>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -147,5 +208,74 @@ document.addEventListener('DOMContentLoaded', function () {
         sidebar.classList.remove('mobile-closed');
         openBtn.classList.add('lg:hidden');
     });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const showModalsMaterials = document.querySelectorAll('[id="showModalMaterials"]');
+    const confirmModalMaterials = document.getElementById('confirmModalMaterials');
+    const cancelModalMaterials = document.getElementById('cancelModalMaterials');
+
+    if (showModalsMaterials.length) {
+        showModalsMaterials.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirmModalMaterials) confirmModalMaterials.classList.remove('hidden');
+            });
+        });
+    }
+
+    if (cancelModalMaterials) {
+        cancelModalMaterials.addEventListener('click', function () {
+            if (confirmModalMaterials) confirmModalMaterials.classList.add('hidden');
+        });
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const showModalsPostTest = document.querySelectorAll('[id="showModalPostTest"]');
+    const confirmModalPostTest = document.getElementById('confirmModalPostTest');
+    const cancelModalPostTest = document.getElementById('cancelModalPostTest');
+
+    if (showModalsPostTest.length) {
+        showModalsPostTest.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirmModalPostTest) confirmModalPostTest.classList.remove('hidden');
+            });
+        });
+    }
+
+    if (cancelModalPostTest) {
+        cancelModalPostTest.addEventListener('click', function () {
+            if (confirmModalPostTest) confirmModalPostTest.classList.add('hidden');
+        });
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const showModalsCertificates = document.querySelectorAll('[id="showModalCertificates"]');
+    const confirmModalCertificates = document.getElementById('confirmModalCertificates');
+    const cancelModalCertificates = document.getElementById('cancelModalCertificates');
+
+    if (showModalsCertificates.length) {
+        showModalsCertificates.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirmModalCertificates) confirmModalCertificates.classList.remove('hidden');
+            });
+        });
+    }
+
+    if (cancelModalCertificates) {
+        cancelModalCertificates.addEventListener('click', function () {
+            if (confirmModalCertificates) confirmModalCertificates.classList.add('hidden');
+        });
+    }
 });
 </script>
