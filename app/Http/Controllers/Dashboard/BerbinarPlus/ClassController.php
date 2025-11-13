@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\BerbinarpAdmin;
+namespace App\Http\Controllers\Dashboard\BerbinarPlus;
 
-use App\Models\Berbinarp_Class;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Berbinarp_Class;
 
-class BerbinarClassController extends Controller
+class ClassController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $classes = Berbinarp_Class::all();
-        return view('dashboard.admin-pm.class.index', compact('classes'));
+        $classes = Berbinarp_Class::withCount('enrollments')->get();
+        return view('dashboard.berbinar-plus.class.index', compact('classes'));
     }
 
     /**
@@ -22,7 +22,7 @@ class BerbinarClassController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin-pm.class.create');
+        return view('dashboard.berbinar-plus.class.create');
     }
 
     /**
@@ -31,41 +31,41 @@ class BerbinarClassController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'category' => 'required',
             'name' => 'required',
-            'description' => 'required',
-            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'syllabus' => 'required|array|min:1',
-            'syllabus.*.title' => 'required|string',
-            'syllabus.*.details' => 'required|string',
+            'instructor_name' => 'required',
+            'instructor_title' => 'required',
+            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:1024',
+        ],  [
+            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
         ]);
 
         // Proses upload thumbnail
+        $filename = null;
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/thumbnails'), $filename);
-        } else {
-            $filename = null;
         }
 
         // Simpan ke database
         Berbinarp_Class::create([
+            'category' => $validated['category'] ?? null,
             'name' => $validated['name'],
-            'description' => $validated['description'],
+            'instructor_name' => $validated['instructor_name'] ?? null,
+            'instructor_title' => $validated['instructor_title'] ?? null,
             'thumbnail' => $filename,
-            'syllabus' => json_encode($validated['syllabus']),
         ]);
-
-        return redirect()->route('dashboard.admin.class.index')->with('success', 'Class berhasil ditambahkan');
+        return redirect()->route('dashboard.kelas.index')->with('success', 'Kelas berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
         $class = Berbinarp_Class::findOrFail($id);
-        return view('dashboard.admin-pm.class.show', compact('class'));
+        return view('dashboard.berbinar-plus.class.show', compact('class'));
     }
 
     /**
@@ -74,7 +74,7 @@ class BerbinarClassController extends Controller
     public function edit(string $id)
     {
         $class = Berbinarp_Class::findOrFail($id);
-        return view('dashboard.admin-pm.class.edit', compact('class'));
+        return view('dashboard.berbinar-plus.class.edit', compact('class'));
     }
 
     /**
@@ -83,12 +83,13 @@ class BerbinarClassController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
+            'category' => 'required',
             'name' => 'required',
-            'description' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'syllabus' => 'required|array|min:1',
-            'syllabus.*.title' => 'required|string',
-            'syllabus.*.details' => 'required|string',
+            'instructor_name' => 'required',
+            'instructor_title' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
+        ], [
+            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
         ]);
 
         $class = Berbinarp_Class::findOrFail($id);
@@ -101,12 +102,13 @@ class BerbinarClassController extends Controller
             $class->thumbnail = $filename;
         }
 
+        $class->category = $validated['category'] ?? null;
         $class->name = $validated['name'];
-        $class->description = $validated['description'];
-        $class->syllabus = json_encode($validated['syllabus']);
+        $class->instructor_name = $validated['instructor_name'] ?? null;
+        $class->instructor_title = $validated['instructor_title'] ?? null;
         $class->save();
 
-        return redirect()->route('dashboard.admin.class.index')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('dashboard.kelas.index')->with('success', 'Class berhasil diedit');
     }
 
     /**
@@ -116,7 +118,6 @@ class BerbinarClassController extends Controller
     {
         $class = Berbinarp_Class::findOrFail($id);
         $class->delete();
-
-        return redirect()->route('dashboard.admin.class.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('dashboard.kelas.index')->with('success', 'Kelas berhasil dihapus');
     }
 }

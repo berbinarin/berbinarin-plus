@@ -23,13 +23,16 @@ class Berbinarp_User extends Model
         'username',
         'password',
         'user_status_id',
+        'plain_password',
     ];
 
-    public function userStatus(): BelongsTo
+    // Relasi ke status user
+    public function status(): BelongsTo
     {
         return $this->belongsTo(BerbinarpUserStatus::class, 'user_status_id');
     }
 
+    // Relasi ke enrollments
     public function enrollments(): HasMany
     {
         return $this->hasMany(EnrollmentUser::class, 'user_id');

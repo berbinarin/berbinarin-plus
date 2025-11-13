@@ -13,28 +13,27 @@ class EnrollmentUser extends Model
     protected $fillable = [
         'user_id',
         'course_id',
-        'service_package_id',
+        'service_package',
+        'price_package',
         'payment_proof_url',
         'price_at_enrollment',
         'enrollment_status_id',
         'verified_at',
     ];
 
+    // Relasi ke user
     public function user(): BelongsTo
     {
         return $this->belongsTo(Berbinarp_User::class, 'user_id');
     }
 
+    // Relasi ke class
     public function course(): BelongsTo
     {
         return $this->belongsTo(Berbinarp_Class::class, 'course_id');
     }
 
-    public function servicePackage(): BelongsTo
-    {
-        return $this->belongsTo(Berbinarp_Service::class, 'service_package_id');
-    }
-
+    // Relasi ke status enrollment
     public function status(): BelongsTo
     {
         return $this->belongsTo(BerbinarpUserStatus::class, 'enrollment_status_id');

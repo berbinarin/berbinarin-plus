@@ -7,20 +7,20 @@
     }
 @endphp
 
-<li class="{{ isRouteNameStartWith('dashboard.berbinar-class', 'bg') }} my-5 rounded-lg p-2">
-    <a href="{{ route('dashboard.berbinar-class.index') }}"
-        class="{{ Str::startsWith(Route::currentRouteName(), 'dashboard.berbinar-class') ? 'text-white' : 'text-gray-700 hover:text-primary' }} flex flex-row items-center duration-700">
+<li class="{{ isRouteNameStartWith('dashboard.kelas', 'bg') }} my-5 rounded-lg p-2">
+    <a href="{{ route('dashboard.kelas.index') }}"
+        class="{{ Str::startsWith(Route::currentRouteName(), 'dashboard.kelas') ? 'text-white' : 'text-gray-700 hover:text-primary' }} flex flex-row items-center duration-700">
         <i
-            class="bx bx-tab {{ Str::startsWith(Route::currentRouteName(), 'dashboard.berbinar-class') ? 'text-white' : 'text-gray-700' }} mr-2 text-lg"></i>
+            class="bx bx-tab {{ Str::startsWith(Route::currentRouteName(), 'dashboard.kelas') ? 'text-white' : 'text-gray-700' }} mr-2 text-lg"></i>
         <span class="ml-4 text-base font-bold leading-5">Daftar Kelas</span>
     </a>
 </li>
 
-<li class="{{ isRouteNameStartWith('dashboard.berbinar-user') }} my-5 rounded-lg p-2">
-    <a href="{{ route('dashboard.berbinar-user.index') }}"
-        class="{{ Str::startsWith(Route::currentRouteName(), 'dashboard.berbinar-user') ? 'text-white' : 'text-gray-700 hover:text-primary' }} flex flex-row items-center duration-700">
+<li class="{{ isRouteNameStartWith('dashboard.pendaftar') }} my-5 rounded-lg p-2">
+    <a href="{{ route('dashboard.pendaftar.index') }}"
+        class="{{ Str::startsWith(Route::currentRouteName(), 'dashboard.pendaftar') ? 'text-white' : 'text-gray-700 hover:text-primary' }} flex flex-row items-center duration-700">
         <i
-            class="bx bx-user {{ Str::startsWith(Route::currentRouteName(), 'dashboard.berbinar-user') ? 'text-white' : 'text-gray-700' }} mr-2 text-lg"></i>
+            class="bx bx-user {{ Str::startsWith(Route::currentRouteName(), 'dashboard.pendaftar') ? 'text-white' : 'text-gray-700' }} mr-2 text-lg"></i>
         <span class="ml-4 text-base font-bold leading-5">Data Pendaftar</span>
     </a>
 </li>

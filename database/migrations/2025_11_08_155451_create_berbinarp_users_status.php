@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('berbinarp_class', function (Blueprint $table) {
+        Schema::create('berbinarp_users_status', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
             $table->string('name');
-            $table->string('instructor_name');
-            $table->string('instructor_title');
-            $table->decimal('rating', 2, 1)->nullable();
-            $table->string('thumbnail');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('berbinarp_class');
+        Schema::dropIfExists('berbinarp_users_status');
     }
 };
