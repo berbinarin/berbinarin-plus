@@ -3,7 +3,7 @@
 <nav class="sticky left-0 right-0 top-0 z-50 flex items-center bg-white bg-opacity-90 px-4 py-3 backdrop-blur-sm max-sm:px-4 max-sm:py-2">
     <!-- Logo -->
     <a href="{{ route('homepage.index') }}" class="flex items-center gap-2">
-        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo" class="h-10 w-auto max-sm:h-8" />
+        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-10 w-auto max-sm:h-8" />
         <h1 class="text-lg max-sm:hidden">Berbinar+</h1>
     </a>
 
@@ -11,12 +11,12 @@
     <div id="navLinks" class="ml-auto items-center space-x-2 lg:space-x-6 flex">
         <div class="relative">
             <button id="notificationButton" type="button" aria-controls="notificationModal" aria-expanded="false" class="relative focus:outline-none">
-                <img src="{{ asset("assets/images/landing/favicion/notification.png") }}" alt="Notifications" class="h-8 w-auto max-sm:h-6">
+                <img src="{{ asset("assets/images/landing/favicion/notification.webp") }}" alt="Notifications" class="h-8 w-auto max-sm:h-6">
                 <span class="absolute bg-[#3986A3] w-3 h-3 lg:w-3.5 lg:h-3.5 rounded-full -translate-y-6 lg:-translate-y-8 text-white text-[8px] lg:text-[10px] text-center">4</span>
             </button>
         </div>
         <a href="{{ route('others.index') }}" class="flex flex-row gap-3">
-            <img src="{{ asset("assets/images/landing/favicion/profile-placeholder.png") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
+            <img src="{{ asset("assets/images/landing/favicion/profile-placeholder.webp") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
             <p class="items-center truncate font-medium hidden">John Doe</p>
         </a>
     </div>
@@ -33,7 +33,7 @@
         <hr class="border border-gray-300">
         <ul class="divide-y divide-gray-200 max-h-64 lg:max-h-96 overflow-y-auto">
             <li class="py-3 flex flex-row gap-2">
-                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
+                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
                 <div>
                     <p class="text-sm font-medium">Halo Tiarasyifa! 🎓</p>
                     <p class="text-sm text-gray-500">Sertifikatmu sudah tersedia! Ayo unduh sekarang.</p>
@@ -42,7 +42,7 @@
                 </div>
             </li>
             <li class="py-3 flex flex-row gap-2">
-                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
+                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
                 <div>
                     <p class="text-sm font-medium">Keep going, Tiarasyifa! 🚀</p>
                     <p class="text-sm text-gray-500">Kamu semakin dekat dengan pencapaianmu.</p>
@@ -51,7 +51,7 @@
                 </div>
             </li>
             <li class="py-3 flex flex-row gap-2">
-                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
+                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
                 <div>
                     <p class="text-sm font-medium">Mantap Tiarasyifa!</p>
                     <p class="text-sm text-gray-500">Progress belajarmu sudah 50% 🚀.</p>
@@ -60,7 +60,7 @@
                 </div>
             </li>
             <li class="py-3 flex flex-row gap-2">
-                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
+                <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-12 mt-1 w-auto max-sm:h-8" />
                 <div>
                     <p class="text-sm font-medium">Selamat Datang, Tiarasyifa! 🚀 </p>
                     <p class="text-sm text-gray-500">Saatnya mulai perjalanan belajarmu.</p>

@@ -8,7 +8,7 @@
             <div class="py-4 md:pb-7 md:pt-12">
                 <div class="mb-2 flex items-center gap-2">
                     <a href="{{ route('dashboard.kelas.index') }}">
-                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.png') }}" alt="Back Btn" />
+                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
                     <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Ubah
                         Daftar Kelas</p>
@@ -94,7 +94,7 @@
                                 background-clip: padding-box, border-box;
                             ">
                             <!-- Warning Icon -->
-                            <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon"
+                            <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
                                 class="mx-auto h-[83px] w-[83px]" />
 
                             <!-- Title -->

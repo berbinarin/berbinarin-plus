@@ -29,7 +29,7 @@
                     <!-- Tombol Kembali -->
                     <a href="{{ route('home.index') }}">
                         <div class="flex cursor-pointer items-center space-x-2 lg:order-1 mt-2">
-                            <img src="{{ asset('assets/images/landing/svg/left-arrow.svg') }}" alt="Left Arrow"
+                            <img src="{{ asset('assets/images/landing/svg/left-arrow.webp') }}" alt="Left Arrow"
                                 class="h-3 w-auto" />
                             <p class="text-[15px] font-semibold text-[#3986A3] xl:text-lg">Kembali</p>
                         </div>
@@ -62,7 +62,7 @@
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 rounded-md shadow-sm p-2 mb-2"
                                     id="genderToggle">
                                     <span id="genderSelected" class="text-gray-500">Pilih Jenis Kelamin</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="transform transition-transform w-[.9rem] mr-1" id="genderIcon">
                                 </button>
                                 <div class="absolute bg-white border border-gray-300 rounded-md mt-2 w-full z-10 hidden"
@@ -105,7 +105,7 @@
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 shadow-sm p-2 mb-2"
                                     id="educationToggle">
                                     <span id="educationSelected" class="text-gray-500">Apa Pendidikan Terakhirmu?</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="transform transition-transform w-[.9rem] mr-1" id="educationIcon">
                                 </button>
                                 <div class="absolute bg-white border border-gray-300 rounded-md mt-2 w-full z-10 hidden"
@@ -180,7 +180,7 @@
                                                             id="modal-headline">Booklet Berbinar Class</h3>
                                                         <a onclick="closeModal()"
                                                             class="absolute translate-y-1 lg:translate-y-2 bg-[#E4F3F8] rounded-full right-5 lg:right-10 cursor-pointer">
-                                                            <img src="{{ asset('assets/images/landing/favicion/vector-close.svg') }}"
+                                                            <img src="{{ asset('assets/images/landing/favicion/vector-close.webp') }}"
                                                                 class="scale-50" alt="close">
                                                         </a>
                                                     </div>
@@ -189,7 +189,7 @@
                                                             <div class="swiper-wrapper">
                                                                 @for ($i = 1; $i <= 23; $i++)
                                                                     <div class="swiper-slide">
-                                                                        <img src="{{ asset('assets/images/landing/booklet/' . $i . '.png') }}"
+                                                                        <img src="{{ asset('assets/images/landing/booklet/' . $i . '.webp') }}"
                                                                             alt="Booklet {{ $i }}"
                                                                             class="w-full rounded-2xl" />
                                                                     </div>
@@ -268,7 +268,7 @@
                                         class="mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm pointer-events-none flex items-center">
                                         <button type="button"
                                             class="pointer-events-none border flex justify-between gap-2 py-[2px] px-2 border-[#B3B3B3] rounded-md items-center">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.png') }}"
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
                                                 alt="" class="w-4 h-4">
                                             Upload File
                                         </button>
@@ -302,7 +302,7 @@
                             <div id="myModalConfirm"
                                 class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900 bg-opacity-50 hidden sm:p-4">
                                 <div class="bg-white p-6 w-4/5 md:w-1/3 rounded-lg text-center">
-                                    <img src="{{ asset('assets/images/landing/produk/emo/confirm.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/confirm.webp') }}" alt=""
                                         class="mx-auto">
                                     <p>Apakah data yang Anda masukkan sudah benar?</p>
                                     <p>Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.</p>

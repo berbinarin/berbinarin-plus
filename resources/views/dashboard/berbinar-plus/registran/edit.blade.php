@@ -8,7 +8,7 @@
             <div class="py-4 md:pb-7 md:pt-12">
                 <div class="mb-2 flex items-center gap-2">
                     <a href="{{ route('dashboard.pendaftar.index') }}">
-                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.png') }}" alt="Back Btn" />
+                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
                     <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Ubah Data
                         Pendaftar</p>
@@ -83,7 +83,7 @@
                                         class="{{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? 'text-black' : 'text-gray-500' }}">
                                         {{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? $user->last_education : ($user->last_education ? 'Other' : 'Apa Pendidikan Terakhirmu?') }}
                                     </span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
                                 </button>
                                 <div class="absolute z-10 mt-2 hidden w-full rounded-md border border-gray-300 bg-white"
@@ -187,7 +187,7 @@
                                         class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
                                         <button type="button"
                                             class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.png') }}"
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
                                                 alt="" class="h-4 w-4" />
                                             Upload File
                                         </button>
@@ -255,7 +255,7 @@
                                 background-clip: padding-box, border-box;
                             ">
                                 <!-- Warning Icon -->
-                                <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon"
+                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
                                     class="mx-auto h-[83px] w-[83px]" />
 
                                 <!-- Title -->

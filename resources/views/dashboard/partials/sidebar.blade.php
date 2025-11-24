@@ -1,7 +1,7 @@
 <nav class="flex w-56 flex-col items-center bg-white py-8 pl-10 pr-6">
     {{-- LOGO BERBINAR --}}
     <div>
-        <img src="{{ asset('assets/images/landing/favicion/logo-berbinar.png') }}"
+        <img src="{{ asset('assets/images/landing/favicion/logo-berbinar.webp') }}"
             alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
     </div>
 

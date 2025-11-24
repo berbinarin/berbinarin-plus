@@ -49,7 +49,7 @@
 <div class="lg:px-6">
     {{-- Banner --}}
     <div class="overflow-hidden relative">
-        <img src="{{ asset("assets/images/landing/favicion/plastic.png") }}" alt="" class="absolute z-0 max-sm:inset-y-0 max-sm:inset-x-0 w-full h-full object-cover">
+        <img src="{{ asset("assets/images/landing/favicion/plastic.webp") }}" alt="" class="absolute z-0 max-sm:inset-y-0 max-sm:inset-x-0 w-full h-full object-cover">
         <div class="bg-[#106681] w-full rounded-lg lg:rounded-xl lg:px-6 lg:py-4 z-40">
             <div class="flex flex-row justify-between z-40">
                 <div class="text-white p-5 flex lg:flex-col justify-center z-40">
@@ -60,7 +60,7 @@
                     <p class="text-xl max-sm:hidden z-40">Progres belajarmu: <span class="font-semibold">30%</span> menuju pencapaian utama</p> {{-- persentase progress --}}
                 </div>
                 <div class="flex flex-row-reverse">
-                    <img src="{{ asset("assets/images/landing/favicion/banner-picture.png") }}" alt="" class="w-2/3 lg:w-full rounded-3xl z-40">
+                    <img src="{{ asset("assets/images/landing/favicion/banner-picture.webp") }}" alt="" class="w-2/3 lg:w-full rounded-3xl z-40">
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
 
                     <div class="swiper-slide">
                         <div class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/graphic-designer.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]"> {{-- thumbnail kelas --}}
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/graphic-designer.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]"> {{-- thumbnail kelas --}}
                             <div>
                                 <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                     <p class="font-medium text-xs lg:text-base course-title italic" title="Graphic Designer">Graphic Designer</p>
@@ -100,7 +100,7 @@
 
                     <div class="swiper-slide">
                         <div class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/secretary-and-finance.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/secretary-and-finance.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                             <div>
                                 <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                     <p class="font-medium text-xs lg:text-base course-title italic" title="Secretary and Finance">Secretary and Finance</p>
@@ -120,7 +120,7 @@
 
                     <div class="swiper-slide">
                         <div class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/hr.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/hr.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                             <div>
                                 <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                     <p class="font-medium text-xs lg:text-base course-title italic" title="Human Resource">Human Resource</p>
@@ -140,7 +140,7 @@
 
                     <div class="swiper-slide">
                         <div class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                            <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
+                            <img src="{{ asset("assets/images/landing/favicion/checker.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                             <div>
                                 <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                     <p class="font-medium text-xs lg:text-base course-title italic" title="User Interface Design for Beginner">User Interface Design for Beginner</p>
@@ -160,7 +160,7 @@
 
                     <div class="swiper-slide">
                         <div class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                            <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
+                            <img src="{{ asset("assets/images/landing/favicion/checker.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                             <div>
                                 <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                     <p class="font-medium text-xs lg:text-base course-title italic" title="User Interface Design for Beginner">User Interface Design for Beginner</p>
@@ -198,7 +198,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/ptpm.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/ptpm.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-orange-500 text-xs lg:text-base font-medium italic">Management</div>
@@ -221,7 +221,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/cpm.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/cpm.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-orange-500 text-xs lg:text-base font-medium italic">Management</div>
@@ -244,7 +244,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/uiux.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/uiux.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-purple-500 text-xs lg:text-base font-medium italic">Design</div>
@@ -267,7 +267,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/fullstack.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/fullstack.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-blue-500 text-xs lg:text-base font-medium italic">Development</div>
@@ -290,7 +290,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/class-thumbnail/fe.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/class-thumbnail/fe.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-blue-500 text-xs lg:text-base font-medium italic">Developer</div>
@@ -313,7 +313,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/favicion/checker.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-purple-500 text-xs lg:text-base font-medium italic">Design</div>
@@ -336,7 +336,7 @@
 
                     <div class="swiper-slide cursor-pointer">
                         <div id="showModal" class="bg-white rounded-lg flex flex-col p-2.5 lg:px-3 lg:pb-4 gap-2 shadow-md">
-                            <img src="{{ asset("assets/images/landing/favicion/checker.png") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
+                            <img src="{{ asset("assets/images/landing/favicion/checker.webp") }}" alt="" class="rounded-lg w-auto max-h-20 lg:max-h-[126px]">
                             <div>
                                 <div class="flex flex-col gap-0 mb-1">
                                     <div class="text-purple-500 text-xs lg:text-base font-medium italic">Design</div>
@@ -371,7 +371,7 @@
 <div id="confirmModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Warning Icon -->
-        <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Kamu belum daftar kelas ini!</h2>

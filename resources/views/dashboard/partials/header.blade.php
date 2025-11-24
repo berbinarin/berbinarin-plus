@@ -30,6 +30,6 @@
 </style>
 
 <!-- Other existing styles -->
-<link rel="shortcut icon" href="{{ asset('assets/images/landing/logo/logo-berbinar.png') }}" type="image/x-icon" />
+<link rel="shortcut icon" href="{{ asset('assets/images/landing/logo/logo-berbinar.webp') }}" type="image/x-icon" />
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 @vite('resources/css/app.css')
