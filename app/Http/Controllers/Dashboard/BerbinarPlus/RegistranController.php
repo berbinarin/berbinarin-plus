@@ -187,7 +187,7 @@ class RegistranController extends Controller
         $enrollment->enrollment_status_id = $request->enrollment_status_id;
         $enrollment->save();
 
-        return back()->with('success', 'Status enrollment berhasil diubah.');
+        return back()->with('success', 'Status Terdaftar.');
     }
 
     /**
