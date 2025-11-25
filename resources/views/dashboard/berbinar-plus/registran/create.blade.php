@@ -8,7 +8,7 @@
             <div class="py-4 md:pb-7 md:pt-12">
                 <div class="mb-2 flex items-center gap-2">
                     <a href="{{ route('dashboard.pendaftar.index') }}">
-                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.png') }}" alt="Back Btn" />
+                        <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
                     <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Tambah
                         Data Pendaftar</p>
@@ -59,7 +59,7 @@
                                 <label class="text-lg">Pendidikan Terakhir</label>
                                 <button type="button" id="educationToggle" class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
                                     <span id="educationSelected" class="text-gray-500">Apa Pendidikan Terakhirmu?</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt="" class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt="" class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
                                 </button>
                                 <div class="absolute z-10 mt-2 hidden w-full rounded-md border border-gray-300 bg-white" id="educationDropdown">
                                     <div class="grid grid-cols-2 gap-4 p-2" style="background-color: white">
@@ -136,7 +136,7 @@
                                     <input type="file" id="bukti_transfer" name="payment_proof_url" class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2" accept="image/*" required />
                                     <div class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
                                         <button type="button" class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.png') }}" alt="" class="h-4 w-4" />
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}" alt="" class="h-4 w-4" />
                                             Upload File
                                         </button>
                                         <span id="fileName" class="ml-3 truncate text-base text-gray-600 max-w-[250px]"></span>
@@ -170,7 +170,7 @@
                         <div id="confirmModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
                             <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg" style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
                                 <!-- Warning Icon -->
-                                <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
 
                                 <!-- Title -->
                                 <h2 class="mt-4 text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>

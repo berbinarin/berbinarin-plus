@@ -37,7 +37,7 @@
 <div id="confirmModalCertificateOpen" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Error Icon -->
-        <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Sertifikat dalam proses verifikasi!</h2>
@@ -56,7 +56,7 @@
 <div id="confirmModalCertificateLocked" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Error Icon -->
-        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/error.webp') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops, sertifikatmu belum bisa diunduh!</h2>

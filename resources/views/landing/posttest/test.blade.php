@@ -30,7 +30,7 @@
             <!-- Card pertanyaan -->
             <div class="bg-white rounded-[18px] ring-1 ring-[#2986A3] flex flex-col lg:flex-row-reverse justify-between items-center gap-8 px-4 py-6 lg:px-12 lg:py-8">
                 <div class="flex justify-center items-center">
-                    <img src="{{ asset('assets/images/landing/favicion/question-placeholder.png') }}" alt="Desain Komposisi" class="w-auto lg:w-60 lg:h-60 object-cover rounded-[10px]">
+                    <img src="{{ asset('assets/images/landing/favicion/question-placeholder.webp') }}" alt="Desain Komposisi" class="w-auto lg:w-60 lg:h-60 object-cover rounded-[10px]">
                 </div>
 
                 <div class="flex-1">

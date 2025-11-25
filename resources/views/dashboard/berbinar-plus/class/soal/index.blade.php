@@ -12,7 +12,7 @@
                     <div>
                         <div class="mb-2 flex items-center gap-2">
                             <a href="{{ route('dashboard.kelas.index') }}">
-                                <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.png') }}" alt="Back Btn" />
+                                <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                             </a>
                             <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Daftar Soal</p>
                         </div>
@@ -252,7 +252,7 @@
     <div id="deleteModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
         <div class="relative w-[360px] md:w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
             <!-- Warning Icon -->
-            <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon"
+            <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
                 class="mx-auto h-[83px] w-[83px]" />
 
             <!-- Title -->

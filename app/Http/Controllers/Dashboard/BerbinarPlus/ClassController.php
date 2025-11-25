@@ -58,7 +58,7 @@ class ClassController extends Controller
         ]);
         return redirect()->route('dashboard.kelas.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Kelas berhasil ditambahkan.',
             'type' => 'success',
@@ -116,7 +116,7 @@ class ClassController extends Controller
 
         return redirect()->route('dashboard.kelas.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Kelas berhasil diubah.',
             'type' => 'success',
@@ -132,7 +132,7 @@ class ClassController extends Controller
         $class->delete();
         return redirect()->route('dashboard.kelas.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Kelas berhasil dihapus.',
             'type' => 'success',

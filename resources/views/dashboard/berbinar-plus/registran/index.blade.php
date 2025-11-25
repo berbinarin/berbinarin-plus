@@ -111,7 +111,7 @@
                                         </td>
                                         <td class="text-center px-6 py-4">
                                             <a href="https://wa.me/6281282103522" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00E45B" target="_blank" rel="noopener noreferrer">
-                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.png') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
+                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
                                             </a>
                                         </td>
                                         <td class="text-center px-6 py-4">
@@ -263,7 +263,7 @@
     <div id="deleteModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
         <div class="relative w-[360px] md:w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
             <!-- Warning Icon -->
-            <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+            <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
 
             <!-- Title -->
             <h2 class="mt-4 text-2xl font-bold text-stone-900">Konfirmasi Hapus</h2>

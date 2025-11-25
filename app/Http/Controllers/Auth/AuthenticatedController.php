@@ -22,7 +22,7 @@ class AuthenticatedController
         if (Auth::attempt($credentials)) {
             return redirect()->route('dashboard.index')->with([
                 'alert' => true,
-                'icon' => asset('assets/images/dashboard/success.png'),
+                'icon' => asset('assets/images/dashboard/success.webp'),
                 'title' => 'Login Berhasil',
                 'message' => 'Silakan masuk',
                 'type' => 'success',
@@ -31,7 +31,7 @@ class AuthenticatedController
         else{
             return redirect()->route('auth.login')->with([
                 'alert' => true,
-                'icon' => asset('assets/images/dashboard/error.png'),
+                'icon' => asset('assets/images/dashboard/error.webp'),
                 'title' => 'Login Gagal',
                 'message' => 'Username atau password salah',
                 'type' => 'error',
@@ -48,7 +48,7 @@ class AuthenticatedController
 
         return redirect('/login')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Logout Berhasil',
             'message' => 'Sampai jumpa lagi',
             'type' => 'success',

@@ -14,7 +14,7 @@
     </div>
 
     <div class="flex flex-row gap-6 mb-6 align-bottom max-sm:text-sm text-lg z-40">
-        <a href="{{ route('homepage.index') }}" class="flex flex-col justify-center z-40"><img src="{{ asset("assets/images/landing/favicion/back-chevron.png") }}" alt="Back" class=""></a>
+        <a href="{{ route('homepage.index') }}" class="flex flex-col justify-center z-40"><img src="{{ asset("assets/images/landing/favicion/back-chevron.webp") }}" alt="Back" class=""></a>
 
         <nav class="text-gray-500 max-sm:text-sm text-lg z-40" aria-label="Breadcrumb">
             <a href="{{ route('homepage.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
@@ -25,7 +25,7 @@
 
     <div class="mb-5 lg:mb-10 z-40">
         <div class="overflow-hidden relative z-40">
-            <img src="{{ asset("assets/images/landing/favicion/plastic.png") }}" alt="" class="absolute z-0 max-sm:inset-y-0 max-sm:inset-x-0 w-full h-full object-cover">
+            <img src="{{ asset("assets/images/landing/favicion/plastic.webp") }}" alt="" class="absolute z-0 max-sm:inset-y-0 max-sm:inset-x-0 w-full h-full object-cover">
             <div class="bg-[#106681] w-full rounded-xl lg:rounded-xl lg:px-4 lg:py-2 z-40">
                 <div class="flex flex-col justify-between z-40">
                     <div class="text-white p-5 flex flex-col gap-2 lg:gap-4 justify-center z-40">
@@ -60,7 +60,7 @@
             <div class="w-full bg-gradient-to-r from-[#FFFFFF] to-[#32758E80] p-5 rounded-2xl">
                 <h1 class="text-2xl font-medium italic mb-3">Pre Test</h1>
                 <div class="flex flex-row gap-3">
-                    <img src="{{ asset("assets/images/landing/favicion/file.png") }}" alt="" class="w-14 h-14">
+                    <img src="{{ asset("assets/images/landing/favicion/file.webp") }}" alt="" class="w-14 h-14">
                     <div>
                         <h1 class="text-gray-700 italic">Pre Test</h1>
                         <a href="{{ route('pretest.index') }}" class="text-lg text-primary font-medium italic">Pre Test - Graphic Design</a>
@@ -91,7 +91,7 @@
             <div class="w-full bg-gradient-to-r from-[#FFFFFF] to-[#32758E80] p-5 rounded-2xl">
                 <h1 class="text-2xl font-medium italic mb-3">Course Menu</h1>
                 <div class="flex flex-row gap-3">
-                    <img src="{{ asset("assets/images/landing/favicion/video.png") }}" alt="" class="w-14 h-14">
+                    <img src="{{ asset("assets/images/landing/favicion/video.webp") }}" alt="" class="w-14 h-14">
                     <div>
                         <h1 class="text-gray-700">Video</h1>
                         <a href="{{ route('materials.index') }}" class="text-lg text-primary font-medium">1. Perkenalan Dasar</a>

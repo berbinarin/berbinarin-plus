@@ -45,7 +45,7 @@
     <button id="closeSidebarBtn" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
     {{-- LOGO BERBINAR --}}
     <div class="flex flex-row items-center justify-center">
-        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
+        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
     </div>
     {{-- LIST MENU --}}
     <ul class="mt-10 overflow-y-auto custom-scrollbar overflow-x-hidden text-gray-700 dark:text-gray-400">
@@ -139,7 +139,7 @@
 <div id="confirmModalMaterials" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Error Icon -->
-        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/error.webp') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Materi ini terkunci!</h2>
@@ -158,7 +158,7 @@
 <div id="confirmModalPostTest" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Error Icon -->
-        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/error.webp') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Post Test ini terkunci!</h2>
@@ -177,7 +177,7 @@
 <div id="confirmModalCertificates" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
         <!-- Error Icon -->
-        <img src="{{ asset('assets/images/dashboard/error.png') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
+        <img src="{{ asset('assets/images/dashboard/error.webp') }}" alt="Error Icon" class="mx-auto h-[83px] w-[83px]" />
 
         <!-- Title -->
         <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Oops! Sertifikat ini terkunci!</h2>

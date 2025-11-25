@@ -19,7 +19,7 @@
                 <a href="" class="hover:text-gray-900 transition-colors"><span class="text-black">Produksi Visual</span></a>
             </nav>
             <h1 class="mt-4 lg:mt-6 text-xl lg:text-3xl font-semibold">Produksi Visual</h1>
-            <img src="{{ asset("assets/images/landing/favicion/materials-placeholder.png") }}" alt="Back" class="w-full lg:w-4/5 mt-5 lg:mt-10 rounded-2xl">
+            <img src="{{ asset("assets/images/landing/favicion/materials-placeholder.webp") }}" alt="Back" class="w-full lg:w-4/5 mt-5 lg:mt-10 rounded-2xl">
 
                 <div class="mb-4 font-medium lg:text-2xl mt-5"><span class="border-b-2 border-cyan-300 pb-[2px]">Deskripsi</span></div>
 

@@ -45,7 +45,7 @@
     <button id="closeSidebarBtn" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
     {{-- LOGO BERBINAR --}}
     <div class="flex flex-row items-center justify-center">
-        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.png") }}" alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
+        <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo Berbinar Insightful Indonesia" title="Logo Berbinar Insightful Indonesia" class="w-14" />
     </div>
     {{-- LIST MENU --}}
     <ul class="mt-10 overflow-y-auto overflow-x-hidden text-gray-700 dark:text-gray-400">

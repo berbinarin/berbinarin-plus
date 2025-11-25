@@ -72,7 +72,7 @@
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 rounded-md shadow-sm p-2 mb-2"
                                     id="genderToggle">
                                     <span id="genderSelected" class="text-gray-500">Pilih Jenis Kelamin</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="transform transition-transform w-[.9rem] mr-1" id="genderIcon">
                                 </button>
                                 <div class="absolute bg-white border border-gray-300 rounded-md mt-2 w-full z-10 hidden"
@@ -123,7 +123,7 @@
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 shadow-sm p-2 mb-2"
                                     id="educationToggle">
                                     <span id="educationSelected" class="text-gray-500">Apa Pendidikan Terakhirmu?</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.png') }}" alt=""
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="transform transition-transform w-[.9rem] mr-1" id="educationIcon">
                                 </button>
                                 <div class="absolute bg-white border border-gray-300 rounded-md mt-2 w-full z-10 hidden"
@@ -212,7 +212,7 @@
                                                             <div class="swiper-wrapper">
                                                                 @for ($i = 1; $i <= 23; $i++)
                                                                     <div class="swiper-slide">
-                                                                        <img src="{{ asset('assets/images/landing/booklet/' . $i . '.png') }}"
+                                                                        <img src="{{ asset('assets/images/landing/booklet/' . $i . '.webp') }}"
                                                                             alt="Booklet {{ $i }}"
                                                                             class="w-full rounded-2xl" />
                                                                     </div>
@@ -310,7 +310,7 @@
                                         class="mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm pointer-events-none flex items-center">
                                         <button type="button"
                                             class="pointer-events-none border flex justify-between gap-2 py-[2px] px-2 border-[#B3B3B3] rounded-md items-center">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.png') }}"
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
                                                 alt="" class="w-4 h-4">
                                             Upload File
                                         </button>
@@ -350,7 +350,7 @@
                             <div id="myModalConfirm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
                                 <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
                                     <!-- Warning Icon -->
-                                    <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+                                    <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
 
                                     <!-- Title -->
                                     <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
@@ -535,7 +535,7 @@
                     showCustomAlert(
                         'Anda belum membaca booklet sampai habis',
                         'Peringatan!',
-                        "{{ asset('assets/images/landing/favicion/warning.png') }}"
+                        "{{ asset('assets/images/landing/favicion/warning.webp') }}"
                     );
                 }
             });
@@ -577,13 +577,13 @@
             }
 
             // Custom Alert Function
-            function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.png') }}") {
+            function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
                 // Create dynamic alert element
                 const alertHTML = `
                     <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
                         <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
                             style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
-                            <img src="{{ asset('assets/images/landing/favicion/warning.png') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <img src="{{ asset('assets/images/landing/favicion/warning.webp') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
                             <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
                             <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
                             <div class="mt-6 flex justify-center">
@@ -595,13 +595,13 @@
                 document.body.insertAdjacentHTML('beforeend', alertHTML);
             }
 
-            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.png') }}") {
+            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
                 // Create dynamic alert element
                 const alertHTML = `
                     <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
                         <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
                             style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
-                            <img src="{{ asset('assets/images/landing/favicion/error.png') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <img src="{{ asset('assets/images/landing/favicion/error.webp') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
                             <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
                             <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
                             <div class="mt-6 flex justify-center">
@@ -628,7 +628,7 @@
                     showCustomAlert(
                         'Anda harus menyetujui Booklet terlebih dahulu.',
                         'Perhatian!',
-                        "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                     );
                     return null;
                 }
@@ -647,7 +647,7 @@
                         showCustomAlert(
                             '"' + getFieldLabel(fieldName) + '" belum diisi.',
                             'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                         );
                         return null;
                     }
@@ -656,7 +656,7 @@
                         showCustomAlert(
                             'Format Email tidak valid.',
                             'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                         );
                         return null;
                     }
@@ -665,7 +665,7 @@
                         showCustomAlert(
                             'Format Nomor Whatsapp tidak valid.',
                             'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                         );
                         return null;
                     }
@@ -691,7 +691,7 @@
                             showCustomAlert(
                                 '"' + getFieldLabel(fieldName) + '" belum diisi.',
                                 'Validasi Error',
-                                "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                                "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                             );
                             return null;
                         }
@@ -703,7 +703,7 @@
                         showCustomAlert(
                             '"' + getFieldLabel(fieldName) + '" belum diisi.',
                             'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                         );
                         return null;
                     }
@@ -777,7 +777,7 @@
                     .then(data => {
                         window.location.href = "";
                     })
-                    .catch(() => showCustomAlertError('Terjadi kesalahan koneksi atau validasi.', 'Error', "{{ asset('assets/images/landing/favicion/error.png') }}"));
+                    .catch(() => showCustomAlertError('Terjadi kesalahan koneksi atau validasi.', 'Error', "{{ asset('assets/images/landing/favicion/error.webp') }}"));
 
             });
 

@@ -86,7 +86,7 @@ class RegistranController extends Controller
 
         return redirect()->route('dashboard.pendaftar.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Pendaftar berhasil ditambahkan.',
             'type' => 'success',
@@ -163,7 +163,7 @@ class RegistranController extends Controller
 
         return redirect()->route('dashboard.pendaftar.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Pendaftar berhasil diubah.',
             'type' => 'success',
@@ -179,7 +179,7 @@ class RegistranController extends Controller
     //     $user->delete();
     //     return redirect()->route('dashboard.pendaftar.index')->with([
     //         'alert' => true,
-    //         'icon' => asset('assets/images/dashboard/success.png'),
+    //         'icon' => asset('assets/images/dashboard/success.webp'),
     //         'title' => 'Berhasil!',
     //         'message' => 'Pendaftar berhasil dihapus.',
     //         'type' => 'success',
@@ -190,7 +190,7 @@ class RegistranController extends Controller
     {
         return redirect()->route('dashboard.pendaftar.index')->with([
             'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.png'),
+            'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil!',
             'message' => 'Pendaftar berhasil dihapus.',
             'type' => 'success',
