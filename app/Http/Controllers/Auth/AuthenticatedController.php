@@ -20,10 +20,22 @@ class AuthenticatedController
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.index');
+            return redirect()->route('dashboard.index')->with([
+                'alert' => true,
+                'icon' => asset('assets/images/dashboard/success.png'),
+                'title' => 'Login Berhasil',
+                'message' => 'Silakan masuk',
+                'type' => 'success',
+            ]);
         }
         else{
-            return redirect()->route('auth.login');
+            return redirect()->route('auth.login')->with([
+                'alert' => true,
+                'icon' => asset('assets/images/dashboard/error.png'),
+                'title' => 'Login Gagal',
+                'message' => 'Username atau password salah',
+                'type' => 'error',
+            ]);
         }
     }
     public function destroy(Request $request):RedirectResponse
@@ -34,7 +46,13 @@ class AuthenticatedController
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/login')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Logout Berhasil',
+            'message' => 'Sampai jumpa lagi',
+            'type' => 'success',
+        ]);
     }
 
     public function berbinarPlusLogin()

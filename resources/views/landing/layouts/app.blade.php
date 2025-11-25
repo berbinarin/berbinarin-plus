@@ -26,6 +26,9 @@
 
         {{-- Additional Script --}}
         @stack('script')
+
+        {{-- Alert Component --}}
+        @include("components.alert")
     </body>
 
     </html>

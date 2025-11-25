@@ -56,7 +56,13 @@ class ClassController extends Controller
             'instructor_title' => $validated['instructor_title'] ?? null,
             'thumbnail' => $filename,
         ]);
-        return redirect()->route('dashboard.kelas.index')->with('success', 'Kelas berhasil ditambahkan');
+        return redirect()->route('dashboard.kelas.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Kelas berhasil ditambahkan.',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -108,7 +114,13 @@ class ClassController extends Controller
         $class->instructor_title = $validated['instructor_title'] ?? null;
         $class->save();
 
-        return redirect()->route('dashboard.kelas.index')->with('success', 'Class berhasil diedit');
+        return redirect()->route('dashboard.kelas.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Kelas berhasil diubah.',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -118,6 +130,12 @@ class ClassController extends Controller
     {
         $class = Berbinarp_Class::findOrFail($id);
         $class->delete();
-        return redirect()->route('dashboard.kelas.index')->with('success', 'Kelas berhasil dihapus');
+        return redirect()->route('dashboard.kelas.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Kelas berhasil dihapus.',
+            'type' => 'success',
+        ]);
     }
 }

@@ -92,33 +92,24 @@
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Bukti Pembayaran</h2>
                             @if ($enrollment && $enrollment->payment_proof_url)
                                 <div class="group relative h-32 w-32">
-                                    <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
-                                        alt="Bukti Pembayaran" class="h-32 w-32 cursor-pointer rounded border object-cover"
-                                        id="buktiTransferThumb" />
+                                    <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}" alt="Bukti Pembayaran" class="h-32 w-32 cursor-pointer rounded border object-cover" id="buktiTransferThumb" />
                                     <div
                                         class="pointer-events-none absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-40 opacity-0 transition-opacity group-hover:opacity-100">
-                                        <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor"
-                                            stroke-width="2" viewBox="0 0 24 24">
+                                        <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <circle cx="11" cy="11" r="8" />
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65"
-                                                stroke-linecap="round" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-linecap="round" />
                                         </svg>
                                     </div>
                                 </div>
                                 <!-- Modal -->
-                                <div id="buktiTransferModal"
-                                    class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-80">
+                                <div id="buktiTransferModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-80">
                                     <div class="relative flex w-full max-w-4xl justify-center">
-                                        <button id="closeBuktiTransfer"
-                                            class="absolute -right-6 -top-6 z-10 rounded-full bg-white p-2 shadow-lg">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
+                                        <button id="closeBuktiTransfer" class="absolute -right-6 -top-6 z-10 rounded-full bg-white p-2 shadow-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
-                                        <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
-                                            alt="Bukti Pembayaran Besar" class="max-h-[90vh] w-auto rounded shadow-2xl" />
+                                        <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}" alt="Bukti Pembayaran Besar" class="max-h-[90vh] w-auto rounded shadow-2xl" />
                                     </div>
                                 </div>
                             @else

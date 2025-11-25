@@ -32,5 +32,8 @@
 
         {{-- Additional Script --}}
         @yield("script")
+
+        {{-- Alert Component --}}
+        @include("components.alert")
     </body>
 </html>

@@ -17,7 +17,8 @@ class RegistranController extends Controller
     public function index()
     {
         $pendaftar = Berbinarp_User::with(['status', 'enrollments.course'])->get();
-        return view('dashboard.berbinar-plus.registran.index', compact('pendaftar'));
+        $progress = "posttest";
+        return view('dashboard.berbinar-plus.registran.index', compact('pendaftar', 'progress'));
     }
 
     /**
@@ -83,28 +84,44 @@ class RegistranController extends Controller
             'enrollment_status_id' => 1, // status default proses
         ]);
 
-        return redirect()->route('dashboard.pendaftar.index')->with('success', 'Pendaftar berhasil ditambahkan');
+        return redirect()->route('dashboard.pendaftar.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Pendaftar berhasil ditambahkan.',
+            'type' => 'success',
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $user = Berbinarp_User::with(['status', 'enrollments.course', 'enrollments.status'])->findOrFail($id);
+    // public function show(string $id)
+    // {
+    //     $user = Berbinarp_User::with(['status', 'enrollments.course', 'enrollments.status'])->findOrFail($id);
 
-        return view('dashboard.berbinar-plus.registran.show', compact('user'));
+    //     return view('dashboard.berbinar-plus.registran.show', compact('user'));
+    // }
+
+    public function show()
+    {
+        return view('dashboard.berbinar-plus.registran.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // public function edit(string $id)
+    // {
+    //     $user = Berbinarp_User::with(['enrollments'])->findOrFail($id);
+    //     $statuses = BerbinarpUserStatus::all();
+    //     $classes = Berbinarp_Class::all();
+    //     return view('dashboard.berbinar-plus.registran.edit', compact('user', 'statuses', 'classes'));
+    // }
+
+    public function edit()
     {
-        $user = Berbinarp_User::with(['enrollments'])->findOrFail($id);
-        $statuses = BerbinarpUserStatus::all();
-        $classes = Berbinarp_Class::all();
-        return view('dashboard.berbinar-plus.registran.edit', compact('user', 'statuses', 'classes'));
+        return view('dashboard.berbinar-plus.registran.edit');
     }
 
     /**
@@ -144,17 +161,40 @@ class RegistranController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.pendaftar.index')->with('success', 'Pendaftar berhasil diupdate');
+        return redirect()->route('dashboard.pendaftar.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Pendaftar berhasil diubah.',
+            'type' => 'success',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // public function destroy(string $id)
+    // {
+    //     $user = Berbinarp_User::findOrFail($id);
+    //     $user->delete();
+    //     return redirect()->route('dashboard.pendaftar.index')->with([
+    //         'alert' => true,
+    //         'icon' => asset('assets/images/dashboard/success.png'),
+    //         'title' => 'Berhasil!',
+    //         'message' => 'Pendaftar berhasil dihapus.',
+    //         'type' => 'success',
+    //     ]);;
+    // }
+
+    public function destroy()
     {
-        $user = Berbinarp_User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('dashboard.berbinar-class.index')->with('success', 'Kelas berhasil dihapus');
+        return redirect()->route('dashboard.pendaftar.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.png'),
+            'title' => 'Berhasil!',
+            'message' => 'Pendaftar berhasil dihapus.',
+            'type' => 'success',
+        ]);
     }
 
     public function updateStatus(Request $request, $id)

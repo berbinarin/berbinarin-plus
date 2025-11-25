@@ -10,8 +10,17 @@
             background-color: white;
         }
 
-        .swiper-button-next,
-        .swiper-button-prev {
+        /* Styling untuk checkbox Saya Setuju ketika disabled */
+        #agreeCheckbox:disabled {
+            cursor: not-allowed !important;
+            background-color: gray !important;
+        }
+
+        #agreeCheckbox:disabled + label {
+            cursor: not-allowed !important;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
             color: #3986A3 !important;
         }
     </style>
@@ -21,9 +30,8 @@
     <div class="row">
         <div class="flex flex-no-wrap pt-8">
             <div class="w-full mt-14 md:mt-28 justify-center items-center">
-                <h1 class="text-4xl xl:text-5xl font-bold text-center mb-12 mt-1">Gabung <span
-                        class="bg-gradient-to-r from-[#3986A3] to-[#15323D] bg-clip-text text-transparent">Berbinar
-                        Class</span></h1>
+                <h1 class="text-4xl xl:text-5xl font-bold text-center mb-12 mt-1">Gabung
+                    <span class="bg-gradient-to-r from-[#3986A3] to-[#15323D] bg-clip-text text-transparent">Berbinar+</span></h1>
                 <div class="bg-white rounded-3xl p-5 md:px-12 xl:px-16 justify-self-center md:w-[90%] w-full md:shadow-lg">
 
                     <!-- Tombol Kembali -->
@@ -39,9 +47,9 @@
                         enctype="multipart/form-data">
                         <div id="registrationForm1" class="registration-form">
                             @csrf
-                            <h1
-                                class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">
-                                Biodata Diri</h1>
+                            <h1 class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">Biodata Diri</h1>
+
+                            {{-- NAMA LENGKAP --}}
                             <div class="flex flex-wrap -mx-2 mb-4">
                                 <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                                     <label for="first_name">Nama Depan</label>
@@ -56,7 +64,9 @@
                                         id="last_name" name="last_name" placeholder="Class" required>
                                 </div>
                             </div>
-                            <div class="mb-4 relative bg-white">
+
+                            {{-- JENIS KELAMIN --}}
+                            <div class="mb-4 relative" style="background-color: white;">
                                 <label for="genderToggle">Jenis Kelamin</label>
                                 <button type="button"
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 rounded-md shadow-sm p-2 mb-2"
@@ -81,25 +91,33 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- USIA --}}
                             <div class="mb-4">
                                 <label for="age">Usia</label>
                                 <input type="number"
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
                                     id="age" name="age" placeholder="Usia Kamu Sekarang Yaa" required>
                             </div>
+
+                            {{-- WA --}}
                             <div class="mb-4">
                                 <label for="wa_number">Nomor Whatsapp Aktif</label>
                                 <input type="text"
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
                                     id="wa_number" name="phone_number" placeholder="08112345XXXX" required>
                             </div>
+
+                            {{-- EMAIL --}}
                             <div class="mb-4">
                                 <label for="email">Email</label>
                                 <input type="email"
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
                                     id="email" name="email" placeholder="sobatbinar@gmail.com" required>
                             </div>
-                            <div class="mb-4 relative bg-white">
+
+                            {{-- PENDIDIKAN TERAKHIR --}}
+                            <div class="mb-4 relative" style="background-color: white;">
                                 <label for="educationToggle">Pendidikan Terakhir</label>
                                 <button type="button"
                                     class="flex justify-between items-center w-full bg-gray-100 border border-gray-100 shadow-sm p-2 mb-2"
@@ -110,7 +128,7 @@
                                 </button>
                                 <div class="absolute bg-white border border-gray-300 rounded-md mt-2 w-full z-10 hidden"
                                     id="educationDropdown">
-                                    <div class="p-2 grid grid-cols-2 gap-4">
+                                    <div class="p-2 grid grid-cols-3 gap-4" style="background-color: white;">
                                         <div>
                                             <label class="flex items-center mb-2">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
@@ -122,18 +140,20 @@
                                                     value="SMP" required>
                                                 SMP
                                             </label>
+                                        </div>
+                                        <div>
                                             <label class="flex items-center mb-2">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
                                                     value="SMA" required>
                                                 SMA
                                             </label>
-                                        </div>
-                                        <div>
                                             <label class="flex items-center mb-2">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
                                                     value="Ahli Madya" required>
                                                 Ahli Madya
                                             </label>
+                                        </div>
+                                        <div>
                                             <label class="flex items-center mb-2">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
                                                     value="Sarjana" required>
@@ -142,16 +162,19 @@
                                             <label class="flex items-center mb-2">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
                                                     value="Other" id="otherRadio" required>
-                                                Other
+                                                Lainnya
                                             </label>
+                                            <!-- Hidden input untuk "Other" education -->
                                             <input type="text"
-                                                class="form-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
+                                                class="form-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1 lg:p-2 hidden"
                                                 id="otherInput" name="other_education"
                                                 placeholder="Isi pendidikan lain..." disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- BOOKLET --}}
                             <p class="mb-1">Sudah Membaca Booklet dan Menyetujui segala ketentuan yang ada pada Booklet
                             </p>
                             <div class="mb-4 flex items-center">
@@ -205,36 +228,53 @@
                                         <div class="px-4 py-3 sm:px-6 flex flex-row justify-center">
                                             <div class="flex flex-col items-center justify-center w-full">
                                                 <input type="checkbox"
-                                                    class="h-10 lg:w-1/4 appearance-none form-checkbox rounded-md bg-gradient-to-r from-[#3986A3] to-[#225062] checked:bg-gradient-to-r checked:from-[#3986A3] checked:to-[#225062] px-16 py-1 lg:px-20 lg:py-1.5 font-medium text-white max-sm:text-[15px] cursor-pointer"
+                                                    class="h-10 w-4/5 lg:w-2/5 appearance-none form-checkbox rounded-md bg-gradient-to-r from-[#3986A3] to-[#225062] checked:bg-gradient-to-r checked:from-[#3986A3] checked:to-[#225062] px-16 py-1 lg:px-20 lg:py-1.5 font-medium text-white max-sm:text-[15px] cursor-pointer"
                                                     id="agreeCheckbox" onchange="agreeModal()">
-                                                <label for="agreeCheckbox"
-                                                    class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya
-                                                    Setuju</label>
+                                                <label id="agreeLabel" for="agreeCheckbox" class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya Setuju</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- NEXT BUTTON --}}
                             <div id="nextButton" class="flex justify-center w-full pt-6 mb-4">
                                 <button id="nextButton" type="button"
                                     class="next-button w-full mt-4 md:w-auto bg-gradient-to-r from-[#3986A3] to-[#15323D] text-white py-2 px-20 xl:px-40 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">Selanjutnya</button>
                             </div>
+
                         </div>
+
+
+                        <!-- Form kedua dimulai di sini -->
                         <div id="registrationForm2" class="hidden">
-                            <h1
-                                class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">
-                                Pilih Kelas</h1>
+                            <h1 class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">Pilih Kelas</h1>
+
+                            {{-- <div class="mb-4">
+                                <label for="kelas">kelas BERBINAR+</label>
+                                <select name="kelas" id="kelas" class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                                    <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
+                                    <option value="" disabled selected class="text-gray-500">Kelas 1</option>
+                                    <option value="" disabled selected class="text-gray-500">Kelas 2</option>
+                                </select>
+                            </div> --}}
+
+                            {{-- KELAS BERBINAR+ --}}
                             <div class="mb-4">
-                                <label for="kelas">Kelas BERBINAR+</label>
-                                <select
-                                    class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
-                                    id="kelas" name="course_id" required>
-                                    <option value="" disabled selected>Pilih Kelas</option>
-                                    @foreach ($ClassBerbinarPlus as $id => $name)
-                                        <option value="{{ $id }}">{{ $name }}</option>
-                                    @endforeach
+                                <label for="kelas">kelas BERBINAR+</label>
+                                <select id="kelas" name="kelas" class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" required {{ count($kelas) == 0 ? 'disabled' : '' }}>
+                                    @if (count($kelas) == 0)
+                                        <option value="" selected class="text-gray-500">Belum ada kelas tersedia</option>
+                                    @else
+                                        <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
+                                        @foreach ($kelas as $k)
+                                            <option value="{{ $k->id }}">{{ $k->name ?? $k->title }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
+
+                            {{-- PAKET LAYANAN --}}
                             <div class="mb-4">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-end">
                                     <div class="md:col-span-2">
@@ -258,7 +298,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-4 rounded-lg bg-white">
+
+                            {{-- BUKTI PEMBAYARAN --}}
+                            <div class="mb-4 rounded-lg" style="background-color: white;">
                                 <label for="bukti_transfer">Bukti Pembayaran</label>
                                 <div class="relative w-full flex items-center">
                                     <input type="file" id="bukti_transfer" name="payment_proof_url"
@@ -276,6 +318,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- SUMBER INFORMASI --}}
                             <div class="mb-4">
                                 <label for="sumber">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
                                 <select
@@ -293,27 +337,35 @@
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm hidden"
                                     id="otherReferralInput" placeholder="Please specify">
                             </div>
+
+                            {{-- BACK AND SUBMIT BUTTONS --}}
                             <div class="flex justify-center items-center">
                                 <div id="openModalConfirm" class="flex justify-center w-full pt-6 mb-4">
                                     <button id="openModalConfirm" type="button"
                                         class="next-button w-full mt-4 md:w-auto bg-gradient-to-r from-[#3986A3] to-[#15323D] text-white py-2 px-20 xl:px-40 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">Daftar</button>
                                 </div>
                             </div>
-                            <div id="myModalConfirm"
-                                class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900 bg-opacity-50 hidden sm:p-4">
-                                <div class="bg-white p-6 w-4/5 md:w-1/3 rounded-lg text-center">
-                                    <img src="{{ asset('assets/images/landing/produk/emo/confirm.png') }}" alt=""
-                                        class="mx-auto">
-                                    <p>Apakah data yang Anda masukkan sudah benar?</p>
-                                    <p>Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.</p>
-                                    <div class="flex justify-between gap-4 mt-4">
-                                        <button id="okButton" type="submit"
-                                            class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition duration-300 mr-2 w-1/2">OK</button>
-                                        <button id="closeModalConfirm" type="button"
-                                            class="bg-white text-primary px-4 py-2 rounded-lg border-2 font-semibold border-primary hover:bg-white transition duration-300 ml-2 w-1/2">Cancel</button>
+
+                            <!-- Modal Confirm -->
+                            <div id="myModalConfirm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+                                <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+                                    <!-- Warning Icon -->
+                                    <img src="{{ asset('assets/images/dashboard/warning.png') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+
+                                    <!-- Title -->
+                                    <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
+
+                                    <!-- Message -->
+                                    <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.</p>
+
+                                    <!-- Actions -->
+                                    <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+                                        <button type="button" id="closeModalConfirm" class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
+                                        <button type="button" id="okButton" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</button>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -323,7 +375,6 @@
 @endsection
 
 @push('script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
@@ -374,15 +425,15 @@
             });
             educationRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    educationSelected.textContent = this.value === 'Other' ? 'Other' : this.value;
+                    educationSelected.textContent = this.value === 'Other' ? 'Lainnya' : this.value;
                     educationSelected.classList.remove('text-gray-500');
                     educationSelected.classList.add('text-black');
                     educationDropdown.classList.add('hidden');
                     educationIcon.classList.remove('rotate-180');
                     if (this.value === 'Other') {
                         otherInput.disabled = false;
-                        otherInput.required = true;
-                        otherInput.focus();
+                        otherInput.required = false; // tidak perlu verifikasi input
+                        otherInput.value = 'Other'; // set nilai default
                     } else {
                         otherInput.disabled = true;
                         otherInput.required = false;
@@ -424,16 +475,84 @@
                 document.getElementById('bookletCheckbox').checked = true;
             };
 
-            // Swiper Booklet
-            new Swiper('.swiper-container-booklet', {
+            const bookletSwiper = new Swiper('.swiper-container-booklet', {
                 slidesPerView: 1,
                 spaceBetween: 70,
-                loop: true,
+                loop: false,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
             });
+
+            const mainBookletCheckbox = document.getElementById('bookletCheckbox');
+            if (mainBookletCheckbox) {
+                mainBookletCheckbox.checked = false;
+                mainBookletCheckbox.addEventListener('click', function (e) {
+                    e.preventDefault(); // prevent toggle
+                    showModalBooklet();
+                });
+            }
+
+            // Disable "Saya Setuju" inside modal until user reaches last slide
+            const agreeCheckbox = document.getElementById('agreeCheckbox');
+            const agreeLabel = document.getElementById('agreeLabel');
+            if (agreeCheckbox) {
+                agreeCheckbox.checked = false;
+                agreeCheckbox.disabled = true;
+            }
+
+            // Enable agreeCheckbox only when swiper reaches the last slide
+            const enableAgreeIfLast = () => {
+                if (!agreeCheckbox || !bookletSwiper) return;
+                if (bookletSwiper.isEnd) {
+                    agreeCheckbox.disabled = false;
+                    agreeCheckbox.style.cursor = 'pointer';
+                    agreeLabel.style.cursor = 'pointer';
+                    agreeLabel.innerHTML = 'Saya Setuju';
+                    agreeCheckbox.style.background = 'linear-gradient(to right, #3986A3, #15323D)';
+                } else {
+                    agreeCheckbox.disabled = true;
+                    agreeCheckbox.style.cursor = 'not-allowed';
+                    agreeLabel.style.cursor = 'not-allowed';
+                    agreeLabel.innerHTML = 'Harap membaca sampai habis';
+                    agreeCheckbox.style.background = '#8D8D8D';
+                    agreeCheckbox.checked = false;
+                }
+            };
+
+            // Run on init and on slide change
+            bookletSwiper.on('init', enableAgreeIfLast);
+            bookletSwiper.on('slideChange', enableAgreeIfLast);
+            // init manually (some Swiper versions require calling init)
+            if (typeof bookletSwiper.init === 'function') bookletSwiper.init();
+            enableAgreeIfLast();
+
+            // Handle click on disabled checkbox to show alert
+            agreeCheckbox.addEventListener('click', function(e) {
+                if (this.disabled) {
+                    e.preventDefault();
+                    showCustomAlert(
+                        'Anda belum membaca booklet sampai habis',
+                        'Peringatan!',
+                        "{{ asset('assets/images/landing/favicion/warning.png') }}"
+                    );
+                }
+            });
+
+            // Override agreeModal to only set main checkbox if user actually checked agreeCheckbox
+            window.agreeModal = function() {
+                const modal = document.getElementById('bookletModal');
+                const main = document.getElementById('bookletCheckbox');
+                const agree = document.getElementById('agreeCheckbox');
+                if (agree && agree.checked) {
+                    if (modal) modal.classList.add('hidden');
+                    if (main) main.checked = true;
+                } else {
+                    // optional: show hint if user tries to close without checking
+                    // e.g. flash temporary message (kept minimal here)
+                }
+            };
 
             // Modal Confirm
             document.getElementById('openModalConfirm').addEventListener('click', function(event) {
@@ -455,145 +574,224 @@
             });
             document.getElementById('closeModalConfirm').addEventListener('click', function() {
                 document.getElementById('myModalConfirm').style.display = "none";
+            }
+
+            // Custom Alert Function
+            function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.png') }}") {
+                // Create dynamic alert element
+                const alertHTML = `
+                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                            style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                            <img src="{{ asset('assets/images/landing/favicion/warning.png') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                            <div class="mt-6 flex justify-center">
+                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', alertHTML);
+            }
+
+            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.png') }}") {
+                // Create dynamic alert element
+                const alertHTML = `
+                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                            style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                            <img src="{{ asset('assets/images/landing/favicion/error.png') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                            <div class="mt-6 flex justify-center">
+                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', alertHTML);
+            }
+
+            function validateStep1() {
+                const requiredFields = [
+                    'first_name', 'last_name', 'gender', 'age', 'wa_number', 'email', 'last_education'
+                ];
+
+                // const lastEducation = document.querySelector('input[name="last_education"]:checked');
+                // if (lastEducation && lastEducation.value === 'Other') {
+                //     requiredFields.push('other_education');
+                // }
+
+                // Booklet harus dicentang
+                if (!document.getElementById('bookletCheckbox').checked) {
+                    showCustomAlert(
+                        'Anda harus menyetujui Booklet terlebih dahulu.',
+                        'Perhatian!',
+                        "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                    );
+                    return null;
+                }
+
+                for (let fieldName of requiredFields) {
+                    let field;
+                    if (fieldName === 'gender') {
+                        field = document.querySelector('input[name="gender"]:checked');
+                    } else if (fieldName === 'last_education') {
+                        field = document.querySelector('input[name="last_education"]:checked');
+                    } else {
+                        field = document.querySelector(`[name="${fieldName}"]`);
+                    }
+
+                    if (!field || (field.value !== undefined && field.value.trim() === '')) {
+                        showCustomAlert(
+                            '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                        );
+                        return null;
+                    }
+
+                    if (fieldName === 'email' && !isValidEmail(field.value)) {
+                        showCustomAlert(
+                            'Format Email tidak valid.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                        );
+                        return null;
+                    }
+
+                    if (fieldName === 'wa_number' && !isValidPhoneNumber(field.value)) {
+                        showCustomAlert(
+                            'Format Nomor Whatsapp tidak valid.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                        );
+                        return null;
+                    }
+                }
+                return true;
+            }
+
+            function validateStep2() {
+                const requiredFields = [
+                    'kelas', 'paket-layanan', 'bukti_transfer', 'knowing_source'
+                ];
+
+                const knowingSource = document.getElementById('sumber').value;
+                if (knowingSource === 'Other') {
+                    requiredFields.push('otherReasonText');
+                }
+
+                for (let fieldName of requiredFields) {
+                    let field;
+                    if (fieldName === 'bukti_transfer') {
+                        field = document.getElementById('bukti_transfer');
+                        if (!field || !field.files || field.files.length === 0) {
+                            showCustomAlert(
+                                '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                                'Validasi Error',
+                                "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                            );
+                            return null;
+                        }
+                        continue;
+                    }
+
+                    field = document.querySelector(`[name="${fieldName}"]`);
+                    if (!field || field.value.trim() === '' || field.value === null) {
+                        showCustomAlert(
+                            '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/warning-icon.png') }}"
+                        );
+                        return null;
+                    }
+                }
+                return true;
+            }
+
+            function getFieldLabel(fieldName) {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (field) {
+                    const container = field.closest('.mb-4, .flex.flex-wrap');
+                    if (container) {
+                        const label = container.querySelector('label');
+                        if (label) return label.textContent.trim();
+                    }
+                }
+                return fieldName.replace(/_/g, ' ');
+            }
+
+            function isValidEmail(email) {
+                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+            }
+
+            function isValidPhoneNumber(number) {
+                return /^(\+62|62|0)8[1-9][0-9]{6,11}$/.test(number);
+            }
+
+            // Next Button
+            document.getElementById('nextButton').addEventListener('click', function(event) {
+                event.preventDefault();
+                if (validateStep1()) {
+                    document.getElementById('registrationForm1').classList.add('hidden');
+                    document.getElementById('registrationForm2').classList.remove('hidden');
+                }
+            });
+
+            // Daftar Button
+            document.getElementById('openModalConfirm').addEventListener('click', function(event) {
+                event.preventDefault();
+                if (validateStep2()) {
+                    document.getElementById('myModalConfirm').style.display = "flex";
+                }
+            });
+
+            // Modal Confirm Buttons
+            document.getElementById('closeModalConfirm').addEventListener('click', function() {
+                document.getElementById('myModalConfirm').style.display = "none";
             });
             window.onclick = function(event) {
                 const modal = document.getElementById('myModalConfirm');
                 if (event.target == modal) modal.style.display = "none";
             };
 
-            // Next Button
-            document.getElementById('nextButton').addEventListener('click', function(event) {
-                event.preventDefault();
-                let errorMessage = validateStep1();
-                if (errorMessage) {
-                    Swal.fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "error",
-                        title: errorMessage,
-                        showConfirmButton: false,
-                        showCloseButton: true,
-                        timer: 4000
-                    });
-                    return;
-                }
-                document.getElementById('registrationForm1').classList.add('hidden');
-                document.getElementById('registrationForm2').classList.remove('hidden');
+            // Submit via AJAX
+            document.getElementById('okButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('myModalConfirm').style.display = "none";
+                const form = document.getElementById('internshipForm');
+                const formData = new FormData(form);
+                fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
+                        },
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Gagal submit');
+                        return response.json();
+                    })
+                    .then(data => {
+                        window.location.href = "";
+                    })
+                    .catch(() => showCustomAlertError('Terjadi kesalahan koneksi atau validasi.', 'Error', "{{ asset('assets/images/landing/favicion/error.png') }}"));
+
             });
 
-            // Paket layanan dan harga otomatis
-            const paketSelect = document.getElementById('paket-layanan');
-            const hargaInput = document.getElementById('harga_paket');
-            if (paketSelect && hargaInput) {
-                paketSelect.addEventListener('change', function() {
-                    const selected = this.options[this.selectedIndex];
-                    let harga = selected.getAttribute('data-harga') || '';
-                    hargaInput.value = formatRupiah(harga);
-                });
-            }
+            // Modal Booklet
+            window.showModalBooklet = function() {
+                document.getElementById('bookletModal').classList.remove('hidden');
+            };
+            window.closeModal = function() {
+                document.getElementById('bookletModal').classList.add('hidden');
+            };
+            window.agreeModal = function() {
+                document.getElementById('bookletModal').classList.add('hidden');
+                document.getElementById('bookletCheckbox').checked = true;
+            };
         });
-
-        function isValidEmail(email) {
-            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-        }
-
-        function isValidPhoneNumber(number) {
-            return /^(\+62|62|0)8[1-9][0-9]{6,11}$/.test(number);
-        }
-
-        function getFieldLabel(fieldName) {
-            const field = document.querySelector(`[name="${fieldName}"]`);
-            if (field) {
-                const container = field.closest('.mb-4, .flex.flex-wrap');
-                if (container) {
-                    const label = container.querySelector('label');
-                    if (label) return label.textContent.trim();
-                }
-            }
-            return fieldName.replace(/_/g, ' ');
-        }
-
-        function validateStep1() {
-            const requiredFields = [
-                'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email', 'last_education'
-            ];
-            const lastEducation = document.querySelector('input[name="last_education"]:checked');
-            if (lastEducation && lastEducation.value === 'Other') {
-                requiredFields.push('other_education');
-            }
-            if (!document.getElementById('bookletCheckbox').checked) {
-                return 'Anda harus menyetujui Booklet terlebih dahulu.';
-            }
-            for (let fieldName of requiredFields) {
-                let field;
-                if (fieldName === 'gender') {
-                    field = document.querySelector('input[name="gender"]:checked');
-                } else if (fieldName === 'last_education') {
-                    field = document.querySelector('input[name="last_education"]:checked');
-                } else {
-                    field = document.querySelector(`[name="${fieldName}"]`);
-                }
-                if (!field || (field.value !== undefined && field.value.trim() === '')) {
-                    return '"' + getFieldLabel(fieldName) + '" belum diisi.';
-                }
-                if (fieldName === 'email' && !isValidEmail(field.value)) {
-                    return 'Format Email tidak valid.';
-                }
-                if (fieldName === 'wa_number' && !isValidPhoneNumber(field.value)) {
-                    return 'Format Nomor Whatsapp tidak valid.';
-                }
-            }
-            return null;
-        }
-
-        function validateStep2() {
-            const requiredFields = [
-                'course_id', 'service_package', 'payment_proof_url', 'referral_source'
-            ];
-            const knowingSource = document.getElementById('sumber').value;
-
-            for (let fieldName of requiredFields) {
-                let field;
-                if (fieldName === 'payment_proof_url') {
-                    field = document.getElementById('bukti_transfer');
-                    if (!field || !field.files || field.files.length === 0) {
-                        return '"' + getFieldLabel(fieldName) + '" belum diisi.';
-                    }
-                    continue;
-                }
-                field = document.querySelector(`[name="${fieldName}"]`);
-                if (!field || field.value.trim() === '' || field.value === null) {
-                    return '"' + getFieldLabel(fieldName) + '" belum diisi.';
-                }
-            }
-            return null;
-        }
     </script>
-
-    @if ($errors->any())
-        <script>
-            @if ($errors->has('email'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Email sudah terdaftar!',
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                    timer: 4000
-                });
-            @endif
-            @if ($errors->has('payment_proof_url'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ukuran file terlalu besar!',
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                    timer: 4000
-                });
-            @endif
-        </script>
-    @endif
 @endpush

@@ -24,3 +24,12 @@
         <span class="ml-4 text-base font-bold leading-5">Data Pendaftar</span>
     </a>
 </li>
+
+<li class="{{ isRouteNameStartWith('dashboard.pengumpulan-tes') }} my-5 rounded-lg p-2">
+    <a href="{{ route('dashboard.pengumpulan-tes.index') }}"
+        class="{{ Str::startsWith(Route::currentRouteName(), 'dashboard.pengumpulan-tes') ? 'text-white' : 'text-gray-700 hover:text-primary' }} flex flex-row items-center duration-700">
+        <i
+            class="bx bx-file {{ Str::startsWith(Route::currentRouteName(), 'dashboard.pengumpulan-tes') ? 'text-white' : 'text-gray-700' }} mr-2 text-lg"></i>
+        <span class="ml-4 text-base font-bold leading-5">Pengumpulan Tes</span>
+    </a>
+</li>
