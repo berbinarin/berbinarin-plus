@@ -5,6 +5,8 @@ use App\Http\Controllers\Dashboard\BerbinarpAdmin\PendaftarController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\RegistranController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\MaterialController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\QuestionController;
+use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PretestQuestionController;
+use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PosttestQuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\TestSubmissionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\PreTestSubmissionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\PostTestSubmissionController;
@@ -26,8 +28,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('/materi/edit', [MaterialController::class, 'edit'])->name('kelas.materi.edit');
         Route::get('/materi/show', [MaterialController::class, 'show'])->name('kelas.materi.show');
 
-        // Soal
-        Route::get('/soal', [QuestionController::class, 'index'])->name('kelas.soal.index');
+        // Soal Pretest & Posttest
+        Route::get('/soal-pre-test', [PretestQuestionController::class, 'index'])->name('kelas.pre-test.index');
+        Route::get('/soal-post-test', [PosttestQuestionController::class, 'index'])->name('kelas.post-test.index');
 
         // Pendaftar
         // Route::resource('pendaftar', RegistranController::class);

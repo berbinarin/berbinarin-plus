@@ -43,7 +43,10 @@
                                             Detail Materi
                                         </th>
                                         <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
-                                            Detail Soal
+                                            Pre Test
+                                        </th>
+                                        <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
+                                            Post Test
                                         </th>
                                         <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
                                             Aksi
@@ -69,7 +72,12 @@
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('dashboard.kelas.soal.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #07444D">
+                                                <a href="{{ route('dashboard.kelas.pre-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #008B38">
+                                                    <i class="bx bx-file text-white"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('dashboard.kelas.post-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #07444D">
                                                     <i class="bx bx-check text-white"></i>
                                                 </a>
                                             </td>
