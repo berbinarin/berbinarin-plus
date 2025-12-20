@@ -114,8 +114,8 @@
 
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
-            <!-- <a href="{{ route('certificates.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
-            <a id="showModalCertificates" href="#') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+            <a href="{{ route('certificates.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+            <!-- <a id="showModalCertificates" href="#') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
                 <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
                 <i class="bx bxs-lock text-2xl text-primary"></i>
             </a>

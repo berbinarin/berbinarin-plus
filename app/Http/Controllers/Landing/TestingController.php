@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class TestingController
 {
+    // Front Page
     public function landing()
     {
         return view('landing.index');
@@ -16,11 +17,18 @@ class TestingController
         return view('landing.homepage.index');
     }
 
+    public function profile()
+    {
+        return view('landing.profile.index');
+    }
+
     public function others()
     {
         return view('landing.others.index');
     }
 
+
+    // Pretest
     public function preview()
     {
         return view('landing.preview.index');
@@ -46,6 +54,8 @@ class TestingController
         return view('landing.pretest.index-finished');
     }
 
+
+    // Posttest
     public function posttest()
     {
         return view('landing.posttest.index');
@@ -66,6 +76,8 @@ class TestingController
         return view('landing.posttest.index-finished');
     }
 
+
+    // Materials and Certificates
     public function materials()
     {
         return view('landing.materials.index');

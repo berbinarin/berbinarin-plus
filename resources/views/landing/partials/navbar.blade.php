@@ -54,7 +54,7 @@
 </nav>
 
 <!-- Screen Mobile Menu -->
-<div id="mobileMenu" class="fixed inset-0 z-40 flex hidden flex-col items-center justify-center bg-white bg-opacity-90">
+<div id="mobileMenu" class="fixed inset-0 z-40 flex hidden flex-col items-center justify-center bg-white opacity-0 bg-opacity-90 transition-all duration-300">
     <a href="" class="{{ isNavbarActiveMobile("home") }}">Beranda</a>
     <a href="" class="{{ isNavbarActiveMobile("about-us") }}">Tentang Kami</a>
     <a href="" class="{{ isNavbarActiveMobile("product") }}">Produk</a>
@@ -74,10 +74,16 @@
     document.getElementById('burgerMenu').addEventListener('click', function () {
         const mobileMenu = document.getElementById('mobileMenu');
         mobileMenu.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            mobileMenu.classList.remove('opacity-0'); // Animate opacity
+        });
     });
 
     document.getElementById('closeMenu').addEventListener('click', function () {
         const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.add('opacity-0'); // Animate opacity
+        mobileMenu.addEventListener('transitionend', () => {
+            mobileMenu.classList.add('hidden'); // Hide after animation
+        }, { once: true });
     });
 </script>

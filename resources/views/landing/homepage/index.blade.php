@@ -70,7 +70,6 @@
     <div class="mt-3 mb-4">
         <div class="flex flex-row justify-between items-center mb-2">
             <h2 class="text-lg lg:text-2xl font-medium">Kelas Saya</h2>
-            <a href="{{ route('others.index') }}" class="lg:text-lg font-medium text-primary">View All</a>
         </div>
 
         <!-- Swiper slider -->
@@ -189,7 +188,6 @@
     <div class="mb-4">
         <div class="flex flex-row justify-between items-center mb-2">
             <h2 class="text-lg lg:text-2xl font-medium">Rekomendasi Kelas Lainnya</h2>
-            <a href="{{ route('others.index') }}" class="lg:text-lg font-medium text-primary">View All</a>
         </div>
 
         <div class="relative">

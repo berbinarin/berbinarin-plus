@@ -10,6 +10,8 @@ Route::get('/home', [TestingController::class, 'homepage'])->name('homepage.inde
 
 Route::get('/others', [TestingController::class, 'others'])->name('others.index');
 
+Route::get('/profile', [TestingController::class, 'profile'])->name('profile.index');
+
 Route::get('/preview', [TestingController::class, 'preview'])->name('preview.index');
 
 Route::get('/pretest', [TestingController::class, 'pretest'])->name('pretest.index');

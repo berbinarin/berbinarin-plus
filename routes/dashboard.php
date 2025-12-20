@@ -39,11 +39,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('/pendaftar/edit', [RegistranController::class, 'edit'])->name('pendaftar.edit');
         Route::get('/pendaftar/show', [RegistranController::class, 'show'])->name('pendaftar.show');
         Route::delete('/pendaftar/destroy', [RegistranController::class, 'destroy'])->name('pendaftar.destroy');
-        
+
         Route::patch('status/{id}', [RegistranController::class, 'updateStatus'])->name('updateStatus');
 
         // Pengumpulan Tes
-        Route::get('/pengumpulan-tes', [TestSubmissionController::class, 'index'])->name('pengumpulan-tes.index');
+        Route::get('/pendaftar/pengumpulan-tes', [TestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.index');
 
         // Pengumpulan Tes: Pre Test
         Route::get('/pre-test', [PreTestSubmissionController::class, 'index'])->name('pengumpulan-tes.pre-test.index');

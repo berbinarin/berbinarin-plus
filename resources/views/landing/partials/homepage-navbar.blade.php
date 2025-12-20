@@ -15,7 +15,7 @@
                 <span class="absolute bg-[#3986A3] w-3 h-3 lg:w-3.5 lg:h-3.5 rounded-full -translate-y-6 lg:-translate-y-8 text-white text-[8px] lg:text-[10px] text-center">4</span>
             </button>
         </div>
-        <a href="{{ route('others.index') }}" class="flex flex-row gap-3">
+        <a href="{{ route('profile.index') }}" class="flex flex-row gap-3">
             <img src="{{ asset("assets/images/landing/favicion/profile-placeholder.webp") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
             <p class="items-center truncate font-medium hidden">John Doe</p>
         </a>

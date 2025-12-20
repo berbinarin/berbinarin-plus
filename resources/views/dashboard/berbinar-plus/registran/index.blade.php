@@ -28,7 +28,7 @@
                         <div class="mb-4 mt-4 overflow-x-hidden">
                             <table id="example" class="display min-w-full pt-5 leading-normal">
                                 <thead>
-                                    <tr class="mt-4">
+                                    <!-- <tr class="mt-4">
                                         <th class="sticky-col sticky-col-1 bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
                                             No
                                         </th>
@@ -53,15 +53,42 @@
                                         <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
                                             Aksi
                                         </th>
+                                    </tr> -->
+
+                                    <tr class="mt-4">
+                                        <th class="sticky-col sticky-col-1 bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            No
+                                        </th>
+                                        <th class="sticky-col sticky-col-2 bg-white px-6 py-3 text-start text-base font-bold leading-4 tracking-wider text-black">
+                                            Nama Lengkap
+                                        </th>
+                                        <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            Tanggal Daftar
+                                        </th>
+                                        <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            Nama Pengguna
+                                        </th>
+                                        <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            Kata Sandi
+                                        </th>
+                                        <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            Status
+                                        </th>
+                                        <!-- <th class="bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            WA
+                                        </th> -->
+                                        <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
+                                            Aksi
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
+                                    <!-- <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
                                         <td class="text-center px-6 py-4">1</td>
                                         <td class="px-6 py-4">Aldi</td>
                                         <td class="text-center px-6 py-4">11-05-2025</td>
-                                        <td class="text-center px-6 py-4">Graphic Designer</td>
+                                        <td class="text-center px-6 py-4"><a href="" class="text-primary font-semibold underline">Graphic Designer</a></td>
                                         <td class="text-center px-6 py-4">
                                             <div class="flex flex-row">
                                                 <div class="w-4/5 bg-gray-200 h-4 flex flex-row">
@@ -81,13 +108,13 @@
                                                 </div>
                                                 <div class="w-1/5 flex justify-between text-xs px-0.5">
                                                     @if ($progress == "belum")
-                                                    <span>0%</span>
+                                                    <span>0/3</span>
                                                     @elseif ($progress == "pretest")
-                                                    <span>33%</span>
+                                                    <span>1/3</span>
                                                     @elseif ($progress == "materials")
-                                                    <span>66%</span>
+                                                    <span>2/3</span>
                                                     @elseif ($progress == "posttest")
-                                                    <span>100%</span>
+                                                    <span>3/3</span>
                                                     @endif
                                                 </div>
 
@@ -114,6 +141,122 @@
                                                 <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
                                             </a>
                                         </td>
+                                        <td class="text-center px-6 py-4">
+                                            <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #3b82f6">
+                                                <i class="bx bx-show-alt text-white"></i>
+                                            </a>
+                                            <a href="{{ route('dashboard.pendaftar.edit') }}" class="inline-flex items-center rounded p-2 hover:bg-yellow-700" style="background-color: #e9b306">
+                                                <i class="bx bxs-edit-alt text-white"></i>
+                                            </a>
+                                            <button type="button" onclick="openDeleteModal({{-- {{ $user->id }} --}})" class="inline-flex items-center rounded p-2 hover:bg-red-700" style="background-color: #ef4444">
+                                                <i class="bx bxs-trash-alt text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr> -->
+
+                                    <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
+                                        <td class="text-center px-6 py-4">1</td>
+                                        <td class="px-6 py-4">Jia Revina Monika</td>
+                                        <td class="text-center px-6 py-4">11-05-2025</td>
+                                        <td class="text-center px-6 py-4"><a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index') }}" class="text-primary font-semibold underline">Momonimut</a></td>
+                                        <td class="text-center px-6 py-4">kanzkanz</td>
+                                        <td class="text-center px-6 py-4">
+                                            <p class="font-medium text-black">
+                                                diproses
+                                            </p>
+                                        </td>
+                                        <!-- <td class="text-center px-6 py-4">
+                                            <a href="https://wa.me/6281282103522" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00E45B" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
+                                            </a>
+                                        </td> -->
+                                        <td class="text-center px-6 py-4">
+                                            <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #3b82f6">
+                                                <i class="bx bx-show-alt text-white"></i>
+                                            </a>
+                                            <a href="{{ route('dashboard.pendaftar.edit') }}" class="inline-flex items-center rounded p-2 hover:bg-yellow-700" style="background-color: #e9b306">
+                                                <i class="bx bxs-edit-alt text-white"></i>
+                                            </a>
+                                            <button type="button" onclick="openDeleteModal({{-- {{ $user->id }} --}})" class="inline-flex items-center rounded p-2 hover:bg-red-700" style="background-color: #ef4444">
+                                                <i class="bx bxs-trash-alt text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
+                                        <td class="text-center px-6 py-4">2</td>
+                                        <td class="px-6 py-4">Yi Revina Monika</td>
+                                        <td class="text-center px-6 py-4">11-05-2025</td>
+                                        <td class="text-center px-6 py-4"><a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index') }}" class="text-primary font-semibold underline">Momonimut</a></td>
+                                        <td class="text-center px-6 py-4">kanzkanz</td>
+                                        <td class="text-center px-6 py-4">
+                                            <p class="font-medium text-yellow-600">
+                                                terdaftar
+                                            </p>
+                                        </td>
+                                        <!-- <td class="text-center px-6 py-4">
+                                            <a href="https://wa.me/6281282103522" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00E45B" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
+                                            </a>
+                                        </td> -->
+                                        <td class="text-center px-6 py-4">
+                                            <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #3b82f6">
+                                                <i class="bx bx-show-alt text-white"></i>
+                                            </a>
+                                            <a href="{{ route('dashboard.pendaftar.edit') }}" class="inline-flex items-center rounded p-2 hover:bg-yellow-700" style="background-color: #e9b306">
+                                                <i class="bx bxs-edit-alt text-white"></i>
+                                            </a>
+                                            <button type="button" onclick="openDeleteModal({{-- {{ $user->id }} --}})" class="inline-flex items-center rounded p-2 hover:bg-red-700" style="background-color: #ef4444">
+                                                <i class="bx bxs-trash-alt text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
+                                        <td class="text-center px-6 py-4">3</td>
+                                        <td class="px-6 py-4">Bing Revina Monika</td>
+                                        <td class="text-center px-6 py-4">11-05-2025</td>
+                                        <td class="text-center px-6 py-4"><a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index') }}" class="text-primary font-semibold underline">Momonimut</a></td>
+                                        <td class="text-center px-6 py-4">kanzkanz</td>
+                                        <td class="text-center px-6 py-4">
+                                            <p class="font-medium text-primary">
+                                                penilaian
+                                            </p>
+                                        </td>
+                                        <!-- <td class="text-center px-6 py-4">
+                                            <a href="https://wa.me/6281282103522" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00E45B" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
+                                            </a>
+                                        </td> -->
+                                        <td class="text-center px-6 py-4">
+                                            <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #3b82f6">
+                                                <i class="bx bx-show-alt text-white"></i>
+                                            </a>
+                                            <a href="{{ route('dashboard.pendaftar.edit') }}" class="inline-flex items-center rounded p-2 hover:bg-yellow-700" style="background-color: #e9b306">
+                                                <i class="bx bxs-edit-alt text-white"></i>
+                                            </a>
+                                            <button type="button" onclick="openDeleteModal({{-- {{ $user->id }} --}})" class="inline-flex items-center rounded p-2 hover:bg-red-700" style="background-color: #ef4444">
+                                                <i class="bx bxs-trash-alt text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
+                                        <td class="text-center px-6 py-4">4</td>
+                                        <td class="px-6 py-4">Ding Revina Monika</td>
+                                        <td class="text-center px-6 py-4">11-05-2025</td>
+                                        <td class="text-center px-6 py-4"><a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index') }}" class="text-primary font-semibold underline">Momonimut</a></td>
+                                        <td class="text-center px-6 py-4">kanzkanz</td>
+                                        <td class="text-center px-6 py-4">
+                                            <p class="font-medium text-red-600">
+                                                nonaktif
+                                            </p>
+                                        </td>
+                                        <!-- <td class="text-center px-6 py-4">
+                                            <a href="https://wa.me/6281282103522" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00E45B" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}" class="w-[16px] h-[16px]" alt="Whatsapp">
+                                            </a>
+                                        </td> -->
                                         <td class="text-center px-6 py-4">
                                             <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #3b82f6">
                                                 <i class="bx bx-show-alt text-white"></i>

@@ -22,46 +22,38 @@
                 <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Nama Lengkap</h2>
-                        <p class="text-lg font-semibold">{{ $user->first_name }} {{ $user->last_name }}</p>
+                        <p class="text-lg font-semibold">Revina Monika</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Telepon/HP</h2>
-                        <p class="text-lg font-semibold">{{ $user->phone_number }}</p>
+                        <p class="text-lg font-semibold">081234567890</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Alamat Email</h2>
-                        <p class="text-lg font-semibold">{{ $user->email }}</p>
+                        <p class="text-lg font-semibold">momonika@gmail.com</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Jenis Kelamin</h2>
-                        <p class="text-lg font-semibold">{{ $user->gender }}</p>
+                        <p class="text-lg font-semibold">perempuan</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Pendidikan Terakhir</h2>
-                        <p class="text-lg font-semibold">{{ $user->last_education }}</p>
+                        <p class="text-lg font-semibold">SMA</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Usia</h2>
-                        <p class="text-lg font-semibold">{{ $user->age }} Tahun</p>
+                        <p class="text-lg font-semibold">18 Tahun</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Username</h2>
                         <div class="flex items-center gap-2">
-                            <p class="text-lg font-semibold" id="usernameText">{{ $user->username ?? '-' }}</p>
-                            @if ($user->username)
-                                <button type="button" onclick="copyToClipboard('usernameText')"
-                                    class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-sm">Salin</button>
-                            @endif
+                            <p class="text-lg font-semibold" id="usernameText">Momonimut</p>
                         </div>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Password</h2>
                         <div class="flex items-center gap-2">
-                            <p class="text-lg font-semibold" id="passwordText">{{ $user->plain_password ?? '-' }}</p>
-                            @if ($user->plain_password)
-                                <button type="button" onclick="copyToClipboard('passwordText')"
-                                    class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-sm">Salin</button>
-                            @endif
+                            <p class="text-lg font-semibold" id="passwordText">kanzkanz</p>
                         </div>
                     </div>
                 </div>
@@ -69,57 +61,33 @@
                 <h1 class="mb-6 text-3xl font-bold text-primary-alt">Pilihan Kelas</h1>
                 <div>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        @php $enrollment = $user->enrollments->first(); @endphp
+
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Kelas Berbinar+</h2>
-                            <p class="text-lg font-semibold">{{ optional($enrollment->course)->name ?? '-' }}</p>
+                            <p class="text-lg font-semibold">Graphic Designer</p>
                         </div>
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Paket Layanan</h2>
-                            <p class="text-lg font-semibold">{{ $enrollment->service_package ?? '-' }}</p>
+                            <p class="text-lg font-semibold">Insightful</p>
                         </div>
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Harga Paket</h2>
-                            <p class="text-lg font-semibold">{{ $enrollment->price_package ?? '-' }}</p>
+                            <p class="text-lg font-semibold">500.000</p>
                         </div>
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Status Enrollment</h2>
                             <p class="text-lg font-semibold">
-                                {{ $enrollment && $enrollment->status ? $enrollment->status->name : '-' }}
+                                Terdaftar
                             </p>
                         </div>
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Bukti Pembayaran</h2>
-                            @if ($enrollment && $enrollment->payment_proof_url)
-                                <div class="group relative h-32 w-32">
-                                    <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}" alt="Bukti Pembayaran" class="h-32 w-32 cursor-pointer rounded border object-cover" id="buktiTransferThumb" />
-                                    <div
-                                        class="pointer-events-none absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-40 opacity-0 transition-opacity group-hover:opacity-100">
-                                        <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <circle cx="11" cy="11" r="8" />
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-linecap="round" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <!-- Modal -->
-                                <div id="buktiTransferModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-80">
-                                    <div class="relative flex w-full max-w-4xl justify-center">
-                                        <button id="closeBuktiTransfer" class="absolute -right-6 -top-6 z-10 rounded-full bg-white p-2 shadow-lg">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                        <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}" alt="Bukti Pembayaran Besar" class="max-h-[90vh] w-auto rounded shadow-2xl" />
-                                    </div>
-                                </div>
-                            @else
-                                <p class="text-lg font-semibold text-gray-400">Tidak ada bukti pembayaran</p>
-                            @endif
+                            <p class="text-lg font-semibold text-gray-400">Tidak ada bukti pembayaran</p>
                         </div>
                         <div class="mb-2 flex flex-col">
                             <h2 class="mb-2 text-lg font-semibold text-gray-500">Darimana SobatBinar mengetahui layanan
                                 produk BERBINAR+</h2>
-                            <p class="text-lg font-semibold">{{ $user->referral_source ?? '-' }}</p>
+                            <p class="text-lg font-semibold">dari Kanz</p>
                         </div>
                     </div>
                 </div>
