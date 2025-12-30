@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
                 'name' => 'berbinarplus',
             ],
             [
-                'name' => 'berbinaradmin',
+                'name' => 'berbinarplusadmin',
             ],
 
         ];

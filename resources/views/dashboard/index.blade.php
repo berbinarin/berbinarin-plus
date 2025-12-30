@@ -16,12 +16,11 @@
                             </p>
                             @endrole
 
-                            @role('berbinaradmin')
-                            <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal text-gray-800 mb-2">
-                                Dashboard</p>
-                            <p class="w-full text-disabled"> Fitur ini digunakan untuk menampilkan statistik kursus, jumlah
-                                peserta, serta aktivitas pembelajaran yang tersedia di platform e-learning Berbinarplus.
-                            @endrole
+                            @role('berbinarplusadmin')
+                            <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal mx-10 text-gray-800 mb-2">
+                                Dashboard Berbinar +</p>
+                            <p class="w-5/6 text-[#333333] lg:text-lg mx-10"> Halaman utama yang menampilkan ringkasan data program Berbinar+
+                                serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.                            @endrole
                     </div>
                 </div>
             </div>

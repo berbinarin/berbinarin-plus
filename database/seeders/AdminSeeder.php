@@ -21,10 +21,10 @@ class AdminSeeder extends Seeder
         ])->assignRole('berbinarplus');
 
         User::create([
-            'name' => 'BerbinarAdmin',
-            'username' => 'berbinaradmin',
-            'email' => 'berbinaradmin@gmail.com',
+            'name' => 'BerbinarPlusAdmin',
+            'username' => 'berbinarplus-admin',
+            'email' => 'berbinarplusadmin@gmail.com',
             'password' => bcrypt('berbinar123'),
-        ])->assignRole('berbinaradmin');
+        ])->assignRole('berbinarplusadmin');
     }
 }
