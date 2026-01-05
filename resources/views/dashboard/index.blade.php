@@ -10,7 +10,7 @@
                     <div>
                         @role('berbinarplus')
                             <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal text-gray-800 mb-2">
-                                Dashboard Berbinar +</p>
+                                Dashboard Berbinar+</p>
                             <p class="w-full text-disabled">
                                 Halaman utama yang menampilkan ringkasan data program Berbinar+ serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.
                             </p>
@@ -37,9 +37,9 @@
                     <div class="w-full grid grid-cols-1 gap-6">
                         <div class="flex h-[70vh] flex-col rounded-xl bg-white px-6 py-4 shadow">
                             <div class="mb-4">
-                                <h1 class="text-[28px] text-[#75BADB]"><b>Data Berbinar+</b></h1>
+                                <h1 class="text-[28px] text-[#75BADB]"><b>Rata-Rata Progres Kelas Berbinar+</b></h1>
                                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                    <p class="text-[14px]">Berikut ini merupakan visualisasi rata-rata progress tiap-tiap kelas Berbinar+</p>
+                                    <p class="text-[14px]">Berikut ini merupakan visualisasi rata-rata progres tiap-tiap kelas Berbinar+</p>
                                 </div>
                             </div>
                             <div class="flex w-full flex-col items-center h-full">
@@ -61,47 +61,143 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col w-2/3 gap-6">
+                    <div class="flex flex-col w-full gap-6">
 
-                        <div class="flex w-full items-center p-8 bg-white shadow rounded-lg">
-                            <table id="unfinished" class="min-w-full pt-5 leading-normal">
-                                <thead>
-                                    <tr class="mt-4">
-                                        <th class="w-1/12 sticky-col sticky-col-1 bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
-                                            No
-                                        </th>
-                                        <th class="w-8/12 sticky-col sticky-col-2 bg-white py-3 text-start text-base font-bold leading-4 tracking-wider text-black">
-                                            Informasi
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b border-gray-200 bg-white">
-                                        <td class="w-1/12 px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
-                                            1
-                                        </td>
-                                        <td>
-                                            <p class="underline"><a href="{{ route('dashboard.kelas.index') }}">Kelas : Kelas Eka</a></p>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-b border-gray-200 bg-white">
-                                        <td class="w-1/12 px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
-                                            2
-                                        </td>
-                                        <td>
-                                            <p class="underline"><a href="{{ route('dashboard.pendaftar.index') }}">Pendaftar : Kanz Abiyu Alkautsar</a></p>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-b border-gray-200 bg-white">
-                                        <td class="w-1/12 px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
-                                            3
-                                        </td>
-                                        <td>
-                                            <p class="underline"><a href="{{ route('dashboard.pendaftar.index') }}">Pendaftar : Morgan Vero</a></p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="flex flex-col w-full items-start px-6 py-4 bg-white shadow rounded-lg">
+                            <h1 class="text-[28px] text-[#75BADB]"><b>Daftar Pendaftar Baru</b></h1>
+                            <div class="w-full h-[59vh] overflow-y-scroll">
+
+                                <table id="unfinished" class="min-w-full pt-5 leading-normal">
+                                    <thead>
+                                        <th class="w-1/12">No.</th>
+                                        <th class="text-start">Jenis</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="w-1/6">Aksi</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Pendaftar Baru</p>
+                                            </td>
+                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                    <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Kelas Baru</p>
+                                            </td>
+                                            <td class="text-center">Graphic Designer</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.kelas.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Pendaftar Baru</p>
+                                            </td>
+                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Kelas Baru</p>
+                                            </td>
+                                            <td class="text-center">Graphic Designer</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.kelas.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Pendaftar Baru</p>
+                                            </td>
+                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Kelas Baru</p>
+                                            </td>
+                                            <td class="text-center">Graphic Designer</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.kelas.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Pendaftar Baru</p>
+                                            </td>
+                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Kelas Baru</p>
+                                            </td>
+                                            <td class="text-center">Graphic Designer</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.kelas.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Pendaftar Baru</p>
+                                            </td>
+                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 bg-white">
+                                            <td class="text-center">1.</td>
+                                            <td class="py-4">
+                                                <p>Kelas Baru</p>
+                                            </td>
+                                            <td class="text-center">Graphic Designer</td>
+                                            <td class="flex justify-center pt-3">
+                                                <a href="{{ route('dashboard.kelas.index') }}">
+                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                     </div>

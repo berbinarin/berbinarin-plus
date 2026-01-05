@@ -46,12 +46,12 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('/pendaftar/pengumpulan-tes', [TestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.index');
 
         // Pengumpulan Tes: Pre Test
-        Route::get('/pre-test', [PreTestSubmissionController::class, 'index'])->name('pengumpulan-tes.pre-test.index');
-        Route::get('/pre-test/show', [PreTestSubmissionController::class, 'show'])->name('pengumpulan-tes.pre-test.show');
+        Route::get('/pendaftar/pre-test', [PreTestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.pre-test.index');
+        Route::get('/pendaftar/pre-test/show', [PreTestSubmissionController::class, 'show'])->name('pendaftar.pengumpulan-tes.pre-test.show');
 
         // Pengumpulan Tes: Post Test
-        Route::get('/post-test', [PostTestSubmissionController::class, 'index'])->name('pengumpulan-tes.post-test.index');
-        Route::get('/show', [PostTestSubmissionController::class, 'show'])->name('pengumpulan-tes.post-test.show');
+        Route::get('/post-test', [PostTestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.post-test.index');
+        Route::get('/show', [PostTestSubmissionController::class, 'show'])->name('pendaftar.pengumpulan-tes.post-test.show');
     });
 
     Route::middleware('role:berbinaradmin')->group(function () {

@@ -11,7 +11,7 @@
                 <div class="py-4 md:pt-12 md:pb-7">
                     <div>
                         <div class="mb-2 flex items-center gap-2">
-                            <a href="{{ route('dashboard.pengumpulan-tes.index') }}">
+                            <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index') }}">
                                 <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                             </a>
                             <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Data Peserta Post Test</p>
@@ -70,7 +70,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.pengumpulan-tes.post-test.show') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
+                                                <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.post-test.show') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
                                                     <i class="bx bxs-show text-white"></i>
                                                 </a>
                                             </td>
@@ -95,7 +95,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.pengumpulan-tes.post-test.show') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
+                                                <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.post-test.show') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
                                                     <i class="bx bxs-show text-white"></i>
                                                 </a>
                                             </td>

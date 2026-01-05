@@ -17,7 +17,7 @@
                             <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Daftar Soal Pre Test</p>
                         </div>
                         <p class="w-full text-disabled">
-                            Halaman untuk menambahkan atau mengedit soal baru ke dalam program Berbinar+ secara rinci, beserta detail soal, dan jawaban.
+                            Halaman untuk menambahkan atau mengubah soal baru ke dalam program Berbinar+ secara rinci, beserta detail soal, dan jawaban.
                         </p>
                         <a href="javascript:void(0);" onclick="openCreateQuestionModal()" class="mt-8 inline-flex items-start justify-start rounded-lg bg-primary px-6 py-3 text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-3">
                             <p class="text-dark font-medium leading-none">Tambah Data</p>

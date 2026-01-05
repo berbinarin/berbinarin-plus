@@ -27,7 +27,7 @@
 
                             <!-- <table id="example" class="display min-w-full pt-5 leading-normal"> -->
                             <table id="example" class="min-w-full pt-5 leading-normal">
-                                <h3 class="text-3xl font-semibold text-primary-alt pb-4">Data Jawaban Test Kelas Graphic Designer</h3>
+                                <h3 class="text-3xl font-semibold text-primary-alt pb-4">Data Jawaban Tes Kelas Graphic Designer</h3>
                                 <thead>
                                     <tr class="mt-4">
                                         <th class="w-1/12 sticky-col sticky-col-1 bg-white px-6 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
@@ -46,13 +46,13 @@
                                     {{-- @foreach ($tests as $index => $test) --}}
                                         <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-50 even:bg-white">
                                             <td class="whitespace-no-wrap text-center sticky-col sticky-col-1 px-6 py-4">
-                                                {{-- {{ $index + 1 }} --}} 1
+                                                1
                                             </td>
                                             <td class="whitespace-no-wrap sticky-col sticky-col-2 px-6 py-4">
-                                                {{-- {{ $test->name }} --}} Pre Test
+                                                <span class="italic">Pre Test</span>
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.pengumpulan-tes.pre-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
+                                                <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.pre-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
                                                     <i class="bx bxs-show text-white"></i>
                                                 </a>
                                             </td>
@@ -60,13 +60,13 @@
 
                                         <tr class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-50 even:bg-white">
                                             <td class="whitespace-no-wrap text-center sticky-col sticky-col-1 px-6 py-4">
-                                                {{-- {{ $index + 1 }} --}} 2
+                                                2
                                             </td>
                                             <td class="whitespace-no-wrap sticky-col sticky-col-2 px-6 py-4">
-                                                {{-- {{ $test->name }} --}} Post Test
+                                                <span class="italic">Post Test</span>
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.pengumpulan-tes.post-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
+                                                <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.post-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
                                                     <i class="bx bxs-show text-white"></i>
                                                 </a>
                                             </td>
@@ -103,12 +103,12 @@
                                                 {{-- {{ $test->name }} --}} Sertifikat
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.pengumpulan-tes.pre-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6">
+                                                <button type="button" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #3b82f6" onclick="openDetailQuestionModal()">
                                                     <i class="bx bxs-show text-white"></i>
-                                                </a>
-                                                <a href="{{ route('dashboard.pengumpulan-tes.pre-test.index') }}" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #e9b306">
+                                                </button>
+                                                <button type="button" class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #e9b306" onclick="openEditCertificateModal()">
                                                     <i class="bx bxs-edit-alt text-white"></i>
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     {{-- @endforeach --}}
@@ -169,23 +169,10 @@
             </h3>
             <div class="mb-5 mt-6 flex flex-col gap-4">
                 <div class="text-left">
-                    <label class="mb-1 block font-medium text-gray-600">Tipe Soal</label>
-                    <select class="w-full rounded-lg border border-gray-300 bg-gray-100 px-3 py-2" disabled>
-                        <option value="multiple_choice" selected>Pilihan Ganda</option>
-                        <option value="short_answer">Jawaban Singkat</option>
-                    </select>
-                </div>
-                <div class="text-left">
-                    <label class="mb-1 block font-medium text-gray-600">Pertanyaan</label>
-                    <input type="text" class="w-full rounded-lg border border-gray-300 bg-gray-100 px-3 py-2" value="Kapan Kanz punya pacar history nerd?" readonly />
-                </div>
-                <div id="pilihanWrapper" class="text-left">
-                    <label class="mb-1 block font-medium text-gray-600">Pilihan Jawaban</label>
-                    <div id="detailPilihanContainer" class="max-h-52 overflow-y-auto"></div>
-                </div>
-                <div id="shortAnswerContainer" class="mb-4 hidden text-left">
-                    <label class="mb-1 block font-medium text-gray-600">Jawaban Uraian</label>
-                    <p id="shortAnswerText" class="rounded-lg border border-gray-300 bg-gray-100 px-3 py-2"></p>
+                    <label class="text-lg">Sertifikat</label>
+                    <div class="mb-2 p-2 border border-gray-300 rounded-lg">
+                        <img id="detailCertificatePreview" src="{{ asset('assets/images/dashboard/sertifikat.webp') }}" alt="Certificate" class="h-24 rounded">
+                    </div>
                 </div>
             </div>
             <button type="button" class="w-1/2 rounded-lg border border-[#3986A3] px-6 py-2 text-[#3986A3] focus:outline-none focus:ring-2 focus:ring-[#3986A3] focus:ring-offset-2" onclick="closeDetailQuestionModal()">Kembali</button>
@@ -195,6 +182,26 @@
 
 @section('script')
     <script>
+        function openEditCertificateModal() {
+            document.getElementById('editCertificateModal').classList.remove('hidden');
+            document.getElementById('editCertificateModal').classList.add('flex');
+        }
+
+        function closeEditCertificateModal() {
+            document.getElementById('editCertificateModal').classList.add('hidden');
+            document.getElementById('editCertificateModal').classList.remove('flex');
+        }
+
+        function openDetailQuestionModal() {
+            document.getElementById('detailQuestionModal').classList.remove('hidden');
+            document.getElementById('detailQuestionModal').classList.add('flex');
+        }
+
+        function closeDetailQuestionModal() {
+            document.getElementById('detailQuestionModal').classList.add('hidden');
+            document.getElementById('detailQuestionModal').classList.remove('flex');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Certificate preview
             const certificateInput = document.getElementById('certificateInput');

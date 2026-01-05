@@ -43,10 +43,10 @@
                                             Detail Materi
                                         </th>
                                         <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
-                                            Pre Test
+                                            <span class="italic">Pre Test</span>
                                         </th>
                                         <th class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
-                                            Post Test
+                                            <span class="italic">Post Test</span>
                                         </th>
                                         <th class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
                                             Aksi

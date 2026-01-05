@@ -17,7 +17,7 @@
                             <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Data Materi</p>
                         </div>
                         <p class="w-full text-disabled">
-                            Halaman untuk menambahkan atau mengedit materi kelas baru ke dalam program Berbinar+ secara rinci, beserta detail judul, video, dan deskripsi.
+                            Halaman untuk menambahkan atau mengubah materi kelas baru ke dalam program Berbinar+ secara rinci, beserta detail judul, video, dan deskripsi.
                         </p>
                         <a href="{{ route('dashboard.kelas.materi.create') }}" class="mt-8 inline-flex items-start justify-start rounded-lg bg-primary px-6 py-3 text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-3">
                             <p class="text-dark font-medium leading-none">Tambah Data</p>
