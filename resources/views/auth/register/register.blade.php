@@ -353,8 +353,26 @@
                             {{-- BACK AND SUBMIT BUTTONS --}}
                             <div class="flex justify-center items-center">
                                 <div class="flex justify-center w-full pt-6 mb-4">
-                                    <button type="submit"
+                                    <button type="button" id="openModalConfirm"
                                         class="next-button w-full mt-4 md:w-auto bg-gradient-to-r from-[#3986A3] to-[#15323D] text-white py-2 px-20 xl:px-40 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">Daftar</button>
+                                </div>
+                            </div>
+                            <!-- Modal Konfirmasi -->
+                            <div id="myModalConfirm"
+                                class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+                                <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
+                                    style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+                                    <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
+                                        class="mx-auto h-[83px] w-[83px]" />
+                                    <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
+                                    <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tolong pastikan
+                                        bahwa informasi yang Anda masukkan telah tepat.</p>
+                                    <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+                                        <button type="button" id="closeModalConfirm"
+                                            class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
+                                        <button type="button" id="okButton"
+                                            class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">OK</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -741,15 +759,28 @@
         }
 
         // --- Next Button ---
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('nextButton').addEventListener('click', function(event) {
-                event.preventDefault();
-                if (validateStep1()) {
-                    document.getElementById('registrationForm1').classList.add('hidden');
-                    document.getElementById('registrationForm2').classList.remove('hidden');
-                }
-            });
+        document.getElementById('nextButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (validateStep1()) {
+                document.getElementById('registrationForm1').classList.add('hidden');
+                document.getElementById('registrationForm2').classList.remove('hidden');
+            }
         });
-    </script>
+        // --- Modal Konfirmasi ---
+        document.getElementById('openModalConfirm').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('myModalConfirm').style.display = "flex";
+        });
+        document.getElementById('closeModalConfirm').addEventListener('click', function() {
+            document.getElementById('myModalConfirm').style.display = "none";
+        });
+        document.getElementById('okButton').addEventListener('click', function() {
+            document.getElementById('myModalConfirm').style.display = "none";
+            document.getElementById('internshipForm').submit();
+        });
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModalConfirm');
+            if (event.target == modal) modal.style.display = "none";
+        };
     </script>
 @endpush

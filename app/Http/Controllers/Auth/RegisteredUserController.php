@@ -109,9 +109,15 @@ class RegisteredUserController
             $enrollment->status_kelas = 'pending_payment';
             $enrollment->save();
 
-            
 
-            return redirect()->route('home.index')->with('success', 'Pendaftaran berhasil!');
+
+            return redirect()->route('homepage.index')->with([
+                'alert' => true,
+                'icon' => asset('assets/images/dashboard/success.webp'),
+                'title' => 'Pendaftaran Berhasil',
+                'message' => 'Selamat datang di Berbinar+',
+                'type' => 'success',
+            ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             if ($request->expectsJson() || $request->ajax()) {
                 return response()->json([
@@ -131,7 +137,13 @@ class RegisteredUserController
                 ], 500);
             }
 
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan data.');
+            return redirect()->route('auth.berbinar-plus.login')->with([
+                'alert' => true,
+                'icon' => asset('assets/images/dashboard/error.webp'),
+                'title' => 'Pendaftaran Gagal',
+                'message' => 'Terjadi kesalahan saat menyimpan data.',
+                'type' => 'error',
+            ]);
         }
     }
 }
