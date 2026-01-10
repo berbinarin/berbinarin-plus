@@ -18,6 +18,12 @@ Route::name('auth.')->group(function () {
 
     Route::get('berbinar-plus/daftar', [RegisteredUserController::class, 'berbinarPlusRegister'])->name('berbinar-plus.regis');
     Route::post('berbinar-plus/store', [RegisteredUserController::class, 'store'])->name('berbinar-plus.store');
+
+    // Tambah kelas baru untuk user yang sudah terdaftar
+    Route::middleware('auth:berbinar')->group(function () {
+        Route::get('berbinar-plus/daftar-kelas', [RegisteredUserController::class, 'registerClass'])->name('berbinar-plus.register-class');
+        Route::post('berbinar-plus/enroll-class', [RegisteredUserController::class, 'enrollClassStore'])->name('berbinar-plus.enroll-class.store');
+    });
     // });
 
     // Logout admin

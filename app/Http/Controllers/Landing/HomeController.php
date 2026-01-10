@@ -16,11 +16,12 @@ class HomeController extends Controller
 {
     public function homepage()
     {
-        $userId = Auth::id();
+        $userId = Auth::guard('berbinar')->id();
 
-        // Get enrolled classes with progress
+        // Get enrolled classes with progress (only active classes: enrolled, completed, expired)
         $enrolledClasses = EnrollmentUser::with(['course.sections'])
             ->where('user_id', $userId)
+            ->whereIn('status_kelas', ['enrolled', 'completed', 'expired'])
             ->get()
             ->map(function ($enrollment) use ($userId) {
                 $course = $enrollment->course;
@@ -52,8 +53,11 @@ class HomeController extends Controller
         $overallProgress = $enrolledClasses->avg('progress_percentage') ?? 0;
         $overallProgress = round($overallProgress);
 
-        // Get class recommendations (classes not enrolled by user)
-        $enrolledCourseIds = $enrolledClasses->pluck('course.id');
+        // Get class recommendations (exclude only active enrolled classes, pending_payment still shows)
+        $enrolledCourseIds = EnrollmentUser::where('user_id', $userId)
+            ->whereIn('status_kelas', ['enrolled', 'completed', 'expired'])
+            ->pluck('course_id');
+
         $recommendations = Berbinarp_Class::with('sections')
             ->whereNotIn('id', $enrolledCourseIds)
             ->limit(10)
@@ -68,7 +72,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $user = Berbinarp_User::with(['enrollments.course'])->find(Auth::id());
+        $user = Berbinarp_User::with(['enrollments.course'])->find(Auth::guard('berbinar')->id());
         return view('landing.profile.index', compact('user'));
     }
 }

@@ -10,7 +10,7 @@
         <div class="w-full flex flex-col">
             <!-- <h3 class="text-gray-500 text-sm">BERBINAR+    /    Graphic Design    /     Course Menu   /    <span class="text-black">Produksi Visual</span></h3> -->
             <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
-                <a href="{{ route('homepage.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
+                <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
                 <span>/</span>
                 <a href="" class="hover:text-gray-900 transition-colors">Graphic Design</a>
                 <span>/</span>

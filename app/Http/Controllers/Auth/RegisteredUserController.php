@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 
 class RegisteredUserController
+
 {
     public function berbinarPlusRegister()
     {
@@ -146,5 +147,79 @@ class RegisteredUserController
                 'type' => 'error',
             ]);
         }
+    }
+
+    public function registerClass(Request $request)
+    {
+        $user = auth('berbinar')->user();
+        // Ambil semua kelas yang belum diambil user
+        $enrolledCourseIds = $user->enrollments->pluck('course_id')->toArray();
+        $courses = Berbinarp_Class::whereNotIn('id', $enrolledCourseIds)->get();
+
+        // Paket layanan (bisa diambil dari config atau model jika ada)
+        $packages = [
+            (object)['id' => 'Insight', 'name' => 'Insight', 'price' => '15000'],
+            (object)['id' => 'A+ Online Weekday', 'name' => 'A+ Online Weekday', 'price' => '36000-120000'],
+            (object)['id' => 'A+ Online Weekend', 'name' => 'A+ Online Weekend', 'price' => '44000-140000'],
+            (object)['id' => 'A+ Offline Weekday', 'name' => 'A+ Offline Weekday', 'price' => '44000-140000'],
+            (object)['id' => 'A+ Offline Weekend', 'name' => 'A+ Offline Weekend', 'price' => '44000-180000'],
+            (object)['id' => 'Complete', 'name' => 'Complete', 'price' => '100000-280000'],
+        ];
+
+        return view('auth.register.register-class', compact('courses', 'packages'));
+    }
+
+    // Proses pendaftaran kelas baru untuk user yang sudah terdaftar
+    public function enrollClassStore(Request $request)
+    {
+        $user = auth('berbinar')->user();
+        $validated = $request->validate([
+            'course_id' => 'required|exists:berbinarp_class,id',
+            'service_package' => 'required|string',
+            'price_package' => 'required|string',
+            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'referral_source' => 'required|string',
+            'otherReasonText' => 'nullable|string|max:255',
+        ]);
+
+        // Cek apakah user sudah pernah daftar kelas ini
+        $alreadyEnrolled = EnrollmentUser::where('user_id', $user->id)
+            ->where('course_id', $request->course_id)
+            ->exists();
+        if ($alreadyEnrolled) {
+            return redirect()->back()->with([
+                'alert' => true,
+                'icon' => asset('assets/images/landing/favicion/warning.webp'),
+                'title' => 'Sudah Terdaftar',
+                'message' => 'Anda sudah terdaftar di kelas ini.',
+                'type' => 'warning',
+            ]);
+        }
+
+        $referralSource = $request->referral_source;
+        if ($referralSource === 'Other' && $request->filled('otherReasonText')) {
+            $referralSource = $request->otherReasonText;
+        }
+
+        // Upload bukti transfer
+        $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+
+        // Simpan enrollments_users
+        $enrollment = new EnrollmentUser();
+        $enrollment->user_id = $user->id;
+        $enrollment->course_id = $request->course_id;
+        $enrollment->service_package = $request->service_package;
+        $enrollment->price_package = $request->price_package;
+        $enrollment->payment_proof_url = $buktiTransferPath;
+        $enrollment->status_kelas = 'pending_payment';
+        $enrollment->save();
+
+        return redirect()->route('landing.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Pendaftaran Kelas Berhasil',
+            'message' => 'Kamu berhasil mendaftar kelas baru. Silakan tunggu verifikasi admin.',
+            'type' => 'success',
+        ]);
     }
 }

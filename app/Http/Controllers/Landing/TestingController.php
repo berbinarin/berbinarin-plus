@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 
 class TestingController
 {
-    // Front Page
-
-    // public function homepage()
-    // {
-    //     return view('landing.homepage.index');
-    // }
 
 
     public function others()

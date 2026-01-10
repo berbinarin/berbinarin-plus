@@ -52,7 +52,7 @@
         <!-- Links -->
          <div class="mb-4">
              <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Pre Test</h1>
-             <a href="{{ route('pretest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+             <a href="{{ route('landing.pretest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                  <span class="text-lg lg:text-lg leading-5">Pre Test - Graphic Design</span>
              </a>
          </div>
@@ -61,7 +61,7 @@
          <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Course Menu</h1>
             <div class="flex flex-col">
-                <a href="{{ route('materials.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                <a href="{{ route('landing.home.materials') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                     <span class="text-lg lg:text-lg leading-5">1. Perkenalan Dasar</span>
                 </a>
                 <a id="showModalMaterials" href="" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
@@ -105,7 +105,7 @@
 
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Post Test</h1>
-            <!-- <a href="{{ route('posttest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
+            <!-- <a href="{{ route('landing.posttest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
             <a id="showModalPostTest" href="#" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                 <span class="text-lg lg:text-lg leading-5">Post Test - Graphic Design</span>
                 <i class="bx bxs-lock text-2xl text-primary"></i>
@@ -114,7 +114,7 @@
 
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
-            <a href="{{ route('certificates.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+            <a href="{{ route('landing.home.certificates') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
             <!-- <a id="showModalCertificates" href="#') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
                 <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
                 <i class="bx bxs-lock text-2xl text-primary"></i>

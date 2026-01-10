@@ -14,10 +14,10 @@
     </div>
 
     <div class="flex flex-row gap-6 mb-6 align-bottom max-sm:text-sm text-lg z-40">
-        <a href="{{ route('homepage.index') }}" class="flex flex-col justify-center z-40"><img src="{{ asset("assets/images/landing/favicion/back-chevron.webp") }}" alt="Back" class=""></a>
+        <a href="{{ route('landing.home.index') }}" class="flex flex-col justify-center z-40"><img src="{{ asset("assets/images/landing/favicion/back-chevron.webp") }}" alt="Back" class=""></a>
 
         <nav class="text-gray-500 max-sm:text-sm text-lg z-40" aria-label="Breadcrumb">
-            <a href="{{ route('homepage.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
+            <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
             <span>/</span>
             <a href="" class="text-primary font-medium transition-colors">Graphic Design</a>
         </nav>
@@ -63,7 +63,7 @@
                     <img src="{{ asset("assets/images/landing/favicion/file.webp") }}" alt="" class="w-14 h-14">
                     <div>
                         <h1 class="text-gray-700 italic">Pre Test</h1>
-                        <a href="{{ route('pretest.index') }}" class="text-lg text-primary font-medium italic">Pre Test - Graphic Design</a>
+                        <a href="{{ route('landing.pretest.index') }}" class="text-lg text-primary font-medium italic">Pre Test - Graphic Design</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     <img src="{{ asset("assets/images/landing/favicion/video.webp") }}" alt="" class="w-14 h-14">
                     <div>
                         <h1 class="text-gray-700">Video</h1>
-                        <a href="{{ route('materials.index') }}" class="text-lg text-primary font-medium">1. Perkenalan Dasar</a>
+                        <a href="{{ route('landing.home.materials') }}" class="text-lg text-primary font-medium">1. Perkenalan Dasar</a>
                     </div>
                 </div>
             </div>

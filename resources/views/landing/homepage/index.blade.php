@@ -303,7 +303,7 @@
             <div class="mt-3 lg:mt-6 flex justify-center gap-3">
                 <button type="button" id="cancelModal"
                     class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
-                <a href="{{ route('auth.berbinar-plus.regis') }}"
+                <a href="{{ route('auth.berbinar-plus.register-class') }}"
                     class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</a>
             </div>
         </div>

@@ -261,15 +261,6 @@
                                 class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">
                                 Pilih Kelas</h1>
 
-                            {{-- <div class="mb-4">
-                                <label for="kelas">kelas BERBINAR+</label>
-                                <select name="kelas" id="kelas" class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
-                                    <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
-                                    <option value="" disabled selected class="text-gray-500">Kelas 1</option>
-                                    <option value="" disabled selected class="text-gray-500">Kelas 2</option>
-                                </select>
-                            </div> --}}
-
                             {{-- KELAS BERBINAR+ --}}
                             <div class="mb-4">
                                 <label for="course_id">Kelas BERBINAR+</label>

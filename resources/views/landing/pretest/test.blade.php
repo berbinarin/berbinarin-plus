@@ -8,7 +8,7 @@
     <div class="mt-20 lg:mt-10">
         <!-- Breadcrumb -->
         <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
-            <a href="{{ route('homepage.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
+            <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
             <span>/</span>
             <a href="#" class="hover:text-gray-900 transition-colors">Graphic Design</a>
             <span>/</span>
@@ -61,7 +61,7 @@
             <!-- Tombol navigasi -->
             <div class="flex w-full justify-between items-center gap-4 mt-8 text-center font-medium text-base lg:text-xl mx-auto">
                 <a href="#" class="max-sm:w-1/2 py-2 px-[18px] bg-white ring-1 ring-[#3986A3] rounded-lg">Sebelumnya</a>
-                <a href="{{ route('pretest.question.2') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
+                <a href="{{ route('landing.pretest.question.2') }}" class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
             </div>
         </div>
 
