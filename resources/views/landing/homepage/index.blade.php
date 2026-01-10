@@ -80,150 +80,58 @@
 
             <!-- Swiper slider -->
             <div class="relative">
-                <div class="swiper slider-courses">
-                    <div class="swiper-wrapper py-2 mb-4">
-
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                <img src="{{ asset('assets/images/landing/class-thumbnail/graphic-designer.webp') }}"
-                                    alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
-                                <div>
-                                    <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
-                                        <p class="font-medium text-xs lg:text-base course-title italic"
-                                            title="Graphic Designer">Graphic Designer</p>
-                                        <p
-                                            class="bg-yellow-500 rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem]">
-                                            Ongoing</p>
-                                    </div>
-                                    <p class="text-xs lg:text-base font-medium">30%</p>
-                                    <div class="flex flex-row gap-1 items-center mb-2">
-                                        <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                            <div class="bg-primary h-2.5 rounded-full" style="width: 30%"></div>
+                @if ($enrolledClasses->isEmpty())
+                    <p class="text-gray-500 text-center py-8">Anda belum memiliki kelas yang aktif.</p>
+                @else
+                    <div class="swiper slider-courses">
+                        <div class="swiper-wrapper py-2 mb-4">
+                            @foreach ($enrolledClasses as $enrolled)
+                                <div class="swiper-slide">
+                                    <div
+                                        class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
+                                        <img src="{{ $enrolled['course']->thumbnail ? asset('uploads/thumbnails/' . $enrolled['course']->thumbnail) : asset('assets/images/landing/favicion/checker.webp') }}"
+                                            alt="{{ $enrolled['course']->name }}"
+                                            class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
+                                        <div>
+                                            <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
+                                                <p class="font-medium text-xs lg:text-base course-title italic"
+                                                    title="{{ $enrolled['course']->name }}">{{ $enrolled['course']->name }}
+                                                </p>
+                                                <p
+                                                    class="rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem] {{ $enrolled['status'] === 'Success' ? 'bg-green-500' : 'bg-yellow-500' }}">
+                                                    {{ $enrolled['status'] }}</p>
+                                            </div>
+                                            <p class="text-xs lg:text-base font-medium">
+                                                {{ $enrolled['progress_percentage'] }}%
+                                            </p>
+                                            <div class="flex flex-row gap-1 items-center mb-2">
+                                                <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                    <div class="bg-primary h-2.5 rounded-full"
+                                                        style="width: {{ $enrolled['progress_percentage'] }}%"></div>
+                                                </div>
+                                                <p
+                                                    class="text-xs lg:text-base {{ $enrolled['status'] === 'Success' ? 'text-primary' : 'text-gray-500' }} align-top">
+                                                    {{ $enrolled['completed_sections'] }}/{{ $enrolled['total_sections'] }}
+                                                </p>
+                                            </div>
+                                            @if ($enrolled['status'] === 'Success')
+                                                <a href="{{ route('landing.home.certificates') }}"
+                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Unduh
+                                                    Sertifikat<i
+                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
+                                            @else
+                                                <a href="{{ route('landing.home.preview') }}"
+                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
+                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
+                                            @endif
                                         </div>
-                                        <p class="text-xs lg:text-base text-gray-500 align-top">30/100</p>
                                     </div>
-                                    <a href="{{ route('landing.home.preview') }}"
-                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                            class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                <img src="{{ asset('assets/images/landing/class-thumbnail/secretary-and-finance.webp') }}"
-                                    alt="" class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
-                                <div>
-                                    <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
-                                        <p class="font-medium text-xs lg:text-base course-title italic"
-                                            title="Secretary and Finance">Secretary and Finance</p>
-                                        <p
-                                            class="bg-green-500 rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem]">
-                                            Success</p>
-                                    </div>
-                                    <p class="text-xs lg:text-base font-medium">100%</p>
-                                    <div class="flex flex-row gap-1 items-center mb-2">
-                                        <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                            <div class="bg-primary h-2.5 rounded-full" style="width: 100%"></div>
-                                        </div>
-                                        <p class="text-xs lg:text-base text-primary align-top">100/100</p>
-                                    </div>
-                                    <a href="{{ route('landing.home.certificates') }}"
-                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Unduh
-                                        Sertifikat<i
-                                            class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                <img src="{{ asset('assets/images/landing/class-thumbnail/hr.webp') }}" alt=""
-                                    class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
-                                <div>
-                                    <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
-                                        <p class="font-medium text-xs lg:text-base course-title italic"
-                                            title="Human Resource">Human Resource</p>
-                                        <p
-                                            class="bg-yellow-500 rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem]">
-                                            Ongoing</p>
-                                    </div>
-                                    <p class="text-xs lg:text-base font-medium">50%</p>
-                                    <div class="flex flex-row gap-1 items-center mb-2">
-                                        <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                            <div class="bg-primary h-2.5 rounded-full" style="width: 50%"></div>
-                                        </div>
-                                        <p class="text-xs lg:text-base text-gray-500 align-top">50/100</p>
-                                    </div>
-                                    <a href="{{ route('landing.home.preview') }}"
-                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                            class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                <img src="{{ asset('assets/images/landing/favicion/checker.webp') }}" alt=""
-                                    class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
-                                <div>
-                                    <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
-                                        <p class="font-medium text-xs lg:text-base course-title italic"
-                                            title="User Interface Design for Beginner">User Interface Design for Beginner
-                                        </p>
-                                        <p
-                                            class="bg-yellow-500 rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem]">
-                                            Ongoing</p>
-                                    </div>
-                                    <p class="text-xs lg:text-base font-medium">10%</p>
-                                    <div class="flex flex-row gap-1 items-center mb-2">
-                                        <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                            <div class="bg-primary h-2.5 rounded-full" style="width: 10%"></div>
-                                        </div>
-                                        <p class="text-xs lg:text-base text-gray-500 align-top">10/100</p>
-                                    </div>
-                                    <a href="{{ route('landing.home.preview') }}"
-                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                            class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                <img src="{{ asset('assets/images/landing/favicion/checker.webp') }}" alt=""
-                                    class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
-                                <div>
-                                    <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
-                                        <p class="font-medium text-xs lg:text-base course-title italic"
-                                            title="User Interface Design for Beginner">User Interface Design for Beginner
-                                        </p>
-                                        <p
-                                            class="bg-yellow-500 rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem]">
-                                            Ongoing</p>
-                                    </div>
-                                    <p class="text-xs lg:text-base font-medium">75%</p>
-                                    <div class="flex flex-row gap-1 items-center mb-2">
-                                        <div class="w-36 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                            <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
-                                        </div>
-                                        <p class="text-xs lg:text-base text-gray-500 align-top">75/100</p>
-                                    </div>
-                                    <a href="{{ route('landing.home.preview') }}"
-                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                            class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
+                        <div class="swiper-pagination" style="bottom: -0px;"></div>
                     </div>
-                    <div class="swiper-pagination" style="bottom: -0px;"></div>
-                </div>
+                @endif
             </div>
         </div>
         {{-- /Kelas Saya --}}

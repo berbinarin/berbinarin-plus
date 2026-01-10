@@ -96,9 +96,20 @@
                                 <h2 class="text-sm lg:text-base text-gray-500 font-semibold">Kelas</h2>
                                 <div class="lg:text-lg font-medium">
                                     @if ($user->enrollments && $user->enrollments->count())
-                                        @foreach ($user->enrollments as $enrollment)
-                                            {{ $enrollment->course->name ?? '-' }}<br>
-                                        @endforeach
+                                        @php
+                                            $activeEnrollments = $user->enrollments->whereIn('status_kelas', [
+                                                'enrolled',
+                                                'completed',
+                                                'expired',
+                                            ]);
+                                        @endphp
+                                        @if ($activeEnrollments->count())
+                                            @foreach ($activeEnrollments as $enrollment)
+                                                {{ $enrollment->course->name ?? '-' }}<br>
+                                            @endforeach
+                                        @else
+                                            -
+                                        @endif
                                     @else
                                         -
                                     @endif
