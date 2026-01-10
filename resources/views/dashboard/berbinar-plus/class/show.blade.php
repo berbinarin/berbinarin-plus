@@ -53,7 +53,7 @@
 
                 <div class="mb-6">
                     <h1 class="mb-2 text-2xl text-primary-alt font-bold">Deskripsi Kelas</h1>
-                    <p class="font-semibold text-lg mb-1">Placeholder Deskripsi Kelas</p>
+                    <p class="font-semibold text-lg mb-1">{{ $class->description }}</p>
                 </div>
             </div>
         </div>

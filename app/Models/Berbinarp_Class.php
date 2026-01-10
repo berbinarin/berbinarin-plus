@@ -19,6 +19,7 @@ class Berbinarp_Class extends Model
         'instructor_title',
         'rating',
         'thumbnail',
+        'description',
     ];
 
     // Relasi ke enrollments

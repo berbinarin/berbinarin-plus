@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('instructor_title');
             $table->decimal('rating', 2, 1)->nullable();
             $table->string('thumbnail');
+            $table->text('description');
             $table->timestamps();
         });
     }

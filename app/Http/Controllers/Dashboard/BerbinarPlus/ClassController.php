@@ -17,7 +17,7 @@ class ClassController extends Controller
         $classes = Berbinarp_Class::with(['tests' => function ($q) {
             $q->whereIn('type', ['pretest', 'posttest']);
         }])->withCount('enrollments')->get();
-        
+
         return view('dashboard.berbinar-plus.class.index', compact('classes'));
     }
 
@@ -39,6 +39,7 @@ class ClassController extends Controller
             'name' => 'required',
             'instructor_name' => 'required',
             'instructor_title' => 'required',
+            'description' => 'required',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:1024',
         ],  [
             'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
@@ -58,6 +59,7 @@ class ClassController extends Controller
             'name' => $validated['name'],
             'instructor_name' => $validated['instructor_name'] ?? null,
             'instructor_title' => $validated['instructor_title'] ?? null,
+            'description' => $validated['description'],
             'thumbnail' => $filename,
         ]);
         return redirect()->route('dashboard.kelas.index')->with([
@@ -97,6 +99,7 @@ class ClassController extends Controller
             'name' => 'required',
             'instructor_name' => 'required',
             'instructor_title' => 'required',
+            'description' => 'required',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
         ], [
             'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
@@ -116,6 +119,7 @@ class ClassController extends Controller
         $class->name = $validated['name'];
         $class->instructor_name = $validated['instructor_name'] ?? null;
         $class->instructor_title = $validated['instructor_title'] ?? null;
+        $class->description = $validated['description'];
         $class->save();
 
         return redirect()->route('dashboard.kelas.index')->with([

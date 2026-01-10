@@ -77,6 +77,11 @@
                                 <span class="text-red-500">Ukuran gambar maksimal 1 MB, dimensi 300x300 px.</span>
                             </small>
                         </div>
+                        <div>
+                            <label class="text-lg">Deskripsi Kelas</label>
+                            <textarea name="description" rows="4" placeholder="Deskripsi lengkap kelas..."
+                                class="peer w-full rounded-lg border-2 border-gray-300 px-4 py-2 shadow-sm mb-1" required>{{ old('description', $class->description) }}</textarea>
+                        </div>
                     </div>
 
                     <div class="mt-8 flex flex-row-reverse border-t border-gray-600 gap-4 pt-9">
