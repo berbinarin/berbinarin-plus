@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Berbinarp_Class;
 use App\Models\EnrollmentUser;
 use App\Models\User_Progres;
+use App\Models\Berbinarp_User;
 use App\Models\Course_Section;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -63,5 +64,11 @@ class HomeController extends Controller
             'overallProgress',
             'recommendations'
         ));
+    }
+
+    public function profile()
+    {
+        $user = Berbinarp_User::with(['enrollments.course'])->find(Auth::id());
+        return view('landing.profile.index', compact('user'));
     }
 }

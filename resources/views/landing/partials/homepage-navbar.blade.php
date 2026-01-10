@@ -2,7 +2,7 @@
 <!-- Navbar -->
 <nav class="sticky left-0 right-0 top-0 z-50 flex items-center bg-white bg-opacity-90 px-4 py-3 backdrop-blur-sm max-sm:px-4 max-sm:py-2">
     <!-- Logo -->
-    <a href="{{ route('homepage.index') }}" class="flex items-center gap-2">
+    <a href="{{ route('landing.home.index') }}" class="flex items-center gap-2">
         <img src="{{ asset("assets/images/landing/favicion/logo-berbinar.webp") }}" alt="Logo" class="h-10 w-auto max-sm:h-8" />
         <h1 class="text-lg max-sm:hidden">Berbinar+</h1>
     </a>
@@ -15,7 +15,7 @@
                 <span class="absolute bg-[#3986A3] w-3 h-3 lg:w-3.5 lg:h-3.5 rounded-full -translate-y-6 lg:-translate-y-8 text-white text-[8px] lg:text-[10px] text-center">4</span>
             </button>
         </div>
-        <a href="{{ route('profile.index') }}" class="flex flex-row gap-3">
+        <a href="{{ route('landing.home.profile') }}" class="flex flex-row gap-3">
             <img src="{{ asset("assets/images/landing/favicion/profile-placeholder.webp") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
             <p class="items-center truncate font-medium hidden">John Doe</p>
         </a>

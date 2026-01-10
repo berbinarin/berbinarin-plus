@@ -37,7 +37,7 @@
                 <div class="bg-white rounded-3xl p-5 md:px-12 xl:px-16 justify-self-center md:w-[90%] w-full md:shadow-lg">
 
                     <!-- Tombol Kembali -->
-                    <a href="{{ route('home.index') }}">
+                    <a href="{{ route('landing.index') }}">
                         <div class="flex cursor-pointer items-center space-x-2 lg:order-1 mt-2">
                             <img src="{{ asset('assets/images/landing/svg/left-arrow.svg') }}" alt="Left Arrow"
                                 class="h-3 w-auto" />
@@ -646,7 +646,7 @@
                 showCustomAlert(
                     'Anda harus menyetujui Booklet terlebih dahulu.',
                     'Perhatian!',
-                    "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                    "{{ asset('assets/images/dashboard/error.webp') }}"
                 );
                 return null;
             }
@@ -663,7 +663,7 @@
                     showCustomAlert(
                         '"' + getFieldLabel(fieldName) + '" belum diisi.',
                         'Validasi Error',
-                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                        "{{ asset('assets/images/dashboard/error.webp') }}"
                     );
                     return null;
                 }
@@ -671,7 +671,7 @@
                     showCustomAlert(
                         'Format Email tidak valid.',
                         'Validasi Error',
-                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                        "{{ asset('assets/images/dashboard/error.webp') }}"
                     );
                     return null;
                 }
@@ -679,7 +679,7 @@
                     showCustomAlert(
                         'Format Nomor Whatsapp tidak valid.',
                         'Validasi Error',
-                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                        "{{ asset('assets/images/dashboard/error.webp') }}"
                     );
                     return null;
                 }
@@ -704,7 +704,7 @@
                         showCustomAlert(
                             '"' + getFieldLabel(fieldName) + '" belum diisi.',
                             'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                            "{{ asset('assets/images/dashboard/error.webp') }}"
                         );
                         return null;
                     }
@@ -715,7 +715,7 @@
                     showCustomAlert(
                         '"' + getFieldLabel(fieldName) + '" belum diisi.',
                         'Validasi Error',
-                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                        "{{ asset('assets/images/dashboard/error.webp') }}"
                     );
                     return null;
                 }

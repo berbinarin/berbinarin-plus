@@ -1,30 +1,63 @@
 <?php
 
 use App\Http\Controllers\Landing\HomeController;
+use App\Http\Controllers\Landing\LandingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Landing\TestingController;
 
 
-Route::get('/', [TestingController::class, 'landing'])->name('home.index');
 
-Route::get('/home', [HomeController::class, 'homepage'])->name('homepage.index');
+Route::name('landing.')->group(function () {
+    // Public landing page
+    Route::get('/', [LandingController::class, 'landing'])->name('index');
 
-Route::get('/others', [TestingController::class, 'others'])->name('others.index');
+    // Group: routes that require authentication (user biasa)
+    Route::middleware(['auth:berbinar'])->group(function () {
+        Route::prefix('home')->name('home.')->group(function () {
+            Route::get('/', [HomeController::class, 'homepage'])->name('index');
+            Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+            Route::get('/preview', [TestingController::class, 'preview'])->name('preview');
+            Route::get('/materials', [TestingController::class, 'materials'])->name('materials.index');
+            Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates');
+        });
+    });
 
-Route::get('/profile', [TestingController::class, 'profile'])->name('profile.index');
+    // Group: routes that do not require authentication
+    Route::get('/others', [TestingController::class, 'others'])->name('others.index');
 
-Route::get('/preview', [TestingController::class, 'preview'])->name('preview.index');
+    // Pretest & Posttest (could be public or protected, adjust middleware as needed)
+    Route::get('/pretest', [TestingController::class, 'pretest'])->name('pretest.index');
+    Route::get('/pretest/question', [TestingController::class, 'pretestQuestion'])->name('pretest.question');
+    Route::get('/pretest/question/2', [TestingController::class, 'pretestQuestion2'])->name('pretest.question.2');
+    Route::get('/pretest-finished', [TestingController::class, 'pretestFinished'])->name('pretest.index-finished');
 
-Route::get('/pretest', [TestingController::class, 'pretest'])->name('pretest.index');
-Route::get('/pretest/question', [TestingController::class, 'pretestQuestion'])->name('pretest.question');
-Route::get('/pretest/question/2', [TestingController::class, 'pretestQuestion2'])->name('pretest.question.2');
-Route::get('/pretest-finished', [TestingController::class, 'pretestFinished'])->name('pretest.index-finished');
+    Route::get('/posttest', [TestingController::class, 'posttest'])->name('posttest.index');
+    Route::get('/posttest/question', [TestingController::class, 'posttestQuestion'])->name('posttest.question');
+    Route::get('/posttest/question/2', [TestingController::class, 'posttestQuestion2'])->name('posttest.question.2');
+    Route::get('/posttest-finished', [TestingController::class, 'posttestFinished'])->name('posttest.index-finished');
+});
 
-Route::get('/posttest', [TestingController::class, 'posttest'])->name('posttest.index');
-Route::get('/posttest/question', [TestingController::class, 'posttestQuestion'])->name('posttest.question');
-Route::get('/posttest/question/2', [TestingController::class, 'posttestQuestion2'])->name('posttest.question.2');
-Route::get('/posttest-finished', [TestingController::class, 'posttestFinished'])->name('posttest.index-finished');
 
-Route::get('/materials', [TestingController::class, 'materials'])->name('materials.index');
+// Route::get('/', [TestingController::class, 'landing'])->name('home.index');
 
-Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates.index');
+// Route::get('/home', [HomeController::class, 'homepage'])->name('homepage.index');
+
+// Route::get('/others', [TestingController::class, 'others'])->name('others.index');
+
+// Route::get('/profile', [TestingController::class, 'profile'])->name('profile.index');
+
+// Route::get('/preview', [TestingController::class, 'preview'])->name('preview.index');
+
+// Route::get('/pretest', [TestingController::class, 'pretest'])->name('pretest.index');
+// Route::get('/pretest/question', [TestingController::class, 'pretestQuestion'])->name('pretest.question');
+// Route::get('/pretest/question/2', [TestingController::class, 'pretestQuestion2'])->name('pretest.question.2');
+// Route::get('/pretest-finished', [TestingController::class, 'pretestFinished'])->name('pretest.index-finished');
+
+// Route::get('/posttest', [TestingController::class, 'posttest'])->name('posttest.index');
+// Route::get('/posttest/question', [TestingController::class, 'posttestQuestion'])->name('posttest.question');
+// Route::get('/posttest/question/2', [TestingController::class, 'posttestQuestion2'])->name('posttest.question.2');
+// Route::get('/posttest-finished', [TestingController::class, 'posttestFinished'])->name('posttest.index-finished');
+
+// Route::get('/materials', [TestingController::class, 'materials'])->name('materials.index');
+
+// Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates.index');

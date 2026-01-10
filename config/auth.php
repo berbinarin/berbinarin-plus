@@ -38,7 +38,11 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users', // admin
+        ],
+        'berbinar' => [
+            'driver' => 'session',
+            'provider' => 'berbinarp_users', // user biasa
         ],
     ],
 
@@ -62,9 +66,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\User::class, // admin
         ],
-
+        'berbinarp_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Berbinarp_User::class, // user biasa
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -93,6 +100,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'berbinarp_users' => [
+            'provider' => 'berbinarp_users',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

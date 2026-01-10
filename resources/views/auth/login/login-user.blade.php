@@ -79,17 +79,5 @@
             </div>
         </div>
     </div>
-    {{-- /Login Desktop --}}
-    @if (session('alert'))
-        <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
-            style="background:rgba(0,0,0,0.3)">
-            <div class="bg-white rounded-xl shadow-lg p-6 text-center max-w-md mx-auto">
-                <img src="{{ session('icon') }}" alt="icon" class="mx-auto h-20 mb-4" />
-                <h2 class="text-xl font-bold mb-2">{{ session('title') }}</h2>
-                <p class="mb-4">{{ session('message') }}</p>
-                <button onclick="this.closest('.fixed').remove()"
-                    class="bg-gradient-to-r from-[#3986A3] to-[#15323D] text-white px-6 py-2 rounded">OK</button>
-            </div>
-        </div>
-    @endif
+    
 @endsection

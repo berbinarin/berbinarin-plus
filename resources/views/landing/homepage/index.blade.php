@@ -103,7 +103,7 @@
                                         </div>
                                         <p class="text-xs lg:text-base text-gray-500 align-top">30/100</p>
                                     </div>
-                                    <a href="{{ route('preview.index') }}"
+                                    <a href="{{ route('landing.home.preview') }}"
                                         class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
                                             class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                 </div>
@@ -130,7 +130,7 @@
                                         </div>
                                         <p class="text-xs lg:text-base text-primary align-top">100/100</p>
                                     </div>
-                                    <a href="{{ route('certificates.index') }}"
+                                    <a href="{{ route('landing.home.certificates') }}"
                                         class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Unduh
                                         Sertifikat<i
                                             class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
@@ -158,7 +158,7 @@
                                         </div>
                                         <p class="text-xs lg:text-base text-gray-500 align-top">50/100</p>
                                     </div>
-                                    <a href="{{ route('preview.index') }}"
+                                    <a href="{{ route('landing.home.preview') }}"
                                         class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
                                             class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                 </div>
@@ -186,7 +186,7 @@
                                         </div>
                                         <p class="text-xs lg:text-base text-gray-500 align-top">10/100</p>
                                     </div>
-                                    <a href="{{ route('preview.index') }}"
+                                    <a href="{{ route('landing.home.preview') }}"
                                         class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
                                             class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                 </div>
@@ -214,7 +214,7 @@
                                         </div>
                                         <p class="text-xs lg:text-base text-gray-500 align-top">75/100</p>
                                     </div>
-                                    <a href="{{ route('preview.index') }}"
+                                    <a href="{{ route('landing.home.preview') }}"
                                         class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
                                             class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                 </div>

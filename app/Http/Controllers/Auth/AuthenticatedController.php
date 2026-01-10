@@ -51,13 +51,15 @@ class AuthenticatedController
         $credentials = $request->only('username', 'password');
         $user = \App\Models\Berbinarp_User::where('username', $credentials['username'])->first();
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            Auth::login($user);
-            return redirect()->route('homepage.index')->with([
+            Auth::guard('berbinar')->login($user);
+            // Kirim data user ke halaman profile
+            return redirect()->route('landing.home.index')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/success.webp'),
                 'title' => 'Login Berhasil',
                 'message' => 'Selamat datang di Berbinar+',
                 'type' => 'success',
+                'user' => $user,
             ]);
         } else {
             return redirect()->route('auth.berbinar-plus.login')->with([
@@ -70,12 +72,28 @@ class AuthenticatedController
         }
     }
 
-    public function destroy(Request $request): RedirectResponse
+    // Untuk admin
+    public function logoutAdmin(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login')->with([
+        return redirect()->route('auth.login')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Logout Berhasil',
+            'message' => 'Sampai jumpa lagi',
+            'type' => 'success',
+        ]);
+    }
+
+    // Untuk user biasa
+    public function logoutUser(Request $request): RedirectResponse
+    {
+        Auth::guard('berbinar')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('auth.berbinar-plus.login')->with([
             'alert' => true,
             'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Logout Berhasil',

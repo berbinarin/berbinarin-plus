@@ -20,8 +20,14 @@ Route::name('auth.')->group(function () {
     Route::post('berbinar-plus/store', [RegisteredUserController::class, 'store'])->name('berbinar-plus.store');
     // });
 
-    Route::middleware('auth')->group(function () {
-        Route::post('logout', [AuthenticatedController::class, 'destroy'])
+    // Logout admin
+    Route::middleware('auth:web')->group(function () {
+        Route::post('logout-admin', [AuthenticatedController::class, 'logoutAdmin'])
+            ->name('logout-admin');
+    });
+    // Logout user biasa
+    Route::middleware('auth:berbinar')->group(function () {
+        Route::post('logout', [AuthenticatedController::class, 'logoutUser'])
             ->name('logout');
     });
 });

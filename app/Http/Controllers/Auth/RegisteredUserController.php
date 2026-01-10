@@ -71,22 +71,19 @@ class RegisteredUserController
                 'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ]);
 
-            // Handle "Other" option for last_education
             $lastEducation = $request->last_education;
             if ($lastEducation === 'Other' && $request->filled('otherEducation')) {
                 $lastEducation = $request->otherEducation;
             }
 
-            // Handle "Other" option for referral_source
             $referralSource = $request->referral_source;
             if ($referralSource === 'Other' && $request->filled('otherReasonText')) {
                 $referralSource = $request->otherReasonText;
             }
 
-            // Simpan bukti transfer
+            // Bukti transfer
             $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
 
-            // Simpan user
             $user = Berbinarp_User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -111,7 +108,7 @@ class RegisteredUserController
 
 
 
-            return redirect()->route('home.index')->with([
+            return redirect()->route('landing.index')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/success.webp'),
                 'title' => 'Pendaftaran Berhasil',
@@ -126,7 +123,7 @@ class RegisteredUserController
                     'errors' => $e->errors()
                 ], 422);
             }
-            // Jika error karena email sudah terdaftar, redirect dengan session untuk swall
+            // Tampilan eror ketika email sudah terdaftar
             if (isset($e->validator) && $e->validator->errors()->has('email')) {
                 return redirect()->back()->withInput()->with('email_exists', true);
             }
@@ -141,7 +138,7 @@ class RegisteredUserController
                 ], 500);
             }
 
-            return redirect()->route('auth.berbinar-plus.login')->with([
+            return redirect()->route('auth.berbinar-plus.regis')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/error.webp'),
                 'title' => 'Pendaftaran Gagal',

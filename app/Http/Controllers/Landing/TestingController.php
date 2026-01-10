@@ -7,20 +7,12 @@ use Illuminate\Http\Request;
 class TestingController
 {
     // Front Page
-    public function landing()
-    {
-        return view('landing.index');
-    }
 
     // public function homepage()
     // {
     //     return view('landing.homepage.index');
     // }
 
-    public function profile()
-    {
-        return view('landing.profile.index');
-    }
 
     public function others()
     {
