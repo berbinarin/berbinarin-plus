@@ -15,30 +15,9 @@ class TestingController
 
 
     // Pretest
-    public function preview()
-    {
-        return view('landing.preview.index');
-    }
+    
 
-    public function pretest()
-    {
-        return view('landing.pretest.index');
-    }
 
-    public function pretestQuestion()
-    {
-        return view('landing.pretest.test');
-    }
-
-    public function pretestQuestion2()
-    {
-        return view('landing.pretest.test2');
-    }
-
-    public function pretestFinished()
-    {
-        return view('landing.pretest.index-finished');
-    }
 
 
     // Posttest

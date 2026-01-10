@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Landing\HomeController;
 use App\Http\Controllers\Landing\LandingController;
+use App\Http\Controllers\Landing\PretestController;
+use App\Http\Controllers\Landing\PreviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Landing\TestingController;
 
@@ -16,7 +18,7 @@ Route::name('landing.')->group(function () {
         Route::prefix('home')->name('home.')->group(function () {
             Route::get('/', [HomeController::class, 'homepage'])->name('index');
             Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
-            Route::get('/preview', [TestingController::class, 'preview'])->name('preview');
+            Route::get('/preview/{class_id}', [PreviewController::class, 'preview'])->name('preview');
             Route::get('/materials', [TestingController::class, 'materials'])->name('materials');
             Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates');
         });
@@ -27,10 +29,9 @@ Route::name('landing.')->group(function () {
 
     // Pretest routes
     Route::prefix('pretest')->name('pretest.')->group(function () {
-        Route::get('/', [TestingController::class, 'pretest'])->name('index');
-        Route::get('/question', [TestingController::class, 'pretestQuestion'])->name('question');
-        Route::get('/question/2', [TestingController::class, 'pretestQuestion2'])->name('question.2');
-        Route::get('-finished', [TestingController::class, 'pretestFinished'])->name('index-finished');
+        Route::get('/{class_id}', [PretestController::class, 'pretest'])->name('index');
+        Route::get('/{class_id}/question/{number}', [PretestController::class, 'pretestQuestion'])->name('question');
+        Route::get('/{class_id}-finished', [PretestController::class, 'pretestFinished'])->name('index-finished');
     });
 
     // Posttest routes
