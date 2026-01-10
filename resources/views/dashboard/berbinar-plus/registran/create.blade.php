@@ -16,9 +16,20 @@
                 <p class="w-full text-disabled">Formulir untuk menambahkan peserta baru ke program Berbinar+ secara manual,
                     lengkap dengan informasi pribadi, pilihan kelas, dan paket layanan yang dipilih.</p>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="rounded-lg bg-white px-4 py-4 shadow-md md:px-8 md:py-7 xl:px-10 mb-7">
                 {{-- <form id="berbinarForm" action="{{ route("dashboard.pendaftar.store") }}" method="POST" enctype="multipart/form-data"> --}}
-                <form id="berbinarForm" action="{{ route('dashboard.pendaftar.index') }}" method="GET" enctype="multipart/form-data">
+                <form id="berbinarForm" action="{{ route('dashboard.pendaftar.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="kategori" value="berbinar-for-u" />
 
@@ -29,15 +40,19 @@
                         <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">
                             <div>
                                 <label class="text-lg">Nama Depan</label>
-                                <input type="text" id="first_name" name="first_name" placeholder="Nama Depan" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
+                                <input type="text" id="first_name" name="first_name" placeholder="Nama Depan"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
                             </div>
                             <div>
                                 <label class="text-lg">Nama Belakang</label>
-                                <input type="text" id="last_name" name="last_name" placeholder="Nama Belakang" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
+                                <input type="text" id="last_name" name="last_name" placeholder="Nama Belakang"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
                             </div>
                             <div>
                                 <label class="text-lg">Jenis Kelamin</label>
-                                <select id="gender" name="gender" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="gender" name="gender"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                     <option value="Laki-laki">Laki-laki</option>
                                     <option value="Perempuan">Perempuan</option>
@@ -45,52 +60,67 @@
                             </div>
                             <div>
                                 <label class="text-lg">Usia</label>
-                                <input type="number" id="age" name="age" placeholder="Usia Kamu Sekarang" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
+                                <input type="number" id="age" name="age" placeholder="Usia Kamu Sekarang"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
                             </div>
                             <div>
                                 <label class="text-lg">Nomor WhatsApp</label>
-                                <input type="text" id="wa_number" name="phone_number" placeholder="08112345XXXX" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
+                                <input type="text" id="wa_number" name="phone_number" placeholder="08112345XXXX"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
                             </div>
                             <div>
                                 <label class="text-lg">Email</label>
-                                <input type="email" id="email" name="email" placeholder="sobatbinar@gmail.com" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
+                                <input type="email" id="email" name="email" placeholder="sobatbinar@gmail.com"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required />
                             </div>
                             <div class="relative" style="background-color: white">
                                 <label class="text-lg">Pendidikan Terakhir</label>
-                                <button type="button" id="educationToggle" class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
+                                <button type="button" id="educationToggle"
+                                    class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
                                     <span id="educationSelected" class="text-gray-500">Apa Pendidikan Terakhirmu?</span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt="" class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
+                                        class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
                                 </button>
-                                <div class="absolute z-10 mt-2 hidden w-full rounded-md border border-gray-300 bg-white" id="educationDropdown">
+                                <div class="absolute z-10 mt-2 hidden w-full rounded-md border border-gray-300 bg-white"
+                                    id="educationDropdown">
                                     <div class="grid grid-cols-2 gap-4 p-2" style="background-color: white">
                                         <div>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="SD" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="SD" required />
                                                 SD
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="SMP" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="SMP" required />
                                                 SMP
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="SMA" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="SMA" required />
                                                 SMA
                                             </label>
                                         </div>
                                         <div>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="Ahli Madya" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Ahli Madya" required />
                                                 Ahli Madya
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="Sarjana" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Sarjana" required />
                                                 Sarjana
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="Other" id="otherRadio" required />
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Other" id="otherRadio" required />
                                                 Lainnya
                                             </label>
-                                            <input type="text" class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" id="otherInput" name="other_education" placeholder="Isi pendidikan lain..." disabled />
+                                            <input type="text"
+                                                class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
+                                                id="otherInput" name="other_education"
+                                                placeholder="Isi pendidikan lain..." disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +131,9 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                             <div>
                                 <label class="text-lg">Kelas Berbinar+</label>
-                                <select id="kelas" name="class_id" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="kelas" name="course_id"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled {{ old('class_id') ? '' : 'selected' }}>Pilih Kelas
                                         Berbinar+</option>
                                     @foreach ($classes as $k)
@@ -112,7 +144,9 @@
                             </div>
                             <div>
                                 <label class="text-lg">Paket Layanan</label>
-                                <select id="paket" name="service_package" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="paket" name="service_package"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled selected>Pilih Paket Layanan</option>
                                     <option value="Insight" data-harga="15000">Insight</option>
                                     <option value="A+ Online Weekday" data-harga="36000-120000">A+ Online Weekday
@@ -128,18 +162,26 @@
                             </div>
                             <div>
                                 <label class="text-lg">Harga Paket</label>
-                                <input type="text" id="harga_paket" name="price_package" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" placeholder="Harga Paket" readonly />
+                                <input type="text" id="harga_paket" name="price_package"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
+                                    placeholder="Harga Paket" readonly />
                             </div>
                             <div>
                                 <label class="text-lg">Bukti Pembayaran</label>
                                 <div class="relative flex w-full items-center overflow-x-auto">
-                                    <input type="file" id="bukti_transfer" name="payment_proof_url" class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2" accept="image/*" required />
-                                    <div class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
-                                        <button type="button" class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}" alt="" class="h-4 w-4" />
+                                    <input type="file" id="bukti_transfer" name="payment_proof_url"
+                                        class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2"
+                                        accept="image/*" required />
+                                    <div
+                                        class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
+                                        <button type="button"
+                                            class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
+                                                alt="" class="h-4 w-4" />
                                             Upload File
                                         </button>
-                                        <span id="fileName" class="ml-3 truncate text-base text-gray-600 max-w-[250px]"></span>
+                                        <span id="fileName"
+                                            class="ml-3 truncate text-base text-gray-600 max-w-[250px]"></span>
                                     </div>
                                 </div>
                                 <small class="text-gray-500 block mt-1">
@@ -148,7 +190,9 @@
                             </div>
                             <div>
                                 <label class="text-lg">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
-                                <select class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2" id="sumber" name="referral_source" required>
+                                <select
+                                    class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                    id="sumber" name="referral_source" required>
                                     <option value="" disabled selected class="text-gray-500">Dari mana nihh</option>
                                     <option value="Instagram">Instagram</option>
                                     <option value="Telegram">Telegram</option>
@@ -157,20 +201,29 @@
                                     <option value="Teman">Teman</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <input type="text" class="form-input mt-1 block hidden h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2" id="otherReasonText" name="otherReasonText" placeholder="Please specify" />
+                                <input type="text"
+                                    class="form-input mt-1 block hidden h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                    id="otherReasonText" name="otherReasonText" placeholder="Please specify" />
                             </div>
                         </div>
 
                         <div class="mt-8 flex gap-4 pt-5">
-                            <a href="#" id="cancelButton" class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg" style="width: 50%; border: 2px solid #3986a3; color: #3986a3">Batal</a>
-                            <button type="button" id="submitButton" class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg" style="width: 50%; background: #3986a3; color: #fff">Simpan</button>
+                            <a href="#" id="cancelButton"
+                                class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg"
+                                style="width: 50%; border: 2px solid #3986a3; color: #3986a3">Batal</a>
+                            <button type="button" id="submitButton"
+                                class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg"
+                                style="width: 50%; background: #3986a3; color: #fff">Simpan</button>
                         </div>
 
                         <!-- Modal Konfirmasi Batal -->
-                        <div id="confirmModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
-                            <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg" style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <div id="confirmModal"
+                            class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+                            <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg"
+                                style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
                                 <!-- Warning Icon -->
-                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
+                                    class="mx-auto h-[83px] w-[83px]" />
 
                                 <!-- Title -->
                                 <h2 class="mt-4 text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
@@ -181,8 +234,10 @@
 
                                 <!-- Actions -->
                                 <div class="mt-6 flex justify-center gap-3">
-                                    <button type="button" id="cancelSubmit" class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
-                                    <a href="{{ route('dashboard.pendaftar.index') }}" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
+                                    <button type="button" id="cancelSubmit"
+                                        class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
+                                    <a href="{{ route('dashboard.pendaftar.index') }}"
+                                        class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +375,7 @@
             function validateForm() {
                 const requiredFields = [
                     'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email',
-                    'last_education', 'class_id', 'service_package', 'price_package', 'bukti_transfer',
+                    'last_education', 'course_id', 'service_package', 'price_package', 'bukti_transfer',
                     'referral_source'
                 ];
                 // Jika pendidikan Other, wajib other_education

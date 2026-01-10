@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\BerbinarPlus\ClassController;
 use App\Http\Controllers\Dashboard\BerbinarpAdmin\PendaftarController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\RegistranController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\MaterialController;
+use App\Http\Controllers\Dashboard\BerbinarPlus\MateriController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\QuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PretestQuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PosttestQuestionController;
@@ -19,33 +20,52 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::middleware('role:berbinarplus')->group(function () {
 
+        // Update user status to active (from Berbinarp_User)
+        Route::patch('/pendaftar/update-user-status/{id}', [RegistranController::class, 'updateUserStatus'])->name('updateUserStatus');
+
         // Class
         Route::resource('kelas', ClassController::class);
 
-        // Materi
-        Route::get('/materi', [MaterialController::class, 'index'])->name('kelas.materi.index');
-        Route::get('/materi/create', [MaterialController::class, 'create'])->name('kelas.materi.create');
-        Route::get('/materi/edit', [MaterialController::class, 'edit'])->name('kelas.materi.edit');
-        Route::get('/materi/show', [MaterialController::class, 'show'])->name('kelas.materi.show');
+        // List materi
+        Route::get('materi/kelas/{class}', [MateriController::class, 'index'])->name('materi.index');
+        Route::get('kelas/{class}/materi/create', [MateriController::class, 'create'])->name('materi.create');
+        Route::post('kelas/{class}/materi', [MateriController::class, 'store'])->name('materi.store');
+        Route::get('materi/{id}', [MateriController::class, 'show'])->name('materi.show');
+        Route::get('materi/{id}/edit', [MateriController::class, 'edit'])->name('materi.edit');
+        Route::put('materi/{id}', [MateriController::class, 'update'])->name('materi.update');
+        Route::delete('materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
         // Soal Pretest & Posttest
-        Route::get('/soal-pre-test', [PretestQuestionController::class, 'index'])->name('kelas.pre-test.index');
-        Route::get('/soal-post-test', [PosttestQuestionController::class, 'index'])->name('kelas.post-test.index');
+        Route::get('kelas/{class}/soal-pre-test/{pretest}', [PretestQuestionController::class, 'index'])->name('kelas.pre-test.index');
+        Route::post('kelas/{class}/soal-pre-test/{pretest}', [PretestQuestionController::class, 'store'])->name('kelas.pre-test.store');
+        Route::get('kelas/{class}/soal-pre-test/{pretest}/show/{question}', [PretestQuestionController::class, 'show'])->name('kelas.pre-test.show');
+        Route::put('kelas/{class}/soal-pre-test/{pretest}/update/{question}', [PretestQuestionController::class, 'update'])->name('kelas.pre-test.update');
+        Route::delete('kelas/{class}/soal-pre-test/{pretest}/delete/{question}', [PretestQuestionController::class, 'destroy'])->name('kelas.pre-test.destroy');
+        Route::get('kelas/{class}/soal-post-test/{posttest}', [PosttestQuestionController::class, 'index'])->name('kelas.post-test.index');
+        Route::post('kelas/{class}/soal-post-test/{posttest}', [PosttestQuestionController::class, 'store'])->name('kelas.post-test.store');
+        Route::get('kelas/{class}/soal-post-test/{posttest}/show/{question}', [PosttestQuestionController::class, 'show'])->name('kelas.post-test.show');
+        Route::put('kelas/{class}/soal-post-test/{posttest}/update/{question}', [PosttestQuestionController::class, 'update'])->name('kelas.post-test.update');
+        Route::delete('kelas/{class}/soal-post-test/{posttest}/delete/{question}', [PosttestQuestionController::class, 'destroy'])->name('kelas.post-test.destroy');
 
         // Pendaftar
+
         // Route::resource('pendaftar', RegistranController::class);
         Route::get('/pendaftar', [RegistranController::class, 'index'])->name('pendaftar.index');
         Route::get('/pendaftar/create', [RegistranController::class, 'create'])->name('pendaftar.create');
-        Route::get('/pendaftar/edit', [RegistranController::class, 'edit'])->name('pendaftar.edit');
-        Route::get('/pendaftar/show', [RegistranController::class, 'show'])->name('pendaftar.show');
-        Route::delete('/pendaftar/destroy', [RegistranController::class, 'destroy'])->name('pendaftar.destroy');
+        Route::post('/pendaftar', [RegistranController::class, 'store'])->name('pendaftar.store');
+        Route::get('/pendaftar/edit/{id}', [RegistranController::class, 'edit'])->name('pendaftar.edit');
+        Route::get('/pendaftar/show/{id}', [RegistranController::class, 'show'])->name('pendaftar.show');
+        Route::patch('/pendaftar/update/{id}', [RegistranController::class, 'update'])->name('pendaftar.update');
+        Route::delete('/pendaftar/destroy/{id}', [RegistranController::class, 'destroy'])->name('pendaftar.destroy');
 
-        Route::patch('status/{id}', [RegistranController::class, 'updateStatus'])->name('updateStatus');
+        // ACC pembayaran (ubah status_kelas menjadi enrolled)
+        Route::patch('/pendaftar/acc-pembayaran/{enrollment_id}', [RegistranController::class, 'accPembayaran'])->name('pendaftar.acc-pembayaran');
 
         // Pengumpulan Tes
         Route::get('/pendaftar/pengumpulan-tes', [TestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.index');
 
         // Pengumpulan Tes: Pre Test
+
         Route::get('/pendaftar/pre-test', [PreTestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.pre-test.index');
         Route::get('/pendaftar/pre-test/show', [PreTestSubmissionController::class, 'show'])->name('pendaftar.pengumpulan-tes.pre-test.show');
 

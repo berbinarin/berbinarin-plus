@@ -22,144 +22,133 @@
                 <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Nama Lengkap</h2>
-                        <p class="text-lg font-semibold">Revina Monika</p>
+                        <p class="text-lg font-semibold">{{ $user->first_name }} {{ $user->last_name }}</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Telepon/HP</h2>
-                        <p class="text-lg font-semibold">081234567890</p>
+                        <p class="text-lg font-semibold">{{ $user->phone_number }}</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Alamat Email</h2>
-                        <p class="text-lg font-semibold">momonika@gmail.com</p>
+                        <p class="text-lg font-semibold">{{ $user->email }}</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Jenis Kelamin</h2>
-                        <p class="text-lg font-semibold">perempuan</p>
+                        <p class="text-lg font-semibold">{{ $user->gender }}</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Pendidikan Terakhir</h2>
-                        <p class="text-lg font-semibold">SMA</p>
+                        <p class="text-lg font-semibold">{{ $user->last_education }}</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Usia</h2>
-                        <p class="text-lg font-semibold">18 Tahun</p>
+                        <p class="text-lg font-semibold">{{ $user->age }} Tahun</p>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Username</h2>
                         <div class="flex items-center gap-2">
-                            <p class="text-lg font-semibold" id="usernameText">Momonimut</p>
+                            <p class="text-lg font-semibold" id="usernameText">{{ $user->username }}</p>
                         </div>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Password</h2>
                         <div class="flex items-center gap-2">
-                            <p class="text-lg font-semibold" id="passwordText">kanzkanz</p>
+                            <p class="text-lg font-semibold" id="passwordText">{{ $user->plain_password ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
 
-                <h1 class="mb-6 text-3xl font-bold text-primary-alt mt-7">Data Kelas 1: <a href="{{ route('dashboard.kelas.index') }}" class="font-semibold text-primary underline">Graphic Designer</a></h1>
-                <div class="flex flex-row gap-6 w-full justify-between">
-                    <div class="w-full">
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Status</h2>
-                            <p class="text-lg font-semibold">Sudah Verif</p>
-                        </div>
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Bukti Pembayaran</h2>
-                            <p class="text-lg font-semibold text-gray-400">
-                                <img src="{{ asset('assets/images/dashboard/bukti_bayar.webp') }}" alt="Bukti Bayar">
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="w-full">
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Progres</h2>
-                            <div class="flex flex-row w-80 gap-2">
-                                <div class="w-4/5 bg-gray-200 h-4 flex flex-row">
-                                    {{-- @if ($progress == "pretest") --}}
-                                        <div id="progressBar1" class="bg-primary/60 h-4 transition-all duration-500 ease-in-out" style="width: 33%;"></div>
-                                    {{-- @elseif ($progress == "materials") --}}
-                                        <!-- <div id="progressBar1" class="bg-primary/60 h-4 transition-all duration-500 ease-in-out" style="width: 33%;"></div>
-                                        <div id="progressBar2" class="bg-primary/80 h-4 transition-all duration-500 ease-in-out" style="width: 33%;"></div> -->
-                                    {{-- @elseif ($progress == "posttest") --}}
-                                        <!-- <div id="progressBar1" class="bg-primary/60 h-4 transition-all duration-500 ease-in-out" style="width: 33%;"></div>
-                                        <div id="progressBar2" class="bg-primary/80 h-4 transition-all duration-500 ease-in-out" style="width: 33%;"></div>
-                                        <div id="progressBar3" class="bg-primary h-4 transition-all duration-500 ease-in-out" style="width: 34%;"></div> -->
-                                    {{-- @endif --}}
-                                </div>
-                                <div class="w-1/5 flex justify-between text-sm font-semibold px-0.5">
-                                    {{-- @if ($progress == "pretest") --}}
-                                    <span>1/3</span>
-                                    {{-- @elseif ($progress == "materials") --}}
-                                    <!-- <span>2/3</span> -->
-                                    {{-- @elseif ($progress == "posttest") --}}
-                                    <!-- <span>3/3</span> -->
-                                    {{-- @endif --}}
-                                </div>
+                @foreach ($user->enrollments as $i => $enrollment)
+                    <h1 class="mb-6 text-3xl font-bold text-primary-alt mt-7">Data Kelas {{ $i + 1 }}: <a
+                            href="{{ route('dashboard.kelas.index') }}" class="font-semibold text-primary underline">
+                            {{ $enrollment->course->name ?? '-' }}
+                        </a></h1>
+                    <div class="flex flex-row gap-6 w-full justify-between">
+                        <div class="w-full">
+                            <div class="mb-4 flex flex-col">
+                                <h2 class="mb-2 text-lg font-semibold text-gray-500">Status</h2>
+                                <p class="text-lg font-semibold">
+                                    @php
+                                        $statusKelasMap = [
+                                            'pending_payment' => [
+                                                'label' => 'Proses Pembayaran',
+                                                'color' => 'text-yellow-500',
+                                            ],
+                                            'enrolled' => ['label' => 'Terdaftar', 'color' => 'text-blue-500'],
+                                            'completed' => ['label' => 'Selesai', 'color' => 'text-green-600'],
+                                            'expired' => ['label' => 'Kadaluarsa', 'color' => 'text-gray-500'],
+                                        ];
+                                        $statusKelas = $statusKelasMap[$enrollment->status_kelas] ?? [
+                                            'label' => $enrollment->status_kelas,
+                                            'color' => 'text-gray-400',
+                                        ];
+                                    @endphp
+                                    <span class="{{ $statusKelas['color'] }}">{{ $statusKelas['label'] }}</span>
+                                </p>
+                            </div>
+                            <div class="mb-4 flex flex-col">
+                                <h2 class="mb-2 text-lg font-semibold text-gray-500">Bukti Pembayaran</h2>
+                                <p class="text-lg font-semibold text-gray-400">
+                                    @if ($enrollment->payment_proof_url)
+                                        <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
+                                            alt="Bukti Bayar" class="max-h-40 rounded border border-gray-300" />
+                                    @else
+                                        -
+                                    @endif
+                                </p>
                             </div>
                         </div>
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Paket Layanan</h2>
-                            <p class="text-lg font-semibold">
-                                A+ 200.000
-                            </p>
-                        </div>
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Darimana SobatBinar mengetahui layanan
-                                produk BERBINAR+</h2>
-                            <p class="text-lg font-semibold">dari Kanz</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h1 class="mb-6 text-3xl font-bold text-primary-alt mt-7">Data Kelas 2: <a href="{{ route('dashboard.kelas.index') }}" class="font-semibold text-primary underline">UI/UX Designer</a></h1>
-                <div class="flex flex-row gap-6 w-full justify-between">
-                    <div class="w-full">
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Status</h2>
-                            <p class="text-lg font-semibold">Belum Verif</p>
-                        </div>
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Bukti Pembayaran</h2>
-                            <p class="text-lg font-semibold text-gray-400">
-                                <img src="{{ asset('assets/images/dashboard/bukti_bayar.webp') }}" alt="Bukti Bayar">
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="w-full">
-
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Aksi</h2>
-                            <p class="text-lg font-semibold">
-                                <a href="{{ route('dashboard.pendaftar.show') }}" class="inline-flex items-center rounded p-2 hover:bg-blue-700" style="background-color: #00B300">
-                                    <i class="bx bx-check text-white"></i>
-                                </a>
-                                <span class="italic">Enroll</span> &nbsp; Pendaftar
-                            </p>
-                        </div>
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Paket Layanan</h2>
-                            <p class="text-lg font-semibold">
-                                A+ 200.000
-                            </p>
-                        </div>
-                        <div class="mb-4 flex flex-col">
-                            <h2 class="mb-2 text-lg font-semibold text-gray-500">Darimana SobatBinar mengetahui layanan
-                                produk BERBINAR+</h2>
-                            <p class="text-lg font-semibold">dari Kanz</p>
+                        <div class="w-full">
+                            <div class="mb-4 flex flex-col">
+                                <h2 class="mb-2 text-lg font-semibold text-gray-500">Aksi</h2>
+                                <p class="text-lg font-semibold">
+                                    @if ($enrollment->status_kelas == 'pending_payment')
+                                        <form
+                                            action="{{ route('dashboard.pendaftar.acc-pembayaran', ['enrollment_id' => $enrollment->id]) }}"
+                                            method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                class="inline-flex items-center rounded p-2 hover:bg-blue-700"
+                                                style="background-color: #00B300">
+                                                <i class="bx bx-check text-white"></i>
+                                            </button>
+                                            <span class="italic">ACC Pembayaran</span>
+                                        </form>
+                                    @else
+                                        <span class="italic">-</span>
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="mb-4 flex flex-col">
+                                <h2 class="mb-2 text-lg font-semibold text-gray-500">Paket Layanan</h2>
+                                <p class="text-lg font-semibold">
+                                    {{ $enrollment->service_package }}
+                                    @php
+                                        $price = $enrollment->price_package;
+                                        // Ambil angka pertama jika ada range, dan pastikan hanya angka
+                                        if (is_string($price)) {
+                                            // Ambil angka pertama dari string (misal: 'Rp44.000 - Rp140.000')
+                                            if (preg_match('/(\d+[.,]?\d*)/', $price, $matches)) {
+                                                $price = str_replace(['.', ','], '', $matches[1]);
+                                            } else {
+                                                $price = null;
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($price)
+                                        Rp {{ number_format((int) $price, 0, ',', '.') }}
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="mb-4 flex flex-col">
+                                <h2 class="mb-2 text-lg font-semibold text-gray-500">Darimana SobatBinar mengetahui layanan
+                                    produk BERBINAR+</h2>
+                                <p class="text-lg font-semibold">{{ $user->referral_source }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

@@ -37,4 +37,9 @@ class Berbinarp_User extends Model
     {
         return $this->hasMany(EnrollmentUser::class, 'user_id');
     }
+
+    public function classes()
+    {
+        return $this->belongsToMany(Berbinarp_Class::class, 'enrollments_users', 'user_id', 'course_id');
+    }
 }

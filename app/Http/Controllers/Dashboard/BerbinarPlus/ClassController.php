@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berbinarp_Class;
+use App\Models\Test;
 
 class ClassController extends Controller
 {
@@ -13,7 +14,10 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $classes = Berbinarp_Class::withCount('enrollments')->get();
+        $classes = Berbinarp_Class::with(['tests' => function ($q) {
+            $q->whereIn('type', ['pretest', 'posttest']);
+        }])->withCount('enrollments')->get();
+        
         return view('dashboard.berbinar-plus.class.index', compact('classes'));
     }
 

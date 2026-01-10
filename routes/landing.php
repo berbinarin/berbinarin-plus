@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\Landing\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Landing\TestingController;
 
 
 Route::get('/', [TestingController::class, 'landing'])->name('home.index');
 
-Route::get('/home', [TestingController::class, 'homepage'])->name('homepage.index');
+Route::get('/home', [HomeController::class, 'homepage'])->name('homepage.index');
 
 Route::get('/others', [TestingController::class, 'others'])->name('others.index');
 

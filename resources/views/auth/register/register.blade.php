@@ -16,11 +16,12 @@
             background-color: gray !important;
         }
 
-        #agreeCheckbox:disabled + label {
+        #agreeCheckbox:disabled+label {
             cursor: not-allowed !important;
         }
 
-        .swiper-button-next, .swiper-button-prev {
+        .swiper-button-next,
+        .swiper-button-prev {
             color: #3986A3 !important;
         }
     </style>
@@ -31,7 +32,8 @@
         <div class="flex flex-no-wrap pt-8">
             <div class="w-full mt-14 md:mt-28 justify-center items-center">
                 <h1 class="text-4xl xl:text-5xl font-bold text-center mb-12 mt-1">Gabung
-                    <span class="bg-gradient-to-r from-[#3986A3] to-[#15323D] bg-clip-text text-transparent">Berbinar+</span></h1>
+                    <span class="bg-gradient-to-r from-[#3986A3] to-[#15323D] bg-clip-text text-transparent">Berbinar+</span>
+                </h1>
                 <div class="bg-white rounded-3xl p-5 md:px-12 xl:px-16 justify-self-center md:w-[90%] w-full md:shadow-lg">
 
                     <!-- Tombol Kembali -->
@@ -47,7 +49,9 @@
                         enctype="multipart/form-data">
                         <div id="registrationForm1" class="registration-form">
                             @csrf
-                            <h1 class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">Biodata Diri</h1>
+                            <h1
+                                class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">
+                                Biodata Diri</h1>
 
                             {{-- NAMA LENGKAP --}}
                             <div class="flex flex-wrap -mx-2 mb-4">
@@ -79,17 +83,18 @@
                                     id="genderDropdown">
                                     <div class="p-2">
                                         <label class="flex items-center mb-2">
-                                            <input class="form-check-input mr-2" type="radio" name="gender"
-                                                value="Laki-laki" required>
+                                            <input class="form-check-input mr-2 gender-radio" type="radio"
+                                                name="gender-radio" value="Laki-laki">
                                             Laki-laki
                                         </label>
                                         <label class="flex items-center">
-                                            <input class="form-check-input mr-2" type="radio" name="gender"
-                                                value="Perempuan" required>
+                                            <input class="form-check-input mr-2 gender-radio" type="radio"
+                                                name="gender-radio" value="Perempuan">
                                             Perempuan
                                         </label>
                                     </div>
                                 </div>
+                                <input type="hidden" name="gender" id="genderInput" required>
                             </div>
 
                             {{-- USIA --}}
@@ -131,47 +136,48 @@
                                     <div class="p-2 grid grid-cols-3 gap-4" style="background-color: white;">
                                         <div>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="SD" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="SD">
                                                 SD
                                             </label>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="SMP" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="SMP">
                                                 SMP
                                             </label>
                                         </div>
                                         <div>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="SMA" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="SMA">
                                                 SMA
                                             </label>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Ahli Madya" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="Ahli Madya">
                                                 Ahli Madya
                                             </label>
                                         </div>
                                         <div>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Sarjana" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="Sarjana">
                                                 Sarjana
                                             </label>
                                             <label class="flex items-center mb-2">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Other" id="otherRadio" required>
+                                                <input class="form-check-input mr-2 education-radio" type="radio"
+                                                    name="education-radio" value="Other" id="otherRadio">
                                                 Lainnya
                                             </label>
                                             <!-- Hidden input untuk "Other" education -->
                                             <input type="text"
                                                 class="form-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1 lg:p-2 hidden"
                                                 id="otherInput" name="other_education"
-                                                placeholder="Isi pendidikan lain..." disabled>
+                                                placeholder="Isi pendidikan lain...">
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="last_education" id="educationInput" required>
                             </div>
 
                             {{-- BOOKLET --}}
@@ -230,7 +236,9 @@
                                                 <input type="checkbox"
                                                     class="h-10 w-4/5 lg:w-2/5 appearance-none form-checkbox rounded-md bg-gradient-to-r from-[#3986A3] to-[#225062] checked:bg-gradient-to-r checked:from-[#3986A3] checked:to-[#225062] px-16 py-1 lg:px-20 lg:py-1.5 font-medium text-white max-sm:text-[15px] cursor-pointer"
                                                     id="agreeCheckbox" onchange="agreeModal()">
-                                                <label id="agreeLabel" for="agreeCheckbox" class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya Setuju</label>
+                                                <label id="agreeLabel" for="agreeCheckbox"
+                                                    class="absolute -translate-x-1 ml-2 cursor-pointer text-start text-white">Saya
+                                                    Setuju</label>
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +256,9 @@
 
                         <!-- Form kedua dimulai di sini -->
                         <div id="registrationForm2" class="hidden">
-                            <h1 class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">Pilih Kelas</h1>
+                            <h1
+                                class="text-4xl font-bold text-center mb-8 mt-1 bg-gradient-to-r from-[#F7B23B] to-[#916823] bg-clip-text text-transparent">
+                                Pilih Kelas</h1>
 
                             {{-- <div class="mb-4">
                                 <label for="kelas">kelas BERBINAR+</label>
@@ -261,17 +271,19 @@
 
                             {{-- KELAS BERBINAR+ --}}
                             <div class="mb-4">
-                                <label for="kelas">kelas BERBINAR+</label>
-                                <select id="kelas" name="kelas" class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" required {{ count($kelas) == 0 ? 'disabled' : '' }}>
-                                    @if (count($kelas) == 0)
-                                        <option value="" selected class="text-gray-500">Belum ada kelas tersedia</option>
-                                    @else
-                                        <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
-                                        @foreach ($kelas as $k)
-                                            <option value="{{ $k->id }}">{{ $k->name ?? $k->title }}</option>
-                                        @endforeach
-                                    @endif
+                                <label for="course_id">Kelas BERBINAR+</label>
+                                <select id="course_id" name="course_id"
+                                    class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                                    required>
+                                    <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
+                                    @foreach ($ClassBerbinarPlus as $id => $name)
+                                        <option value="{{ $id }}"
+                                            {{ old('course_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                    @endforeach
                                 </select>
+                                @error('course_id')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             {{-- PAKET LAYANAN --}}
@@ -324,7 +336,7 @@
                                 <label for="sumber">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
                                 <select
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
-                                    id="sumber" name="referral_source" onchange="checkOption(this);" required>
+                                    id="sumber" name="referral_source" required>
                                     <option value="" disabled selected class="text-gray-500">Dari mana nihh</option>
                                     <option value="Instagram">Instagram</option>
                                     <option value="Telegram">Telegram</option>
@@ -335,34 +347,14 @@
                                 </select>
                                 <input type="text"
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm hidden"
-                                    id="otherReferralInput" placeholder="Please specify">
+                                    id="otherReferralInput" name="otherReasonText" placeholder="Please specify">
                             </div>
 
                             {{-- BACK AND SUBMIT BUTTONS --}}
                             <div class="flex justify-center items-center">
-                                <div id="openModalConfirm" class="flex justify-center w-full pt-6 mb-4">
-                                    <button id="openModalConfirm" type="button"
+                                <div class="flex justify-center w-full pt-6 mb-4">
+                                    <button type="submit"
                                         class="next-button w-full mt-4 md:w-auto bg-gradient-to-r from-[#3986A3] to-[#15323D] text-white py-2 px-20 xl:px-40 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">Daftar</button>
-                                </div>
-                            </div>
-
-                            <!-- Modal Confirm -->
-                            <div id="myModalConfirm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
-                                <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg" style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
-                                    <!-- Warning Icon -->
-                                    <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
-
-                                    <!-- Title -->
-                                    <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
-
-                                    <!-- Message -->
-                                    <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.</p>
-
-                                    <!-- Actions -->
-                                    <div class="mt-3 lg:mt-6 flex justify-center gap-3">
-                                        <button type="button" id="closeModalConfirm" class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
-                                        <button type="button" id="okButton" class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">Ok</button>
-                                    </div>
                                 </div>
                             </div>
 
@@ -379,6 +371,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <script>
+        // Format Rupiah
         function formatRupiah(angka) {
             if (!angka) return '';
             if (angka.includes('-')) {
@@ -389,51 +382,83 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Dropdown Jenis Kelamin
+            // --- Paket Layanan dan Harga otomatis ---
+            const paketSelect = document.getElementById('paket-layanan');
+            const hargaInput = document.getElementById('harga_paket');
+            if (paketSelect && hargaInput) {
+                paketSelect.addEventListener('change', function() {
+                    const selected = this.options[this.selectedIndex];
+                    let harga = selected.getAttribute('data-harga') || '';
+                    if (harga) {
+                        if (harga.includes('-')) {
+                            // Range harga
+                            const [min, max] = harga.split('-');
+                            harga = 'Rp ' + Number(min).toLocaleString('id-ID') + ' - Rp ' + Number(max)
+                                .toLocaleString('id-ID');
+                        } else {
+                            harga = 'Rp ' + Number(harga).toLocaleString('id-ID');
+                        }
+                    }
+                    hargaInput.value = harga;
+                });
+            }
+            // --- Dropdown Jenis Kelamin ---
             const genderToggle = document.getElementById('genderToggle');
             const genderDropdown = document.getElementById('genderDropdown');
             const genderIcon = document.getElementById('genderIcon');
-            const genderRadios = document.querySelectorAll('input[name="gender"]');
             const genderSelected = document.getElementById('genderSelected');
-
-            genderToggle.addEventListener('click', function() {
+            const genderInput = document.getElementById('genderInput');
+            genderToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
                 genderDropdown.classList.toggle('hidden');
                 genderIcon.classList.toggle('rotate-180');
             });
-            genderRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
+            genderDropdown.querySelectorAll('.gender-radio').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     genderSelected.textContent = this.value;
                     genderSelected.classList.remove('text-gray-500');
                     genderSelected.classList.add('text-black');
+                    genderInput.value = this.value;
                     genderDropdown.classList.add('hidden');
                     genderIcon.classList.remove('rotate-180');
                 });
             });
+            document.addEventListener('click', function(e) {
+                if (!genderDropdown.classList.contains('hidden')) {
+                    if (!genderDropdown.contains(e.target) && e.target !== genderToggle) {
+                        genderDropdown.classList.add('hidden');
+                        genderIcon.classList.remove('rotate-180');
+                    }
+                }
+            });
 
-            // Dropdown Pendidikan Terakhir
+            // --- Dropdown Pendidikan Terakhir ---
             const educationToggle = document.getElementById('educationToggle');
             const educationDropdown = document.getElementById('educationDropdown');
             const educationIcon = document.getElementById('educationIcon');
-            const educationRadios = document.querySelectorAll('input[name="last_education"]');
             const educationSelected = document.getElementById('educationSelected');
             const otherRadio = document.getElementById('otherRadio');
             const otherInput = document.getElementById('otherInput');
-
-            educationToggle.addEventListener('click', function() {
+            const educationInput = document.getElementById('educationInput');
+            educationToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
                 educationDropdown.classList.toggle('hidden');
                 educationIcon.classList.toggle('rotate-180');
             });
-            educationRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
+            educationDropdown.querySelectorAll('.education-radio').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     educationSelected.textContent = this.value === 'Other' ? 'Lainnya' : this.value;
                     educationSelected.classList.remove('text-gray-500');
                     educationSelected.classList.add('text-black');
+                    educationInput.value = this.value;
                     educationDropdown.classList.add('hidden');
                     educationIcon.classList.remove('rotate-180');
                     if (this.value === 'Other') {
                         otherInput.disabled = false;
-                        otherInput.required = false; // tidak perlu verifikasi input
-                        otherInput.value = 'Other'; // set nilai default
+                        otherInput.required = false;
+                        otherInput.value = 'Other';
                     } else {
                         otherInput.disabled = true;
                         otherInput.required = false;
@@ -441,14 +466,22 @@
                     }
                 });
             });
+            document.addEventListener('click', function(e) {
+                if (!educationDropdown.classList.contains('hidden')) {
+                    if (!educationDropdown.contains(e.target) && e.target !== educationToggle) {
+                        educationDropdown.classList.add('hidden');
+                        educationIcon.classList.remove('rotate-180');
+                    }
+                }
+            });
 
-            // File upload display
+            // --- File upload display ---
             document.getElementById('bukti_transfer').addEventListener('change', function(e) {
                 const fileNameSpan = document.getElementById('fileName');
                 fileNameSpan.textContent = this.files && this.files.length > 0 ? this.files[0].name : '';
             });
 
-            // Sumber informasi "Other"
+            // --- Sumber informasi "Other" ---
             document.getElementById('sumber').addEventListener('change', function() {
                 const otherInput = document.getElementById('otherReferralInput');
                 if (this.value === 'Other') {
@@ -463,7 +496,7 @@
                 }
             });
 
-            // Modal Booklet
+            // --- Modal Booklet ---
             window.showModalBooklet = function() {
                 document.getElementById('bookletModal').classList.remove('hidden');
             };
@@ -488,21 +521,19 @@
             const mainBookletCheckbox = document.getElementById('bookletCheckbox');
             if (mainBookletCheckbox) {
                 mainBookletCheckbox.checked = false;
-                mainBookletCheckbox.addEventListener('click', function (e) {
-                    e.preventDefault(); // prevent toggle
+                mainBookletCheckbox.addEventListener('click', function(e) {
+                    e.preventDefault();
                     showModalBooklet();
                 });
             }
 
-            // Disable "Saya Setuju" inside modal until user reaches last slide
+            // --- Disable "Saya Setuju" until last slide ---
             const agreeCheckbox = document.getElementById('agreeCheckbox');
             const agreeLabel = document.getElementById('agreeLabel');
             if (agreeCheckbox) {
                 agreeCheckbox.checked = false;
                 agreeCheckbox.disabled = true;
             }
-
-            // Enable agreeCheckbox only when swiper reaches the last slide
             const enableAgreeIfLast = () => {
                 if (!agreeCheckbox || !bookletSwiper) return;
                 if (bookletSwiper.isEnd) {
@@ -520,15 +551,10 @@
                     agreeCheckbox.checked = false;
                 }
             };
-
-            // Run on init and on slide change
             bookletSwiper.on('init', enableAgreeIfLast);
             bookletSwiper.on('slideChange', enableAgreeIfLast);
-            // init manually (some Swiper versions require calling init)
             if (typeof bookletSwiper.init === 'function') bookletSwiper.init();
             enableAgreeIfLast();
-
-            // Handle click on disabled checkbox to show alert
             agreeCheckbox.addEventListener('click', function(e) {
                 if (this.disabled) {
                     e.preventDefault();
@@ -539,8 +565,6 @@
                     );
                 }
             });
-
-            // Override agreeModal to only set main checkbox if user actually checked agreeCheckbox
             window.agreeModal = function() {
                 const modal = document.getElementById('bookletModal');
                 const main = document.getElementById('bookletCheckbox');
@@ -548,102 +572,112 @@
                 if (agree && agree.checked) {
                     if (modal) modal.classList.add('hidden');
                     if (main) main.checked = true;
-                } else {
-                    // optional: show hint if user tries to close without checking
-                    // e.g. flash temporary message (kept minimal here)
                 }
             };
 
-            // Modal Confirm
-            document.getElementById('openModalConfirm').addEventListener('click', function(event) {
-                event.preventDefault();
-                let errorMessage = validateStep2();
-                if (errorMessage) {
-                    Swal.fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "error",
-                        title: errorMessage,
-                        showConfirmButton: false,
-                        showCloseButton: true,
-                        timer: 4000
-                    });
-                    return;
+        });
+
+        // --- Custom Alert Functions ---
+        function showCustomAlert(message, title = "Peringatan", icon =
+            "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
+            const alertHTML = `
+                <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                    <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                        style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                        <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                        <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                        <div class="mt-6 flex justify-center">
+                            <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', alertHTML);
+        }
+
+        function showCustomAlertError(message, title = "Error", icon =
+            "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+            const alertHTML = `
+                <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                    <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                        style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                        <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                        <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                        <div class="mt-6 flex justify-center">
+                            <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', alertHTML);
+        }
+
+        // --- Validasi Step 1 ---
+        function validateStep1() {
+            const requiredFields = [
+                'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email', 'last_education'
+            ];
+            if (!document.getElementById('bookletCheckbox').checked) {
+                showCustomAlert(
+                    'Anda harus menyetujui Booklet terlebih dahulu.',
+                    'Perhatian!',
+                    "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                );
+                return null;
+            }
+            for (let fieldName of requiredFields) {
+                let field;
+                if (fieldName === 'gender') {
+                    field = document.getElementById('genderInput');
+                } else if (fieldName === 'last_education') {
+                    field = document.getElementById('educationInput');
+                } else {
+                    field = document.querySelector(`[name="${fieldName}"]`);
                 }
-                document.getElementById('myModalConfirm').style.display = "flex";
-            });
-            document.getElementById('closeModalConfirm').addEventListener('click', function() {
-                document.getElementById('myModalConfirm').style.display = "none";
-            }
-
-            // Custom Alert Function
-            function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
-                // Create dynamic alert element
-                const alertHTML = `
-                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
-                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
-                            style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
-                            <img src="{{ asset('assets/images/landing/favicion/warning.webp') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
-                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
-                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
-                            <div class="mt-6 flex justify-center">
-                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                document.body.insertAdjacentHTML('beforeend', alertHTML);
-            }
-
-            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
-                // Create dynamic alert element
-                const alertHTML = `
-                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
-                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
-                            style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
-                            <img src="{{ asset('assets/images/landing/favicion/error.webp') }}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
-                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
-                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
-                            <div class="mt-6 flex justify-center">
-                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                document.body.insertAdjacentHTML('beforeend', alertHTML);
-            }
-
-            function validateStep1() {
-                const requiredFields = [
-                    'first_name', 'last_name', 'gender', 'age', 'wa_number', 'email', 'last_education'
-                ];
-
-                // const lastEducation = document.querySelector('input[name="last_education"]:checked');
-                // if (lastEducation && lastEducation.value === 'Other') {
-                //     requiredFields.push('other_education');
-                // }
-
-                // Booklet harus dicentang
-                if (!document.getElementById('bookletCheckbox').checked) {
+                if (!field || (field.value !== undefined && field.value.trim() === '')) {
                     showCustomAlert(
-                        'Anda harus menyetujui Booklet terlebih dahulu.',
-                        'Perhatian!',
+                        '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                        'Validasi Error',
                         "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
                     );
                     return null;
                 }
+                if (fieldName === 'email' && !isValidEmail(field.value)) {
+                    showCustomAlert(
+                        'Format Email tidak valid.',
+                        'Validasi Error',
+                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                    );
+                    return null;
+                }
+                if (fieldName === 'phone_number' && !isValidPhoneNumber(field.value)) {
+                    showCustomAlert(
+                        'Format Nomor Whatsapp tidak valid.',
+                        'Validasi Error',
+                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                    );
+                    return null;
+                }
+            }
+            return true;
+        }
 
-                for (let fieldName of requiredFields) {
-                    let field;
-                    if (fieldName === 'gender') {
-                        field = document.querySelector('input[name="gender"]:checked');
-                    } else if (fieldName === 'last_education') {
-                        field = document.querySelector('input[name="last_education"]:checked');
-                    } else {
-                        field = document.querySelector(`[name="${fieldName}"]`);
-                    }
-
-                    if (!field || (field.value !== undefined && field.value.trim() === '')) {
+        // --- Validasi Step 2 ---
+        function validateStep2() {
+            const requiredFields = [
+                'course_id', 'service_package', 'price_package', 'payment_proof_url', 'referral_source'
+            ];
+            const knowingSource = document.getElementById('sumber').value;
+            if (knowingSource === 'Other') {
+                requiredFields.push('otherReasonText');
+            }
+            for (let fieldName of requiredFields) {
+                let field;
+                if (fieldName === 'payment_proof_url') {
+                    field = document.getElementById('bukti_transfer');
+                    if (!field || !field.files || field.files.length === 0) {
                         showCustomAlert(
                             '"' + getFieldLabel(fieldName) + '" belum diisi.',
                             'Validasi Error',
@@ -651,87 +685,63 @@
                         );
                         return null;
                     }
-
-                    if (fieldName === 'email' && !isValidEmail(field.value)) {
-                        showCustomAlert(
-                            'Format Email tidak valid.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
-                        );
-                        return null;
-                    }
-
-                    if (fieldName === 'wa_number' && !isValidPhoneNumber(field.value)) {
-                        showCustomAlert(
-                            'Format Nomor Whatsapp tidak valid.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
-                        );
-                        return null;
-                    }
+                    continue;
                 }
-                return true;
-            }
-
-            function validateStep2() {
-                const requiredFields = [
-                    'kelas', 'paket-layanan', 'bukti_transfer', 'knowing_source'
-                ];
-
-                const knowingSource = document.getElementById('sumber').value;
-                if (knowingSource === 'Other') {
-                    requiredFields.push('otherReasonText');
+                field = document.querySelector(`[name="${fieldName}"]`);
+                if (!field || field.value.trim() === '' || field.value === null) {
+                    showCustomAlert(
+                        '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                        'Validasi Error',
+                        "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
+                    );
+                    return null;
                 }
+            }
+            return true;
+        }
 
-                for (let fieldName of requiredFields) {
-                    let field;
-                    if (fieldName === 'bukti_transfer') {
-                        field = document.getElementById('bukti_transfer');
-                        if (!field || !field.files || field.files.length === 0) {
-                            showCustomAlert(
-                                '"' + getFieldLabel(fieldName) + '" belum diisi.',
-                                'Validasi Error',
-                                "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
-                            );
-                            return null;
-                        }
-                        continue;
-                    }
-
-                    field = document.querySelector(`[name="${fieldName}"]`);
-                    if (!field || field.value.trim() === '' || field.value === null) {
-                        showCustomAlert(
-                            '"' + getFieldLabel(fieldName) + '" belum diisi.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/warning-icon.webp') }}"
-                        );
-                        return null;
-                    }
+        // --- Helper Functions ---
+        function getFieldLabel(fieldName) {
+            // Map field names to user-friendly labels
+            const labelMap = {
+                first_name: 'Nama Depan',
+                last_name: 'Nama Belakang',
+                gender: 'Jenis Kelamin',
+                age: 'Usia',
+                phone_number: 'Nomor Whatsapp Aktif',
+                email: 'Email',
+                last_education: 'Pendidikan Terakhir',
+                course_id: 'Kelas BERBINAR+',
+                service_package: 'Paket Layanan',
+                price_package: 'Harga',
+                payment_proof_url: 'Bukti Pembayaran',
+                referral_source: 'Sumber Informasi',
+                otherReasonText: 'Sumber Informasi Lainnya',
+            };
+            if (labelMap[fieldName]) {
+                return labelMap[fieldName];
+            }
+            const field = document.querySelector(`[name="${fieldName}"]`);
+            if (field) {
+                const container = field.closest('.mb-4, .flex.flex-wrap');
+                if (container) {
+                    const label = container.querySelector('label');
+                    if (label) return label.textContent.trim();
                 }
-                return true;
             }
+            return fieldName.replace(/_/g, ' ');
+        }
 
-            function getFieldLabel(fieldName) {
-                const field = document.querySelector(`[name="${fieldName}"]`);
-                if (field) {
-                    const container = field.closest('.mb-4, .flex.flex-wrap');
-                    if (container) {
-                        const label = container.querySelector('label');
-                        if (label) return label.textContent.trim();
-                    }
-                }
-                return fieldName.replace(/_/g, ' ');
-            }
+        function isValidEmail(email) {
+            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        }
 
-            function isValidEmail(email) {
-                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-            }
+        function isValidPhoneNumber(number) {
+            return /^(\+62|62|0)8[1-9][0-9]{6,11}$/.test(number);
+        }
 
-            function isValidPhoneNumber(number) {
-                return /^(\+62|62|0)8[1-9][0-9]{6,11}$/.test(number);
-            }
-
-            // Next Button
+        // --- Next Button ---
+        document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('nextButton').addEventListener('click', function(event) {
                 event.preventDefault();
                 if (validateStep1()) {
@@ -739,59 +749,7 @@
                     document.getElementById('registrationForm2').classList.remove('hidden');
                 }
             });
-
-            // Daftar Button
-            document.getElementById('openModalConfirm').addEventListener('click', function(event) {
-                event.preventDefault();
-                if (validateStep2()) {
-                    document.getElementById('myModalConfirm').style.display = "flex";
-                }
-            });
-
-            // Modal Confirm Buttons
-            document.getElementById('closeModalConfirm').addEventListener('click', function() {
-                document.getElementById('myModalConfirm').style.display = "none";
-            });
-            window.onclick = function(event) {
-                const modal = document.getElementById('myModalConfirm');
-                if (event.target == modal) modal.style.display = "none";
-            };
-
-            // Submit via AJAX
-            document.getElementById('okButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('myModalConfirm').style.display = "none";
-                const form = document.getElementById('internshipForm');
-                const formData = new FormData(form);
-                fetch(form.action, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
-                        },
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error('Gagal submit');
-                        return response.json();
-                    })
-                    .then(data => {
-                        window.location.href = "";
-                    })
-                    .catch(() => showCustomAlertError('Terjadi kesalahan koneksi atau validasi.', 'Error', "{{ asset('assets/images/landing/favicion/error.webp') }}"));
-
-            });
-
-            // Modal Booklet
-            window.showModalBooklet = function() {
-                document.getElementById('bookletModal').classList.remove('hidden');
-            };
-            window.closeModal = function() {
-                document.getElementById('bookletModal').classList.add('hidden');
-            };
-            window.agreeModal = function() {
-                document.getElementById('bookletModal').classList.add('hidden');
-                document.getElementById('bookletCheckbox').checked = true;
-            };
         });
+    </script>
     </script>
 @endpush

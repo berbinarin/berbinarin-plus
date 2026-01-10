@@ -18,9 +18,4 @@ class BerbinarpUserStatus extends Model
         return $this->hasMany(Berbinarp_User::class, 'user_status_id');
     }
 
-    // Relasi ke enrollments 
-    public function enrollments(): HasMany
-    {
-        return $this->hasMany(EnrollmentUser::class, 'enrollment_status_id');
-    }
 }

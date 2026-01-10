@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             // User Seeder
             AdminSeeder::class,
 
-            BerbinarpUserStatusSeeder::class,
+            BerbinarpStatus::class,
         ]);
     }
 }

@@ -55,11 +55,6 @@
                                 <span class="text-red-500">Ukuran gambar maksimal 1 MB, dimensi 300x300 px.</span>
                             </small>
                         </div>
-
-                        <div>
-                            <label class="text-lg">Deskripsi Kelas</label>
-                            <input type="text" name="class_descriptiption" placeholder="Berikan Deskripsi Mengenai Kelas Berbinar" class="peer w-full rounded-lg border-2 border-gray-300 px-4 py-2 shadow-sm mb-1" {{-- required --}} />
-                        </div>
                     </div>
 
                     <div class="mt-8 flex flex-row-reverse gap-4 border-t border-gray-600 pt-9">

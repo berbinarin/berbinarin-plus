@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('berbinarp_class')->onDelete('cascade');
             $table->string('service_package')->nullable();
             $table->string('payment_proof_url')->nullable();
-            $table->foreignId('enrollment_status_id')->constrained('berbinarp_users_status');
             $table->timestamp('verified_at')->nullable();
+            $table->enum('status_kelas', ['pending_payment', 'enrolled', 'completed', 'expired'])->default('pending_payment');
             $table->timestamps();
         });
     }

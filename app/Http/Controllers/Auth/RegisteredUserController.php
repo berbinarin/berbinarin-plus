@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Berbinarp_Class;
 use App\Models\Berbinarp_User;
 use App\Models\EnrollmentUser;
+use App\Models\BerbinarpUserStatus;
+use Illuminate\Support\Facades\Log;
 
 
 class RegisteredUserController
@@ -51,52 +53,85 @@ class RegisteredUserController
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        try {
+            $validated = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'gender' => 'required|string',
+                'age' => 'required|integer|min:1',
+                'phone_number' => 'required|string',
+                'email' => 'required|email|unique:berbinarp_users,email',
+                'last_education' => 'required|string',
+                'otherEducation' => 'nullable|string|max:255',
+                'referral_source' => 'required|string',
+                'otherReasonText' => 'nullable|string|max:255',
+                'course_id' => 'required|exists:berbinarp_class,id',
+                'service_package' => 'required|string',
+                'price_package' => 'required|string',
+                'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            ]);
 
-        $validated = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'age' => 'required|integer',
-            'phone_number' => 'required',
-            'email' => 'required|email|unique:berbinarp_users,email',
-            'last_education' => 'required',
-            'course_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required',
-            'price_package' => 'required',
-            'payment_proof_url' => 'required|image|max:2048',
-            'referral_source' => 'required',
-        ]);
+            // Handle "Other" option for last_education
+            $lastEducation = $request->last_education;
+            if ($lastEducation === 'Other' && $request->filled('otherEducation')) {
+                $lastEducation = $request->otherEducation;
+            }
 
-        // Simpan user
-        $user = Berbinarp_User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'age' => $request->age,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'last_education' => $request->last_education,
-            'referral_source' => $request->referral_source,
-            'user_status_id' => 1,
-        ]);
+            // Handle "Other" option for referral_source
+            $referralSource = $request->referral_source;
+            if ($referralSource === 'Other' && $request->filled('otherReasonText')) {
+                $referralSource = $request->otherReasonText;
+            }
 
-        $paymentProofPath = null;
-        if ($request->hasFile('payment_proof_url')) {
-            $file = $request->file('payment_proof_url');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $paymentProofPath = $file->storeAs('uploads/payment_proofs', $filename, 'public');
+            // Simpan bukti transfer
+            $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+
+            // Simpan user
+            $user = Berbinarp_User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'age' => $request->age,
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'last_education' => $lastEducation,
+                'referral_source' => $referralSource,
+                'user_status_id' => BerbinarpUserStatus::where('name', 'pending')->first()?->id ?? 1,
+            ]);
+
+            // Simpan enrollments_users
+            $enrollment = new EnrollmentUser();
+            $enrollment->user_id = $user->id;
+            $enrollment->course_id = $request->course_id;
+            $enrollment->service_package = $request->service_package;
+            $enrollment->price_package = $request->price_package;
+            $enrollment->payment_proof_url = $buktiTransferPath;
+            $enrollment->status_kelas = 'pending_payment';
+            $enrollment->save();
+
+            
+
+            return redirect()->route('home.index')->with('success', 'Pendaftaran berhasil!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validasi gagal. Silakan periksa kembali data Anda.',
+                    'errors' => $e->errors()
+                ], 422);
+            }
+            throw $e;
+        } catch (\Exception $e) {
+            Log::error('Registration error: ' . $e->getMessage());
+
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.'
+                ], 500);
+            }
+
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan data.');
         }
-
-        EnrollmentUser::create([
-            'user_id' => $user->id,
-            'course_id' => $request->course_id,
-            'service_package' => $request->service_package,
-            'price_package' => $request->price_package,
-            'payment_proof_url' => $paymentProofPath,
-            'enrollment_status_id' => 1,
-        ]);
-
-        return redirect()->route('home.index')->with('success', 'Pendaftaran berhasil!');
     }
 }

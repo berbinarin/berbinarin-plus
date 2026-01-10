@@ -33,9 +33,4 @@ class EnrollmentUser extends Model
         return $this->belongsTo(Berbinarp_Class::class, 'course_id');
     }
 
-    // Relasi ke status enrollment
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(BerbinarpUserStatus::class, 'enrollment_status_id');
-    }
 }

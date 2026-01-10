@@ -12,10 +12,10 @@ class TestingController
         return view('landing.index');
     }
 
-    public function homepage()
-    {
-        return view('landing.homepage.index');
-    }
+    // public function homepage()
+    // {
+    //     return view('landing.homepage.index');
+    // }
 
     public function profile()
     {

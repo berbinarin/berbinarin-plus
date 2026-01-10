@@ -10,12 +10,15 @@
                     <a href="{{ route('dashboard.pendaftar.index') }}">
                         <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
-                    <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Ubah Data Pendaftar</p>
+                    <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Ubah Data
+                        Pendaftar</p>
                 </div>
-                <p class="w-full text-disabled">Formulir untuk mengubah peserta program Berbinar+ secara manual, lengkap dengan informasi pribadi, pilihan kelas, dan paket layanan yang dipilih.</p>
+                <p class="w-full text-disabled">Formulir untuk mengubah peserta program Berbinar+ secara manual, lengkap
+                    dengan informasi pribadi, pilihan kelas, dan paket layanan yang dipilih.</p>
             </div>
             <div class="rounded-lg bg-white px-4 py-4 shadow-md md:px-8 md:py-7 xl:px-10 mb-7">
-                <form id="berbinarForm" action="{{ route('dashboard.pendaftar.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form id="berbinarForm" action="{{ url('dashboard/pendaftar/update/' . $user->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <input type="hidden" name="kategori" value="berbinar-for-u" />
@@ -25,15 +28,21 @@
                         <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">
                             <div>
                                 <label class="text-lg">Nama Depan</label>
-                                <input type="text" id="first_name" name="first_name" placeholder="Nama Depan" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('first_name', $user->first_name) }}" />
+                                <input type="text" id="first_name" name="first_name" placeholder="Nama Depan"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('first_name', $user->first_name) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Nama Belakang</label>
-                                <input type="text" id="last_name" name="last_name" placeholder="Nama Belakang" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('last_name', $user->last_name) }}" />
+                                <input type="text" id="last_name" name="last_name" placeholder="Nama Belakang"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('last_name', $user->last_name) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Jenis Kelamin</label>
-                                <select id="gender" name="gender" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="gender" name="gender"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled {{ !$user->gender ? 'selected' : '' }}>Pilih Jenis
                                         Kelamin</option>
                                     <option value="Laki-laki" {{ $user->gender == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
@@ -44,27 +53,38 @@
                             </div>
                             <div>
                                 <label class="text-lg">Usia</label>
-                                <input type="number" id="age" name="age" placeholder="Usia Kamu Sekarang" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('age', $user->age) }}" />
+                                <input type="number" id="age" name="age" placeholder="Usia Kamu Sekarang"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('age', $user->age) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Nomor WhatsApp</label>
-                                <input type="text" id="wa_number" name="phone_number" placeholder="08112345XXXX" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('phone_number', $user->phone_number) }}" />
+                                <input type="text" id="wa_number" name="phone_number" placeholder="08112345XXXX"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('phone_number', $user->phone_number) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Email</label>
-                                <input type="email" id="email" name="email" placeholder="sobatbinar@gmail.com" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('email', $user->email) }}" />
+                                <input type="email" id="email" name="email" placeholder="sobatbinar@gmail.com"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('email', $user->email) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Username</label>
-                                <input type="text" id="username" name="username" placeholder="Username" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required value="{{ old('username', $user->username) }}" />
+                                <input type="text" id="username" name="username" placeholder="Username"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" required
+                                    value="{{ old('username', $user->username) }}" />
                             </div>
                             <div class="relative" style="background-color: white">
                                 <label class="text-lg">Pendidikan Terakhir</label>
-                                <button type="button" id="educationToggle" class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
-                                    <span id="educationSelected" class="{{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? 'text-black' : 'text-gray-500' }}">
+                                <button type="button" id="educationToggle"
+                                    class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
+                                    <span id="educationSelected"
+                                        class="{{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? 'text-black' : 'text-gray-500' }}">
                                         {{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? $user->last_education : ($user->last_education ? 'Other' : 'Apa Pendidikan Terakhirmu?') }}
                                     </span>
-                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt="" class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
+                                    <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
+                                        class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
                                 </button>
                                 <div class="absolute z-10 mt-2 hidden w-full rounded-md border border-gray-300 bg-white"
                                     id="educationDropdown">
@@ -72,7 +92,8 @@
                                         <div>
                                             @foreach (['SD', 'SMP', 'SMA'] as $edu)
                                                 <label class="mb-2 flex cursor-pointer items-center">
-                                                    <input class="form-check-input mr-2" type="radio" name="last_education" value="{{ $edu }}" required
+                                                    <input class="form-check-input mr-2" type="radio"
+                                                        name="last_education" value="{{ $edu }}" required
                                                         {{ $user->last_education == $edu ? 'checked' : '' }} />
                                                     {{ $edu }}
                                                 </label>
@@ -81,17 +102,22 @@
                                         <div>
                                             @foreach (['Ahli Madya', 'Sarjana'] as $edu)
                                                 <label class="mb-2 flex cursor-pointer items-center">
-                                                    <input class="form-check-input mr-2" type="radio" name="last_education" value="{{ $edu }}" required
+                                                    <input class="form-check-input mr-2" type="radio"
+                                                        name="last_education" value="{{ $edu }}" required
                                                         {{ $user->last_education == $edu ? 'checked' : '' }} />
                                                     {{ $edu }}
                                                 </label>
                                             @endforeach
                                             <label class="mb-2 flex cursor-pointer items-center">
-                                                <input class="form-check-input mr-2" type="radio" name="last_education" value="Other" id="otherRadio" required
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Other" id="otherRadio" required
                                                     {{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) && $user->last_education ? 'checked' : '' }} />
                                                 Lainnya
                                             </label>
-                                            <input type="text" class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2" id="otherInput" name="other_education" placeholder="Isi pendidikan lain..."
+                                            <input type="text"
+                                                class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2"
+                                                id="otherInput" name="other_education"
+                                                placeholder="Isi pendidikan lain..."
                                                 {{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) && $user->last_education ? '' : 'disabled' }}
                                                 value="{{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? $user->last_education : '' }}" />
                                         </div>
@@ -104,7 +130,9 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                             <div>
                                 <label class="text-lg">Kelas Berbinar+</label>
-                                <select id="kelas" name="class_id" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="kelas" name="class_id"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled
                                         {{ !optional($user->enrollments->first())->course_id ? 'selected' : '' }}>Pilih
                                         Kelas Berbinar+</option>
@@ -118,7 +146,9 @@
                             </div>
                             <div>
                                 <label class="text-lg">Paket Layanan</label>
-                                <select id="paket" name="service_package" class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm" required>
+                                <select id="paket" name="service_package"
+                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                    required>
                                     <option value="" disabled>Pilih Paket Layanan</option>
                                     <option value="Insight" data-harga="15000"
                                         {{ optional($user->enrollments->first())->service_package == 'Insight' ? 'selected' : '' }}>
@@ -148,15 +178,23 @@
                             </div>
                             <div>
                                 <label class="text-lg">Harga Paket</label>
-                                <input type="text" id="harga_paket" name="price_package" class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm" placeholder="Harga Paket" readonly value="{{ old('price_package', optional($user->enrollments->first())->price_package) }}" />
+                                <input type="text" id="harga_paket" name="price_package"
+                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
+                                    placeholder="Harga Paket" readonly
+                                    value="{{ old('price_package', optional($user->enrollments->first())->price_package) }}" />
                             </div>
                             <div>
                                 <label class="text-lg">Bukti Pembayaran</label>
                                 <div class="relative flex w-full items-center overflow-x-auto">
-                                    <input type="file" id="bukti_transfer" name="payment_proof_url" class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2" accept="image/*" />
-                                    <div class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
-                                        <button type="button" class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}" alt="" class="h-4 w-4" />
+                                    <input type="file" id="bukti_transfer" name="payment_proof_url"
+                                        class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2"
+                                        accept="image/*" />
+                                    <div
+                                        class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
+                                        <button type="button"
+                                            class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
+                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
+                                                alt="" class="h-4 w-4" />
                                             Upload File
                                         </button>
                                         <span id="fileName" class="ml-3 truncate text-base text-gray-600 max-w-[250px]">
@@ -171,13 +209,16 @@
                                 </small>
                                 <div id="buktiPreview" class="mt-2">
                                     @if (optional($user->enrollments->first())->payment_proof_url)
-                                        <img src="{{ asset('storage/' . optional($user->enrollments->first())->payment_proof_url) }}" alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
+                                        <img src="{{ asset('storage/' . optional($user->enrollments->first())->payment_proof_url) }}"
+                                            alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
                                     @endif
                                 </div>
                             </div>
                             <div>
                                 <label class="text-lg">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
-                                <select class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2" id="sumber" name="referral_source" required>
+                                <select
+                                    class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                    id="sumber" name="referral_source" required>
                                     <option value="" disabled class="text-gray-500">Dari mana nihh</option>
                                     @php $knowing = $user->referral_source; @endphp
                                     <option value="Instagram" {{ $knowing == 'Instagram' ? 'selected' : '' }}>Instagram
@@ -193,20 +234,30 @@
                                         Other
                                     </option>
                                 </select>
-                                <input type="text" class="form-input mt-1 block {{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $knowing ? '' : 'hidden' }} h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2" id="otherReasonText" name="otherReasonText" placeholder="Please specify" value="{{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) ? $knowing : '' }}" />
+                                <input type="text"
+                                    class="form-input mt-1 block {{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $knowing ? '' : 'hidden' }} h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                    id="otherReasonText" name="otherReasonText" placeholder="Please specify"
+                                    value="{{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) ? $knowing : '' }}" />
                             </div>
                         </div>
 
                         <div class="mt-8 flex gap-4 pt-5">
-                            <a href="#" id="cancelButton" class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg" style="width: 50%; border: 2px solid #3986a3; color: #3986a3">Batal</a>
-                            <button type="button" id="submitButton" class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg" style="width: 50%; background: #3986a3; color: #fff">Simpan</button>
+                            <a href="#" id="cancelButton"
+                                class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg"
+                                style="width: 50%; border: 2px solid #3986a3; color: #3986a3">Batal</a>
+                            <button type="button" id="submitButton"
+                                class="flex h-12 flex-1 items-center justify-center rounded-xl text-lg"
+                                style="width: 50%; background: #3986a3; color: #fff">Simpan</button>
                         </div>
 
                         <!-- Modal Konfirmasi Batal -->
-                        <div id="confirmModal" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
-                            <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg" style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <div id="confirmModal"
+                            class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+                            <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg"
+                                style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
                                 <!-- Warning Icon -->
-                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon" class="mx-auto h-[83px] w-[83px]" />
+                                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
+                                    class="mx-auto h-[83px] w-[83px]" />
 
                                 <!-- Title -->
                                 <h2 class="mt-4 text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
@@ -217,8 +268,10 @@
 
                                 <!-- Actions -->
                                 <div class="mt-6 flex justify-center gap-3">
-                                    <button type="button" id="cancelSubmit" class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
-                                    <a href="{{ route('dashboard.pendaftar.index') }}" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
+                                    <button type="button" id="cancelSubmit"
+                                        class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
+                                    <a href="{{ route('dashboard.pendaftar.index') }}"
+                                        class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
                                 </div>
                             </div>
                         </div>
