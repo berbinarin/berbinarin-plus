@@ -111,7 +111,7 @@ class RegisteredUserController
 
 
 
-            return redirect()->route('homepage.index')->with([
+            return redirect()->route('home.index')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/success.webp'),
                 'title' => 'Pendaftaran Berhasil',
@@ -125,6 +125,10 @@ class RegisteredUserController
                     'message' => 'Validasi gagal. Silakan periksa kembali data Anda.',
                     'errors' => $e->errors()
                 ], 422);
+            }
+            // Jika error karena email sudah terdaftar, redirect dengan session untuk swall
+            if (isset($e->validator) && $e->validator->errors()->has('email')) {
+                return redirect()->back()->withInput()->with('email_exists', true);
             }
             throw $e;
         } catch (\Exception $e) {

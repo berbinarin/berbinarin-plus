@@ -181,7 +181,8 @@
                             </div>
 
                             {{-- BOOKLET --}}
-                            <p class="mb-1">Sudah Membaca Booklet dan Menyetujui segala ketentuan yang ada pada Booklet
+                            <p class="mb-1">Sudah Membaca Booklet dan Menyetujui segala ketentuan yang ada pada
+                                Booklet
                             </p>
                             <div class="mb-4 flex items-center">
                                 <input type="checkbox"
@@ -275,10 +276,12 @@
                                 <select id="course_id" name="course_id"
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                                     required>
-                                    <option value="" disabled selected class="text-gray-500">Pilih Kelas</option>
+                                    <option value="" disabled selected class="text-gray-500">Pilih Kelas
+                                    </option>
                                     @foreach ($ClassBerbinarPlus as $id => $name)
                                         <option value="{{ $id }}"
-                                            {{ old('course_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                            {{ old('course_id') == $id ? 'selected' : '' }}>{{ $name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('course_id')
@@ -337,7 +340,8 @@
                                 <select
                                     class="form-input mt-1 block w-full h-10 pl-2 bg-gray-100 border border-gray-100 rounded-md shadow-sm"
                                     id="sumber" name="referral_source" required>
-                                    <option value="" disabled selected class="text-gray-500">Dari mana nihh</option>
+                                    <option value="" disabled selected class="text-gray-500">Dari mana nihh
+                                    </option>
                                     <option value="Instagram">Instagram</option>
                                     <option value="Telegram">Telegram</option>
                                     <option value="TikTok">TikTok</option>
@@ -364,7 +368,8 @@
                                     style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
                                     <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
                                         class="mx-auto h-[83px] w-[83px]" />
-                                    <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
+                                    <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!
+                                    </h2>
                                     <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Tolong pastikan
                                         bahwa informasi yang Anda masukkan telah tepat.</p>
                                     <div class="mt-3 lg:mt-6 flex justify-center gap-3">
@@ -783,4 +788,12 @@
             if (event.target == modal) modal.style.display = "none";
         };
     </script>
+    @if (session('email_exists'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showCustomAlertError('Email sudah terdaftar, silakan gunakan email lain.', 'Email Sudah Terdaftar',
+                    "{{ asset('assets/images/landing/favicion/error.webp') }}");
+            });
+        </script>
+    @endif
 @endpush
