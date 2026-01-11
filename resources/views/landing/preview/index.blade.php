@@ -21,7 +21,7 @@
             <nav class="text-gray-500 max-sm:text-sm text-lg z-40" aria-label="Breadcrumb">
                 <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
                 <span>/</span>
-                <a href="" class="text-primary font-medium transition-colors">Graphic Design</a>
+                <span class="text-primary font-medium transition-colors">{{ $class->name ?? '-' }}</span>
             </nav>
         </div>
 
@@ -32,7 +32,8 @@
                 <div class="bg-[#106681] w-full rounded-xl lg:rounded-xl lg:px-4 lg:py-2 z-40">
                     <div class="flex flex-col justify-between z-40">
                         <div class="text-white p-5 flex flex-col gap-2 lg:gap-4 justify-center z-40">
-                            <h1 class="font-bold text-xl lg:text-3xl flex flex-col justify-center z-40">Graphic Designer
+                            <h1 class="font-bold text-xl lg:text-3xl flex flex-col justify-center z-40">
+                                {{ $class->name ?? '-' }}
                             </h1>
 
                             <p class="text-xs/4 lg:text-xl z-40">{{ $class->description ?? '-' }}</p>
@@ -66,7 +67,7 @@
                         <div>
                             <h1 class="text-gray-700 italic">Pre Test</h1>
                             <a href="{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}"
-                                class="text-lg text-primary font-medium italic">Pre Test - Graphic Design</a>
+                                class="text-lg text-primary font-medium italic">Pre Test - {{ $class->name ?? '-' }}</a>
                         </div>
                     </div>
                 </div>

@@ -152,15 +152,24 @@
                                                                 $plainPassword .
                                                                 '%0A';
                                                         }
-                                                        $waMsg .= 'Silakan login di https://berbinar.id/plus';
+                                                        $waMsg .= 'Silakan login di https://berbinarplus.berbinar.in/';
                                                     @endphp
-                                                    <a href="https://wa.me/{{ $waNumber }}?text={{ $waMsg }}"
-                                                        class="inline-flex items-center rounded p-2 hover:bg-blue-700"
-                                                        style="background-color: #00E45B" target="_blank"
-                                                        rel="noopener noreferrer">
-                                                        <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}"
-                                                            class="w-[16px] h-[16px]" alt="Whatsapp">
-                                                    </a>
+                                                    @if ($user->user_status_id == 2)
+                                                        <a href="https://wa.me/{{ $waNumber }}?text={{ $waMsg }}"
+                                                            class="inline-flex items-center rounded p-2 hover:bg-blue-700"
+                                                            style="background-color: #00E45B" target="_blank"
+                                                            rel="noopener noreferrer">
+                                                            <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}"
+                                                                class="w-[16px] h-[16px]" alt="Whatsapp">
+                                                        </a>
+                                                    @else
+                                                        <span
+                                                            class="inline-flex items-center rounded p-2 cursor-not-allowed opacity-60"
+                                                            style="background-color: #00E45B">
+                                                            <img src="{{ asset('assets/images/dashboard/svg-icon/whatsapp.webp') }}"
+                                                                class="w-[16px] h-[16px]" alt="Whatsapp">
+                                                        </span>
+                                                    @endif
                                                 @else
                                                     -
                                                 @endif

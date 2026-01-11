@@ -47,13 +47,35 @@
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Username</h2>
                         <div class="flex items-center gap-2">
-                            <p class="text-lg font-semibold" id="usernameText">{{ $user->username }}</p>
+                            <p class="text-lg font-semibold" id="usernameText">{{ $user->username ?? '-' }}</p>
+                            <button type="button" onclick="copyToClipboard('usernameText')"
+                                class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-200 rounded hover:bg-gray-300"
+                                title="Salin Username">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="mb-2 flex flex-col">
                         <h2 class="mb-2 text-lg font-semibold text-gray-500">Password</h2>
                         <div class="flex items-center gap-2">
                             <p class="text-lg font-semibold" id="passwordText">{{ $user->plain_password ?? '-' }}</p>
+                            <button type="button" onclick="copyToClipboard('passwordText')"
+                                class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-200 rounded hover:bg-gray-300"
+                                title="Salin Password">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>

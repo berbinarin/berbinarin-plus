@@ -10,14 +10,13 @@
             <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
                 <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
                 <span>/</span>
-                <a href="" class="hover:text-gray-900 transition-colors">Graphic Design</a>
+                <a href="{{ route('landing.home.preview', ['class_id' => $class->id ?? 1]) }}"
+                    class="hover:text-gray-900 transition-colors">{{ $class->name ?? '-' }}</a>
                 <span>/</span>
-                <a href="" class="hover:text-gray-900 transition-colors">Sertifikat</a>
-                <span>/</span>
-                <a href=""><span class="text-black">Pre Test - Graphic Design</span></a>
+                <span class="text-black">Pre Test - {{ $class->name ?? '-' }}</span>
             </nav>
 
-            <h1 class="mt-4 lg:mt-6 text-xl lg:text-3xl font-semibold">Pre Test - Graphic Design</h1>
+            <h1 class="mt-4 lg:mt-6 text-xl lg:text-3xl font-semibold">Pre Test - {{ $class->name ?? '-' }}</h1>
 
             <div class="bg-white w-full mt-5 lg:mt-10 rounded-2xl p-5 lg:p-8">
                 <h2 class="mb-6 font-medium text-lg lg:text-xl">
