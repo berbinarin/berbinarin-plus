@@ -10,7 +10,7 @@
         <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
             <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
             <span>/</span>
-            <a href="{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}"
+            <a href="{{ route('landing.home.preview', ['class_id' => $class->id ?? 1]) }}"
                 class="hover:text-gray-900 transition-colors">{{ $class->name ?? 'Kelas' }}</a>
             <span>/</span>
             <a href="{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}"
@@ -37,12 +37,12 @@
                     <p class="text-base lg:text-xl font-medium mb-7">
                         {{ $question->question_text ?? 'Tidak ada pertanyaan.' }}</p>
                     @if ($question)
-                        <form class="flex flex-col gap-3" method="POST" action="#">
+                        <form id="pretestForm" class="flex flex-col gap-3">
                             @csrf
                             @if ($question->type === 'short_answer')
                                 <input type="text" name="answer"
                                     class="min-w-5 h-10 text-[#2986A3] focus:ring-[#2986A3] border rounded-lg px-3"
-                                    placeholder="Jawaban singkat...">
+                                    placeholder="Jawaban singkat..." value="" autocomplete="off">
                             @elseif($question->type === 'multiple_choice' && is_array($question->options))
                                 @foreach ($question->options as $key => $option)
                                     <label class="flex items-start gap-3 lg:gap-5 text-base lg:text-xl">
@@ -67,15 +67,99 @@
                     <span></span>
                 @endif
                 @if (($number ?? 1) < ($total ?? 1))
-                    <a href="{{ route('landing.pretest.question', ['class_id' => $class->id ?? 1, 'number' => ($number ?? 1) + 1]) }}"
-                        class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</a>
+                    <button id="nextBtn"
+                        class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Berikutnya</button>
                 @else
-                    <a href="{{ route('landing.pretest.index-finished', ['class_id' => $class->id ?? 1]) }}"
-                        class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Selesai</a>
+                    <button id="finishBtn"
+                        class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Selesai</button>
                 @endif
-            </div>
+            @section('script')
+                <script>
+                    const classId = {{ $class->id ?? 1 }};
+                    const number = {{ $number ?? 1 }};
+                    const total = {{ $total ?? 1 }};
+                    const questionId = {{ $question->id ?? 'null' }};
+
+                    function saveAnswer() {
+                        const form = document.getElementById('pretestForm');
+                        let answer = '';
+                        if (!form) return;
+                        if (form.answer) {
+                            if (form.answer.type === 'radio') {
+                                answer = form.answer.checked ? form.answer.value : '';
+                            } else {
+                                answer = form.answer.value;
+                            }
+                        } else {
+                            // radio group
+                            const checked = form.querySelector('input[name="answer"]:checked');
+                            if (checked) answer = checked.value;
+                        }
+                        let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
+                        answers[questionId] = answer;
+                        localStorage.setItem('pretest_answers_' + classId, JSON.stringify(answers));
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const nextBtn = document.getElementById('nextBtn');
+                        const finishBtn = document.getElementById('finishBtn');
+                        const form = document.getElementById('pretestForm');
+                        if (nextBtn) {
+                            nextBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                saveAnswer();
+                                window.location.href =
+                                    "{{ route('landing.pretest.question', ['class_id' => $class->id ?? 1, 'number' => ($number ?? 1) + 1]) }}";
+                            });
+                        }
+                        if (finishBtn) {
+                            finishBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                saveAnswer();
+                                // submit all answers
+                                const answers = localStorage.getItem('pretest_answers_' + classId);
+                                const formData = new FormData();
+                                formData.append('_token', '{{ csrf_token() }}');
+                                formData.append('answers', answers);
+                                fetch("{{ route('landing.pretest.submit', ['class_id' => $class->id ?? 1]) }}", {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: formData
+                                }).then(res => {
+                                    if (res.redirected) {
+                                        localStorage.removeItem('pretest_answers_' + classId);
+                                        window.location.href = res.url;
+                                    } else {
+                                        alert('Gagal submit jawaban');
+                                    }
+                                });
+                            });
+                        }
+                        // Prefill jika sudah ada
+                        let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
+                        if (answers[questionId] !== undefined) {
+                            if (form.answer) {
+                                if (form.answer.type === 'radio') {
+                                    if (form.answer.value == answers[questionId]) form.answer.checked = true;
+                                } else {
+                                    form.answer.value = answers[questionId];
+                                }
+                            } else {
+                                // radio group
+                                const radios = form.querySelectorAll('input[name="answer"]');
+                                radios.forEach(r => {
+                                    if (r.value == answers[questionId]) r.checked = true;
+                                });
+                            }
+                        }
+                    });
+                </script>
+            @endsection
         </div>
-
-
     </div>
+
+
+</div>
 @endsection

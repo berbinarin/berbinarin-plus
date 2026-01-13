@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BerbinarPlus\MateriController;
 use App\Http\Controllers\Landing\HomeController;
 use App\Http\Controllers\Landing\LandingController;
+use App\Http\Controllers\Landing\MaterialsController;
 use App\Http\Controllers\Landing\PretestController;
 use App\Http\Controllers\Landing\PreviewController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,7 @@ Route::name('landing.')->group(function () {
             Route::get('/', [HomeController::class, 'homepage'])->name('index');
             Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
             Route::get('/preview/{class_id}', [PreviewController::class, 'preview'])->name('preview');
-            Route::get('/materials', [TestingController::class, 'materials'])->name('materials');
+            Route::get('/materials', [MaterialsController::class, 'materials'])->name('materials'); // expects class_id & section_id as query params
             Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates');
         });
     });
@@ -31,6 +33,7 @@ Route::name('landing.')->group(function () {
     Route::prefix('pretest')->name('pretest.')->group(function () {
         Route::get('/{class_id}', [PretestController::class, 'pretest'])->name('index');
         Route::get('/{class_id}/question/{number}', [PretestController::class, 'pretestQuestion'])->name('question');
+        Route::post('/{class_id}/submit', [PretestController::class, 'submitPretest'])->name('submit');
         Route::get('/{class_id}-finished', [PretestController::class, 'pretestFinished'])->name('index-finished');
     });
 

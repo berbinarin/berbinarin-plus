@@ -43,10 +43,7 @@ class TestingController
 
 
     // Materials and Certificates
-    public function materials()
-    {
-        return view('landing.materials.index');
-    }
+    
 
     public function certificates()
     {

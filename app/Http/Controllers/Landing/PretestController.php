@@ -31,4 +31,53 @@ class PretestController extends Controller
         $pretest = $class->pretest;
         return view('landing.pretest.index-finished', compact('class', 'pretest'));
     }
+
+    public function submitPretest(Request $request, $class_id)
+    {
+        $user = auth('berbinar')->user();
+        $class = \App\Models\Berbinarp_Class::findOrFail($class_id);
+        $pretest = $class->pretest;
+        if (!$pretest) {
+            return redirect()->back()->with('error', 'Pretest tidak ditemukan');
+        }
+        $answers = $request->input('answers', []);
+        // Debug: return user dan answers
+        if ($request->has('debug')) {
+            return response()->json([
+                'user' => $user,
+                'answers_raw' => $answers,
+                'answers_decoded' => is_string($answers) ? json_decode($answers, true) : $answers,
+            ]);
+        }
+        // Pastikan $answers adalah array, decode jika string JSON
+        if (is_string($answers)) {
+            $decoded = json_decode($answers, true);
+            if (is_array($decoded)) {
+                $answers = $decoded;
+            }
+        }
+        // Simpan ke user_test_results
+        $result = \App\Models\Test_Result::updateOrCreate([
+            'user_id' => $user->id,
+            'test_id' => $pretest->id,
+        ], [
+            'course_section_id' => null,
+            'score' => null,
+            'answers' => json_encode($answers),
+            'completed_at' => now(),
+        ]);
+
+        // Update progres user (user_progress)
+        $progress = \App\Models\User_Progres::updateOrCreate([
+            'user_id' => $user->id,
+            'test_id' => $pretest->id,
+        ], [
+            'course_section_id' => null,
+            'status_materi' => 'done',
+            'completed_at' => now(),
+            'last_accessed' => now(),
+        ]);
+
+        return redirect()->route('landing.pretest.index-finished', ['class_id' => $class_id]);
+    }
 }

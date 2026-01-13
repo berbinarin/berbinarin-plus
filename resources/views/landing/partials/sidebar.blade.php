@@ -60,7 +60,7 @@
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Pre Test</h1>
             <a href="{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}"
                 class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                <span class="text-lg lg:text-lg leading-5">Pre Test - Graphic Design</span>
+                <span class="text-lg lg:text-lg leading-5">Pre Test - {{ $class->name ?? '-' }}</span>
             </a>
         </div>
 
@@ -68,55 +68,17 @@
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Course Menu</h1>
             <div class="flex flex-col">
-                <a href="{{ route('landing.home.materials') }}"
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('materials.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                    <span class="text-lg lg:text-lg leading-5">1. Perkenalan Dasar</span>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
-                    <span class="text-lg lg:text-lg leading-5">2. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
-                    <span class="text-lg lg:text-lg leading-5">3. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
-                    <span class="text-lg lg:text-lg leading-5">4. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
-                    <span class="text-lg lg:text-lg leading-5">5. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
-                    <span class="text-lg lg:text-lg leading-5">6. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
-                    <span class="text-lg lg:text-lg leading-5">7. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
-                    <span class="text-lg lg:text-lg leading-5">8. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt bg-gray-50">
-                    <span class="text-lg lg:text-lg leading-5">9. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
-                <a id="showModalMaterials" href=""
-                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt">
-                    <span class="text-lg lg:text-lg leading-5">10. Perkenalan Dasar</span>
-                    <i class="bx bxs-lock text-2xl text-primary"></i>
-                </a>
+                @if (isset($class) && $class->sections && $class->sections->count())
+                    @foreach ($class->sections as $i => $section)
+                        <a href="{{ route('landing.home.materials', ['class_id' => $class->id, 'section_id' => $section->id]) }}"
+                            class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ isset($sectionActive) && $sectionActive == $section->id ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                            <span class="text-lg lg:text-lg leading-5">{{ $i + 1 }}.
+                                {{ $section->title ?? '-' }}</span>
+                        </a>
+                    @endforeach
+                @else
+                    <span class="text-gray-500 italic pl-8">Belum ada materi.</span>
+                @endif
             </div>
         </div>
 
