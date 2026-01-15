@@ -60,7 +60,13 @@ class PosttestQuestionController extends Controller
         }
         $question->save();
 
-        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with('success', 'Soal post-test berhasil ditambahkan.');
+        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Post-Test Berhasil Ditambahkan',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -118,7 +124,13 @@ class PosttestQuestionController extends Controller
 
         $question->save();
 
-        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with('success', 'Soal post-test berhasil diperbarui.');
+        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Post-Test Berhasil Diubah',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -128,6 +140,12 @@ class PosttestQuestionController extends Controller
     {
         $question->delete();
 
-        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with('success', 'Soal post-test berhasil dihapus.');
+        return redirect()->route('dashboard.kelas.post-test.index', ['class' => $class->id, 'posttest' => $posttest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Post-Test Berhasil Dihapus',
+            'type' => 'success',
+        ]);
     }
 }

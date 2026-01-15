@@ -16,7 +16,7 @@
             </button>
         </div>
         <a href="{{ route('landing.home.profile') }}" class="flex flex-row gap-3">
-            <img src="{{ asset("assets/images/landing/favicion/profile-placeholder.webp") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
+            <img src="{{ asset("assets/images/landing/favicion/profile-icon-2.webp") }}" alt="" class="h-10 rounded-full w-auto max-sm:h-8">
             <p class="items-center truncate font-medium hidden">John Doe</p>
         </a>
     </div>

@@ -7,7 +7,7 @@
         <div class="flex w-full flex-col">
             <div class="py-4 md:pb-7 md:pt-12">
                 <div class="mb-2 flex items-center gap-2">
-                    <a href="{{ route('dashboard.materi.index', ['class' => $classId]) }}">
+                    <a href="{{ route('dashboard.kelas.materi.index', ['class' => $classId]) }}">
                         <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
                     <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">

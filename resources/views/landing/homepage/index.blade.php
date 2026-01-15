@@ -57,7 +57,7 @@
                     <div class="text-white p-5 flex lg:flex-col justify-center z-40">
                         <h1 class="font-semibold text-lg lg:hidden flex flex-col justify-center z-40">Berbinar+</h1>
                         <h1 class="font-semibold text-start lg:text-3xl max-sm:hidden mb-4 z-40">Hai,
-                            {{ Auth::user()->name ?? 'Pengguna' }}</h1>
+                            {{ Auth::user()->first_name ?? 'Pengguna' }} {{ Auth::user()->last_name }}</h1>
 
                         <p class="text-xl max-sm:hidden z-40">Terus semangat 🚀✨, setiap langkah kecil mendekatkanmu ke
                             tujuan besar!</p>
@@ -241,6 +241,14 @@
                         slidesPerView: 2
                     },
                     1024: {
+                        slidesPerView: 2,
+                        spaceBetween: 16
+                    },
+                    1210: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 16
+                    },
+                    1440: {
                         slidesPerView: 3,
                         spaceBetween: 16
                     },

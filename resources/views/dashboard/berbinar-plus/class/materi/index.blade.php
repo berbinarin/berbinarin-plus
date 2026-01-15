@@ -22,7 +22,7 @@
                             Halaman untuk menambahkan atau mengubah materi kelas baru ke dalam program Berbinar+ secara
                             rinci, beserta detail judul, video, dan deskripsi.
                         </p>
-                        <a href="{{ route('dashboard.materi.create', ['class' => $classId]) }}"
+                        <a href="{{ route('dashboard.kelas.materi.create', ['class' => $classId]) }}"
                             class="mt-8 inline-flex items-start justify-start rounded-lg bg-primary px-6 py-3 text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-3">
                             <p class="text-dark font-medium leading-none">Tambah Data</p>
                         </a>
@@ -60,12 +60,12 @@
                                                 {{ $material->title }}
                                             </td>
                                             <td class="whitespace-no-wrap flex items-center justify-center gap-2 px-6 py-4">
-                                                <a href="{{ route('dashboard.materi.show', $material->id) }}"
+                                                <a href="{{ route('dashboard.kelas.materi.show', $material->id) }}"
                                                     class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                                                     style="background-color: #3b82f6">
                                                     <i class="bx bxs-show text-white"></i>
                                                 </a>
-                                                <a href="{{ route('dashboard.materi.edit', $material->id) }}"
+                                                <a href="{{ route('dashboard.kelas.materi.edit', $material->id) }}"
                                                     class="inline-flex items-start justify-start rounded p-2 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                                                     style="background-color: #e9b306">
                                                     <i class="bx bxs-edit-alt text-white"></i>

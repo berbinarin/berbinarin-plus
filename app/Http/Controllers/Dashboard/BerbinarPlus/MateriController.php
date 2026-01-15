@@ -54,7 +54,13 @@ class MateriController extends Controller
             'order_key' => $request->order_key,
         ]);
 
-        return redirect()->route('dashboard.materi.index', ['class' => $classId])->with('success', 'Materi berhasil ditambahkan!');
+        return redirect()->route('dashboard.kelas.materi.index', ['class' => $classId])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Materi Berhasil Ditambahkan',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -109,7 +115,13 @@ class MateriController extends Controller
             'description' => $request->description,
             'order_key' => $request->order_key,
         ]);
-        return redirect()->route('dashboard.materi.index', ['class' => $classId])->with('success', 'Materi berhasil diubah!');
+        return redirect()->route('dashboard.kelas.materi.index', ['class' => $classId])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Materi Berhasil Diubah',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -120,7 +132,13 @@ class MateriController extends Controller
         $material = Course_Section::findOrFail($id);
         $classId = $material->course_id;
         $material->delete();
-        return redirect()->route('dashboard.materi.index', ['class' => $classId])
-            ->with('success', 'Materi berhasil dihapus!');
+        return redirect()->route('dashboard.kelas.materi.index', ['class' => $classId])
+            ->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Materi Berhasil Dihapus',
+            'type' => 'success',
+        ]);
     }
 }

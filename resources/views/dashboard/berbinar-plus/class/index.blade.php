@@ -51,12 +51,10 @@
                                         <th
                                             class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
                                             Pre Test
-                                            <span class="italic">Pre Test</span>
                                         </th>
                                         <th
                                             class="bg-white px-6 py-3 text-center  text-base font-bold leading-4 tracking-wider text-black">
                                             Post Test
-                                            <span class="italic">Post Test</span>
                                         </th>
                                         <th
                                             class="bg-white px-6 right-0 py-3 text-center text-base font-bold leading-4 tracking-wider text-black">
@@ -78,7 +76,7 @@
                                                 {{ $class->enrollments_count ?? 0 }}
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('dashboard.materi.index', ['class' => $class->id]) }}"
+                                                <a href="{{ route('dashboard.kelas.materi.index', ['class' => $class->id]) }}"
                                                     class="inline-flex items-start justify-start rounded p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                                                     style="background-color: #005499">
                                                     <i class="bx bx-list-ul text-white"></i>

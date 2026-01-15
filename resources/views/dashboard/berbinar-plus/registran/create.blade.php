@@ -114,13 +114,9 @@
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Other" id="otherRadio" required />
+                                                    value="Other" required />
                                                 Lainnya
                                             </label>
-                                            <input type="text"
-                                                class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
-                                                id="otherInput" name="other_education"
-                                                placeholder="Isi pendidikan lain..." disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +246,6 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // === DROPDOWN EDUCATION ONLY ===
@@ -259,8 +254,6 @@
             const educationIcon = document.getElementById('educationIcon');
             const educationRadios = document.querySelectorAll('input[name="last_education"]');
             const educationSelected = document.getElementById('educationSelected');
-            const otherRadio = document.getElementById('otherRadio');
-            const otherInput = document.getElementById('otherInput');
 
             educationToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -270,32 +263,15 @@
 
             educationRadios.forEach((radio) => {
                 radio.addEventListener('change', function() {
-                    educationSelected.textContent = this.value === 'Other' ? 'Other' : this.value;
+                    educationSelected.textContent = this.value;
+
                     educationSelected.classList.remove('text-gray-500');
                     educationSelected.classList.add('text-black');
+
                     educationDropdown.classList.add('hidden');
                     educationIcon.classList.remove('rotate-180');
-                    if (this.value === 'Other') {
-                        otherInput.disabled = false;
-                        otherInput.required = true;
-                        otherInput.focus();
-                        // Set value radio ke isi input jika diubah
-                        otherInput.addEventListener('input', function() {
-                            radio.value = this.value;
-                        });
-                    } else {
-                        otherInput.disabled = true;
-                        otherInput.required = false;
-                        otherInput.value = '';
-                    }
                 });
             });
-
-            otherRadio.addEventListener('change', function() {
-                otherInput.disabled = !this.checked;
-            });
-
-            otherInput.disabled = true;
 
             // File upload display
             document.getElementById('bukti_transfer').addEventListener('change', function(e) {
@@ -330,7 +306,7 @@
                 confirmModal.classList.add('hidden');
             });
 
-            // SweetAlert untuk validasi
+            // Custom Alert untuk validasi
             const submitButton = document.getElementById('submitButton');
             const form = document.getElementById('berbinarForm');
 
@@ -338,15 +314,7 @@
                 e.preventDefault();
                 let errorMessage = validateForm();
                 if (errorMessage) {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: errorMessage,
-                        showConfirmButton: false,
-                        showCloseButton: true,
-                        timer: 4000,
-                    });
+                    showCustomAlertError(errorMessage, 'Validasi Error', "{{ asset('assets/images/landing/favicion/error.webp') }}");
                     return;
                 }
                 form.submit();
@@ -380,9 +348,7 @@
                 ];
                 // Jika pendidikan Other, wajib other_education
                 const lastEducation = document.querySelector('input[name="last_education"]:checked');
-                if (lastEducation && lastEducation.value === 'Other') {
-                    requiredFields.push('other_education');
-                }
+
                 // Sumber info Other
                 const knowingSource = document.getElementById('sumber').value;
                 if (knowingSource === 'Other') {
@@ -436,18 +402,29 @@
             });
         });
     </script>
-    @if ($errors->has('email'))
+    @if ($errors->any())
         <script>
+            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+                const alertHTML = `
+                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                            style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                            <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                            <div class="mt-6 flex justify-center">
+                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', alertHTML);
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: '{{ $errors->first('email') }}',
-                    showConfirmButton: false,
-                    timer: 4000,
-                    timerProgressBar: true
-                });
+                @foreach ($errors->all() as $error)
+                    showCustomAlertError('{{ $error }}', 'Error', "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                @endforeach
             });
         </script>
     @endif

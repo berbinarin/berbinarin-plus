@@ -27,13 +27,13 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::resource('kelas', ClassController::class);
 
         // List materi
-        Route::get('materi/kelas/{class}', [MateriController::class, 'index'])->name('materi.index');
-        Route::get('kelas/{class}/materi/create', [MateriController::class, 'create'])->name('materi.create');
-        Route::post('kelas/{class}/materi', [MateriController::class, 'store'])->name('materi.store');
-        Route::get('materi/{id}', [MateriController::class, 'show'])->name('materi.show');
-        Route::get('materi/{id}/edit', [MateriController::class, 'edit'])->name('materi.edit');
-        Route::put('materi/{id}', [MateriController::class, 'update'])->name('materi.update');
-        Route::delete('materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+        Route::get('materi/kelas/{class}', [MateriController::class, 'index'])->name('kelas.materi.index');
+        Route::get('kelas/{class}/materi/create', [MateriController::class, 'create'])->name('kelas.materi.create');
+        Route::post('kelas/{class}/materi', [MateriController::class, 'store'])->name('kelas.materi.store');
+        Route::get('materi/{id}', [MateriController::class, 'show'])->name('kelas.materi.show');
+        Route::get('materi/{id}/edit', [MateriController::class, 'edit'])->name('kelas.materi.edit');
+        Route::put('materi/{id}', [MateriController::class, 'update'])->name('kelas.materi.update');
+        Route::delete('materi/{id}', [MateriController::class, 'destroy'])->name('kelas.materi.destroy');
 
         // Soal Pretest & Posttest
         Route::get('kelas/{class}/soal-pre-test/{pretest}', [PretestQuestionController::class, 'index'])->name('kelas.pre-test.index');

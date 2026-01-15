@@ -81,7 +81,13 @@ class RegistranController extends Controller
         $enrollment->status_kelas = 'pending_payment';
         $enrollment->save();
 
-        return redirect()->route('dashboard.pendaftar.index')->with('success', 'Pendaftar berhasil ditambahkan!');
+        return redirect()->route('dashboard.pendaftar.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Pendaftar Berhasil Ditambahkan',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -155,7 +161,13 @@ class RegistranController extends Controller
             $enrollment->save();
         }
 
-        return redirect()->route('dashboard.pendaftar.index')->with('success', 'Data pendaftar berhasil diubah.');
+        return redirect()->route('dashboard.pendaftar.index')->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Pendaftar Berhasil Diubah',
+            'type' => 'success',
+        ]);
     }
     /**
      * Remove the specified resource from storage.
@@ -216,7 +228,13 @@ class RegistranController extends Controller
         }
         $user->save();
 
-        return back()->with('success', 'Status user berhasil diubah menjadi aktif.');
+        return back()->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Status User Berhasil Diubah Menjadi Aktif',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -241,6 +259,12 @@ class RegistranController extends Controller
         $enrollment->status_kelas = 'enrolled';
         $enrollment->verified_at = now();
         $enrollment->save();
-        return back()->with('success', 'Status kelas berhasil diubah menjadi Enrolled.');
+        return back()->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Status Kelas Berhasil Diubah Menjadi Enrolled',
+            'type' => 'success',
+        ]);
     }
 }

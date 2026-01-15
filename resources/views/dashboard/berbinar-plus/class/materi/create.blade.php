@@ -7,7 +7,7 @@
         <div class="flex w-full flex-col">
             <div class="py-4 md:pb-7 md:pt-12">
                 <div class="mb-2 flex items-center gap-2">
-                    <a href="{{ route('dashboard.materi.index', ['class' => $classId]) }}">
+                    <a href="{{ route('dashboard.kelas.materi.index', ['class' => $classId]) }}">
                         <img src="{{ asset('assets/images/dashboard/svg-icon/dashboard-back.webp') }}" alt="Back Btn" />
                     </a>
                     <p class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-2xl lg:text-4xl">Tambah
@@ -17,7 +17,7 @@
                     rinci, beserta detail nama kelas, jadwal pelaksanaan, fasilitator, dan kapasitas maksimal peserta.</p>
             </div>
             <div class="rounded-lg bg-white px-4 py-4 shadow-md md:px-8 md:py-7 xl:px-10 mb-7">
-                <form action="{{ route('dashboard.materi.store', ['class' => $classId]) }}" method="POST"
+                <form action="{{ route('dashboard.kelas.materi.store', ['class' => $classId]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -74,7 +74,7 @@
                             <div class="mt-6 flex justify-center gap-3">
                                 <button type="button" id="cancelSubmit"
                                     class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
-                                <a href="{{ route('dashboard.materi.index', ['class' => $classId]) }}"
+                                <a href="{{ route('dashboard.kelas.materi.index', ['class' => $classId]) }}"
                                     class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
                             </div>
                         </div>
@@ -116,17 +116,26 @@
     </script>
     @if ($errors->any())
         <script>
+            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+                const alertHTML = `
+                    <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
+                        <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
+                            style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                            <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                            <h2 class="mt-4 text-center font-plusJakartaSans text-2xl font-bold text-stone-900">${title}</h2>
+                            <p class="mt-2 text-center text-base font-medium text-black">${message}</p>
+                            <div class="mt-6 flex justify-center">
+                                <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-10 py-2 font-medium text-white">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', alertHTML);
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
                 @foreach ($errors->all() as $error)
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: '{{ $error }}',
-                        showConfirmButton: false,
-                        timer: 4000,
-                        timerProgressBar: true
-                    });
+                    showCustomAlertError('{{ $error }}', 'Error', "{{ asset('assets/images/landing/favicion/error.webp') }}");
                 @endforeach
             });
         </script>

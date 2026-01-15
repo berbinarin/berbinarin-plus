@@ -60,7 +60,13 @@ class PretestQuestionController extends Controller
         }
         $question->save();
 
-        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with('success', 'Soal pre-test berhasil ditambahkan.');
+        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Pre-Test Berhasil Ditambahkan',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -118,7 +124,13 @@ class PretestQuestionController extends Controller
 
         $question->save();
 
-        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with('success', 'Soal pre-test berhasil diperbarui.');
+        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Pre-Test Berhasil Diubah',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -128,6 +140,12 @@ class PretestQuestionController extends Controller
     {
         $question->delete();
 
-        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with('success', 'Soal pre-test berhasil dihapus.');
+        return redirect()->route('dashboard.kelas.pre-test.index', ['class' => $class->id, 'pretest' => $pretest->id])->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Soal Pre-Test Berhasil Dihapus',
+            'type' => 'success',
+        ]);
     }
 }
