@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('video_url')->nullable();
-            $table->integer('order_key')->default(1)->unique();
+            $table->integer('order_key')->default(1);
             $table->timestamps();
+            $table->unique(['course_id', 'order_key']); 
         });
     }
 

@@ -37,7 +37,7 @@
     }
 </style>
 
-<!-- Tombol buka sidebar (di luar sidebar, misal di layout utama) -->
+<!-- Tombol buka sidebar -->
 <button id="openSidebarBtn"
     class="top-6 left-6 lg:ml-5 z-40 bg-[#3986A3] text-white px-3 py-2 rounded-full shadow-lg fixed lg:sticky lg:hidden">
     <i class="bx bx-menu text-2xl"></i>
@@ -55,26 +55,48 @@
     </div>
     {{-- LIST MENU --}}
     <ul class="mt-10 overflow-y-auto custom-scrollbar overflow-x-hidden text-gray-700 dark:text-gray-400">
-        <!-- Links -->
+        <!-- Links Pretest -->
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Pre Test</h1>
             <a href="{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}"
-                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('landing.pretest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
                 <span class="text-lg lg:text-lg leading-5">Pre Test - {{ $class->name ?? '-' }}</span>
             </a>
         </div>
 
-        {{-- Untuk Course Menu dan menu lainnya --}}
+        {{-- Links Course --}}
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Course Menu</h1>
             <div class="flex flex-col">
                 @if (isset($class) && $class->sections && $class->sections->count())
                     @foreach ($class->sections as $i => $section)
-                        <a href="{{ route('landing.home.materials', ['class_id' => $class->id, 'section_id' => $section->id]) }}"
-                            class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ isset($sectionActive) && $sectionActive == $section->id ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                            <span class="text-lg lg:text-lg leading-5">{{ $i + 1 }}.
-                                {{ $section->title ?? '-' }}</span>
-                        </a>
+                        @php
+                            // Fallback logic: unlock section pertama jika pretestCompleted true
+                            $isUnlocked = false;
+                            if (isset($canAccess)) {
+                                $isUnlocked = $canAccess[$section->id] ?? false;
+                            } elseif (isset($pretestCompleted) && $pretestCompleted && $i === 0) {
+                                $isUnlocked = true;
+                            }
+                            $isCompleted = isset($sectionProgress) ? $sectionProgress[$section->id] ?? false : false;
+                            $isActive = isset($sectionActive) && $sectionActive == $section->id;
+                        @endphp
+                        @if ($isUnlocked)
+                            <a href="{{ route('landing.home.materials', ['class_id' => $class->id, 'section_id' => $section->id]) }}"
+                                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ $isActive ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                                <span class="text-lg lg:text-lg leading-5">{{ $i + 1 }}.
+                                    {{ $section->title ?? '-' }}</span>
+                                @if ($isCompleted)
+                                @endif
+                            </a>
+                        @else
+                            <a href="#" id="showModalMaterials"
+                                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 bg-gray-100 text-gray-400">
+                                <span class="text-lg lg:text-lg leading-5">{{ $i + 1 }}.
+                                    {{ $section->title ?? '-' }}</span>
+                                <i class="bx bxs-lock text-2xl text-primary"></i>
+                            </a>
+                        @endif
                     @endforeach
                 @else
                     <span class="text-gray-500 italic pl-8">Belum ada materi.</span>
@@ -82,16 +104,36 @@
             </div>
         </div>
 
+        {{-- Links Posttest --}}
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Post Test</h1>
-            <!-- <a href="{{ route('landing.posttest.index') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
-            <a id="showModalPostTest" href="#"
-                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                <span class="text-lg lg:text-lg leading-5">Post Test - Graphic Design</span>
-                <i class="bx bxs-lock text-2xl text-primary"></i>
-            </a>
+            @php
+                $canAccessPostTest = false;
+                if (isset($class) && isset($class->sections) && $class->sections->count()) {
+                    $canAccessPostTest = true;
+                    foreach ($class->sections as $sec) {
+                        if (empty($sectionProgress[$sec->id] ?? false)) {
+                            $canAccessPostTest = false;
+                            break;
+                        }
+                    }
+                }
+            @endphp
+            @if ($canAccessPostTest)
+                <a href="{{ route('landing.posttest.index', ['class_id' => $class->id ?? 1]) }}"
+                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('landing.posttest.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                    <span class="text-lg lg:text-lg leading-5">Post Test - {{ $class->name ?? '-' }}</span>
+                </a>
+            @else
+                <a href="#" id="showModalPostTest"
+                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 bg-gray-100 text-gray-400">
+                    <span class="text-lg lg:text-lg leading-5">Post Test - {{ $class->name ?? '-' }}</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+            @endif
         </div>
 
+        {{-- Links Sertifikat --}}
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
             <a href="{{ route('landing.home.certificates') }}"

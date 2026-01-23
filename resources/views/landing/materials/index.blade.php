@@ -9,8 +9,7 @@
     <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
     <style>
         :root {
-            --vjs-theme-primary: #22d3ee;
-            /* Warna Cyan Berbinar+ */
+            --vjs-theme-primary: #3986A3;
         }
 
         /* Container dengan overflow hidden untuk memotong elemen YouTube */
@@ -28,15 +27,12 @@
             aspect-ratio: 16 / 9;
         }
 
-        /* TEKNIK CLIPPING: Memperbesar video sedikit (115%)
-                           untuk menyembunyikan judul di atas dan logo di bawah */
         .video-js .vjs-tech {
             width: 100%;
             height: 100%;
         }
 
-        /* Sembunyikan overlay rekomendasi YouTube jika muncul */
-        /* Untuk YouTube embed, overlay rekomendasi biasanya berupa .ytp-ce-element, .ytp-ce-video, .ytp-ce-channel, dan .ytp-endscreen-content */
+        /* Overlay rekomendasi YouTube jika muncul */
         .video-container iframe[src*="youtube.com"] {
             pointer-events: none !important;
         }
@@ -53,7 +49,7 @@
 
         /* Mengembalikan posisi tombol play agar tetap di tengah setelah scaling */
         .vjs-big-play-button {
-            background-color: rgba(34, 211, 238, 0.9) !important;
+            background-color: rgba(57, 134, 163, 0.9) !important;
             border-radius: 50% !important;
             width: 2.5em !important;
             height: 2.5em !important;
@@ -64,7 +60,7 @@
             z-index: 10;
         }
 
-        /* Sembunyikan kontrol asli YouTube agar tidak bisa di-skip sembarangan */
+        /* Sembunyikan kontrol asli YouTube */
         .vjs-youtube .vjs-iframe-blocker {
             display: none;
         }
@@ -77,10 +73,10 @@
             {{-- Breadcrumb Profesional --}}
             <nav class="text-gray-500 max-sm:text-sm text-lg mb-4" aria-label="Breadcrumb">
                 <a href="{{ route('landing.home.index') }}"
-                    class="hover:text-cyan-500 transition-colors uppercase font-medium">BERBINAR+</a>
+                    class="hover:text-[#3986A3] transition-colors uppercase font-medium">BERBINAR+</a>
                 <span class="mx-2">/</span>
                 <a href="{{ route('landing.home.preview', ['class_id' => $class->id]) }}"
-                    class="hover:text-cyan-500 transition-colors">{{ $class->name ?? 'Course' }}</a>
+                    class="hover:text-[#3986A3] transition-colors">{{ $class->name ?? 'Course' }}</a>
                 <span class="mx-2">/</span>
                 <span class="text-black font-semibold">{{ $section->title ?? '-' }}</span>
             </nav>
@@ -125,31 +121,13 @@
                     <div id="overlay-end"
                         style="display:none; position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.95);z-index:99;align-items:center;justify-content:center;flex-direction:column;"
                         class="flex">
-                        <div class="text-2xl font-bold text-cyan-600 mb-4">Materi Selesai!</div>
+                        <div class="text-2xl font-bold mb-4" style="color:#3986A3;">Materi Selesai!</div>
                         <button id="btn-next-overlay"
-                            class="px-8 py-3 rounded-xl font-bold bg-cyan-500 text-white hover:scale-105 active:scale-95">Lanjut
-                            Materi</button>
+                            class="px-8 py-3 rounded-xl font-bold text-white hover:scale-105 active:scale-95"
+                            style="background-color:#3986A3;">Lanjut Materi</button>
                     </div>
                 </div>
 
-                {{-- Status Bar Interaktif --}}
-                {{-- <div
-                    class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 w-full lg:w-4/5 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <div id="status-bg"
-                            class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
-                            <i id="status-icon" class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <div>
-                            <p id="status-text" class="text-gray-600 font-medium">Video sedang diputar...</p>
-                            <p class="text-xs text-gray-400">Tonton hingga selesai untuk klaim sertifikat.</p>
-                        </div>
-                    </div>
-                    <button id="btn-next" disabled
-                        class="px-10 py-3 rounded-xl font-bold transition-all duration-500 bg-gray-200 text-gray-400 cursor-not-allowed shadow-inner">
-                        Lanjut Materi
-                    </button>
-                </div> --}}
             @endif
 
             {{-- Deskripsi Materi --}}
@@ -174,28 +152,44 @@
         window.addEventListener('load', function() {
             @if ($videoId)
                 const player = videojs('course-video');
+                let progressSent = false;
 
                 // Mencegah user melakukan klik kanan pada video
                 player.on('contextmenu', function(e) {
                     e.preventDefault();
                 });
 
-                // Deteksi Video Selesai
+                player.on('timeupdate', function() {
+                    let currentTime = player.currentTime();
+                    let duration = player.duration();
+                    // 10 Detik Sebelum Durasi Belakang
+                    if (duration > 0) {
+                        let threshold = duration - 10;
+                        // Jika video pendek (kurang dari 10 detik), setel threshold ke 90%
+                        if (duration < 15) threshold = duration * 0.9;
+                        if (currentTime >= threshold && !progressSent) {
+                            progressSent = true;
+                            updateDatabaseProgres();
+                        }
+                    }
+                });
+
+                // Tampilkan overlay custom saat video selesai
                 player.on('ended', function() {
-                    // Tampilkan overlay custom
                     document.getElementById('overlay-end').style.display = 'flex';
-                    // Optional: tetap update progress ke backend
-                    updateProgress();
                 });
 
                 // Tombol lanjut materi pada overlay
-                document.getElementById('btn-next-overlay').onclick = function() {
-                    // Aksi lanjut materi, misal redirect atau trigger progress
-                    // window.location.href = 'URL_LANJUT_MATERI';
-                };
+                const btnNextOverlay = document.getElementById('btn-next-overlay');
+                if (btnNextOverlay) {
+                    btnNextOverlay.onclick = function() {
+                        // window.location.href = 'URL_LANJUT_MATERI';
+                    };
+                }
 
-                function updateProgress() {
-                    fetch("", {
+                function updateDatabaseProgres() {
+                    console.log("Ambang batas (10 detik terakhir) tercapai. Sinkronisasi...");
+                    fetch("{{ route('landing.home.user.progress.update') }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -208,27 +202,19 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                // UI Feedback saat berhasil
-                                const btn = document.getElementById('btn-next');
-                                const text = document.getElementById('status-text');
-                                const icon = document.getElementById('status-icon');
-                                const bg = document.getElementById('status-bg');
-
-                                btn.disabled = false;
-                                btn.classList.replace('bg-gray-200', 'bg-cyan-500');
-                                btn.classList.replace('text-gray-400', 'text-white');
-                                btn.classList.remove('cursor-not-allowed');
-                                btn.classList.add('hover:scale-105', 'active:scale-95');
-
-                                bg.classList.replace('bg-gray-100', 'bg-green-100');
-                                icon.classList.replace('fa-lock', 'fa-check-circle');
-                                icon.classList.replace('text-gray-400', 'text-green-600');
-
-                                text.innerText = "Materi Selesai! Kamu hebat.";
-                                text.classList.replace('text-gray-600', 'text-green-600');
-                                text.classList.add('font-bold');
+                                showSuccessFeedback();
                             }
                         });
+                }
+
+                function showSuccessFeedback() {
+                    const btnNext = document.getElementById('btn-next');
+                    if (btnNext) {
+                        btnNext.disabled = false;
+                        btnNext.classList.replace('bg-gray-200', 'bg-cyan-500');
+                        btnNext.classList.replace('text-gray-400', 'text-white');
+                        btnNext.classList.remove('cursor-not-allowed');
+                    }
                 }
             @endif
         });

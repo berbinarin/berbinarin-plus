@@ -57,6 +57,11 @@
 
 @section('script')
     <script>
+        // Hapus jawaban pretest di localStorage
+        document.addEventListener("DOMContentLoaded", function() {
+            var classId = {{ $class->id ?? 1 }};
+            localStorage.removeItem('pretest_answers_' + classId);
+        });
         document.addEventListener("DOMContentLoaded", function() {
             const showModals = document.querySelectorAll('[id="showModal"]');
             const confirmModal = document.getElementById('confirmModal');

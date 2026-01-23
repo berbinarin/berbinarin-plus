@@ -37,9 +37,14 @@ class MateriController extends Controller
             'title' => 'required|string|max:255',
             'video_url' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'order_key' => 'required|integer|min:1|unique:course_section,order_key',
+            'order_key' => [
+                'required',
+                'integer',
+                'min:1',
+                'unique:course_section,order_key,NULL,id,course_id,' . $classId,
+            ],
         ], [
-            'order_key.unique' => 'Urutan materi sudah digunakan. Silakan pilih urutan lain.',
+            'order_key.unique' => 'Urutan materi sudah digunakan di kelas ini. Silakan pilih urutan lain.',
         ]);
 
         if ($validator->fails()) {
@@ -102,9 +107,14 @@ class MateriController extends Controller
             'title' => 'required',
             'video_url' => 'nullable',
             'description' => 'nullable',
-            'order_key' => 'required|integer|min:1|unique:course_section,order_key,' . $id,
+            'order_key' => [
+                'required',
+                'integer',
+                'min:1',
+                'unique:course_section,order_key,' . $id . ',id,course_id,' . $classId,
+            ],
         ], [
-            'order_key.unique' => 'Urutan materi sudah digunakan. Silakan pilih urutan lain.',
+            'order_key.unique' => 'Urutan materi sudah digunakan di kelas ini. Silakan pilih urutan lain.',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -134,11 +144,11 @@ class MateriController extends Controller
         $material->delete();
         return redirect()->route('dashboard.kelas.materi.index', ['class' => $classId])
             ->with([
-            'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.webp'),
-            'title' => 'Berhasil',
-            'message' => 'Materi Berhasil Dihapus',
-            'type' => 'success',
-        ]);
+                'alert' => true,
+                'icon' => asset('assets/images/dashboard/success.webp'),
+                'title' => 'Berhasil',
+                'message' => 'Materi Berhasil Dihapus',
+                'type' => 'success',
+            ]);
     }
 }

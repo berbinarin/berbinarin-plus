@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('berbinarp_users')->onDelete('cascade');
             $table->foreignId('test_id')->constrained('tests')->onDelete('cascade');
-            $table->foreignId('course_section_id')->constrained('course_section')->onDelete('cascade');
             $table->integer('score')->nullable();
             $table->json('answers')->nullable(); 
             $table->timestamp('completed_at')->nullable();

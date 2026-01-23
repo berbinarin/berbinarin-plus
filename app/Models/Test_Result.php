@@ -14,7 +14,6 @@ class Test_Result extends Model
     protected $fillable = [
         'user_id',
         'test_id',
-        'course_section_id',
         'score',
         'answers',
         'completed_at',
@@ -28,10 +27,5 @@ class Test_Result extends Model
     public function test()
     {
         return $this->belongsTo(Test::class, 'test_id');
-    }
-
-    public function courseSection()
-    {
-        return $this->belongsTo(Course_Section::class, 'course_section_id');
     }
 }

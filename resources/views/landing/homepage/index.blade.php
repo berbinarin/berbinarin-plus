@@ -115,6 +115,9 @@
                                                 </p>
                                             </div>
                                             @if ($enrolled['status'] === 'Success')
+                                                <a href="{{ route('landing.home.preview', ['class_id' => $enrolled['course']->id]) }}"
+                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
+                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
                                                 <a href="{{ route('landing.home.certificates') }}"
                                                     class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Unduh
                                                     Sertifikat<i

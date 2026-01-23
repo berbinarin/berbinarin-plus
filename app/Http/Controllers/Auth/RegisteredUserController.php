@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 
 class RegisteredUserController
-
 {
     public function berbinarPlusRegister()
     {
@@ -156,7 +155,7 @@ class RegisteredUserController
         $enrolledCourseIds = $user->enrollments->pluck('course_id')->toArray();
         $courses = Berbinarp_Class::whereNotIn('id', $enrolledCourseIds)->get();
 
-        // Paket layanan (bisa diambil dari config atau model jika ada)
+        // Paket layanan
         $packages = [
             (object)['id' => 'Insight', 'name' => 'Insight', 'price' => '15000'],
             (object)['id' => 'A+ Online Weekday', 'name' => 'A+ Online Weekday', 'price' => '36000-120000'],

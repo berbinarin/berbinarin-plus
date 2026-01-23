@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="mt-20 lg:mt-10">
-        <!-- Breadcrumb -->
+        <!-- Navigasi -->
         <nav class="text-gray-500 max-sm:text-sm text-lg" aria-label="Breadcrumb">
             <a href="{{ route('landing.home.index') }}" class="hover:text-gray-900 transition-colors">BERBINAR+</a>
             <span>/</span>
@@ -73,93 +73,107 @@
                     <button id="finishBtn"
                         class="max-sm:w-1/2 py-2 px-[18px] bg-[#3986A3] rounded-lg text-white">Selesai</button>
                 @endif
-            @section('script')
-                <script>
-                    const classId = {{ $class->id ?? 1 }};
-                    const number = {{ $number ?? 1 }};
-                    const total = {{ $total ?? 1 }};
-                    const questionId = {{ $question->id ?? 'null' }};
-
-                    function saveAnswer() {
-                        const form = document.getElementById('pretestForm');
-                        let answer = '';
-                        if (!form) return;
-                        if (form.answer) {
-                            if (form.answer.type === 'radio') {
-                                answer = form.answer.checked ? form.answer.value : '';
-                            } else {
-                                answer = form.answer.value;
-                            }
-                        } else {
-                            // radio group
-                            const checked = form.querySelector('input[name="answer"]:checked');
-                            if (checked) answer = checked.value;
-                        }
-                        let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
-                        answers[questionId] = answer;
-                        localStorage.setItem('pretest_answers_' + classId, JSON.stringify(answers));
-                    }
-
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const nextBtn = document.getElementById('nextBtn');
-                        const finishBtn = document.getElementById('finishBtn');
-                        const form = document.getElementById('pretestForm');
-                        if (nextBtn) {
-                            nextBtn.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                saveAnswer();
-                                window.location.href =
-                                    "{{ route('landing.pretest.question', ['class_id' => $class->id ?? 1, 'number' => ($number ?? 1) + 1]) }}";
-                            });
-                        }
-                        if (finishBtn) {
-                            finishBtn.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                saveAnswer();
-                                // submit all answers
-                                const answers = localStorage.getItem('pretest_answers_' + classId);
-                                const formData = new FormData();
-                                formData.append('_token', '{{ csrf_token() }}');
-                                formData.append('answers', answers);
-                                fetch("{{ route('landing.pretest.submit', ['class_id' => $class->id ?? 1]) }}", {
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    body: formData
-                                }).then(res => {
-                                    if (res.redirected) {
-                                        localStorage.removeItem('pretest_answers_' + classId);
-                                        window.location.href = res.url;
-                                    } else {
-                                        alert('Gagal submit jawaban');
-                                    }
-                                });
-                            });
-                        }
-                        // Prefill jika sudah ada
-                        let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
-                        if (answers[questionId] !== undefined) {
-                            if (form.answer) {
-                                if (form.answer.type === 'radio') {
-                                    if (form.answer.value == answers[questionId]) form.answer.checked = true;
-                                } else {
-                                    form.answer.value = answers[questionId];
-                                }
-                            } else {
-                                // radio group
-                                const radios = form.querySelectorAll('input[name="answer"]');
-                                radios.forEach(r => {
-                                    if (r.value == answers[questionId]) r.checked = true;
-                                });
-                            }
-                        }
-                    });
-                </script>
-            @endsection
+            </div>
         </div>
-    </div>
+    @endsection
 
 
-</div>
-@endsection
+    @section('script')
+        <script>
+            const classId = {{ $class->id ?? 1 }};
+            const number = {{ $number ?? 1 }};
+            const total = {{ $total ?? 1 }};
+            const questionId = {{ $question->id ?? 'null' }};
+
+            function saveAnswer() {
+                const form = document.getElementById('pretestForm');
+                let answer = '';
+                if (!form) return;
+                if (form.answer) {
+                    if (form.answer.type === 'radio') {
+                        answer = form.answer.checked ? form.answer.value : '';
+                    } else {
+                        answer = form.answer.value;
+                    }
+                } else {
+                    // radio group
+                    const checked = form.querySelector('input[name="answer"]:checked');
+                    if (checked) answer = checked.value;
+                }
+                let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
+                answers[questionId] = answer;
+                localStorage.setItem('pretest_answers_' + classId, JSON.stringify(answers));
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const nextBtn = document.getElementById('nextBtn');
+                const finishBtn = document.getElementById('finishBtn');
+                const form = document.getElementById('pretestForm');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        saveAnswer();
+                        window.location.href =
+                            "{{ route('landing.pretest.question', ['class_id' => $class->id ?? 1, 'number' => ($number ?? 1) + 1]) }}";
+                    });
+                }
+                if (finishBtn) {
+                    finishBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        saveAnswer();
+                        // submit all answers
+                        const answersRaw = localStorage.getItem('pretest_answers_' + classId);
+                        let answersObj = {};
+                        try {
+                            answersObj = answersRaw ? JSON.parse(answersRaw) : {};
+                        } catch (e) {
+                            answersObj = {};
+                        }
+                        fetch("{{ route('landing.pretest.submit', ['class_id' => $class->id ?? 1]) }}", {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    answers: answersObj
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data && data.redirect) {
+                                    localStorage.removeItem('pretest_answers_' + classId);
+                                    window.location.href = data.redirect;
+                                } else {
+                                    // Jika tidak ada data tetap redirect ke index pre test
+                                    window.location.href =
+                                        "{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}";
+                                }
+                            })
+                            .catch(() => {
+                                // Jika error, tetap redirect ke index
+                                window.location.href =
+                                    "{{ route('landing.pretest.index', ['class_id' => $class->id ?? 1]) }}";
+                            });
+                    });
+                }
+                // Prefill jika sudah ada
+                let answers = JSON.parse(localStorage.getItem('pretest_answers_' + classId) || '{}');
+                if (answers[questionId] !== undefined) {
+                    if (form.answer) {
+                        if (form.answer.type === 'radio') {
+                            if (form.answer.value == answers[questionId]) form.answer.checked = true;
+                        } else {
+                            form.answer.value = answers[questionId];
+                        }
+                    } else {
+                        // radio group
+                        const radios = form.querySelectorAll('input[name="answer"]');
+                        radios.forEach(r => {
+                            if (r.value == answers[questionId]) r.checked = true;
+                        });
+                    }
+                }
+            });
+        </script>
+    @endsection

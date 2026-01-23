@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Berbinarp_User;
 
 class AuthenticatedController
 {
@@ -49,7 +50,7 @@ class AuthenticatedController
     public function authenticateUser(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        $user = \App\Models\Berbinarp_User::where('username', $credentials['username'])->first();
+        $user = Berbinarp_User::where('username', $credentials['username'])->first();
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::guard('berbinar')->login($user);
             // Kirim data user ke halaman profile

@@ -44,6 +44,7 @@
         </div>
 
 
+        {{-- Pre Test Section --}}
         <div class="relative flex flex-row justify-start gap-4 lg:gap-0 mb-5 lg:mb-10 z-40">
             <div class="flex-col justify-center gap-3 hidden lg:flex">
                 <h1 class="text-xl font-medium italic hidden lg:block">Pre Test</h1>
@@ -55,7 +56,8 @@
 
             <div class="flex flex-col lg:flex-row justify-center items-center lg:hidden">
                 <div class="min-w-3 min-h-3 bg-primary rounded-full z-10"></div>
-                <div class="w-0.5 h-full bg-gradient-to-b from-[#C8F0FF] to-[#32758E]"></div>
+                <div class="w-0.5 h-full bg-gradient-to-b from-[#C8F0FF] to-[#32758E]">
+                </div>
             </div>
 
             <div class="flex flex-col gap-3 w-full">
@@ -72,9 +74,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
 
         <div class="relative flex flex-row justify-start gap-4 lg:gap-0 mb-5 lg:mb-10 z-40">
             <div class="flex-col justify-center gap-3 hidden lg:flex">
@@ -114,6 +114,42 @@
             </div>
 
         </div>
+
+
+        <!-- Post Test Section -->
+        <div class="relative flex flex-row justify-start gap-4 lg:gap-0 mb-5 lg:mb-10 z-40">
+            <div class="flex-col justify-center gap-3 hidden lg:flex">
+                <h1 class="text-xl font-medium italic hidden lg:block">Post Test</h1>
+                <div class="flex flex-col lg:flex-row justify-center items-center">
+                    <div class="min-w-3 min-h-3 bg-primary rounded-full z-10"></div>
+                    <div class="w-64 h-0.5 bg-gradient-to-r from-[#C8F0FF] to-[#32758E]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row justify-center items-center lg:hidden">
+                <div class="min-w-3 min-h-3 bg-primary rounded-full z-10"></div>
+                <div class="w-0.5 h-full bg-gradient-to-b from-[#C8F0FF] to-[#32758E]">
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 w-full">
+                <h1 class="text-xl font-medium italic lg:hidden">Post Test</h1>
+                <div class="w-full bg-gradient-to-r from-[#FFFFFF] to-[#32758E80] p-5 rounded-2xl">
+                    <h1 class="text-2xl font-medium italic mb-3">Post Test</h1>
+                    <div class="flex flex-row gap-3">
+                        <img src="{{ asset('assets/images/landing/favicion/file.webp') }}" alt=""
+                            class="w-14 h-14">
+                        <div>
+                            <h1 class="text-gray-700 italic">Post Test</h1>
+                            <a href="{{ route('landing.posttest.index', ['class_id' => $class->id ?? 1]) }}"
+                                class="text-lg text-primary font-medium italic">Post Test - {{ $class->name ?? '-' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- BLUR SETENGAH LINGKARAN PEMBATAS KANAN -->
         <div class="relative h-0 block lg:hidden">

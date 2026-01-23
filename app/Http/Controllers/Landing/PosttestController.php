@@ -8,25 +8,30 @@ use App\Models\Berbinarp_Class;
 use App\Models\User_Progres;
 use App\Models\Test_Result;
 
-class PretestController extends Controller
+class PosttestController extends Controller
 {
-    public function pretest($class_id)
+    public function posttest($class_id)
     {
-        $class = Berbinarp_Class::with(['sections' => function ($q) {
-            $q->orderBy('order_key');
-        }, 'pretest'])->findOrFail($class_id);
-        $pretest = $class->pretest;
-        $pretestCompleted = false;
+        if ($class_id) {
+            $class = Berbinarp_Class::with(['sections' => function ($q) {
+                $q->orderBy('order_key');
+            }, 'posttest'])->findOrFail($class_id);
+        } else {
+            $class = Berbinarp_Class::whereHas('posttest')->with(['sections' => function ($q) {
+                $q->orderBy('order_key');
+            }, 'posttest'])->firstOrFail();
+        }
+        $posttest = $class->posttest;
+        $posttestCompleted = false;
         $sectionProgress = [];
         $canAccess = [];
-        if ($pretest && auth('berbinar')->check()) {
+        if ($posttest && auth('berbinar')->check()) {
             $userId = auth('berbinar')->id();
-            $pretestCompleted = User_Progres::where('user_id', $userId)
-                ->where('test_id', $pretest->id)
+            $posttestCompleted = User_Progres::where('user_id', $userId)
+                ->where('test_id', $posttest->id)
                 ->where('status_materi', 'completed')
                 ->exists();
 
-            // Logic unlock materi sama seperti di MaterialsController
             $sections = $class->sections;
             foreach ($sections as $i => $sec) {
                 $progress = User_Progres::where('user_id', $userId)
@@ -35,7 +40,7 @@ class PretestController extends Controller
                     ->first();
                 $sectionProgress[$sec->id] = $progress ? true : false;
             }
-            $prevCompleted = $pretestCompleted;
+            $prevCompleted = $posttestCompleted;
             foreach ($sections as $i => $sec) {
                 if ($sectionProgress[$sec->id]) {
                     $canAccess[$sec->id] = true;
@@ -46,41 +51,43 @@ class PretestController extends Controller
                 }
             }
         }
-        return view('landing.pretest.index', compact('class', 'pretest', 'pretestCompleted', 'sectionProgress', 'canAccess'));
+        return view('landing.posttest.index', compact('class', 'posttest', 'posttestCompleted', 'sectionProgress', 'canAccess'));
     }
 
-    public function pretestQuestion($class_id, $number)
+    public function posttestQuestion($class_id, $number)
     {
         $class = Berbinarp_Class::findOrFail($class_id);
-        $pretest = $class->pretest;
-        $questions = $pretest ? $pretest->questions : collect();
+        $posttest = $class->posttest;
+        $questions = $posttest ? $posttest->questions : collect();
         $index = max(0, (int)$number - 1);
         $question = $questions->get($index);
         $total = $questions->count();
-        return view('landing.pretest.test', compact('class', 'pretest', 'question', 'number', 'total'));
+        return view('landing.posttest.test', compact('class', 'posttest', 'question', 'number', 'total'));
     }
 
-    public function submitPretest(Request $request, $class_id)
+    public function submitPosttest(Request $request, $class_id)
     {
         $user = auth('berbinar')->user();
         $class = Berbinarp_Class::findOrFail($class_id);
-        $pretest = $class->pretest;
-        if (!$pretest) {
-            return redirect()->back()->with('error', 'Pretest tidak ditemukan');
+        $posttest = $class->posttest;
+        if (!$posttest) {
+            return redirect()->back()->with('error', 'Posttest tidak ditemukan');
         }
         $answers = $request->input('answers', []);
 
-        // Pastikan $answers adalah array, decode jika string JSON
+        // Decode string json
         if (is_string($answers)) {
             $decoded = json_decode($answers, true);
             if (is_array($decoded)) {
                 $answers = $decoded;
+            } else {
+                $answers = [];
             }
         }
         // Simpan ke user_test_results
         $result = Test_Result::updateOrCreate([
             'user_id' => $user->id,
-            'test_id' => $pretest->id,
+            'test_id' => $posttest->id,
         ], [
             'score' => null,
             'answers' => json_encode($answers),
@@ -90,7 +97,7 @@ class PretestController extends Controller
         // Update progres user 
         $progress = User_Progres::updateOrCreate([
             'user_id' => $user->id,
-            'test_id' => $pretest->id,
+            'test_id' => $posttest->id,
         ], [
             'course_section_id' => null,
             'status_materi' => 'completed',
@@ -98,14 +105,12 @@ class PretestController extends Controller
             'last_accessed' => now(),
         ]);
 
-        // Hapus session pretest
-        $request->session()->forget('pretest');
         if ($request->expectsJson()) {
             return response()->json([
                 'success' => true,
-                'redirect' => route('landing.pretest.index-finished', ['class_id' => $class_id])
+                'redirect' => route('landing.posttest.index', ['class_id' => $class_id]),
             ]);
         }
-        return redirect()->route('landing.pretest.index-finished', ['class_id' => $class_id]);
+        return redirect()->route('landing.posttest.index', ['class_id' => $class_id]);
     }
 }
