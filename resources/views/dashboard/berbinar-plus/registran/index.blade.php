@@ -101,14 +101,13 @@
                                                     $status = 'Unknown';
                                                     $statusColor = 'text-gray-400';
                                             }
-                                            // Format nomor WA agar selalu awalan 62 tanpa +, tanpa spasi/tanda baca
+                                            // Format nomor WA agar selalu awalan 62 tanpa +
                                             $waNumber = $user->phone_number;
                                             if ($waNumber) {
                                                 $waNumber = preg_replace('/\D/', '', $waNumber); // Hanya digit
                                                 if (strpos($waNumber, '0') === 0) {
                                                     $waNumber = '62' . substr($waNumber, 1);
                                                 } elseif (strpos($waNumber, '62') === 0) {
-                                                    // sudah benar
                                                 } elseif (strpos($waNumber, '8') === 0) {
                                                     // handle jika user input "812xxxx" tanpa 0/62
                                                     $waNumber = '62' . $waNumber;
@@ -123,10 +122,11 @@
                                             class="border-b border-gray-200 hover:bg-gray-200 odd:bg-gray-100 even:bg-white">
                                             <td class="text-center px-6 py-4">{{ $index + 1 }}</td>
                                             <td class="px-6 py-4">
-                                                <a href="{{ route('dashboard.pendaftar.pengumpulan-tes.index', ['user' => $user->id]) }}"
+                                                {{ $user->first_name }} {{ $user->last_name }}
+                                                {{-- <a href=""
                                                     class="text-primary font-semibold underline">
                                                     {{ $user->first_name }} {{ $user->last_name }}
-                                                </a>
+                                                </a> --}}
                                             </td>
                                             <td class="text-center px-6 py-4">
                                                 {{ $user->created_at ? $user->created_at->format('d-m-Y') : '-' }}</td>

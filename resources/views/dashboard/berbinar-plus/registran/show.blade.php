@@ -82,7 +82,8 @@
 
                 @foreach ($user->enrollments as $i => $enrollment)
                     <h1 class="mb-6 text-3xl font-bold text-primary-alt mt-7">Data Kelas {{ $i + 1 }}: <a
-                            href="{{ route('dashboard.kelas.index') }}" class="font-semibold text-primary underline">
+                            href="{{ route('dashboard.pendaftar.pengumpulan-tes.index', ['user' => $user->id, 'enrollment' => $enrollment->id]) }}"
+                            class="font-semibold text-primary underline">
                             {{ $enrollment->course->name ?? '-' }}
                         </a></h1>
                     <div class="flex flex-row gap-6 w-full justify-between">

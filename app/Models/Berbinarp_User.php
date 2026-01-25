@@ -42,4 +42,9 @@ class Berbinarp_User extends Authenticatable
     {
         return $this->belongsToMany(Berbinarp_Class::class, 'enrollments_users', 'user_id', 'course_id');
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificates::class, 'user_id');
+    }
 }

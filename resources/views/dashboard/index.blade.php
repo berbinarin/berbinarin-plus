@@ -12,20 +12,27 @@
                             <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal text-gray-800 mb-2">
                                 Dashboard Berbinar+</p>
                             <p class="w-full text-disabled">
-                                Halaman utama yang menampilkan ringkasan data program Berbinar+ serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.
+                                Halaman utama yang menampilkan ringkasan data program Berbinar+ serta akses cepat untuk
+                                mengelola kelas, pendaftar, dan paket layanan secara efisien.
                             </p>
-                            @endrole
+                        @endrole
 
-                            @role('berbinarplusadmin')
-                            <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal mx-10 text-gray-800 mb-2">
+                        @role('berbinarplusadmin')
+                            <p tabindex="0"
+                                class="focus:outline-none text-4xl font-bold leading-normal mx-10 text-gray-800 mb-2">
                                 Dashboard Berbinar +</p>
-                            <p class="w-5/6 text-[#333333] lg:text-lg mx-10"> Halaman utama yang menampilkan ringkasan data program Berbinar+
-                                serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.                            @endrole
+                            <p class="w-5/6 text-[#333333] lg:text-lg mx-10"> Halaman utama yang menampilkan ringkasan data
+                                program Berbinar+
+                                serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.
+                            @endrole
                             @role('berbinarplusadmin')
-                            <p tabindex="0" class="focus:outline-none text-4xl font-bold leading-normal mx-10 text-gray-800 mb-2">
+                            <p tabindex="0"
+                                class="focus:outline-none text-4xl font-bold leading-normal mx-10 text-gray-800 mb-2">
                                 Dashboard Berbinar +</p>
-                            <p class="w-5/6 text-[#333333] lg:text-lg mx-10"> Halaman utama yang menampilkan ringkasan data program Berbinar+
-                                serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.                            @endrole
+                            <p class="w-5/6 text-[#333333] lg:text-lg mx-10"> Halaman utama yang menampilkan ringkasan data
+                                program Berbinar+
+                                serta akses cepat untuk mengelola kelas, pendaftar, dan paket layanan secara efisien.
+                            @endrole
                     </div>
                 </div>
             </div>
@@ -39,14 +46,21 @@
                             <div class="mb-4">
                                 <h1 class="text-[28px] text-[#75BADB]"><b>Rata-Rata Progres Kelas Berbinar+</b></h1>
                                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                    <p class="text-[14px]">Berikut ini merupakan visualisasi rata-rata progres tiap-tiap kelas Berbinar+</p>
+                                    <p class="text-[14px]">Berikut ini merupakan visualisasi rata-rata progres tiap-tiap kelas
+                                        Berbinar+</p>
                                 </div>
                             </div>
                             <div class="flex w-full flex-col items-center h-full">
                                 <canvas id="marketingChart" class="mb-1" style="max-height: 400px;"></canvas>
                                 <div class="mb-4 flex gap-4 text-xs">
                                     @php
-                                        $chartLabels = ['Kelas Eka', 'Kelas Dwi', 'Kelas Tri', 'Kelas Catur', 'Kelas Panca'];
+                                        $chartLabels = [
+                                            'Kelas Eka',
+                                            'Kelas Dwi',
+                                            'Kelas Tri',
+                                            'Kelas Catur',
+                                            'Kelas Panca',
+                                        ];
                                         $chartColors = ['#440E03', '#F4320B', '#E9B306', '#57F527', '#106681'];
                                     @endphp
                                     @foreach ($chartLabels as $i => $label)
@@ -66,7 +80,6 @@
                         <div class="flex flex-col w-full items-start px-6 py-4 bg-white shadow rounded-lg">
                             <h1 class="text-[28px] text-[#75BADB]"><b>Daftar Pendaftar Baru</b></h1>
                             <div class="w-full h-[59vh] overflow-y-scroll">
-
                                 <table id="unfinished" class="min-w-full pt-5 leading-normal">
                                     <thead>
                                         <th class="w-1/12">No.</th>
@@ -75,126 +88,44 @@
                                         <th class="w-1/6">Aksi</th>
                                     </thead>
                                     <tbody>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Pendaftar Baru</p>
-                                            </td>
-                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                    <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Kelas Baru</p>
-                                            </td>
-                                            <td class="text-center">Graphic Designer</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.kelas.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Pendaftar Baru</p>
-                                            </td>
-                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Kelas Baru</p>
-                                            </td>
-                                            <td class="text-center">Graphic Designer</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.kelas.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Pendaftar Baru</p>
-                                            </td>
-                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Kelas Baru</p>
-                                            </td>
-                                            <td class="text-center">Graphic Designer</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.kelas.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Pendaftar Baru</p>
-                                            </td>
-                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Kelas Baru</p>
-                                            </td>
-                                            <td class="text-center">Graphic Designer</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.kelas.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Pendaftar Baru</p>
-                                            </td>
-                                            <td class="text-center">Kanz Abiyu Alkautsar</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-b border-gray-200 bg-white">
-                                            <td class="text-center">1.</td>
-                                            <td class="py-4">
-                                                <p>Kelas Baru</p>
-                                            </td>
-                                            <td class="text-center">Graphic Designer</td>
-                                            <td class="flex justify-center pt-3">
-                                                <a href="{{ route('dashboard.kelas.index') }}">
-                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}" alt="">
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @php $no = 1; @endphp
+                                        @foreach ($pendingUsers as $user)
+                                            <tr class="border-b border-gray-200 bg-white">
+                                                <td class="text-center">{{ $no++ }}.</td>
+                                                <td class="py-4">
+                                                    <p>Pendaftar Baru</p>
+                                                </td>
+                                                <td class="text-center">{{ $user->first_name }} {{ $user->last_name }}</td>
+                                                <td class="flex justify-center pt-3">
+                                                    <a href="{{ route('dashboard.pendaftar.index') }}">
+                                                        <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}"
+                                                            alt="">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        @foreach ($enrollmentBaru as $enroll)
+                                            <tr class="border-b border-gray-200 bg-white">
+                                                <td class="text-center">{{ $no++ }}.</td>
+                                                <td class="py-4">
+                                                    <p>Kelas Baru</p>
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $enroll->course ? $enroll->course->name : '-' }}<br>
+                                                </td>
+                                                <td class="flex justify-center pt-3">
+                                                    @if ($enroll->user)
+                                                        <a
+                                                            href="{{ route('dashboard.pendaftar.show', ['id' => $enroll->user->id]) }}">
+                                                            <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}"
+                                                                alt="">
+                                                        </a>
+                                                    @else
+                                                        <span>-</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -207,8 +138,12 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
-                            const chartDataValues = [{{ $kelas1 }}, {{ $kelas2 }}, {{ $kelas3 }}, {{ $kelas4 }}, {{ $kelas5 }}];
-                            const chartColors = ['rgba(68, 14, 3, 0.6)', 'rgba(244, 50, 11, 0.6)', 'rgba(233, 179, 6, 0.6)', 'rgba(87, 245, 39, 0.6)', 'rgba(16, 102, 129, 0.6)'];
+                            const chartDataValues = [{{ $kelas1 }}, {{ $kelas2 }}, {{ $kelas3 }},
+                                {{ $kelas4 }}, {{ $kelas5 }}
+                            ];
+                            const chartColors = ['rgba(68, 14, 3, 0.6)', 'rgba(244, 50, 11, 0.6)', 'rgba(233, 179, 6, 0.6)',
+                                'rgba(87, 245, 39, 0.6)', 'rgba(16, 102, 129, 0.6)'
+                            ];
                             const solidColors = ['#440E03', '#F4320B', '#E9B306', '#57F527', '#106681'];
                             const chartLabels = ['Kelas Eka', 'Kelas Dwi', 'Kelas Tri', 'Kelas Catur', 'Kelas Panca'];
 
@@ -266,7 +201,8 @@
                                                 const value = dataset.data[index];
                                                 ctx.save();
                                                 ctx.font = 'bold 14px sans-serif';
-                                                if (value >= Math.max(...chartDataValues) * 0.8) {
+                                                if (value >= Math.max(...chartDataValues) *
+                                                    0.8) {
                                                     ctx.fillStyle = '#fff';
                                                     ctx.textAlign = 'center';
                                                     ctx.textBaseline = 'top';
@@ -283,7 +219,8 @@
                                                     const barHeight = bar.height || (bar.base -
                                                         bar.y) * 2;
                                                     ctx.fillStyle = solidColor;
-                                                    ctx.fillRect(bar.x - bar.width / 2, bar.y, bar.width, 12);
+                                                    ctx.fillRect(bar.x - bar.width / 2, bar.y,
+                                                        bar.width, 12);
                                                 }
                                                 ctx.restore();
                                             });

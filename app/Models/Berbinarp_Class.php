@@ -54,4 +54,9 @@ class Berbinarp_Class extends Model
     {
         return $this->belongsToMany(Berbinarp_User::class, 'enrollments_users', 'course_id', 'user_id');
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificates::class, 'course_id');
+    }
 }

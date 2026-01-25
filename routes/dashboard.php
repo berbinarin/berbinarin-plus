@@ -62,7 +62,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::patch('/pendaftar/acc-pembayaran/{enrollment_id}', [RegistranController::class, 'accPembayaran'])->name('pendaftar.acc-pembayaran');
 
         // Pengumpulan Tes
-        Route::get('/pendaftar/pengumpulan-tes', [TestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.index');
+        Route::get('/pendaftar/pengumpulan-tes/{user}/{enrollment}', [TestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.index');
+        Route::post('/pendaftar/pengumpulan-tes/{user}/{enrollment}/certificate', [TestSubmissionController::class, 'uploadCertificate'])->name('pengumpulan-tes.certificate.upload');
 
         // Pengumpulan Tes: Pre Test
 
