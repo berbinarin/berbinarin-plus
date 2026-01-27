@@ -80,8 +80,8 @@
                                 <button type="button" id="educationToggle"
                                     class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:outline-none">
                                     <span id="educationSelected"
-                                        class="{{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? 'text-black' : 'text-gray-500' }}">
-                                        {{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? $user->last_education : ($user->last_education ? 'Other' : 'Apa Pendidikan Terakhirmu?') }}
+                                        class="{{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana', 'Other']) ? 'text-black' : 'text-gray-500' }}">
+                                        {{ in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana', 'Other']) ? ($user->last_education === 'Other' ? 'Lainnya' : $user->last_education) : 'Apa Pendidikan Terakhirmu?' }}
                                     </span>
                                     <img src="{{ asset('assets/images/landing/produk/emo/chevron.webp') }}" alt=""
                                         class="mr-1 w-[.9rem] transform transition-transform" id="educationIcon" />
@@ -90,36 +90,44 @@
                                     id="educationDropdown">
                                     <div class="grid grid-cols-2 gap-4 p-2" style="background-color: white">
                                         <div>
-                                            @foreach (['SD', 'SMP', 'SMA'] as $edu)
-                                                <label class="mb-2 flex cursor-pointer items-center">
-                                                    <input class="form-check-input mr-2" type="radio"
-                                                        name="last_education" value="{{ $edu }}" required
-                                                        {{ $user->last_education == $edu ? 'checked' : '' }} />
-                                                    {{ $edu }}
-                                                </label>
-                                            @endforeach
-                                        </div>
-                                        <div>
-                                            @foreach (['Ahli Madya', 'Sarjana'] as $edu)
-                                                <label class="mb-2 flex cursor-pointer items-center">
-                                                    <input class="form-check-input mr-2" type="radio"
-                                                        name="last_education" value="{{ $edu }}" required
-                                                        {{ $user->last_education == $edu ? 'checked' : '' }} />
-                                                    {{ $edu }}
-                                                </label>
-                                            @endforeach
                                             <label class="mb-2 flex cursor-pointer items-center">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Other" id="otherRadio" required
-                                                    {{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) && $user->last_education ? 'checked' : '' }} />
+                                                    value="SD" required
+                                                    {{ $user->last_education == 'SD' ? 'checked' : '' }} />
+                                                SD
+                                            </label>
+                                            <label class="mb-2 flex cursor-pointer items-center">
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="SMP" required
+                                                    {{ $user->last_education == 'SMP' ? 'checked' : '' }} />
+                                                SMP
+                                            </label>
+                                            <label class="mb-2 flex cursor-pointer items-center">
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="SMA" required
+                                                    {{ $user->last_education == 'SMA' ? 'checked' : '' }} />
+                                                SMA
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="mb-2 flex cursor-pointer items-center">
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Ahli Madya" required
+                                                    {{ $user->last_education == 'Ahli Madya' ? 'checked' : '' }} />
+                                                Ahli Madya
+                                            </label>
+                                            <label class="mb-2 flex cursor-pointer items-center">
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Sarjana" required
+                                                    {{ $user->last_education == 'Sarjana' ? 'checked' : '' }} />
+                                                Sarjana
+                                            </label>
+                                            <label class="mb-2 flex cursor-pointer items-center">
+                                                <input class="form-check-input mr-2" type="radio" name="last_education"
+                                                    value="Other" required
+                                                    {{ $user->last_education == 'Other' ? 'checked' : '' }} />
                                                 Lainnya
                                             </label>
-                                            <input type="text"
-                                                class="form-input mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2"
-                                                id="otherInput" name="other_education"
-                                                placeholder="Isi pendidikan lain..."
-                                                {{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) && $user->last_education ? '' : 'disabled' }}
-                                                value="{{ !in_array($user->last_education, ['SD', 'SMP', 'SMA', 'Ahli Madya', 'Sarjana']) ? $user->last_education : '' }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -292,8 +300,6 @@
             const educationIcon = document.getElementById('educationIcon');
             const educationRadios = document.querySelectorAll('input[name="last_education"]');
             const educationSelected = document.getElementById('educationSelected');
-            const otherRadio = document.getElementById('otherRadio');
-            const otherInput = document.getElementById('otherInput');
 
             educationToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -303,32 +309,13 @@
 
             educationRadios.forEach((radio) => {
                 radio.addEventListener('change', function() {
-                    educationSelected.textContent = this.value === 'Other' ? 'Other' : this.value;
+                    educationSelected.textContent = this.value === 'Other' ? 'Lainnya' : this.value;
                     educationSelected.classList.remove('text-gray-500');
                     educationSelected.classList.add('text-black');
                     educationDropdown.classList.add('hidden');
                     educationIcon.classList.remove('rotate-180');
-                    if (this.value === 'Other') {
-                        otherInput.disabled = false;
-                        otherInput.required = true;
-                        otherInput.focus();
-                        // Set value radio ke isi input jika diubah
-                        otherInput.addEventListener('input', function() {
-                            radio.value = this.value;
-                        });
-                    } else {
-                        otherInput.disabled = true;
-                        otherInput.required = false;
-                        otherInput.value = '';
-                    }
                 });
             });
-
-            otherRadio.addEventListener('change', function() {
-                otherInput.disabled = !this.checked;
-            });
-
-            otherInput.disabled = true;
 
             // File upload display & preview
             document.getElementById('bukti_transfer').addEventListener('change', function(e) {
@@ -440,11 +427,7 @@
                     'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email',
                     'last_education', 'class_id', 'service_package', 'price_package', 'referral_source'
                 ];
-                // Jika pendidikan Other, wajib other_education
-                const lastEducation = document.querySelector('input[name="last_education"]:checked');
-                if (lastEducation && lastEducation.value === 'Other') {
-                    requiredFields.push('other_education');
-                }
+
                 // Sumber info Other
                 const knowingSource = document.getElementById('sumber').value;
                 if (knowingSource === 'Other') {

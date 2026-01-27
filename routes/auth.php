@@ -19,6 +19,8 @@ Route::name('auth.')->group(function () {
     Route::get('berbinar-plus/daftar', [RegisteredUserController::class, 'berbinarPlusRegister'])->name('berbinar-plus.regis');
     Route::post('berbinar-plus/store', [RegisteredUserController::class, 'store'])->name('berbinar-plus.store');
 
+    Route::get('berbinar-plus/success', [RegisteredUserController::class, 'success'])->name('berbinar-plus.success');
+
     // Tambah kelas baru untuk user yang sudah terdaftar
     Route::middleware('auth:berbinar')->group(function () {
         Route::get('berbinar-plus/daftar-kelas', [RegisteredUserController::class, 'registerClass'])->name('berbinar-plus.register-class');
