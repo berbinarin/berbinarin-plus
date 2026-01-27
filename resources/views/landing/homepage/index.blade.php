@@ -86,16 +86,31 @@
                     <div class="swiper slider-courses">
                         <div class="swiper-wrapper py-2 mb-4">
                             @foreach ($enrolledClasses as $enrolled)
+                                @php
+                                    $class = $enrolled['course'];
+                                    $certificate = null;
+                                    $hasCertificate = false;
+                                    if (isset($class->id) && Auth::guard('berbinar')->check()) {
+                                        $userId = Auth::guard('berbinar')->id();
+                                        $certificate = \App\Models\Certificates::where('course_id', $class->id)
+                                            ->where('user_id', $userId)
+                                            ->first();
+                                        $hasCertificate =
+                                            $certificate &&
+                                            $certificate->certificate_file &&
+                                            file_exists(public_path('storage/' . $certificate->certificate_file));
+                                    }
+                                @endphp
                                 <div class="swiper-slide">
                                     <div
                                         class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                        <img src="{{ $enrolled['course']->thumbnail ? asset('uploads/thumbnails/' . $enrolled['course']->thumbnail) : asset('assets/images/landing/favicion/checker.webp') }}"
-                                            alt="{{ $enrolled['course']->name }}"
+                                        <img src="{{ $class->thumbnail ? asset('uploads/thumbnails/' . $class->thumbnail) : asset('assets/images/landing/favicion/checker.webp') }}"
+                                            alt="{{ $class->name }}"
                                             class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                                         <div>
                                             <div class="flex flex-col-reverse lg:flex-row gap-1 lg:gap-5 mb-1">
                                                 <p class="font-medium text-xs lg:text-base course-title italic"
-                                                    title="{{ $enrolled['course']->name }}">{{ $enrolled['course']->name }}
+                                                    title="{{ $class->name }}">{{ $class->name }}
                                                 </p>
                                                 <p
                                                     class="rounded-3xl px-2 text-[10px] lg:text-sm text-center font-medium italic max-w-[70px] lg:max-h-[1.5rem] {{ $enrolled['status'] === 'Success' ? 'bg-green-500' : 'bg-yellow-500' }}">
@@ -114,18 +129,13 @@
                                                     {{ $enrolled['completed_sections'] }}/{{ $enrolled['total_sections'] }}
                                                 </p>
                                             </div>
-                                            @if ($enrolled['status'] === 'Success')
-                                                <a href="{{ route('landing.home.preview', ['class_id' => $enrolled['course']->id]) }}"
-                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                                <a href="{{ route('landing.home.certificates') }}"
-                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Unduh
-                                                    Sertifikat<i
-                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                            @else
-                                                <a href="{{ route('landing.home.preview', ['class_id' => $enrolled['course']->id]) }}"
-                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
-                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
+                                            <a href="{{ route('landing.home.preview', ['class_id' => $class->id]) }}"
+                                                class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2">Mulai<i
+                                                    class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
+                                            @if ($hasCertificate)
+                                                <a href="{{ route('landing.home.certificates', ['class_id' => $class->id]) }}"
+                                                    class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2 mt-1">Unduh
+                                                    Sertifikat</a>
                                             @endif
                                         </div>
                                     </div>

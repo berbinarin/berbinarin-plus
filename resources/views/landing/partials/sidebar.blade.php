@@ -136,12 +136,22 @@
         {{-- Links Sertifikat --}}
         <div class="mb-4">
             <h1 class="text-xl lg:text-2xl font-semibold leading-5 pl-8 pr-2 mb-2">Sertifikat</h1>
-            <a href="{{ route('landing.home.certificates') }}"
-                class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
-                <!-- <a id="showModalCertificates" href="#') }}" class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}"> -->
-                <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
-                <i class="bx bxs-lock text-2xl text-primary"></i>
-            </a>
+            @php
+                // Ikuti logika post test: menu sertifikat terbuka jika posttestCompleted true
+                $isCertificateUnlocked = isset($posttestCompleted) && $posttestCompleted;
+            @endphp
+            @if ($isCertificateUnlocked)
+                <a href="{{ route('landing.home.certificates', ['class_id' => $class->id ?? null]) }}"
+                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 hover:bg-primary-alt {{ Request::routeIs('landing.home.certificates') || Request::routeIs('certificates.index') ? 'bg-primary text-white' : 'bg-gray-50' }}">
+                    <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
+                </a>
+            @else
+                <a href="#" id="showModalCertificates"
+                    class="flex flex-row items-center justify-between duration-150 pl-8 pr-2 py-2 bg-gray-100 text-gray-400">
+                    <span class="text-lg lg:text-lg leading-5">Download Sertifikat</span>
+                    <i class="bx bxs-lock text-2xl text-primary"></i>
+                </a>
+            @endif
         </div>
 
         <!-- <li class="dark-hover:text-blue-300 mt-20 rounded-lg p-2">

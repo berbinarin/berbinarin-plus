@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\BerbinarPlus\ClassController;
-use App\Http\Controllers\Dashboard\BerbinarpAdmin\PendaftarController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\RegistranController;
-use App\Http\Controllers\Dashboard\BerbinarPlus\MaterialController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\MateriController;
-use App\Http\Controllers\Dashboard\BerbinarPlus\QuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PretestQuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Questions\PosttestQuestionController;
 use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\TestSubmissionController;
@@ -13,14 +10,13 @@ use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\PreTestSubmissionControlle
 use App\Http\Controllers\Dashboard\BerbinarPlus\Tests\PostTestSubmissionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Metadata\Test;
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::middleware('role:berbinarplus')->group(function () {
 
-        // Update user status to active (from Berbinarp_User)
+        // Update user status to active 
         Route::patch('/pendaftar/update-user-status/{id}', [RegistranController::class, 'updateUserStatus'])->name('updateUserStatus');
 
         // Class
@@ -66,16 +62,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::post('/pendaftar/pengumpulan-tes/{user}/{enrollment}/certificate', [TestSubmissionController::class, 'uploadCertificate'])->name('pengumpulan-tes.certificate.upload');
 
         // Pengumpulan Tes: Pre Test
-
         Route::get('/pendaftar/pre-test', [PreTestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.pre-test.index');
         Route::get('/pendaftar/pre-test/show', [PreTestSubmissionController::class, 'show'])->name('pendaftar.pengumpulan-tes.pre-test.show');
 
         // Pengumpulan Tes: Post Test
         Route::get('/post-test', [PostTestSubmissionController::class, 'index'])->name('pendaftar.pengumpulan-tes.post-test.index');
         Route::get('/show', [PostTestSubmissionController::class, 'show'])->name('pendaftar.pengumpulan-tes.post-test.show');
-    });
-
-    Route::middleware('role:berbinaradmin')->group(function () {
-        Route::get('/berbinar-admin', [DashboardController::class, 'admin'])->name('admin');
     });
 });

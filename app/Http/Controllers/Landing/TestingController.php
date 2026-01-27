@@ -12,8 +12,4 @@ class TestingController
         return view('landing.others.index');
     }
 
-    public function certificates()
-    {
-        return view('landing.certificates.index');
-    }
 }

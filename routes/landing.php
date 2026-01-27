@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Landing\CertificateController;
 use App\Http\Controllers\Landing\HomeController;
 use App\Http\Controllers\Landing\LandingController;
 use App\Http\Controllers\Landing\MaterialsController;
@@ -20,8 +21,10 @@ Route::name('landing.')->group(function () {
             Route::get('/', [HomeController::class, 'homepage'])->name('index');
             Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
             Route::get('/preview/{class_id}', [PreviewController::class, 'preview'])->name('preview');
-            Route::get('/materials', [MaterialsController::class, 'materials'])->name('materials'); 
-            Route::get('/certificates', [TestingController::class, 'certificates'])->name('certificates');
+            Route::get('/materials', [MaterialsController::class, 'materials'])->name('materials');
+            Route::get('/certificates', [CertificateController::class, 'certificates'])->name('certificates');
+            Route::post('/certificates/update-rating', [CertificateController::class, 'updateRating'])->name('certificates.updateRating');
+            Route::get('/certificates/download', [CertificateController::class, 'downloadCertificate'])->name('certificates.download');
             Route::post('/progress/update', [MaterialsController::class, 'updateProgress'])->name('user.progress.update');
         });
 
@@ -42,4 +45,3 @@ Route::name('landing.')->group(function () {
         });
     });
 });
-

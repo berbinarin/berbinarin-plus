@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus\Tests;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Berbinarp_User;;
+use App\Models\EnrollmentUser;
+use App\Models\Test_Result;
 
 class PreTestSubmissionController extends Controller
 {
@@ -17,8 +20,8 @@ class PreTestSubmissionController extends Controller
         $userModel = null;
         $enrollmentModel = null;
         if ($userId && $enrollmentId) {
-            $userModel = \App\Models\Berbinarp_User::find($userId);
-            $enrollmentModel = \App\Models\EnrollmentUser::find($enrollmentId);
+            $userModel = Berbinarp_User::find($userId);
+            $enrollmentModel = EnrollmentUser::find($enrollmentId);
         }
         return view('dashboard.berbinar-plus.pengumpulan.pretest.index', compact('userModel', 'enrollmentModel'));
     }
@@ -55,12 +58,12 @@ class PreTestSubmissionController extends Controller
         $status = null;
         $jawabanList = [];
         if ($userId && $enrollmentId) {
-            $userModel = \App\Models\Berbinarp_User::find($userId);
-            $enrollmentModel = \App\Models\EnrollmentUser::find($enrollmentId);
+            $userModel = Berbinarp_User::find($userId);
+            $enrollmentModel = EnrollmentUser::find($enrollmentId);
             $course = $enrollmentModel ? $enrollmentModel->course : null;
             $preTest = $course && $course->tests ? $course->tests->where('type', 'pre_test')->first() : null;
             if ($preTest) {
-                $testResult = \App\Models\Test_Result::where('user_id', $userId)->where('test_id', $preTest->id)->first();
+                $testResult = Test_Result::where('user_id', $userId)->where('test_id', $preTest->id)->first();
                 if ($testResult) {
                     $status = 'Finished';
                     $tanggalPengerjaan = $testResult->completed_at ? date('d M Y', strtotime($testResult->completed_at)) : '-';
@@ -69,7 +72,7 @@ class PreTestSubmissionController extends Controller
                     foreach ($questions as $q) {
                         $jawabanUser = null;
                         if (isset($answers[$q->id])) {
-                            // handle both array and string answer format
+                            // Output handling jika jawaban berupa array atau string
                             if (is_array($answers[$q->id]) && isset($answers[$q->id]['answer'])) {
                                 $jawabanUser = $answers[$q->id]['answer'];
                             } else {

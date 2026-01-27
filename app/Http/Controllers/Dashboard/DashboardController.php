@@ -31,7 +31,7 @@ class DashboardController extends Controller
             $pendingUsers = Berbinarp_User::where('user_status_id', $pendingStatus->id)->get();
         }
 
-        // Ambil enrollment dengan status_kelas 'pending_payment' (atau status lain sesuai kebutuhan)
+        // Ambil enrollment dengan status_kelas 'pending_payment' 
         $enrollmentBaru = EnrollmentUser::where('status_kelas', 'pending_payment')
             ->with(['user', 'course'])
             ->get();

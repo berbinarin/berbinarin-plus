@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus\Tests;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Berbinarp_User;;
+use App\Models\EnrollmentUser;
+use App\Models\Test_Result;
+use App\Models\Certificates;
 
 class TestSubmissionController extends Controller
 {
@@ -12,14 +16,14 @@ class TestSubmissionController extends Controller
      */
     public function index($user, $enrollment)
     {
-        $userModel = \App\Models\Berbinarp_User::findOrFail($user);
-        $enrollmentModel = \App\Models\EnrollmentUser::findOrFail($enrollment);
+        $userModel = Berbinarp_User::findOrFail($user);
+        $enrollmentModel = EnrollmentUser::findOrFail($enrollment);
         $course = $enrollmentModel->course;
         $preTest = $course && $course->tests ? $course->tests->where('type', 'pre_test')->first() : null;
         $postTest = $course && $course->tests ? $course->tests->where('type', 'post_test')->first() : null;
         $preTestResult = $preTest && $preTest->userProgresses ? $preTest->userProgresses->where('user_id', $userModel->id)->first() : null;
         $postTestResult = $postTest && $postTest->userProgresses ? $postTest->userProgresses->where('user_id', $userModel->id)->first() : null;
-        $certificate = \App\Models\Certificates::where('user_id', $userModel->id)->where('course_id', $course ? $course->id : null)->first();
+        $certificate = Certificates::where('user_id', $userModel->id)->where('course_id', $course ? $course->id : null)->first();
         return view('dashboard.berbinar-plus.pengumpulan.index', compact(
             'userModel',
             'enrollmentModel',
@@ -36,13 +40,13 @@ class TestSubmissionController extends Controller
         $request->validate([
             'certificate' => 'required|mimes:pdf|max:2048',
         ]);
-        $userModel = \App\Models\Berbinarp_User::findOrFail($user);
-        $enrollmentModel = \App\Models\EnrollmentUser::findOrFail($enrollment);
+        $userModel = Berbinarp_User::findOrFail($user);
+        $enrollmentModel = EnrollmentUser::findOrFail($enrollment);
         $course = $enrollmentModel->course;
         $file = $request->file('certificate');
         $filename = 'certificate_' . $userModel->id . '_' . $course->id . '_' . time() . '.' . $file->getClientOriginalExtension();
         $path = $file->storeAs('certificates', $filename, 'public');
-        $certificate = \App\Models\Certificates::updateOrCreate(
+        $certificate = Certificates::updateOrCreate(
             [
                 'user_id' => $userModel->id,
                 'course_id' => $course->id,

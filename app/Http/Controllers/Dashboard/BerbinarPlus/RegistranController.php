@@ -47,10 +47,10 @@ class RegistranController extends Controller
             'age' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email|unique:berbinarp_users,email',
-            'last_education' => 'required|string',
-            'referral_source' => 'required|string',
+            'last_education' => 'required',
+            'referral_source' => 'required',
             'course_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required|string',
+            'service_package' => 'required',
             'price_package' => 'required',
             'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
@@ -128,10 +128,10 @@ class RegistranController extends Controller
             'age' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'last_education' => 'required|string',
-            'referral_source' => 'required|string',
+            'last_education' => 'required',
+            'referral_source' => 'required',
             'class_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required|string',
+            'service_package' => 'required',
             'price_package' => 'required',
         ]);
 
@@ -147,13 +147,13 @@ class RegistranController extends Controller
         $user->referral_source = $request->referral_source;
         $user->save();
 
-        // Update enrollment (assume only one enrollment per user)
+        // Update enrollment 
         $enrollment = $user->enrollments->first();
         if ($enrollment) {
             $enrollment->course_id = $request->class_id;
             $enrollment->service_package = $request->service_package;
             $enrollment->price_package = $request->price_package;
-            // Update payment proof if new file uploaded
+            // Update payment proof
             if ($request->hasFile('payment_proof_url')) {
                 $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
                 $enrollment->payment_proof_url = $buktiTransferPath;
@@ -169,21 +169,6 @@ class RegistranController extends Controller
             'type' => 'success',
         ]);
     }
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(string $id)
-    // {
-    //     $user = Berbinarp_User::findOrFail($id);
-    //     $user->delete();
-    //     return redirect()->route('dashboard.pendaftar.index')->with([
-    //         'alert' => true,
-    //         'icon' => asset('assets/images/dashboard/success.webp'),
-    //         'title' => 'Berhasil!',
-    //         'message' => 'Pendaftar berhasil dihapus.',
-    //         'type' => 'success',
-    //     ]);;
-    // }
 
     /**
      * Remove the specified user and related enrollments from storage.
@@ -191,7 +176,7 @@ class RegistranController extends Controller
     public function destroy($id)
     {
         $user = Berbinarp_User::findOrFail($id);
-        // Delete related enrollments
+        // Delete enrollments
         $user->enrollments()->delete();
         // Delete user
         $user->delete();
@@ -207,13 +192,13 @@ class RegistranController extends Controller
     public function updateUserStatus(Request $request, $id)
     {
         $request->validate([
-            'user_status_id' => 'required|in:2', // 2 = active
+            'user_status_id' => 'required|in:2', 
         ]);
 
         $user = Berbinarp_User::findOrFail($id);
         $user->user_status_id = $request->user_status_id;
 
-        // Generate username and password if not set
+        // Generate username and password 
         if (empty($user->username)) {
             $user->username = strtolower($user->first_name) . rand(100, 999);
         }
@@ -263,7 +248,7 @@ class RegistranController extends Controller
             'alert' => true,
             'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Berhasil',
-            'message' => 'Status Kelas Berhasil Diubah Menjadi Enrolled',
+            'message' => 'Status Kelas Berhasil Diubah Menjadi Terdaftar',
             'type' => 'success',
         ]);
     }

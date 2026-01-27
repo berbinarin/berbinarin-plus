@@ -34,9 +34,9 @@ class MateriController extends Controller
     public function store(Request $request, $classId)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'video_url' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
+            'title' => 'required',
+            'video_url' => 'nullable',
+            'description' => 'nullable',
             'order_key' => [
                 'required',
                 'integer',

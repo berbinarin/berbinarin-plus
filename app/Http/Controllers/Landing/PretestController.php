@@ -19,6 +19,8 @@ class PretestController extends Controller
         $pretestCompleted = false;
         $sectionProgress = [];
         $canAccess = [];
+        $hasCertificate = false;
+        $posttestCompleted = false;
         if ($pretest && auth('berbinar')->check()) {
             $userId = auth('berbinar')->id();
             $pretestCompleted = User_Progres::where('user_id', $userId)
@@ -26,7 +28,7 @@ class PretestController extends Controller
                 ->where('status_materi', 'completed')
                 ->exists();
 
-            // Logic unlock materi sama seperti di MaterialsController
+            // Logic unlock materi
             $sections = $class->sections;
             foreach ($sections as $i => $sec) {
                 $progress = User_Progres::where('user_id', $userId)
@@ -45,8 +47,23 @@ class PretestController extends Controller
                     $prevCompleted = false;
                 }
             }
+
+            // Cek sertifikat 
+            $certificate = \App\Models\Certificates::where('course_id', $class->id)
+                ->where('user_id', $userId)
+                ->first();
+            $hasCertificate = $certificate && $certificate->certificate_file && file_exists(public_path('storage/' . $certificate->certificate_file));
+
+            // Cek posttestCompleted
+            $posttest = $class->posttest;
+            if ($posttest) {
+                $posttestCompleted = User_Progres::where('user_id', $userId)
+                    ->where('test_id', $posttest->id)
+                    ->where('status_materi', 'completed')
+                    ->exists();
+            }
         }
-        return view('landing.pretest.index', compact('class', 'pretest', 'pretestCompleted', 'sectionProgress', 'canAccess'));
+        return view('landing.pretest.index', compact('class', 'pretest', 'pretestCompleted', 'sectionProgress', 'canAccess', 'hasCertificate', 'posttestCompleted'));
     }
 
     public function pretestQuestion($class_id, $number)

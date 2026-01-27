@@ -56,7 +56,16 @@ class MaterialsController extends Controller
             }
         }
 
-        return view('landing.materials.index', compact('class', 'section', 'sectionActive', 'sections', 'canAccess', 'sectionProgress', 'pretestCompleted'));
+        // Cek posttestCompleted 
+        $posttestCompleted = false;
+        if ($class->posttest) {
+            $posttestCompleted = User_Progres::where('user_id', $userId)
+                ->where('test_id', $class->posttest->id)
+                ->where('status_materi', 'completed')
+                ->exists();
+        }
+
+        return view('landing.materials.index', compact('class', 'section', 'sectionActive', 'sections', 'canAccess', 'sectionProgress', 'pretestCompleted', 'posttestCompleted'));
     }
 
     // Update progres materi via AJAX

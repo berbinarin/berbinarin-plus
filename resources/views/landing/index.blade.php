@@ -1,4 +1,3 @@
-{{-- filepath: c:\laragon\www\kerja_new\berbinarin-plus\resources\views\landing\index.blade.php --}}
 @extends('landing.layouts.app', [
     'title' => 'Berbinar Insightful Indonesia',
 ])

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus\Tests;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Berbinarp_User;
+use App\Models\EnrollmentUser;
+use App\Models\Test_Result;
 
 class PostTestSubmissionController extends Controller
 {
@@ -34,7 +37,6 @@ class PostTestSubmissionController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(string $id)
     public function show(Request $request)
     {
         $userId = $request->query('user');
@@ -47,17 +49,17 @@ class PostTestSubmissionController extends Controller
         $status = null;
         $jawabanList = [];
         if ($userId && $enrollmentId) {
-            $userModel = \App\Models\Berbinarp_User::find($userId);
-            // Pastikan properti name selalu terisi fallback ke first_name/last_name jika kosong
+            $userModel = Berbinarp_User::find($userId);
+            // menggabungkan first_name dan last_name menjadi name
             if ($userModel) {
                 $name = trim(($userModel->first_name ?? '') . ' ' . ($userModel->last_name ?? ''));
                 $userModel->name = $name !== '' ? $name : null;
             }
-            $enrollmentModel = \App\Models\EnrollmentUser::find($enrollmentId);
+            $enrollmentModel = EnrollmentUser::find($enrollmentId);
             $course = $enrollmentModel ? $enrollmentModel->course : null;
             $postTest = $course && $course->tests ? $course->tests->where('type', 'post_test')->first() : null;
             if ($postTest) {
-                $testResult = \App\Models\Test_Result::where('user_id', $userId)->where('test_id', $postTest->id)->first();
+                $testResult = Test_Result::where('user_id', $userId)->where('test_id', $postTest->id)->first();
                 if ($testResult) {
                     $status = 'Finished';
                     $tanggalPengerjaan = $testResult->completed_at ? date('d M Y', strtotime($testResult->completed_at)) : '-';
@@ -66,7 +68,7 @@ class PostTestSubmissionController extends Controller
                     foreach ($questions as $q) {
                         $jawabanUser = null;
                         if (isset($answers[$q->id])) {
-                            // handle both array and string answer format
+                            // Output handling jika jawaban berupa array atau string
                             if (is_array($answers[$q->id]) && isset($answers[$q->id]['answer'])) {
                                 $jawabanUser = $answers[$q->id]['answer'];
                             } else {
