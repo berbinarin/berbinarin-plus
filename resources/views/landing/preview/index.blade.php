@@ -153,7 +153,7 @@
         </div>
 
         <!-- Certificate Section -->
-        <div class="relative flex flex-row justify-start gap-4 lg:gap-0 mb-5 lg:mb-10 z-40">
+        {{-- <div class="relative flex flex-row justify-start gap-4 lg:gap-0 mb-5 lg:mb-10 z-40">
             <div class="flex-col justify-center gap-3 hidden lg:flex">
                 <h1 class="text-xl font-medium italic hidden lg:block">Sertifikat</h1>
                 <div class="flex flex-col lg:flex-row justify-center items-center">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         <!-- BLUR SETENGAH LINGKARAN PEMBATAS KANAN -->
