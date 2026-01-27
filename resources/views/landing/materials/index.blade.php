@@ -100,6 +100,24 @@
             @endphp
 
             @if ($videoId)
+                @php
+                    // Cari next section berdasarkan urutan $sections
+                    $nextSection = null;
+                    if (isset($sections) && $sections->count()) {
+                        $found = false;
+                        foreach ($sections as $i => $sec) {
+                            if ($sec->id == $section->id) {
+                                $found = true;
+                                if (isset($sections[$i + 1])) {
+                                    $nextSection = $sections[$i + 1];
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    // URL post test
+                    $postTestUrl = route('landing.posttest.index', ['class_id' => $class->id]);
+                @endphp
                 <div class="w-full lg:w-4/5 video-container" style="position:relative;">
                     {{-- Player Video.js dengan Tech YouTube --}}
                     <video id="course-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
@@ -124,10 +142,12 @@
                         <div class="text-2xl font-bold mb-4" style="color:#3986A3;">Materi Selesai!</div>
                         <button id="btn-next-overlay"
                             class="px-8 py-3 rounded-xl font-bold text-white hover:scale-105 active:scale-95"
-                            style="background-color:#3986A3;">Lanjut Materi</button>
+                            style="background-color:#3986A3;"
+                            data-next-url="{{ $nextSection ? route('landing.home.materials', ['class_id' => $class->id, 'section_id' => $nextSection->id]) : $postTestUrl }}">
+                            {{ $nextSection ? 'Lanjut Materi' : 'Lanjut ke Post Test' }}
+                        </button>
                     </div>
                 </div>
-
             @endif
 
             {{-- Deskripsi Materi --}}
@@ -183,7 +203,10 @@
                 const btnNextOverlay = document.getElementById('btn-next-overlay');
                 if (btnNextOverlay) {
                     btnNextOverlay.onclick = function() {
-                        // window.location.href = 'URL_LANJUT_MATERI';
+                        const nextUrl = btnNextOverlay.getAttribute('data-next-url');
+                        if (nextUrl) {
+                            window.location.href = nextUrl;
+                        }
                     };
                 }
 

@@ -46,13 +46,14 @@ class MaterialsController extends Controller
             $sectionProgress[$sec->id] = $progress ? true : false;
         }
 
-        // Logic unlock: jika pretest sudah complete, semua materi bisa dibuka
+        // Logic unlock: section pertama unlock jika pretest complete, section berikutnya unlock jika section sebelumnya sudah complete
         $canAccess = [];
         foreach ($sections as $i => $sec) {
-            if ($pretestCompleted) {
-                $canAccess[$sec->id] = true;
+            if ($i === 0) {
+                $canAccess[$sec->id] = $pretestCompleted;
             } else {
-                $canAccess[$sec->id] = false;
+                $prevSection = $sections[$i - 1];
+                $canAccess[$sec->id] = !empty($sectionProgress[$prevSection->id]);
             }
         }
 
