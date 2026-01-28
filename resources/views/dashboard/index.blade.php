@@ -78,7 +78,7 @@
                     <div class="flex flex-col w-full gap-6">
 
                         <div class="flex flex-col w-full items-start px-6 py-4 bg-white shadow rounded-lg">
-                            <h1 class="text-[28px] text-[#75BADB]"><b>Daftar Pendaftar Baru</b></h1>
+                            <h1 class="text-[28px] text-[#75BADB]"><b>Data Kelas dan Pendaftar Baru</h1>
                             <div class="w-full h-[59vh] overflow-y-scroll">
                                 <table id="unfinished" class="min-w-full pt-5 leading-normal">
                                     <thead>

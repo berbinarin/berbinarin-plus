@@ -108,7 +108,7 @@ class RegisteredUserController
 
 
 
-            return redirect()->route('landing.index')->with([
+            return redirect()->route('auth.berbinar-plus.success')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/success.webp'),
                 'title' => 'Pendaftaran Berhasil',
@@ -213,12 +213,16 @@ class RegisteredUserController
         $enrollment->status_kelas = 'pending_payment';
         $enrollment->save();
 
-        return redirect()->route('landing.index')->with([
+        return redirect()->route('auth.berbinar-plus.success')->with([
             'alert' => true,
             'icon' => asset('assets/images/dashboard/success.webp'),
             'title' => 'Pendaftaran Kelas Berhasil',
             'message' => 'Kamu berhasil mendaftar kelas baru. Silakan tunggu verifikasi admin.',
             'type' => 'success',
         ]);
+    }
+
+    public function success(){
+        return view('auth.register.success');
     }
 }
