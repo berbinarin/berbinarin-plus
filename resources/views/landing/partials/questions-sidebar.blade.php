@@ -69,6 +69,14 @@
                         </a>
                     @endforeach
                 @endif
+                @if (isset($posttest) && $posttest->questions->count())
+                    @foreach ($posttest->questions as $i => $q)
+                        <a href="{{ route('landing.posttest.question', ['class_id' => $class->id ?? 1, 'number' => $i + 1]) }}"
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border {{ ($number ?? 1) == $i + 1 ? 'bg-[#3986A3] text-white' : 'bg-[#BAD5DF] text-black' }} border-gray-500 text-lg shadow hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            {{ $i + 1 }}
+                        </a>
+                    @endforeach
+                @endif
             </div>
         </div>
     </ul>

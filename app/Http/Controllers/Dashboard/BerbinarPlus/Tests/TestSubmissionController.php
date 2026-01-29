@@ -55,7 +55,13 @@ class TestSubmissionController extends Controller
                 'certificate_file' => $path,
             ]
         );
-        return redirect()->back()->with('success', 'Sertifikat berhasil diupload.');
+        return redirect()->back()->with([
+            'alert' => true,
+            'icon' => asset('assets/images/dashboard/success.webp'),
+            'title' => 'Berhasil',
+            'message' => 'Sertifikat Berhasil Diupload.',
+            'type' => 'success',
+        ]);
     }
 
     /**

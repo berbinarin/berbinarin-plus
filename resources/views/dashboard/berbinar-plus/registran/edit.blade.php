@@ -258,28 +258,27 @@
                                 style="width: 50%; background: #3986a3; color: #fff">Simpan</button>
                         </div>
 
-                        <!-- Modal Konfirmasi Batal -->
+                        <!-- Modal Konfirmasi Batal/Submit -->
                         <div id="confirmModal"
                             class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
-                            <div class="relative w-[560px] rounded-[20px] bg-white p-6 text-center font-plusJakartaSans shadow-lg"
+                            <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
                                 style=" background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
                                 <!-- Warning Icon -->
                                 <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
                                     class="mx-auto h-[83px] w-[83px]" />
 
                                 <!-- Title -->
-                                <h2 class="mt-4 text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
+                                <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
 
                                 <!-- Message -->
-                                <p class="mt-2 text-base font-medium text-black">Apakah Anda yakin ingin membatalkan
-                                    pengisian data?</p>
+                                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Apakah Anda yakin ingin membatalkan pengisian data?</p>
 
                                 <!-- Actions -->
-                                <div class="mt-6 flex justify-center gap-3">
+                                <div class="mt-3 lg:mt-6 flex justify-center gap-3">
                                     <button type="button" id="cancelSubmit"
-                                        class="rounded-lg border border-stone-300 px-6 py-2 text-stone-700">Tidak</button>
-                                    <a href="{{ route('dashboard.pendaftar.index') }}"
-                                        class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-6 py-2 font-medium text-white">Ya</a>
+                                        class="rounded-lg border border-stone-300 px-4 lg:px-6 py-2 text-sm lg:text-base text-stone-700">Tidak</button>
+                                    <button type="button" id="confirmAction"
+                                        class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-4 lg:px-6 py-2 font-medium text-white text-sm lg:text-base">Ya</button>
                                 </div>
                             </div>
                         </div>
@@ -291,8 +290,42 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // --- Custom Alert Functions ---
+        function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
+            const alertHTML = `
+                <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
+                        style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">${title}</h2>
+                        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">${message}</p>
+                        <div class="mt-3 lg:mt-6 flex justify-center">
+                            <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-8 lg:px-10 py-2 font-medium text-white">OK</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', alertHTML);
+        }
+
+        function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+            const alertHTML = `
+                <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
+                        style="background: linear-gradient(to right, #BD7979, #BD7979) top/100% 6px no-repeat, white; border-radius: 20px; background-clip: padding-box, border-box;">
+                        <img src="${icon}" alt="icon" class="mx-auto h-[83px] w-[83px]" />
+                        <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">${title}</h2>
+                        <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">${message}</p>
+                        <div class="mt-3 lg:mt-6 flex justify-center">
+                            <button onclick="this.closest('.fixed').remove()" class="rounded-[5px] bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-8 lg:px-10 py-2 font-medium text-white">OK</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', alertHTML);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // === DROPDOWN EDUCATION ONLY ===
             const educationToggle = document.getElementById('educationToggle');
@@ -366,13 +399,20 @@
                 }
             });
 
-            // Modal Konfirmasi Batal
+            // Modal Konfirmasi Batal/Submit
             const cancelButton = document.getElementById('cancelButton');
             const confirmModal = document.getElementById('confirmModal');
             const cancelSubmit = document.getElementById('cancelSubmit');
+            const confirmAction = document.getElementById('confirmAction');
+            let modalMode = 'cancel'; // 'cancel' atau 'submit'
 
             cancelButton.addEventListener('click', function(e) {
                 e.preventDefault();
+                modalMode = 'cancel';
+                const h2 = confirmModal.querySelector('h2');
+                const p = confirmModal.querySelector('p');
+                h2.textContent = 'Konfirmasi Batal';
+                p.textContent = 'Apakah Anda yakin ingin membatalkan pengisian data?';
                 confirmModal.classList.remove('hidden');
             });
 
@@ -380,27 +420,37 @@
                 confirmModal.classList.add('hidden');
             });
 
-            // SweetAlert untuk validasi
+            confirmAction.addEventListener('click', function() {
+                if (modalMode === 'cancel') {
+                    // Redirect ke halaman index
+                    window.location.href = "{{ route('dashboard.pendaftar.index') }}";
+                } else if (modalMode === 'submit') {
+                    // Submit form
+                    document.getElementById('berbinarForm').submit();
+                }
+            });
+
+            // Custom Alert untuk validasi
             const submitButton = document.getElementById('submitButton');
             const form = document.getElementById('berbinarForm');
 
             submitButton.addEventListener('click', function(e) {
                 e.preventDefault();
-                let errorMessage = validateForm();
-                if (errorMessage) {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: errorMessage,
-                        showConfirmButton: false,
-                        showCloseButton: true,
-                        timer: 4000,
-                    });
-                    return;
+                if (validateForm()) {
+                    // Tampilkan modal konfirmasi sebelum submit
+                    showConfirmModal();
                 }
-                form.submit();
             });
+
+            // Fungsi untuk modal konfirmasi sebelum submit
+            window.showConfirmModal = function() {
+                modalMode = 'submit';
+                const h2 = confirmModal.querySelector('h2');
+                const p = confirmModal.querySelector('p');
+                h2.textContent = 'Konfirmasi!';
+                p.textContent = 'Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.';
+                confirmModal.classList.remove('hidden');
+            };
 
             function getFieldLabel(fieldName) {
                 const field = document.querySelector(`[name="${fieldName}"]`);
@@ -424,7 +474,7 @@
 
             function validateForm() {
                 const requiredFields = [
-                    'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email',
+                    'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email', 'username',
                     'last_education', 'class_id', 'service_package', 'price_package', 'referral_source'
                 ];
 
@@ -434,15 +484,20 @@
                     requiredFields.push('otherReasonText');
                 }
 
-                // Cek bukti_transfer hanya jika tidak ada file lama
+                // Cek bukti_transfer hanya jika ada file baru
                 const buktiTransferInput = document.getElementById('bukti_transfer');
-                const hasOldBukti = @json(optional(optional($user->enrollments->first())->payment_proof_url) ? true : false);
-                if (!hasOldBukti) {
-                    if (!buktiTransferInput || !buktiTransferInput.files || buktiTransferInput.files.length === 0) {
-                        return '"Bukti Pembayaran" belum diisi.';
+                if (buktiTransferInput && buktiTransferInput.files && buktiTransferInput.files.length > 0) {
+                    // Validasi ukuran file (max 1 MB)
+                    if (buktiTransferInput.files[0].size > 1048576) {
+                        showCustomAlertError(
+                            'Ukuran file bukti pembayaran tidak boleh lebih dari 1 MB.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
+                        );
+                        return false;
                     }
                 }
-                // ...lanjut validasi field lain...
+
                 for (let fieldName of requiredFields) {
                     let field;
                     if (fieldName === 'gender') {
@@ -453,16 +508,31 @@
                         field = document.querySelector(`[name="${fieldName}"]`);
                     }
                     if (!field || (field.value !== undefined && field.value.trim() === '')) {
-                        return '"' + getFieldLabel(fieldName) + '" belum diisi.';
+                        showCustomAlertError(
+                            '"' + getFieldLabel(fieldName) + '" belum diisi.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
+                        );
+                        return false;
                     }
                     if (fieldName === 'email' && !isValidEmail(field.value)) {
-                        return 'Format Email tidak valid.';
+                        showCustomAlertError(
+                            'Format Email tidak valid.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
+                        );
+                        return false;
                     }
                     if (fieldName === 'phone_number' && !isValidPhoneNumber(field.value)) {
-                        return 'Format Nomor Whatsapp tidak valid.';
+                        showCustomAlertError(
+                            'Format Nomor Whatsapp tidak valid.',
+                            'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
+                        );
+                        return false;
                     }
                 }
-                return null;
+                return true;
             }
         });
     </script>

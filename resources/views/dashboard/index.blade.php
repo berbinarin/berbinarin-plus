@@ -44,10 +44,9 @@
                     <div class="w-full grid grid-cols-1 gap-6">
                         <div class="flex h-[70vh] flex-col rounded-xl bg-white px-6 py-4 shadow">
                             <div class="mb-4">
-                                <h1 class="text-[28px] text-[#75BADB]"><b>Rata-Rata Progres Kelas Berbinar+</b></h1>
+                                <h1 class="text-[28px] text-[#75BADB]"><b>Jumlah Pendaftar Kelas Berbinar+</b></h1>
                                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                    <p class="text-[14px]">Berikut ini merupakan visualisasi rata-rata progres tiap-tiap kelas
-                                        Berbinar+</p>
+                                    <p class="text-[14px]">Berikut ini merupakan visualisasi data jumlah pendaftar tiap-tiap kelas Berbinar+</p>
                                 </div>
                             </div>
                             <div class="flex w-full flex-col items-center h-full">
@@ -77,10 +76,10 @@
 
                     <div class="flex flex-col w-full gap-6">
 
-                        <div class="flex flex-col w-full items-start px-6 py-4 bg-white shadow rounded-lg">
+                        <div class="w-full items-start px-6 py-4 bg-white shadow rounded-lg">
                             <h1 class="text-[28px] text-[#75BADB]"><b>Data Kelas dan Pendaftar Baru</h1>
-                            <div class="w-full h-[59vh] overflow-y-scroll">
-                                <table id="unfinished" class="min-w-full pt-5 leading-normal">
+                            <div class="w-full h-[59vh] overflow-y-scroll" style="width: 100%;">
+                                <table id="unfinished" class="w-full pt-5 leading-normal">
                                     <thead>
                                         <th class="w-1/12">No.</th>
                                         <th class="text-start">Jenis</th>
@@ -88,44 +87,50 @@
                                         <th class="w-1/6">Aksi</th>
                                     </thead>
                                     <tbody>
-                                        @php $no = 1; @endphp
-                                        @foreach ($pendingUsers as $user)
-                                            <tr class="border-b border-gray-200 bg-white">
-                                                <td class="text-center">{{ $no++ }}.</td>
-                                                <td class="py-4">
-                                                    <p>Pendaftar Baru</p>
-                                                </td>
-                                                <td class="text-center">{{ $user->first_name }} {{ $user->last_name }}</td>
-                                                <td class="flex justify-center pt-3">
-                                                    <a href="{{ route('dashboard.pendaftar.index') }}">
-                                                        <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}"
-                                                            alt="">
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        @foreach ($enrollmentBaru as $enroll)
-                                            <tr class="border-b border-gray-200 bg-white">
-                                                <td class="text-center">{{ $no++ }}.</td>
-                                                <td class="py-4">
-                                                    <p>Kelas Baru</p>
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $enroll->course ? $enroll->course->name : '-' }}<br>
-                                                </td>
-                                                <td class="flex justify-center pt-3">
-                                                    @if ($enroll->user)
-                                                        <a
-                                                            href="{{ route('dashboard.pendaftar.show', ['id' => $enroll->user->id]) }}">
+                                        @if ($pendingUsers->count() > 0 || $enrollmentBaru->count() > 0)
+                                            @php $no = 1; @endphp
+                                            @foreach ($pendingUsers as $user)
+                                                <tr class="border-b border-gray-200 bg-white">
+                                                    <td class="text-center">{{ $no++ }}.</td>
+                                                    <td class="py-4">
+                                                        <p>Pendaftar Baru</p>
+                                                    </td>
+                                                    <td class="text-center">{{ $user->first_name }} {{ $user->last_name }}</td>
+                                                    <td class="flex justify-center pt-3">
+                                                        <a href="{{ route('dashboard.pendaftar.index') }}">
                                                             <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}"
                                                                 alt="">
                                                         </a>
-                                                    @else
-                                                        <span>-</span>
-                                                    @endif
-                                                </td>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @foreach ($enrollmentBaru as $enroll)
+                                                <tr class="border-b border-gray-200 bg-white">
+                                                    <td class="text-center">{{ $no++ }}.</td>
+                                                    <td class="py-4">
+                                                        <p>Kelas Baru</p>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ $enroll->course ? $enroll->course->name : '-' }}<br>
+                                                    </td>
+                                                    <td class="flex justify-center pt-3">
+                                                        @if ($enroll->user)
+                                                            <a
+                                                                href="{{ route('dashboard.pendaftar.show', ['id' => $enroll->user->id]) }}">
+                                                                <img src="{{ asset('assets/images/dashboard/svg/arrow-square.webp') }}"
+                                                                    alt="">
+                                                            </a>
+                                                        @else
+                                                            <span>-</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr class="border-b border-gray-200 bg-white">
+                                                <td class="text-center py-4 text-gray-500 text-xl font-normal" colspan="4">Tidak ada pendaftar atau kelas baru</td>
                                             </tr>
-                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
