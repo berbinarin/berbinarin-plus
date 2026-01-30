@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus\Tests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berbinarp_User;;
+
 use App\Models\EnrollmentUser;
 use App\Models\Test_Result;
 use App\Models\Certificates;
@@ -38,7 +39,7 @@ class TestSubmissionController extends Controller
     public function uploadCertificate(Request $request, $user, $enrollment)
     {
         $request->validate([
-            'certificate' => 'required|mimes:pdf|max:2048',
+            'certificate' => 'required|mimes:pdf|max:5120',
         ]);
         $userModel = Berbinarp_User::findOrFail($user);
         $enrollmentModel = EnrollmentUser::findOrFail($enrollment);

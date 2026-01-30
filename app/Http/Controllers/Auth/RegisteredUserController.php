@@ -7,7 +7,9 @@ use App\Models\Berbinarp_Class;
 use App\Models\Berbinarp_User;
 use App\Models\EnrollmentUser;
 use App\Models\BerbinarpUserStatus;
+
 use Illuminate\Support\Facades\Log;
+use App\Services\ImageService;
 
 
 class RegisteredUserController
@@ -51,7 +53,7 @@ class RegisteredUserController
         return view('auth.register.register', compact('servicePackages', 'ClassBerbinarPlus'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         try {
             $validated = $request->validate([
@@ -81,8 +83,10 @@ class RegisteredUserController
                 $referralSource = $request->otherReasonText;
             }
 
-            // Bukti transfer
-            $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+            // Bukti transfer (pakai ImageService)
+            $buktiTransferFile = $request->file('payment_proof_url');
+            $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null (resize saja)
+            $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
 
             $user = Berbinarp_User::create([
                 'first_name' => $request->first_name,
@@ -169,14 +173,14 @@ class RegisteredUserController
     }
 
     // Proses pendaftaran kelas baru untuk user yang sudah terdaftar
-    public function enrollClassStore(Request $request)
+    public function enrollClassStore(Request $request, ImageService $imageService)
     {
         $user = auth('berbinar')->user();
         $validated = $request->validate([
             'course_id' => 'required|exists:berbinarp_class,id',
             'service_package' => 'required|string',
             'price_package' => 'required|string',
-            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
             'referral_source' => 'required|string',
             'otherReasonText' => 'nullable|string|max:255',
         ]);
@@ -200,8 +204,10 @@ class RegisteredUserController
             $referralSource = $request->otherReasonText;
         }
 
-        // Upload bukti transfer
-        $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+        // Upload bukti transfer (pakai ImageService)
+        $buktiTransferFile = $request->file('payment_proof_url');
+        $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null (resize saja)
+        $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
 
         // Simpan enrollments_users
         $enrollment = new EnrollmentUser();
@@ -216,13 +222,14 @@ class RegisteredUserController
         return redirect()->route('auth.berbinar-plus.success')->with([
             'alert' => true,
             'icon' => asset('assets/images/dashboard/success.webp'),
-            'title' => 'Pendaftaran Kelas Berhasil',
+            'title' => 'Pendaftaran Kelas Berhasil',~
             'message' => 'Kamu berhasil mendaftar kelas baru. Silakan tunggu verifikasi admin.',
             'type' => 'success',
         ]);
     }
 
-    public function success(){
+    public function success()
+    {
         return view('auth.register.success');
     }
 }

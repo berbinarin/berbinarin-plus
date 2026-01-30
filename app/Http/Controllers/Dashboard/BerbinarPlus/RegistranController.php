@@ -8,6 +8,7 @@ use App\Models\Berbinarp_User;
 use App\Models\BerbinarpUserStatus;
 use App\Models\Berbinarp_Class;
 use App\Models\EnrollmentUser;
+use App\Services\ImageService;
 
 class RegistranController extends Controller
 
@@ -38,7 +39,7 @@ class RegistranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $request->validate([
             'first_name' => 'required',
@@ -52,7 +53,7 @@ class RegistranController extends Controller
             'course_id' => 'required|exists:berbinarp_class,id',
             'service_package' => 'required',
             'price_package' => 'required',
-            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         // Simpan user
@@ -68,8 +69,10 @@ class RegistranController extends Controller
             'user_status_id' => BerbinarpUserStatus::where('name', 'pending')->first()?->id ?? 1,
         ]);
 
-        // Simpan bukti transfer
-        $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+        // Simpan bukti transfer pakai ImageService
+        $buktiTransferFile = $request->file('payment_proof_url');
+        $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null
+        $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
 
         // Simpan enrollments_users
         $enrollment = new EnrollmentUser();
@@ -119,7 +122,7 @@ class RegistranController extends Controller
     /**
      * Update the specified user and enrollment in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $request->validate([
             'first_name' => 'required',
@@ -155,7 +158,9 @@ class RegistranController extends Controller
             $enrollment->price_package = $request->price_package;
             // Update payment proof
             if ($request->hasFile('payment_proof_url')) {
-                $buktiTransferPath = $request->file('payment_proof_url')->store('uploads/bukti_transfer', 'public');
+                $buktiTransferFile = $request->file('payment_proof_url');
+                $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null);
+                $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
                 $enrollment->payment_proof_url = $buktiTransferPath;
             }
             $enrollment->save();
@@ -192,7 +197,7 @@ class RegistranController extends Controller
     public function updateUserStatus(Request $request, $id)
     {
         $request->validate([
-            'user_status_id' => 'required|in:2', 
+            'user_status_id' => 'required|in:2',
         ]);
 
         $user = Berbinarp_User::findOrFail($id);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berbinarp_Class;
 use App\Models\Test;
+use App\Services\ImageService;
 
 class ClassController extends Controller
 {
@@ -32,7 +33,7 @@ class ClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $validated = $request->validate([
             'category' => 'required',
@@ -40,17 +41,16 @@ class ClassController extends Controller
             'instructor_name' => 'required',
             'instructor_title' => 'required',
             'description' => 'required',
-            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:1024',
+            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
         ],  [
-            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
+            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 5 MB.',
         ]);
 
-        // Proses upload thumbnail
+        // Proses upload thumbnail pakai ImageService
         $filename = null;
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/thumbnails'), $filename);
+            $filename = $imageService->upload($file, 'uploads/thumbnails', 600, null); // width 600px, height null
         }
 
         // Simpan ke database
@@ -92,7 +92,7 @@ class ClassController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, ImageService $imageService)
     {
         $validated = $request->validate([
             'category' => 'required',
@@ -100,18 +100,17 @@ class ClassController extends Controller
             'instructor_name' => 'required',
             'instructor_title' => 'required',
             'description' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ], [
-            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 1 MB.',
+            'thumbnail.max' => 'Ukuran file thumbnail tidak boleh lebih dari 5 MB.',
         ]);
 
         $class = Berbinarp_Class::findOrFail($id);
 
-        // Proses upload thumbnail jika ada file baru
+        // Proses upload thumbnail jika ada file baru pakai ImageService
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/thumbnails'), $filename);
+            $filename = $imageService->upload($file, 'uploads/thumbnails', 600, null);
             $class->thumbnail = $filename;
         }
 
