@@ -88,18 +88,6 @@
                             @foreach ($enrolledClasses as $enrolled)
                                 @php
                                     $class = $enrolled['course'];
-                                    $certificate = null;
-                                    $hasCertificate = false;
-                                    if (isset($class->id) && Auth::guard('berbinar')->check()) {
-                                        $userId = Auth::guard('berbinar')->id();
-                                        $certificate = \App\Models\Certificates::where('course_id', $class->id)
-                                            ->where('user_id', $userId)
-                                            ->first();
-                                        $hasCertificate =
-                                            $certificate &&
-                                            $certificate->certificate_file &&
-                                            file_exists(public_path('storage/' . $certificate->certificate_file));
-                                    }
                                 @endphp
                                 <div class="swiper-slide">
                                     <div
@@ -131,11 +119,15 @@
                                             </div>
                                             <div class="flex max-sm:flex-col gap-2 max-sm:gap-0.5">
                                                 <a href="{{ route('landing.home.preview', ['class_id' => $class->id]) }}"
-                                                    class="bg-primary text-white flex flex-row items-center py-0.5 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-0.5 mt-1 w-fit"><p>Mulai</p>
-                                                    <i class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i></a>
-                                                @if ($hasCertificate)
+                                                    class="bg-primary text-white flex flex-row items-center py-0.5 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-0.5 mt-1 w-fit">
+                                                    <p>Mulai</p>
+                                                    <i
+                                                        class="bx bx-right-arrow-alt text-white text-sm lg:text-base align-bottom"></i>
+                                                </a>
+                                                @if ($enrolled['status'] === 'Success' && $enrolled['has_certificate'])
                                                     <a href="{{ route('landing.home.certificates', ['class_id' => $class->id]) }}"
-                                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2 mt-1">Unduh Sertifikat</a>
+                                                        class="bg-primary text-white py-1 px-2 lg:py-1 rounded-lg text-xs lg:text-base gap-2 mt-1">Unduh
+                                                        Sertifikat</a>
                                                 @endif
                                             </div>
                                         </div>
