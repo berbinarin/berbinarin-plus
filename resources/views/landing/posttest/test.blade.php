@@ -75,6 +75,24 @@
                 @endif
             </div>
         </div>
+
+        <!-- Modal Konfirmasi -->
+        <div id="myModalConfirm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/40">
+            <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
+                style="background: linear-gradient(to right, #74aabf, #3986a3) top/100% 6px no-repeat, white; border-radius: 20px;background-clip: padding-box, border-box;">
+                <img src="{{ asset('assets/images/dashboard/warning.webp') }}" alt="Warning Icon"
+                    class="mx-auto h-[83px] w-[83px]" />
+                <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi!</h2>
+                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black" id="modalConfirmText">Tolong pastikan
+                    bahwa informasi yang Anda masukkan telah tepat.</p>
+                <div class="mt-3 lg:mt-6 flex justify-center gap-3">
+                    <button type="button" id="closeModalConfirm"
+                        class="w-1/3 rounded-lg border border-primary px-3 lg:px-6 py-2 text-stone-700">Kembali</button>
+                    <button type="button" id="okButton"
+                        class="w-1/3 rounded-lg bg-gradient-to-r from-[#74AABF] to-[#3986A3] px-3 lg:px-6 py-2 font-medium text-white">OK</button>
+                </div>
+            </div>
+        </div>
     @endsection
 
     @section('script')
@@ -110,9 +128,52 @@
                 const nextBtn = document.getElementById('nextBtn');
                 const finishBtn = document.getElementById('finishBtn');
                 const form = document.getElementById('posttestForm');
+
+                function isAnswered() {
+                    if (!form) return false;
+                    if (form.answer) {
+                        if (form.answer.type === 'radio') {
+                            return form.answer.checked;
+                        } else {
+                            return form.answer.value.trim() !== '';
+                        }
+                    } else {
+                        // Multiple radio
+                        const radios = form.querySelectorAll('input[type="radio"][name="answer"]');
+                        for (let r of radios) {
+                            if (r.checked) return true;
+                        }
+                    }
+                    return false;
+                }
+                // Modal logic
+                const modal = document.getElementById('myModalConfirm');
+                const closeModalBtn = document.getElementById('closeModalConfirm');
+                const okModalBtn = document.getElementById('okButton');
+                const modalText = document.getElementById('modalConfirmText');
+                let nextAction = null;
+
+                function showModalConfirm(message, onOk) {
+                    modalText.textContent = message;
+                    modal.classList.remove('hidden');
+                    nextAction = onOk;
+                }
+                closeModalBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+                okModalBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+
                 if (nextBtn) {
                     nextBtn.addEventListener('click', function(e) {
                         e.preventDefault();
+                        if (!isAnswered()) {
+                            showModalConfirm(
+                                'Silakan isi jawaban terlebih dahulu sebelum melanjutkan ke soal berikutnya.',
+                                null);
+                            return;
+                        }
                         saveAnswer();
                         window.location.href =
                             "{{ route('landing.posttest.question', ['class_id' => $class->id ?? 1, 'number' => ($number ?? 1) + 1]) }}";
@@ -121,6 +182,12 @@
                 if (finishBtn) {
                     finishBtn.addEventListener('click', function(e) {
                         e.preventDefault();
+                        if (!isAnswered()) {
+                            showModalConfirm(
+                                'Silakan isi jawaban terlebih dahulu sebelum menyelesaikan post test.', null
+                            );
+                            return;
+                        }
                         saveAnswer();
                         // submit all answers
                         const answersRaw = localStorage.getItem('posttest_answers_' + classId);
@@ -130,8 +197,6 @@
                         } catch (e) {
                             answersObj = {};
                         }
-                        const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-                        const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
                         fetch("{{ route('landing.posttest.submit', ['class_id' => $class->id ?? 1]) }}", {
                                 method: 'POST',
                                 headers: {
