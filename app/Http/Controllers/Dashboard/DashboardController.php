@@ -14,15 +14,14 @@ class DashboardController extends Controller
 
     public function index()
     {
+
         $totalBerbinarPlusClass = Berbinarp_Class::count();
         $totalBerbinarPlusUser = Berbinarp_User::count();
 
-        // Placeholder chart
-        $kelas1 = 78;
-        $kelas2 = 49;
-        $kelas3 = 83;
-        $kelas4 = 66;
-        $kelas5 = 27;
+        // Ambil data kelas dan jumlah pendaftarnya
+        $classChartData = Berbinarp_Class::withCount('enrollments')->get(['id', 'name']);
+        $chartLabels = $classChartData->pluck('name')->toArray();
+        $chartValues = $classChartData->pluck('enrollments_count')->toArray();
 
         // Ambil user dengan status 'pending'
         $pendingStatus = BerbinarpUserStatus::where('name', 'pending')->first();
@@ -39,11 +38,8 @@ class DashboardController extends Controller
         return view('dashboard.index', compact(
             'totalBerbinarPlusClass',
             'totalBerbinarPlusUser',
-            'kelas1',
-            'kelas2',
-            'kelas3',
-            'kelas4',
-            'kelas5',
+            'chartLabels',
+            'chartValues',
             'pendingUsers',
             'enrollmentBaru'
         ));

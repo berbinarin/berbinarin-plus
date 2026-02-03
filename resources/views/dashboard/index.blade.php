@@ -46,26 +46,31 @@
                             <div class="mb-4">
                                 <h1 class="text-[28px] text-[#75BADB]"><b>Jumlah Pendaftar Kelas Berbinar+</b></h1>
                                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                    <p class="text-[14px]">Berikut ini merupakan visualisasi data jumlah pendaftar tiap-tiap kelas Berbinar+</p>
+                                    <p class="text-[14px]">Berikut ini merupakan visualisasi data jumlah pendaftar tiap-tiap
+                                        kelas Berbinar+</p>
                                 </div>
                             </div>
                             <div class="flex w-full flex-col items-center h-full">
                                 <canvas id="marketingChart" class="mb-1" style="max-height: 400px;"></canvas>
                                 <div class="mb-4 flex gap-4 text-xs">
                                     @php
-                                        $chartLabels = [
-                                            'Kelas Eka',
-                                            'Kelas Dwi',
-                                            'Kelas Tri',
-                                            'Kelas Catur',
-                                            'Kelas Panca',
+                                        $chartColors = [
+                                            '#440E03',
+                                            '#F4320B',
+                                            '#E9B306',
+                                            '#57F527',
+                                            '#106681',
+                                            '#1E90FF',
+                                            '#FF69B4',
+                                            '#32CD32',
+                                            '#FFD700',
+                                            '#8A2BE2',
                                         ];
-                                        $chartColors = ['#440E03', '#F4320B', '#E9B306', '#57F527', '#106681'];
                                     @endphp
                                     @foreach ($chartLabels as $i => $label)
                                         <div class="flex items-center gap-1">
                                             <span class="inline-block h-3 w-3 rounded"
-                                                style="background: {{ $chartColors[$i] }}"></span>
+                                                style="background: {{ $chartColors[$i % count($chartColors)] }}"></span>
                                             {{ $label }}
                                         </div>
                                     @endforeach
@@ -128,7 +133,8 @@
                                             @endforeach
                                         @else
                                             <tr class="border-b border-gray-200 bg-white">
-                                                <td class="text-center py-4 text-gray-500 text-xl font-normal" colspan="4">Tidak ada pendaftar atau kelas baru</td>
+                                                <td class="text-center py-4 text-gray-500 text-xl font-normal" colspan="4">
+                                                    Tidak ada pendaftar atau kelas baru</td>
                                             </tr>
                                         @endif
                                     </tbody>
@@ -143,14 +149,16 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
-                            const chartDataValues = [{{ $kelas1 }}, {{ $kelas2 }}, {{ $kelas3 }},
-                                {{ $kelas4 }}, {{ $kelas5 }}
-                            ];
+                            const chartLabels = @json($chartLabels);
+                            const chartDataValues = @json($chartValues);
                             const chartColors = ['rgba(68, 14, 3, 0.6)', 'rgba(244, 50, 11, 0.6)', 'rgba(233, 179, 6, 0.6)',
-                                'rgba(87, 245, 39, 0.6)', 'rgba(16, 102, 129, 0.6)'
+                                'rgba(87, 245, 39, 0.6)', 'rgba(16, 102, 129, 0.6)', 'rgba(30, 144, 255, 0.6)',
+                                'rgba(255, 105, 180, 0.6)', 'rgba(50, 205, 50, 0.6)', 'rgba(255, 215, 0, 0.6)',
+                                'rgba(138, 43, 226, 0.6)'
                             ];
-                            const solidColors = ['#440E03', '#F4320B', '#E9B306', '#57F527', '#106681'];
-                            const chartLabels = ['Kelas Eka', 'Kelas Dwi', 'Kelas Tri', 'Kelas Catur', 'Kelas Panca'];
+                            const solidColors = ['#440E03', '#F4320B', '#E9B306', '#57F527', '#106681', '#1E90FF', '#FF69B4',
+                                '#32CD32', '#FFD700', '#8A2BE2'
+                            ];
 
                             const ctx = document.getElementById('marketingChart').getContext('2d');
                             const chartData = {
@@ -158,10 +166,10 @@
                                 datasets: [{
                                     label: 'Jumlah',
                                     data: chartDataValues,
-                                    backgroundColor: chartColors,
+                                    backgroundColor: chartLabels.map((_, i) => chartColors[i % chartColors.length]),
                                     borderRadius: 0,
                                     barThickness: 30,
-                                }, ],
+                                }],
                             };
 
                             new Chart(ctx, {
@@ -181,11 +189,11 @@
                                                 color: '#eee'
                                             },
                                             beginAtZero: true,
-                                            max: 100,
+                                            // max: 100, // Remove static max, let Chart.js decide
                                             ticks: {
-                                                stepSize: 10,
+                                                stepSize: 1,
                                                 callback: function(value) {
-                                                    return value % 10 === 0 ? value : '';
+                                                    return Number.isInteger(value) ? value : '';
                                                 }
                                             }
                                         },
@@ -221,8 +229,6 @@
                                                 if (value > 0) {
                                                     const solidColor = solidColors[index %
                                                         solidColors.length];
-                                                    const barHeight = bar.height || (bar.base -
-                                                        bar.y) * 2;
                                                     ctx.fillStyle = solidColor;
                                                     ctx.fillRect(bar.x - bar.width / 2, bar.y,
                                                         bar.width, 12);
@@ -231,7 +237,7 @@
                                             });
                                         });
                                     },
-                                }, ],
+                                }],
                             });
                         });
                     </script>
