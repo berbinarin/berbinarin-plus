@@ -12,8 +12,8 @@
             --vjs-theme-primary: #3986A3;
         }
 
-        /* Proteksi visual: progress bar tidak bisa di-klik */
-        /* .video-js .vjs-progress-control {
+        /* Proteksi visual */
+        .video-js .vjs-progress-control {
             pointer-events: none;
         }
 
@@ -23,7 +23,7 @@
 
         .video-js .vjs-progress-holder {
             opacity: 0.8;
-        } */
+        }
 
         /* Container dengan overflow hidden untuk memotong elemen YouTube */
         .video-container {

@@ -14,6 +14,7 @@ class EnrollmentUser extends Model
         'user_id',
         'course_id',
         'service_package',
+        'referral_source',
         'price_package',
         'payment_proof_url',
         'price_at_enrollment',
@@ -32,5 +33,4 @@ class EnrollmentUser extends Model
     {
         return $this->belongsTo(Berbinarp_Class::class, 'course_id');
     }
-
 }

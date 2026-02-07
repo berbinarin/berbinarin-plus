@@ -53,7 +53,6 @@ class AuthenticatedController
         $user = Berbinarp_User::where('username', $credentials['username'])->first();
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::guard('berbinar')->login($user);
-            // Kirim data user ke halaman profile
             return redirect()->route('landing.home.index')->with([
                 'alert' => true,
                 'icon' => asset('assets/images/dashboard/success.webp'),

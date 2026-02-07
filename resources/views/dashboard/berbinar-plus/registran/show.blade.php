@@ -136,10 +136,10 @@
                                                 style="background-color: #00B300">
                                                 <i class="bx bx-check text-white"></i>
                                             </button>
-                                            <span class="italic">ACC Pembayaran</span>
+                                            <span class="text-lg font-semibold">ACC Pembayaran</span>
                                         </form>
                                     @else
-                                        <span class="italic">-</span>
+                                        <span>-</span>
                                     @endif
                                 </p>
                             </div>
@@ -167,7 +167,7 @@
                             <div class="mb-4 flex flex-col">
                                 <h2 class="mb-2 text-lg font-semibold text-gray-500">Darimana SobatBinar mengetahui layanan
                                     produk BERBINAR+</h2>
-                                <p class="text-lg font-semibold">{{ $user->referral_source }}</p>
+                                <p class="text-lg font-semibold">{{ $enrollment->referral_source }}</p>
                             </div>
                         </div>
                     </div>

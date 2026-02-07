@@ -9,7 +9,7 @@ use App\Models\EnrollmentUser;
 use App\Models\BerbinarpUserStatus;
 
 use Illuminate\Support\Facades\Log;
-use App\Services\ImageService;
+use App\Services\Auth\RegistrationService;
 
 
 class RegisteredUserController
@@ -53,104 +53,41 @@ class RegisteredUserController
         return view('auth.register.register', compact('servicePackages', 'ClassBerbinarPlus'));
     }
 
-    public function store(Request $request, ImageService $imageService)
+    public function store(Request $request, RegistrationService $registrationService)
     {
-        try {
-            $validated = $request->validate([
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'gender' => 'required|string',
-                'age' => 'required|integer|min:1',
-                'phone_number' => 'required|string',
-                'email' => 'required|email|unique:berbinarp_users,email',
-                'last_education' => 'required|string',
-                'otherEducation' => 'nullable|string|max:255',
-                'referral_source' => 'required|string',
-                'otherReasonText' => 'nullable|string|max:255',
-                'course_id' => 'required|exists:berbinarp_class,id',
-                'service_package' => 'required|string',
-                'price_package' => 'required|string',
-                'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            ]);
-
-            $lastEducation = $request->last_education;
-            if ($lastEducation === 'Other' && $request->filled('otherEducation')) {
-                $lastEducation = $request->otherEducation;
-            }
-
-            $referralSource = $request->referral_source;
-            if ($referralSource === 'Other' && $request->filled('otherReasonText')) {
-                $referralSource = $request->otherReasonText;
-            }
-
-            // Bukti transfer (pakai ImageService)
-            $buktiTransferFile = $request->file('payment_proof_url');
-            $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null (resize saja)
-            $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
-
-            $user = Berbinarp_User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'gender' => $request->gender,
-                'age' => $request->age,
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'last_education' => $lastEducation,
-                'referral_source' => $referralSource,
-                'user_status_id' => BerbinarpUserStatus::where('name', 'pending')->first()?->id ?? 1,
-            ]);
-
-            // Simpan enrollments_users
-            $enrollment = new EnrollmentUser();
-            $enrollment->user_id = $user->id;
-            $enrollment->course_id = $request->course_id;
-            $enrollment->service_package = $request->service_package;
-            $enrollment->price_package = $request->price_package;
-            $enrollment->payment_proof_url = $buktiTransferPath;
-            $enrollment->status_kelas = 'pending_payment';
-            $enrollment->save();
-
-
-
-            return redirect()->route('auth.berbinar-plus.success')->with([
+        // Cek email sudah terdaftar
+        if (Berbinarp_User::where('email', $request->email)->exists()) {
+            return redirect()->back()->withInput()->with([
                 'alert' => true,
-                'icon' => asset('assets/images/dashboard/success.webp'),
-                'title' => 'Pendaftaran Berhasil',
-                'message' => 'Selamat datang di Berbinar+',
-                'type' => 'success',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            if ($request->expectsJson() || $request->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validasi gagal. Silakan periksa kembali data Anda.',
-                    'errors' => $e->errors()
-                ], 422);
-            }
-            // Tampilan eror ketika email sudah terdaftar
-            if (isset($e->validator) && $e->validator->errors()->has('email')) {
-                return redirect()->back()->withInput()->with('email_exists', true);
-            }
-            throw $e;
-        } catch (\Exception $e) {
-            Log::error('Registration error: ' . $e->getMessage());
-
-            if ($request->expectsJson() || $request->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.'
-                ], 500);
-            }
-
-            return redirect()->route('auth.berbinar-plus.regis')->with([
-                'alert' => true,
-                'icon' => asset('assets/images/dashboard/error.webp'),
-                'title' => 'Pendaftaran Gagal',
-                'message' => 'Terjadi kesalahan saat menyimpan data.',
-                'type' => 'error',
+                'icon' => asset('assets/images/landing/favicion/warning.webp'),
+                'title' => 'Email Sudah Terdaftar',
+                'message' => 'Email yang Anda masukkan sudah terdaftar. Silakan gunakan email lain.',
+                'type' => 'warning',
             ]);
         }
+
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'age' => 'required|integer|min:1',
+            'phone_number' => 'required|string|max:255',
+            'email' => 'required|email|string|max:255',
+            'last_education' => 'required|string|max:255',
+            'otherEducation' => 'nullable|string|max:255',
+            'referral_source' => 'required|string|max:255',
+            'otherReasonText' => 'nullable|string|max:255',
+            'course_id' => 'required|exists:berbinarp_class,id',
+            'service_package' => 'required|string|max:255',
+            'price_package' => 'required|string|max:255',
+            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
+        $registrationService->registerUserWithEnrollment($validated, $request->file('payment_proof_url'));
+
+        return redirect()->route('auth.berbinar-plus.success');
     }
+
 
     public function registerClass(Request $request)
     {
@@ -173,7 +110,7 @@ class RegisteredUserController
     }
 
     // Proses pendaftaran kelas baru untuk user yang sudah terdaftar
-    public function enrollClassStore(Request $request, ImageService $imageService)
+    public function enrollClassStore(Request $request, RegistrationService $registrationService)
     {
         $user = auth('berbinar')->user();
         $validated = $request->validate([
@@ -185,47 +122,10 @@ class RegisteredUserController
             'otherReasonText' => 'nullable|string|max:255',
         ]);
 
-        // Cek apakah user sudah pernah daftar kelas ini
-        $alreadyEnrolled = EnrollmentUser::where('user_id', $user->id)
-            ->where('course_id', $request->course_id)
-            ->exists();
-        if ($alreadyEnrolled) {
-            return redirect()->back()->with([
-                'alert' => true,
-                'icon' => asset('assets/images/landing/favicion/warning.webp'),
-                'title' => 'Sudah Terdaftar',
-                'message' => 'Anda sudah terdaftar di kelas ini.',
-                'type' => 'warning',
-            ]);
-        }
 
-        $referralSource = $request->referral_source;
-        if ($referralSource === 'Other' && $request->filled('otherReasonText')) {
-            $referralSource = $request->otherReasonText;
-        }
+        $registrationService->enrollExistingUser($user->id, $validated, $request->file('payment_proof_url'));
 
-        // Upload bukti transfer (pakai ImageService)
-        $buktiTransferFile = $request->file('payment_proof_url');
-        $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null (resize saja)
-        $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
-
-        // Simpan enrollments_users
-        $enrollment = new EnrollmentUser();
-        $enrollment->user_id = $user->id;
-        $enrollment->course_id = $request->course_id;
-        $enrollment->service_package = $request->service_package;
-        $enrollment->price_package = $request->price_package;
-        $enrollment->payment_proof_url = $buktiTransferPath;
-        $enrollment->status_kelas = 'pending_payment';
-        $enrollment->save();
-
-        return redirect()->route('auth.berbinar-plus.success')->with([
-            'alert' => true,
-            'icon' => asset('assets/images/dashboard/success.webp'),
-            'title' => 'Pendaftaran Kelas Berhasil',~
-            'message' => 'Kamu berhasil mendaftar kelas baru. Silakan tunggu verifikasi admin.',
-            'type' => 'success',
-        ]);
+        return redirect()->route('auth.berbinar-plus.success');
     }
 
     public function success()

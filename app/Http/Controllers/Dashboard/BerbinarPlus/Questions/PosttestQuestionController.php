@@ -74,7 +74,6 @@ class PosttestQuestionController extends Controller
      */
     public function show(Berbinarp_Class $class, Test $posttest, Question $question)
     {
-        // Return detail soal post-test dalam bentuk JSON
         return response()->json([
             'id' => $question->id,
             'type' => $question->type,

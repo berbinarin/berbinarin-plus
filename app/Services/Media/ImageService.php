@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Services;
-
-// PERUBAHAN 1: Namespace V3 yang benar
+namespace App\Services\Media;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Str;
 
 class ImageService
 {
     /**
-     * Upload, Resize, Convert to WebP (Versi 3)
+     * ImageService ini digunakan untuk compress, resize, dan menyimpan gambar dalam format WebP.
      *
      * @param $file (File dari Request)
      * @param string $path (Folder tujuan, misal: 'banners')
@@ -17,6 +15,8 @@ class ImageService
      * @param int|null $height (Tinggi yang diinginkan/Crop)
      * @return string (Nama file yang disimpan)
      */
+
+    // Fungsi ini mengunggah gambar, mengubah ukurannya, dan menyimpannya dalam format WebP
     public function upload($file, string $path, int $width = null, int $height = null)
     {
         $filename = time() . '_' . \Illuminate\Support\Str::random(10) . '.webp';
@@ -44,8 +44,7 @@ class ImageService
     }
 
     /**
-     * Hapus gambar lama
-     * (Tidak ada perubahan karena menggunakan fungsi native PHP)
+     * Fungsi ini menghapus gambar dari storage,saat dia update maupun delete
      */
     public function delete(string $path, string $filename)
     {

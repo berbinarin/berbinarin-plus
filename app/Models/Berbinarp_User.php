@@ -19,7 +19,6 @@ class Berbinarp_User extends Authenticatable
         'phone_number',
         'email',
         'last_education',
-        'referral_source',
         'username',
         'password',
         'user_status_id',

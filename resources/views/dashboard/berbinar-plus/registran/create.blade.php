@@ -31,8 +31,6 @@
                 <form id="berbinarForm" action="{{ route('dashboard.pendaftar.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="kategori" value="berbinar-for-u" />
-
                     <h1 class="mb-6 text-center text-3xl font-bold">
                         Kelas Berbinar+
                     </h1>
@@ -114,7 +112,7 @@
                                             </label>
                                             <label class="mb-2 flex cursor-pointer items-center">
                                                 <input class="form-check-input mr-2" type="radio" name="last_education"
-                                                    value="Other" required />
+                                                    value="Lainnya" required />
                                                 Lainnya
                                             </label>
                                         </div>
@@ -181,7 +179,7 @@
                                     </div>
                                 </div>
                                 <small class="text-gray-500 block mt-1">
-                                    <span class="text-red-500">Ukuran file maksimal 1 MB.</span>
+                                    <span class="text-red-500">Ukuran file maksimal 5 MB.</span>
                                 </small>
                             </div>
                             <div>
@@ -225,7 +223,8 @@
                                 <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
 
                                 <!-- Message -->
-                                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Apakah Anda yakin ingin membatalkan pengisian data?</p>
+                                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Apakah Anda yakin ingin
+                                    membatalkan pengisian data?</p>
 
                                 <!-- Actions -->
                                 <div class="mt-3 lg:mt-6 flex justify-center gap-3">
@@ -247,7 +246,8 @@
 @section('script')
     <script>
         // --- Custom Alert Functions ---
-        function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
+        function showCustomAlert(message, title = "Peringatan", icon =
+            "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
             const alertHTML = `
                 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
@@ -264,7 +264,8 @@
             document.body.insertAdjacentHTML('beforeend', alertHTML);
         }
 
-        function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+        function showCustomAlertError(message, title = "Error", icon =
+            "{{ asset('assets/images/landing/favicion/error.webp') }}") {
             const alertHTML = `
                 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
@@ -318,11 +319,13 @@
                 const otherReasonText = document.getElementById('otherReasonText');
                 if (this.value === 'Other') {
                     otherReasonText.classList.remove('hidden');
+                    otherReasonText.removeAttribute('disabled');
                     otherReasonText.required = true;
                 } else {
                     otherReasonText.classList.add('hidden');
                     otherReasonText.required = false;
                     otherReasonText.value = '';
+                    otherReasonText.setAttribute('disabled', 'disabled');
                 }
             });
 
@@ -492,7 +495,8 @@
     </script>
     @if ($errors->any())
         <script>
-            function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+            function showCustomAlertError(message, title = "Error", icon =
+                "{{ asset('assets/images/landing/favicion/error.webp') }}") {
                 const alertHTML = `
                     <div x-data="{ open: true }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" x-cloak>
                         <div class="relative w-[560px] rounded-[20px] bg-white p-6 font-plusJakartaSans shadow-lg"
@@ -511,7 +515,8 @@
 
             document.addEventListener('DOMContentLoaded', function() {
                 @foreach ($errors->all() as $error)
-                    showCustomAlertError('{{ $error }}', 'Error', "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                    showCustomAlertError('{{ $error }}', 'Error',
+                        "{{ asset('assets/images/landing/favicion/error.webp') }}");
                 @endforeach
             });
         </script>

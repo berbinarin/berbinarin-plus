@@ -8,7 +8,8 @@ use App\Models\Berbinarp_User;
 use App\Models\BerbinarpUserStatus;
 use App\Models\Berbinarp_Class;
 use App\Models\EnrollmentUser;
-use App\Services\ImageService;
+use App\Services\Auth\RegistrationService;
+use App\Services\Media\ImageService;
 
 class RegistranController extends Controller
 
@@ -39,50 +40,36 @@ class RegistranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, ImageService $imageService)
+    public function store(Request $request, RegistrationService $registrationService)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'age' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required|email|unique:berbinarp_users,email',
-            'last_education' => 'required',
-            'referral_source' => 'required',
+        if (Berbinarp_User::where('email', $request->email)->exists()) {
+            return redirect()->back()->withInput()->with([
+                'alert' => true,
+                'icon' => asset('assets/images/landing/favicion/warning.webp'),
+                'title' => 'Email Sudah Terdaftar',
+                'message' => 'Email yang Anda masukkan sudah terdaftar. Silakan gunakan email lain.',
+                'type' => 'warning',
+            ]);
+        }
+
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'age' => 'required|integer|min:1',
+            'phone_number' => 'required|string|max:255',
+            'email' => 'required|email|string|max:255',
+            'last_education' => 'required|string|max:255',
+            'otherEducation' => 'nullable|string|max:255',
+            'referral_source' => 'required|string|max:255',
+            'otherReasonText' => 'nullable|string|max:255',
             'course_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required',
-            'price_package' => 'required',
+            'service_package' => 'required|string|max:255',
+            'price_package' => 'required|string|max:255',
             'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
-        // Simpan user
-        $user = Berbinarp_User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'age' => $request->age,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'last_education' => $request->last_education,
-            'referral_source' => $request->referral_source,
-            'user_status_id' => BerbinarpUserStatus::where('name', 'pending')->first()?->id ?? 1,
-        ]);
-
-        // Simpan bukti transfer pakai ImageService
-        $buktiTransferFile = $request->file('payment_proof_url');
-        $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null); // width 800px, height null
-        $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
-
-        // Simpan enrollments_users
-        $enrollment = new EnrollmentUser();
-        $enrollment->user_id = $user->id;
-        $enrollment->course_id = $request->course_id;
-        $enrollment->service_package = $request->service_package;
-        $enrollment->price_package = $request->price_package;
-        $enrollment->payment_proof_url = $buktiTransferPath;
-        $enrollment->status_kelas = 'pending_payment';
-        $enrollment->save();
+        $registrationService->registerUserWithEnrollment($validated, $request->file('payment_proof_url'));
 
         return redirect()->route('dashboard.pendaftar.index')->with([
             'alert' => true,
@@ -122,48 +109,49 @@ class RegistranController extends Controller
     /**
      * Update the specified user and enrollment in storage.
      */
-    public function update(Request $request, $id, ImageService $imageService)
+    public function update(Request $request, $id, RegistrationService $registrationService)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'age' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required|email',
-            'last_education' => 'required',
-            'referral_source' => 'required',
-            'class_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required',
-            'price_package' => 'required',
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'age' => 'required|integer|min:1',
+            'phone_number' => 'required|string|max:255',
+            'email' => 'required|email|string|max:255',
+            'last_education' => 'required|string|max:255',
+            'otherEducation' => 'required_if:last_education,Other|string|max:255',
+            'referral_source' => 'required|string|max:255',
+            'otherReasonText' => 'required_if:referral_source,Other|string|max:255',
+            'course_id' => 'required|exists:berbinarp_class,id',
+            'service_package' => 'required|string|max:255',
+            'price_package' => 'required|string|max:255',
+            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         $user = Berbinarp_User::findOrFail($id);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->gender = $request->gender;
-        $user->age = $request->age;
-        $user->phone_number = $request->phone_number;
-        $user->email = $request->email;
+        $user->first_name = $validated['first_name'];
+        $user->last_name = $validated['last_name'];
+        $user->gender = $validated['gender'];
+        $user->age = $validated['age'];
+        $user->phone_number = $validated['phone_number'];
+        $user->email = $validated['email'];
         $user->username = $request->username;
-        $user->last_education = $request->last_education;
-        $user->referral_source = $request->referral_source;
+        $user->last_education = $validated['last_education'];
         $user->save();
 
-        // Update enrollment 
+        // Update enrollment (hanya satu enrollment pertama) pakai service
         $enrollment = $user->enrollments->first();
         if ($enrollment) {
-            $enrollment->course_id = $request->class_id;
-            $enrollment->service_package = $request->service_package;
-            $enrollment->price_package = $request->price_package;
-            // Update payment proof
-            if ($request->hasFile('payment_proof_url')) {
-                $buktiTransferFile = $request->file('payment_proof_url');
-                $buktiTransferFilename = $imageService->upload($buktiTransferFile, 'uploads/bukti_transfer', 800, null);
-                $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
-                $enrollment->payment_proof_url = $buktiTransferPath;
-            }
-            $enrollment->save();
+            $enrollmentData = [
+                'course_id' => $validated['course_id'],
+                'service_package' => $validated['service_package'],
+                'price_package' => $validated['price_package'],
+                'referral_source' => $validated['referral_source'],
+                'otherReasonText' => $validated['otherReasonText'] ?? null,
+            ];
+            $paymentProofFile = $request->hasFile('payment_proof_url') ? $request->file('payment_proof_url') : null;
+            // Gunakan service untuk update enrollment
+            $this->updateEnrollment($enrollment, $enrollmentData, $paymentProofFile);
         }
 
         return redirect()->route('dashboard.pendaftar.index')->with([
@@ -174,6 +162,30 @@ class RegistranController extends Controller
             'type' => 'success',
         ]);
     }
+
+    /**
+     * Update enrollment data using service logic
+     */
+    private function updateEnrollment($enrollment, array $data, $paymentProofFile = null)
+    {
+        $enrollment->course_id = $data['course_id'];
+        $enrollment->service_package = $data['service_package'];
+        $enrollment->price_package = $data['price_package'];
+        // Update referral_source logic (handle 'Other')
+        $referralSource = $data['referral_source'];
+        if ($referralSource === 'Other' && !empty($data['otherReasonText'])) {
+            $referralSource = $data['otherReasonText'];
+        }
+        $enrollment->referral_source = $referralSource;
+        // Update payment proof if file provided
+        if ($paymentProofFile) {
+            $buktiTransferFilename = app(ImageService::class)->upload($paymentProofFile, 'uploads/bukti_transfer', 800, null);
+            $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
+            $enrollment->payment_proof_url = $buktiTransferPath;
+        }
+        $enrollment->save();
+    }
+
 
     /**
      * Remove the specified user and related enrollments from storage.

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard\BerbinarPlus;
 use App\Http\Controllers\Controller;
 use App\Models\Course_Section;
 use App\Models\Berbinarp_Class;
-use App\Services\VideoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,10 +76,12 @@ class MateriController extends Controller
         $classId = $material->course_id;
         $embedUrl = null;
         if ($material->video_url) {
-            try {
-                $embedUrl = (new VideoService())->formatEmbedUrl($material->video_url);
-            } catch (\Exception $e) {
-                $embedUrl = null;
+            $url = $material->video_url;
+            if (str_contains($url, 'youtube.com') || str_contains($url, 'youtu.be')) {
+                // Extract YouTube video ID
+                if (preg_match('%(?:youtube(?:-nocookie)?\\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\\.be/)([^"&?/ ]{11})%i', $url, $match)) {
+                    $embedUrl = "https://www.youtube.com/embed/" . $match[1];
+                }
             }
         }
         return view('dashboard.berbinar-plus.class.materi.show', compact('material', 'classId', 'embedUrl'));

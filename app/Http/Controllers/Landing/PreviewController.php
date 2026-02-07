@@ -15,23 +15,6 @@ class PreviewController extends Controller
         if (!$class) {
             abort(404, 'Class not found');
         }
-
-        $userId = auth()->guard('berbinar')->id();
-        $homeController = app(HomeController::class);
-        $enrolledClasses = $homeController->getEnrolledClassesWithProgress($userId);
-        [
-            'certificateNotification' => $certificateNotification,
-            'materiCompleteNotification' => $materiCompleteNotification,
-            'progress50Notification' => $progress50Notification,
-            'enrollmentStatusNotification' => $enrollmentStatusNotification,
-        ] = $homeController->getHomepageNotifications($userId, $enrolledClasses);
-
-        return view('landing.preview.index', compact(
-            'class',
-            'certificateNotification',
-            'materiCompleteNotification',
-            'progress50Notification',
-            'enrollmentStatusNotification'
-        ));
+        return view('landing.preview.index', compact('class'));
     }
 }

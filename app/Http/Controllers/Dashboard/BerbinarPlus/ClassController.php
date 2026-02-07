@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berbinarp_Class;
 use App\Models\Test;
-use App\Services\ImageService;
+use App\Services\Media\ImageService;
 
 class ClassController extends Controller
 {

@@ -123,10 +123,6 @@
                                             <td class="text-center px-6 py-4">{{ $index + 1 }}</td>
                                             <td class="px-6 py-4">
                                                 {{ $user->first_name }} {{ $user->last_name }}
-                                                {{-- <a href=""
-                                                    class="text-primary font-semibold underline">
-                                                    {{ $user->first_name }} {{ $user->last_name }}
-                                                </a> --}}
                                             </td>
                                             <td class="text-center px-6 py-4">
                                                 {{ $user->created_at ? $user->created_at->format('d-m-Y') : '-' }}</td>
@@ -138,6 +134,7 @@
                                                 </p>
                                             </td>
                                             <td class="text-center px-6 py-4">
+                                                {{-- Template Whatsapp --}}
                                                 @if ($waNumber)
                                                     @php
                                                         $waMsg =
