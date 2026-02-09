@@ -30,6 +30,7 @@
                                 <option value="Development">Development</option>
                                 <option value="Design">Design</option>
                                 <option value="Management">Management</option>
+                                <option value="Human Resources">Human Resources</option>
                             </select>
                         </div>
 

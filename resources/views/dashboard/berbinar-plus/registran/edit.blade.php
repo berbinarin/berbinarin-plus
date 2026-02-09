@@ -21,8 +21,6 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
-                    <input type="hidden" name="kategori" value="berbinar-for-u" />
-
                     <h1 class="mb-6 text-center text-3xl font-bold">Kelas Berbinar+</h1>
                     <div class="flex flex-col">
                         <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">

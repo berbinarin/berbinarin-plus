@@ -33,6 +33,9 @@
                                 <option value="Design" {{ $class->category == 'Design' ? 'selected' : '' }}>Design</option>
                                 <option value="Management" {{ $class->category == 'Management' ? 'selected' : '' }}>
                                     Management</option>
+                                <option value="Human Resources"
+                                    {{ $class->category == 'Human Resources' ? 'selected' : '' }}>
+                                    Human Resources</option>
                             </select>
                         </div>
 
