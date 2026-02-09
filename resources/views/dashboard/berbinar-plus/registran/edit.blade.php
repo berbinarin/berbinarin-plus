@@ -134,120 +134,101 @@
                             </div>
                         </div>
 
-                        <h1 class="mb-6 text-center text-3xl font-bold">Pilih Kelas</h1>
-                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <div>
-                                <label class="text-lg">Kelas Berbinar+</label>
-                                <select id="kelas" name="class_id"
-                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
-                                    required>
-                                    <option value="" disabled
-                                        {{ !optional($user->enrollments->first())->course_id ? 'selected' : '' }}>Pilih
-                                        Kelas Berbinar+</option>
-                                    @foreach ($classes as $k)
-                                        <option value="{{ $k->id }}"
-                                            {{ optional($user->enrollments->first())->course_id == $k->id ? 'selected' : '' }}>
-                                            {{ $k->name }}
+                        <h1 class="mb-6 text-center text-3xl font-bold">Daftar Kelas Berbinar+ User</h1>
+                        @foreach ($user->enrollments as $i => $enrollment)
+                            <div
+                                class="grid grid-cols-1 gap-6 md:grid-cols-2 border-b border-gray-200 pb-6 mb-6 enrollment-block">
+                                <div>
+                                    <label class="text-lg">Kelas Berbinar+</label>
+                                    <select name="class_id[]"
+                                        class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                        required>
+                                        <option value="" disabled {{ $enrollment->course_id ? '' : 'selected' }}>
+                                            Pilih Kelas Berbinar+</option>
+                                        @foreach ($classes as $k)
+                                            <option value="{{ $k->id }}"
+                                                {{ $enrollment->course_id == $k->id || (!$enrollment->course_id && $loop->first) ? 'selected' : '' }}>
+                                                {{ $k->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-lg">Paket Layanan</label>
+                                    <select name="service_package[]"
+                                        class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
+                                        required>
+                                        <option value="" disabled>Pilih Paket Layanan</option>
+                                        <option value="Insight" data-harga="15000"
+                                            {{ $enrollment->service_package == 'Insight' ? 'selected' : '' }}>Insight
                                         </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div>
-                                <label class="text-lg">Paket Layanan</label>
-                                <select id="paket" name="service_package"
-                                    class="peer w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm"
-                                    required>
-                                    <option value="" disabled>Pilih Paket Layanan</option>
-                                    <option value="Insight" data-harga="15000"
-                                        {{ optional($user->enrollments->first())->service_package == 'Insight' ? 'selected' : '' }}>
-                                        Insight
-                                    </option>
-                                    <option value="A+ Online Weekday" data-harga="36000-120000"
-                                        {{ optional($user->enrollments->first())->service_package == 'A+ Online Weekday' ? 'selected' : '' }}>
-                                        A+ Online Weekday
-                                    </option>
-                                    <option value="A+ Online Weekend" data-harga="44000-140000"
-                                        {{ optional($user->enrollments->first())->service_package == 'A+ Online Weekend' ? 'selected' : '' }}>
-                                        A+ Online Weekend
-                                    </option>
-                                    <option value="A+ Offline Weekday" data-harga="44000-140000"
-                                        {{ optional($user->enrollments->first())->service_package == 'A+ Offline Weekday' ? 'selected' : '' }}>
-                                        A+ Offline Weekday
-                                    </option>
-                                    <option value="A+ Offline Weekend" data-harga="44000-180000"
-                                        {{ optional($user->enrollments->first())->service_package == 'A+ Offline Weekend' ? 'selected' : '' }}>
-                                        A+ Offline Weekend
-                                    </option>
-                                    <option value="Complete" data-harga="100000-280000"
-                                        {{ optional($user->enrollments->first())->service_package == 'Complete' ? 'selected' : '' }}>
-                                        Complete
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="text-lg">Harga Paket</label>
-                                <input type="text" id="harga_paket" name="price_package"
-                                    class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
-                                    placeholder="Harga Paket" readonly
-                                    value="{{ old('price_package', optional($user->enrollments->first())->price_package) }}" />
-                            </div>
-                            <div>
-                                <label class="text-lg">Bukti Pembayaran</label>
-                                <div class="relative flex w-full items-center overflow-x-auto">
-                                    <input type="file" id="bukti_transfer" name="payment_proof_url"
-                                        class="absolute inset-0 h-full w-full cursor-pointer opacity-0 py-2"
-                                        accept="image/*" />
-                                    <div
-                                        class="pointer-events-none mt-1 block flex h-10 w-full items-center rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm overflow-x-auto">
-                                        <button type="button"
-                                            class="pointer-events-none flex cursor-pointer items-center justify-between gap-2 rounded-md border border-[#B3B3B3] px-2 py-[2px]">
-                                            <img src="{{ asset('assets/images/landing/produk/emo/upload-line-icon.webp') }}"
-                                                alt="" class="h-4 w-4" />
-                                            Upload File
-                                        </button>
-                                        <span id="fileName" class="ml-3 truncate text-base text-gray-600 max-w-[250px]">
-                                            @if (optional($user->enrollments->first())->payment_proof_url)
-                                                {{ basename(optional($user->enrollments->first())->payment_proof_url) }}
-                                            @endif
-                                        </span>
+                                        <option value="A+ Online Weekday" data-harga="36000-120000"
+                                            {{ $enrollment->service_package == 'A+ Online Weekday' ? 'selected' : '' }}>A+
+                                            Online Weekday</option>
+                                        <option value="A+ Online Weekend" data-harga="44000-140000"
+                                            {{ $enrollment->service_package == 'A+ Online Weekend' ? 'selected' : '' }}>A+
+                                            Online Weekend</option>
+                                        <option value="A+ Offline Weekday" data-harga="44000-140000"
+                                            {{ $enrollment->service_package == 'A+ Offline Weekday' ? 'selected' : '' }}>A+
+                                            Offline Weekday</option>
+                                        <option value="A+ Offline Weekend" data-harga="44000-180000"
+                                            {{ $enrollment->service_package == 'A+ Offline Weekend' ? 'selected' : '' }}>A+
+                                            Offline Weekend</option>
+                                        <option value="Complete" data-harga="100000-280000"
+                                            {{ $enrollment->service_package == 'Complete' ? 'selected' : '' }}>Complete
+                                        </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-lg">Harga Paket</label>
+                                    <input type="text" name="price_package[]"
+                                        class="peer w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
+                                        placeholder="Harga Paket" readonly
+                                        value="{{ old('price_package.' . $i, $enrollment->price_package) }}" />
+                                </div>
+                                <div>
+                                    <label class="text-lg">Bukti Pembayaran</label>
+                                    <input type="file" name="payment_proof_url[]" accept="image/*" />
+                                    <small class="text-gray-500 block mt-1"><span class="text-red-500">Ukuran file
+                                            maksimal 1 MB.</span></small>
+                                    <div class="mt-2">
+                                        @if ($enrollment->payment_proof_url)
+                                            <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
+                                                alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
+                                        @endif
                                     </div>
                                 </div>
-                                <small class="text-gray-500 block mt-1">
-                                    <span class="text-red-500">Ukuran file maksimal 1 MB.</span>
-                                </small>
-                                <div id="buktiPreview" class="mt-2">
-                                    @if (optional($user->enrollments->first())->payment_proof_url)
-                                        <img src="{{ asset('storage/' . optional($user->enrollments->first())->payment_proof_url) }}"
-                                            alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
-                                    @endif
+                                <div>
+                                    <label class="text-lg">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
+                                    <select name="referral_source[]"
+                                        class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                        required>
+                                        <option value="" disabled class="text-gray-500">Dari mana nihh</option>
+                                        <option value="Instagram"
+                                            {{ $enrollment->referral_source == 'Instagram' ? 'selected' : '' }}>Instagram
+                                        </option>
+                                        <option value="Telegram"
+                                            {{ $enrollment->referral_source == 'Telegram' ? 'selected' : '' }}>Telegram
+                                        </option>
+                                        <option value="TikTok"
+                                            {{ $enrollment->referral_source == 'TikTok' ? 'selected' : '' }}>TikTok
+                                        </option>
+                                        <option value="LinkedIn"
+                                            {{ $enrollment->referral_source == 'LinkedIn' ? 'selected' : '' }}>LinkedIn
+                                        </option>
+                                        <option value="Teman"
+                                            {{ $enrollment->referral_source == 'Teman' ? 'selected' : '' }}>Teman</option>
+                                        <option value="Other"
+                                            {{ !in_array($enrollment->referral_source, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $enrollment->referral_source ? 'selected' : '' }}>
+                                            Other</option>
+                                    </select>
+                                    <input type="text" name="otherReasonText[]"
+                                        class="form-input mt-1 block {{ !in_array($enrollment->referral_source, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $enrollment->referral_source ? '' : 'hidden' }} h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
+                                        placeholder="Please specify"
+                                        value="{{ !in_array($enrollment->referral_source, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) ? $enrollment->referral_source : '' }}" />
                                 </div>
                             </div>
-                            <div>
-                                <label class="text-lg">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
-                                <select
-                                    class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
-                                    id="sumber" name="referral_source" required>
-                                    <option value="" disabled class="text-gray-500">Dari mana nihh</option>
-                                    @php $knowing = $user->referral_source; @endphp
-                                    <option value="Instagram" {{ $knowing == 'Instagram' ? 'selected' : '' }}>Instagram
-                                    </option>
-                                    <option value="Telegram" {{ $knowing == 'Telegram' ? 'selected' : '' }}>Telegram
-                                    </option>
-                                    <option value="TikTok" {{ $knowing == 'TikTok' ? 'selected' : '' }}>TikTok</option>
-                                    <option value="LinkedIn" {{ $knowing == 'LinkedIn' ? 'selected' : '' }}>LinkedIn
-                                    </option>
-                                    <option value="Teman" {{ $knowing == 'Teman' ? 'selected' : '' }}>Teman</option>
-                                    <option value="Other"
-                                        {{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $knowing ? 'selected' : '' }}>
-                                        Other
-                                    </option>
-                                </select>
-                                <input type="text"
-                                    class="form-input mt-1 block {{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) && $knowing ? '' : 'hidden' }} h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
-                                    id="otherReasonText" name="otherReasonText" placeholder="Please specify"
-                                    value="{{ !in_array($knowing, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) ? $knowing : '' }}" />
-                            </div>
-                        </div>
+                        @endforeach
 
                         <div class="mt-8 flex gap-4 pt-5">
                             <a href="#" id="cancelButton"
@@ -271,7 +252,8 @@
                                 <h2 class="mt-2 lg:mt-4 text-lg lg:text-2xl font-bold text-stone-900">Konfirmasi Batal</h2>
 
                                 <!-- Message -->
-                                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Apakah Anda yakin ingin membatalkan pengisian data?</p>
+                                <p class="mt-1 lg:mt-2 text-sm lg:text-base font-medium text-black">Apakah Anda yakin ingin
+                                    membatalkan pengisian data?</p>
 
                                 <!-- Actions -->
                                 <div class="mt-3 lg:mt-6 flex justify-center gap-3">
@@ -292,7 +274,8 @@
 @section('script')
     <script>
         // --- Custom Alert Functions ---
-        function showCustomAlert(message, title = "Peringatan", icon = "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
+        function showCustomAlert(message, title = "Peringatan", icon =
+            "{{ asset('assets/images/landing/favicion/warning.webp') }}") {
             const alertHTML = `
                 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
@@ -309,7 +292,8 @@
             document.body.insertAdjacentHTML('beforeend', alertHTML);
         }
 
-        function showCustomAlertError(message, title = "Error", icon = "{{ asset('assets/images/landing/favicion/error.webp') }}") {
+        function showCustomAlertError(message, title = "Error", icon =
+            "{{ asset('assets/images/landing/favicion/error.webp') }}") {
             const alertHTML = `
                 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div class="relative w-[90%] lg:w-[560px] rounded-[20px] bg-white p-3 lg:p-6 text-center font-plusJakartaSans shadow-lg"
@@ -327,19 +311,41 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Harga paket otomatis update saat paket layanan dipilih
+            document.querySelectorAll('div.enrollment-block').forEach(function(enrollDiv) {
+                const paketSelect = enrollDiv.querySelector('select[name="service_package[]"]');
+                const hargaInput = enrollDiv.querySelector('input[name="price_package[]"]');
+                if (paketSelect && hargaInput) {
+                    paketSelect.addEventListener('change', function() {
+                        const selected = this.options[this.selectedIndex];
+                        let harga = selected.getAttribute('data-harga') || '';
+                        if (harga) {
+                            if (harga.includes('-')) {
+                                // Range harga
+                                const [min, max] = harga.split('-');
+                                harga = 'Rp' + min.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' - Rp' +
+                                    max.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                            } else {
+                                harga = 'Rp' + harga.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                            }
+                        }
+                        hargaInput.value = harga;
+                    });
+                }
+            });
             // === DROPDOWN EDUCATION ONLY ===
             const educationToggle = document.getElementById('educationToggle');
             const educationDropdown = document.getElementById('educationDropdown');
             const educationIcon = document.getElementById('educationIcon');
             const educationRadios = document.querySelectorAll('input[name="last_education"]');
             const educationSelected = document.getElementById('educationSelected');
-
-            educationToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                educationDropdown.classList.toggle('hidden');
-                educationIcon.classList.toggle('rotate-180');
-            });
-
+            if (educationToggle && educationDropdown && educationIcon) {
+                educationToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    educationDropdown.classList.toggle('hidden');
+                    educationIcon.classList.toggle('rotate-180');
+                });
+            }
             educationRadios.forEach((radio) => {
                 radio.addEventListener('change', function() {
                     educationSelected.textContent = this.value === 'Other' ? 'Lainnya' : this.value;
@@ -350,53 +356,56 @@
                 });
             });
 
-            // File upload display & preview
-            document.getElementById('bukti_transfer').addEventListener('change', function(e) {
-                const fileNameSpan = document.getElementById('fileName');
-                const previewDiv = document.getElementById('buktiPreview');
-                const file = this.files && this.files.length > 0 ? this.files[0] : null;
-                fileNameSpan.textContent = file ? file.name : '';
-
-                // Preview
-                previewDiv.innerHTML = '';
-                if (file) {
-                    const ext = file.name.split('.').pop().toLowerCase();
-                    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(ext)) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.className = 'max-h-40 rounded border border-gray-300';
-                            previewDiv.appendChild(img);
-                        };
-                        reader.readAsDataURL(file);
-                    } else if (ext === 'pdf') {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const embed = document.createElement('embed');
-                            embed.src = e.target.result;
-                            embed.type = 'application/pdf';
-                            embed.className = 'w-full max-h-40 border border-gray-300 rounded';
-                            previewDiv.appendChild(embed);
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        previewDiv.textContent = 'Preview tidak tersedia untuk file ini.';
+            // File upload display & preview for each enrollment
+            document.querySelectorAll('input[type="file"][name="payment_proof_url[]"]').forEach(function(input,
+                idx) {
+                input.addEventListener('change', function(e) {
+                    const previewDiv = input.parentNode.querySelector('.mt-2');
+                    previewDiv.innerHTML = '';
+                    const file = input.files && input.files.length > 0 ? input.files[0] : null;
+                    if (file) {
+                        const ext = file.name.split('.').pop().toLowerCase();
+                        if (["jpg", "jpeg", "png", "gif", "bmp", "webp"].includes(ext)) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.className = 'max-h-40 rounded border border-gray-300';
+                                previewDiv.appendChild(img);
+                            };
+                            reader.readAsDataURL(file);
+                        } else if (ext === 'pdf') {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const embed = document.createElement('embed');
+                                embed.src = e.target.result;
+                                embed.type = 'application/pdf';
+                                embed.className =
+                                    'w-full max-h-40 border border-gray-300 rounded';
+                                previewDiv.appendChild(embed);
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            previewDiv.textContent = 'Preview tidak tersedia untuk file ini.';
+                        }
                     }
-                }
+                });
             });
 
-            // Sumber informasi "Other"
-            document.getElementById('sumber').addEventListener('change', function() {
-                const otherReasonText = document.getElementById('otherReasonText');
-                if (this.value === 'Other') {
-                    otherReasonText.classList.remove('hidden');
-                    otherReasonText.required = true;
-                } else {
-                    otherReasonText.classList.add('hidden');
-                    otherReasonText.required = false;
-                    otherReasonText.value = '';
-                }
+            // Sumber informasi "Other" untuk setiap enrollment
+            document.querySelectorAll('select[name="referral_source[]"]').forEach(function(select, idx) {
+                select.addEventListener('change', function() {
+                    const otherInput = select.parentNode.querySelector(
+                        'input[name="otherReasonText[]"]');
+                    if (select.value === 'Other') {
+                        otherInput.classList.remove('hidden');
+                        otherInput.required = true;
+                    } else {
+                        otherInput.classList.add('hidden');
+                        otherInput.required = false;
+                        otherInput.value = '';
+                    }
+                });
             });
 
             // Modal Konfirmasi Batal/Submit
@@ -406,43 +415,41 @@
             const confirmAction = document.getElementById('confirmAction');
             let modalMode = 'cancel'; // 'cancel' atau 'submit'
 
-            cancelButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                modalMode = 'cancel';
-                const h2 = confirmModal.querySelector('h2');
-                const p = confirmModal.querySelector('p');
-                h2.textContent = 'Konfirmasi Batal';
-                p.textContent = 'Apakah Anda yakin ingin membatalkan pengisian data?';
-                confirmModal.classList.remove('hidden');
-            });
-
-            cancelSubmit.addEventListener('click', function() {
-                confirmModal.classList.add('hidden');
-            });
-
-            confirmAction.addEventListener('click', function() {
-                if (modalMode === 'cancel') {
-                    // Redirect ke halaman index
-                    window.location.href = "{{ route('dashboard.pendaftar.index') }}";
-                } else if (modalMode === 'submit') {
-                    // Submit form
-                    document.getElementById('berbinarForm').submit();
-                }
-            });
+            if (cancelButton && confirmModal && cancelSubmit && confirmAction) {
+                cancelButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modalMode = 'cancel';
+                    const h2 = confirmModal.querySelector('h2');
+                    const p = confirmModal.querySelector('p');
+                    h2.textContent = 'Konfirmasi Batal';
+                    p.textContent = 'Apakah Anda yakin ingin membatalkan pengisian data?';
+                    confirmModal.classList.remove('hidden');
+                });
+                cancelSubmit.addEventListener('click', function() {
+                    confirmModal.classList.add('hidden');
+                });
+                confirmAction.addEventListener('click', function() {
+                    if (modalMode === 'cancel') {
+                        window.location.href = "{{ route('dashboard.pendaftar.index') }}";
+                    } else if (modalMode === 'submit') {
+                        document.getElementById('berbinarForm').submit();
+                    }
+                });
+            }
 
             // Custom Alert untuk validasi
             const submitButton = document.getElementById('submitButton');
             const form = document.getElementById('berbinarForm');
 
-            submitButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (validateForm()) {
-                    // Tampilkan modal konfirmasi sebelum submit
-                    showConfirmModal();
-                }
-            });
+            if (submitButton && form) {
+                submitButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (validateForm()) {
+                        showConfirmModal();
+                    }
+                });
+            }
 
-            // Fungsi untuk modal konfirmasi sebelum submit
             window.showConfirmModal = function() {
                 modalMode = 'submit';
                 const h2 = confirmModal.querySelector('h2');
@@ -451,18 +458,6 @@
                 p.textContent = 'Tolong pastikan bahwa informasi yang Anda masukkan telah tepat.';
                 confirmModal.classList.remove('hidden');
             };
-
-            function getFieldLabel(fieldName) {
-                const field = document.querySelector(`[name="${fieldName}"]`);
-                if (field) {
-                    const container = field.closest('div');
-                    if (container) {
-                        const label = container.querySelector('label');
-                        if (label) return label.textContent.trim();
-                    }
-                }
-                return fieldName.replace(/_/g, ' ');
-            }
 
             function isValidEmail(email) {
                 return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -473,32 +468,11 @@
             }
 
             function validateForm() {
-                const requiredFields = [
-                    'first_name', 'last_name', 'gender', 'age', 'phone_number', 'email', 'username',
-                    'last_education', 'class_id', 'service_package', 'price_package', 'referral_source'
+                // Validasi field utama user
+                const mainFields = ['first_name', 'last_name', 'gender', 'age', 'phone_number', 'email', 'username',
+                    'last_education'
                 ];
-
-                // Sumber info Other
-                const knowingSource = document.getElementById('sumber').value;
-                if (knowingSource === 'Other') {
-                    requiredFields.push('otherReasonText');
-                }
-
-                // Cek bukti_transfer hanya jika ada file baru
-                const buktiTransferInput = document.getElementById('bukti_transfer');
-                if (buktiTransferInput && buktiTransferInput.files && buktiTransferInput.files.length > 0) {
-                    // Validasi ukuran file (max 1 MB)
-                    if (buktiTransferInput.files[0].size > 1048576) {
-                        showCustomAlertError(
-                            'Ukuran file bukti pembayaran tidak boleh lebih dari 1 MB.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
-                        );
-                        return false;
-                    }
-                }
-
-                for (let fieldName of requiredFields) {
+                for (let fieldName of mainFields) {
                     let field;
                     if (fieldName === 'gender') {
                         field = document.getElementById('gender');
@@ -508,30 +482,65 @@
                         field = document.querySelector(`[name="${fieldName}"]`);
                     }
                     if (!field || (field.value !== undefined && field.value.trim() === '')) {
-                        showCustomAlertError(
-                            '"' + getFieldLabel(fieldName) + '" belum diisi.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
-                        );
+                        showCustomAlertError('"' + fieldName.replace(/_/g, ' ') + '" belum diisi.',
+                            'Validasi Error', "{{ asset('assets/images/landing/favicion/error.webp') }}");
                         return false;
                     }
                     if (fieldName === 'email' && !isValidEmail(field.value)) {
-                        showCustomAlertError(
-                            'Format Email tidak valid.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
-                        );
+                        showCustomAlertError('Format Email tidak valid.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
                         return false;
                     }
                     if (fieldName === 'phone_number' && !isValidPhoneNumber(field.value)) {
-                        showCustomAlertError(
-                            'Format Nomor Whatsapp tidak valid.',
-                            'Validasi Error',
-                            "{{ asset('assets/images/landing/favicion/error.webp') }}"
-                        );
+                        showCustomAlertError('Format Nomor Whatsapp tidak valid.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
                         return false;
                     }
                 }
+                // Validasi semua enrollment
+                const enrollments = document.querySelectorAll('div.enrollment-block');
+                enrollments.forEach(function(enrollDiv, idx) {
+                    const classField = enrollDiv.querySelector('select[name="class_id[]"]');
+                    const serviceField = enrollDiv.querySelector('select[name="service_package[]"]');
+                    const priceField = enrollDiv.querySelector('input[name="price_package[]"]');
+                    const referralField = enrollDiv.querySelector('select[name="referral_source[]"]');
+                    const otherField = enrollDiv.querySelector('input[name="otherReasonText[]"]');
+                    const fileField = enrollDiv.querySelector('input[name="payment_proof_url[]"]');
+                    if (!classField || !classField.value) {
+                        showCustomAlertError('Kelas Berbinar+ belum diisi.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                        return false;
+                    }
+                    if (!serviceField || !serviceField.value) {
+                        showCustomAlertError('Paket Layanan belum diisi.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                        return false;
+                    }
+                    if (!priceField || !priceField.value) {
+                        showCustomAlertError('Harga Paket belum diisi.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                        return false;
+                    }
+                    if (!referralField || !referralField.value) {
+                        showCustomAlertError('Sumber Referral belum diisi.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                        return false;
+                    }
+                    if (referralField.value === 'Other' && (!otherField || !otherField.value.trim())) {
+                        showCustomAlertError('Sumber Referral (Other) belum diisi.', 'Validasi Error',
+                            "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                        return false;
+                    }
+                    if (fileField && fileField.files && fileField.files.length > 0) {
+                        if (fileField.files[0].size > 1048576) {
+                            showCustomAlertError(
+                                'Ukuran file bukti pembayaran tidak boleh lebih dari 1 MB.',
+                                'Validasi Error',
+                                "{{ asset('assets/images/landing/favicion/error.webp') }}");
+                            return false;
+                        }
+                    }
+                });
                 return true;
             }
         });

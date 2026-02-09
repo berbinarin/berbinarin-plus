@@ -119,13 +119,6 @@ class RegistranController extends Controller
             'phone_number' => 'required|string|max:255',
             'email' => 'required|email|string|max:255',
             'last_education' => 'required|string|max:255',
-            'otherEducation' => 'required_if:last_education,Other|string|max:255',
-            'referral_source' => 'required|string|max:255',
-            'otherReasonText' => 'required_if:referral_source,Other|string|max:255',
-            'course_id' => 'required|exists:berbinarp_class,id',
-            'service_package' => 'required|string|max:255',
-            'price_package' => 'required|string|max:255',
-            'payment_proof_url' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         $user = Berbinarp_User::findOrFail($id);
@@ -139,18 +132,23 @@ class RegistranController extends Controller
         $user->last_education = $validated['last_education'];
         $user->save();
 
-        // Update enrollment (hanya satu enrollment pertama) pakai service
-        $enrollment = $user->enrollments->first();
-        if ($enrollment) {
+        // Update all enrollments
+        $classIds = $request->input('class_id', []);
+        $servicePackages = $request->input('service_package', []);
+        $pricePackages = $request->input('price_package', []);
+        $referralSources = $request->input('referral_source', []);
+        $otherReasonTexts = $request->input('otherReasonText', []);
+        $paymentProofFiles = $request->file('payment_proof_url', []);
+
+        foreach ($user->enrollments as $i => $enrollment) {
             $enrollmentData = [
-                'course_id' => $validated['course_id'],
-                'service_package' => $validated['service_package'],
-                'price_package' => $validated['price_package'],
-                'referral_source' => $validated['referral_source'],
-                'otherReasonText' => $validated['otherReasonText'] ?? null,
+                'course_id' => $classIds[$i] ?? $enrollment->course_id,
+                'service_package' => $servicePackages[$i] ?? $enrollment->service_package,
+                'price_package' => $pricePackages[$i] ?? $enrollment->price_package,
+                'referral_source' => $referralSources[$i] ?? $enrollment->referral_source,
+                'otherReasonText' => $otherReasonTexts[$i] ?? null,
             ];
-            $paymentProofFile = $request->hasFile('payment_proof_url') ? $request->file('payment_proof_url') : null;
-            // Gunakan service untuk update enrollment
+            $paymentProofFile = isset($paymentProofFiles[$i]) ? $paymentProofFiles[$i] : null;
             $this->updateEnrollment($enrollment, $enrollmentData, $paymentProofFile);
         }
 
