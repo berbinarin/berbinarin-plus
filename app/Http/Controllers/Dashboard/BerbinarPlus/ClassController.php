@@ -50,7 +50,7 @@ class ClassController extends Controller
         $filename = null;
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $filename = $imageService->upload($file, 'uploads/thumbnails', 600, null); // width 600px, height null
+            $filename = $imageService->upload($file, 'thumbnails', 600, null); // width 600px, height null
         }
 
         // Simpan ke database
@@ -110,7 +110,7 @@ class ClassController extends Controller
         // Proses upload thumbnail jika ada file baru pakai ImageService
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $filename = $imageService->upload($file, 'uploads/thumbnails', 600, null);
+            $filename = $imageService->upload($file, 'thumbnails', 600, null);
             $class->thumbnail = $filename;
         }
 

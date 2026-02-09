@@ -61,8 +61,8 @@ class RegistrationService
     {
         return DB::transaction(function () use ($userId, $data, $paymentProofFile) {
             // Upload bukti bayar
-            $buktiFilename = $this->imageService->upload($paymentProofFile, 'uploads/bukti_transfer', 800);
-            $buktiPath = 'uploads/bukti_transfer/' . $buktiFilename;
+            $buktiFilename = $this->imageService->upload($paymentProofFile, 'bukti_transfer', 800);
+            $buktiPath = 'bukti_transfer/' . $buktiFilename;
 
             return $this->createEnrollment($userId, $data, $buktiPath);
         });

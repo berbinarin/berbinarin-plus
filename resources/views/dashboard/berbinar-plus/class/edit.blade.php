@@ -61,7 +61,7 @@
                             <label class="text-lg">Thumbnail</label>
                             @if ($class->thumbnail)
                                 <div class="mb-2">
-                                    <img id="thumbnailPreview" src="{{ asset('uploads/thumbnails/' . $class->thumbnail) }}"
+                                    <img id="thumbnailPreview" src="{{ asset('thumbnails/' . $class->thumbnail) }}"
                                         alt="Thumbnail" class="h-24 rounded">
                                 </div>
                             @else

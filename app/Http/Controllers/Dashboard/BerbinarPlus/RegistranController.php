@@ -177,8 +177,8 @@ class RegistranController extends Controller
         $enrollment->referral_source = $referralSource;
         // Update payment proof if file provided
         if ($paymentProofFile) {
-            $buktiTransferFilename = app(ImageService::class)->upload($paymentProofFile, 'uploads/bukti_transfer', 800, null);
-            $buktiTransferPath = 'uploads/bukti_transfer/' . $buktiTransferFilename;
+            $buktiTransferFilename = app(ImageService::class)->upload($paymentProofFile, 'bukti_transfer', 800, null);
+            $buktiTransferPath = 'bukti_transfer/' . $buktiTransferFilename;
             $enrollment->payment_proof_url = $buktiTransferPath;
         }
         $enrollment->save();
