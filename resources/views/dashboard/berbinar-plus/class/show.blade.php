@@ -44,7 +44,7 @@
                 <div class="mb-6">
                     <h1 class="mb-2 text-2xl text-primary-alt font-bold">Thumbnail</h1>
                     @if ($class->thumbnail)
-                        <img src="{{ asset('uploads/thumbnails/' . $class->thumbnail) }}" alt="Thumbnail"
+                        <img src="{{ asset('storage/thumbnails/' . $class->thumbnail) }}" alt="Thumbnail"
                             class="h-40 rounded border" />
                     @else
                         <p class="text-gray-400">Tidak ada thumbnail</p>
