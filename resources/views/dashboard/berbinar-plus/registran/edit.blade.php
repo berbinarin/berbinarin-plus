@@ -187,18 +187,6 @@
                                         value="{{ old('price_package.' . $i, $enrollment->price_package) }}" />
                                 </div>
                                 <div>
-                                    <label class="text-lg">Bukti Pembayaran</label>
-                                    <input type="file" name="payment_proof_url[]" accept="image/*" />
-                                    <small class="text-gray-500 block mt-1"><span class="text-red-500">Ukuran file
-                                            maksimal 1 MB.</span></small>
-                                    <div class="mt-2">
-                                        @if ($enrollment->payment_proof_url)
-                                            <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
-                                                alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
-                                        @endif
-                                    </div>
-                                </div>
-                                <div>
                                     <label class="text-lg">Darimana SobatBinar mengetahui layanan produk BERBINAR+</label>
                                     <select name="referral_source[]"
                                         class="form-input mt-1 block h-10 w-full rounded-md border border-gray-100 bg-gray-100 pl-2 shadow-sm py-2"
@@ -227,6 +215,19 @@
                                         placeholder="Please specify"
                                         value="{{ !in_array($enrollment->referral_source, ['Instagram', 'Telegram', 'TikTok', 'LinkedIn', 'Teman']) ? $enrollment->referral_source : '' }}" />
                                 </div>
+                                <div>
+                                    <label class="text-lg">Bukti Pembayaran</label>
+                                    <input type="file" name="payment_proof_url[]" accept="image/*" />
+                                    <small class="text-gray-500 block mt-1"><span class="text-red-500">Ukuran file
+                                            maksimal 5 MB.</span></small>
+                                    <div class="mt-2">
+                                        @if ($enrollment->payment_proof_url)
+                                            <img src="{{ asset('storage/' . $enrollment->payment_proof_url) }}"
+                                                alt="Preview Bukti" class="max-h-40 rounded border border-gray-300" />
+                                        @endif
+                                    </div>
+                                </div>
+
                             </div>
                         @endforeach
 
