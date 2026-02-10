@@ -52,7 +52,7 @@
                             </div>
                             <div class="flex w-full flex-col items-center h-full">
                                 <canvas id="marketingChart" class="mb-1" style="max-height: 400px;"></canvas>
-                                <div class="mb-4 flex gap-4 text-xs">
+                                <div class="mb-4 flex flex-wrap gap-4 text-xs">
                                     @php
                                         $chartColors = [
                                             '#440E03',
@@ -162,7 +162,7 @@
 
                             const ctx = document.getElementById('marketingChart').getContext('2d');
                             const chartData = {
-                                labels: chartLabels,
+                                labels: chartLabels.map((_, i) => ''),  // Label kosong tapi array tetap terisi
                                 datasets: [{
                                     label: 'Jumlah',
                                     data: chartDataValues,
@@ -183,6 +183,9 @@
                                             grid: {
                                                 color: '#eee'
                                             },
+                                            ticks: {
+                                                display: false
+                                            }
                                         },
                                         y: {
                                             grid: {
