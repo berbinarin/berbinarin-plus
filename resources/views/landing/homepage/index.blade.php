@@ -92,7 +92,7 @@
                                 <div class="swiper-slide">
                                     <div
                                         class="bg-white rounded-lg flex flex-col lg:flex-row p-2.5 lg:px-3 lg:pb-4 gap-2 lg:gap-3 shadow-md">
-                                        <img src="{{ $class->thumbnail ? asset('thumbnails/' . $class->thumbnail) : asset('assets/images/landing/favicion/checker.webp') }}"
+                                        <img src="{{ $class->thumbnail ? asset('storage/thumbnails/' . $class->thumbnail) : asset('assets/images/landing/favicion/checker.webp') }}"
                                             alt="{{ $class->name }}"
                                             class="rounded-lg w-auto max-h-20 lg:max-w-[184px] lg:max-h-[108px]">
                                         <div>
