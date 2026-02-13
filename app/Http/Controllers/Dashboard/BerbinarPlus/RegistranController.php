@@ -10,6 +10,7 @@ use App\Models\Berbinarp_Class;
 use App\Models\EnrollmentUser;
 use App\Services\Auth\RegistrationService;
 use App\Services\Media\ImageService;
+use Illuminate\Support\Facades\Mail;
 
 class RegistranController extends Controller
 
@@ -227,6 +228,11 @@ class RegistranController extends Controller
             ]]);
         }
         $user->save();
+
+        // Kirim email kredensial jika status menjadi aktif
+        if ($user->user_status_id == 2 && !empty($user->plain_password)) {
+            Mail::to($user->email)->send(new \App\Mail\UserCredentialsMail($user, $user->plain_password));
+        }
 
         return back()->with([
             'alert' => true,

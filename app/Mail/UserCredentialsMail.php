@@ -20,6 +20,12 @@ class UserCredentialsMail extends Mailable
         $this->password = $password;
     }
 
+    public function build()
+    {
+        return $this->subject('Akun Berbinar+ Anda')
+            ->view('emails.user_credentials');
+    }
+
     public function content(): Content
     {
         return new Content(
